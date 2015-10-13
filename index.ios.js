@@ -5,6 +5,7 @@
 'use strict';
 
 var React = require('react-native');
+var SearchHome = require('./App/Components/SearchHome');
 var {
   AppRegistry,
   StyleSheet,
@@ -21,7 +22,9 @@ var sproutli = React.createClass({
           title="Give Feedback">
         </TabBarIOS.Item>
         <TabBarIOS.Item
+          selected={true}
           title="Home">
+          <SearchHome></SearchHome>
         </TabBarIOS.Item>
         <TabBarIOS.Item
           title="Kindness Card">
@@ -39,7 +42,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 25,
     textAlign: 'center',
     margin: 10,
   },
