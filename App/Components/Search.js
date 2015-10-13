@@ -39,7 +39,6 @@ class Search extends React.Component {
       title: listing.name,
       passProps: { listing }
     });
-    console.log(listing);
   }
 
   render() {

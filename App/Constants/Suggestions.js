@@ -1,6 +1,6 @@
 'use strict';
 
-const SUGGESTIONS = {
+var SUGGESTIONS = {
   initial: ['Food', 'Products', 'Services'],
   'Food': ['Places to Eat', 'In-store', 'On-line'],
   'Products': ['In-store', 'On-line'],
