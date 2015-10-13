@@ -11,16 +11,12 @@ var {
 } = React;
 
 class SearchSuggestion extends React.Component {
-  _onPressSuggestion(label) {
-    console.log(label);
-  }
-
   render() {
     return (
       <TouchableHighlight 
         style={styles.container} 
         underlayColor='#eee'
-        onPress={this._onPressSuggestion.bind(this, this.props.label)}>
+        onPress={this.props.handler}>
 
         <View style={styles.container}>
           <View style={styles.label}>

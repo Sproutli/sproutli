@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var SearchSuggestion = require('./SearchSuggestion');
+var SUGGESTIONS = require('../Constants/Suggestions');
 var {
   TextInput,
   StyleSheet,
@@ -13,12 +14,29 @@ class SearchHome extends React.Component {
   constructor() {
     super();
     this.state = {
-      suggestions: ['Food', 'Products', 'Services']
+      suggestions: SUGGESTIONS.initial
     };
   }
 
+  _onPressSuggestion(label) {
+    if (SUGGESTIONS[label]) {
+      this.setState({
+        suggestions: SUGGESTIONS[label]
+      });
+    } else {
+      // Navigate Away
+    }
+  }
+
   render() {
-    var searchSuggestions = this.state.suggestions.map( (suggestionText, index) => <SearchSuggestion label={suggestionText} key={index} /> );
+    var searchSuggestions = this.state.suggestions.map( (suggestionText, index) => {
+      return ( 
+        <SearchSuggestion 
+          label={suggestionText} 
+          key={index} 
+          handler={this._onPressSuggestion.bind(this, suggestionText)}/>
+      );
+    });
 
     return (
       <View style={styles.container}>
