@@ -13,15 +13,14 @@ var {
 class SearchHome extends React.Component {
   constructor() {
     super();
-    this.state = {
-      suggestions: SUGGESTIONS.initial
-    };
   }
 
   _onPressSuggestion(label) {
     if (SUGGESTIONS[label]) {
-      this.setState({
-        suggestions: SUGGESTIONS[label]
+      this.props.navigator.push({
+        component: SearchHome,
+        title: label,
+        passProps: { suggestions: SUGGESTIONS[label] }
       });
     } else {
       // Navigate Away
@@ -29,7 +28,7 @@ class SearchHome extends React.Component {
   }
 
   render() {
-    var searchSuggestions = this.state.suggestions.map( (suggestionText, index) => {
+    var searchSuggestions = this.props.suggestions.map( (suggestionText, index) => {
       return ( 
         <SearchSuggestion 
           label={suggestionText} 
@@ -39,7 +38,7 @@ class SearchHome extends React.Component {
     });
 
     return (
-      <View style={styles.container}>
+      <View style={styles.bigContainer}>
         <TextInput 
           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
           value="Search for something"
@@ -53,6 +52,10 @@ class SearchHome extends React.Component {
 };
 
 var styles = StyleSheet.create({
+  bigContainer: {
+    flex: 1,
+    paddingTop: 64
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
