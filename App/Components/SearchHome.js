@@ -62,7 +62,8 @@ class SearchHome extends React.Component {
 var styles = StyleSheet.create({
   bigContainer: {
     flex: 1,
-    paddingTop: 64
+    paddingTop: 64,
+    paddingBottom: 32
   },
   container: {
     flex: 1,

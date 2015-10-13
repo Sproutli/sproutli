@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var SearchBox = require('./SearchBox');
 var {
   TextInput,
   StyleSheet,
@@ -22,7 +23,8 @@ class Search extends React.Component {
 var styles = StyleSheet.create({
   bigContainer: {
     flex: 1,
-    paddingTop: 64
+    paddingTop: 64,
+    paddingBottom: 32
   }
 });
 
