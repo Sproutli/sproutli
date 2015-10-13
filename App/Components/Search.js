@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var SearchBox = require('./SearchBox');
+var Listing = require('./Listing');
 var {
   TextInput,
   StyleSheet,
@@ -17,6 +18,7 @@ class Search extends React.Component {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     };
 
+    // TODO: Extract
     fetch('http://search-sproutli-bhzq3vdfhs5jhshdoqqt67ru5a.ap-southeast-2.cloudsearch.amazonaws.com/2013-01-01/search?q=-adadad&size=1000')
       .then((res) => res.json())
       .then((listings) => {
@@ -30,13 +32,17 @@ class Search extends React.Component {
       });
   }
 
+  listingPressed(listing) {
+    console.log(listing);
+  }
+
   render() {
     return (
       <View style={styles.bigContainer}>
         <SearchBox />
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={(rowData, index) => <Text key={index}>{rowData.name}</Text>}
+          renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this.listingPressed.bind(this, listing)} />}
         />
       </View>
     );
@@ -48,7 +54,7 @@ var styles = StyleSheet.create({
     flex: 1,
     paddingTop: 64,
     paddingBottom: 32
-  }
+  },
 });
 
 module.exports = Search;
