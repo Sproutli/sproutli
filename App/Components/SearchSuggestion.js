@@ -6,20 +6,32 @@ var {
   TextInput,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View
 } = React;
 
 class SearchSuggestion extends React.Component {
+  _onPressSuggestion(label) {
+    console.log(label);
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.label}>
-          <Text style={styles.labelText}>{this.props.label}</Text>
+      <TouchableHighlight 
+        style={styles.container} 
+        underlayColor='#eee'
+        onPress={this._onPressSuggestion.bind(this, this.props.label)}>
+
+        <View style={styles.container}>
+          <View style={styles.label}>
+            <Text style={styles.labelText}>{this.props.label}</Text>
+          </View>
+          <View style={styles.icon}>
+            <Text style={styles.iconText}>Icon</Text>
+          </View>
         </View>
-        <View style={styles.icon}>
-          <Text style={styles.iconText}>Icon</Text>
-        </View>
-      </View>
+
+      </TouchableHighlight>
     );
   }
 }
@@ -31,8 +43,7 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row',
-    backgroundColor: '#F5FCFF',
+    flexDirection: 'row'
   },
   label: {
     flex: 1,
@@ -47,12 +58,7 @@ var styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     width: boxWidth
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
 
 module.exports = SearchSuggestion;

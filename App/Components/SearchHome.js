@@ -10,7 +10,16 @@ var {
 } = React;
 
 class SearchHome extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      suggestions: ['Food', 'Products', 'Services']
+    };
+  }
+
   render() {
+    var searchSuggestions = this.state.suggestions.map( (suggestionText, index) => <SearchSuggestion label={suggestionText} key={index} /> );
+
     return (
       <View style={styles.container}>
         <TextInput 
@@ -18,9 +27,7 @@ class SearchHome extends React.Component {
           value="Search for something"
          /> 
         <View style={styles.container}>
-          <SearchSuggestion label="Food" />
-          <SearchSuggestion label="Products" />
-          <SearchSuggestion label="Services" />
+          {searchSuggestions}
         </View>
       </View>
     );
@@ -33,17 +40,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 25,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
 
 module.exports = SearchHome;
