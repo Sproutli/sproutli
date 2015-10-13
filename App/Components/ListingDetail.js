@@ -42,6 +42,9 @@ class ListingDetail extends React.Component {
           <Text style={{color: "white", flex: 1, textAlign: 'center'}}>Cry</Text>
         </View>
         <View style={styles.container}>
+          <Text style={styles.description}>{this.props.listing.description}</Text>
+          <Text />
+          <Text />
           <Text style={styles.bold}>Categories</Text>
           <Text>{this.props.listing.categories.join(', ')}</Text>
           <Text />
@@ -80,7 +83,8 @@ var styles = StyleSheet.create({
     paddingBottom: 32
   },
   container: {
-    padding: 10
+    padding: 10,
+    paddingTop: 20
   },
   imageStyle: {
     width: width,
@@ -93,6 +97,9 @@ var styles = StyleSheet.create({
   tags: {
     color: '#222',
     fontStyle: 'italic'
+  },
+  description: {
+    fontSize: 15
   }
 });
 
