@@ -1,7 +1,9 @@
 'use strict';
 
 var React = require('react-native');
+var SearchSuggestion = require('./SearchSuggestion');
 var {
+  TextInput,
   StyleSheet,
   Text,
   View
@@ -11,14 +13,14 @@ class SearchHome extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <TextInput 
+          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          value="Search for something"
+         /> 
         <View style={styles.container}>
-          <Text style={styles.welcome}>Food</Text>
-        </View>
-        <View style={styles.container}>
-          <Text style={styles.welcome}>Products</Text>
-        </View>
-        <View style={styles.container}>
-          <Text style={styles.welcome}>Services</Text>
+          <SearchSuggestion label="Food" />
+          <SearchSuggestion label="Products" />
+          <SearchSuggestion label="Services" />
         </View>
       </View>
     );
