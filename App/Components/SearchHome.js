@@ -1,8 +1,6 @@
 'use strict';
 
 var React = require('react-native');
-var SearchSuggestion = require('./SearchSuggestion');
-var SUGGESTIONS = require('../Constants/Suggestions');
 var {
   TextInput,
   StyleSheet,
@@ -10,21 +8,34 @@ var {
   View
 } = React;
 
+var SearchSuggestion = require('./SearchSuggestion');
+var Search = require('./Search');
+var SearchBox = require('./SearchBox');
+
+var SUGGESTIONS = require('../Constants/Suggestions');
+
 class SearchHome extends React.Component {
   constructor() {
     super();
   }
 
   _onPressSuggestion(label) {
+    var route;
     if (SUGGESTIONS[label]) {
-      this.props.navigator.push({
+      route = {
         component: SearchHome,
         title: label,
         passProps: { suggestions: SUGGESTIONS[label] }
-      });
+      };
     } else {
-      // Navigate Away
+      route = {
+        component: Search,
+        title: 'Search',
+        passProps: { preCanned: label }
+      }
     }
+
+    this.props.navigator.push(route);
   }
 
   render() {
@@ -39,10 +50,7 @@ class SearchHome extends React.Component {
 
     return (
       <View style={styles.bigContainer}>
-        <TextInput 
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          value="Search for something"
-         /> 
+        <SearchBox />
         <View style={styles.container}>
           {searchSuggestions}
         </View>
