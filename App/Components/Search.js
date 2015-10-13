@@ -3,6 +3,7 @@
 var React = require('react-native');
 var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
+var ListingDetail = require('./ListingDetail');
 var {
   TextInput,
   StyleSheet,
@@ -33,6 +34,11 @@ class Search extends React.Component {
   }
 
   listingPressed(listing) {
+    this.props.navigator.push({
+      component: ListingDetail,
+      title: listing.name,
+      passProps: { listing }
+    });
     console.log(listing);
   }
 
