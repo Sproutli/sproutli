@@ -6,19 +6,50 @@ var {
   Text,
   View,
   ScrollView,
-  TextInput
+  TextInput,
+  AlertIOS
 } = React;
 
 class Feedback extends React.Component {
   constructor() {
     super();
     this.state = {
-      feedback: ''
+      feedback: '',
+      sending: false
     };
   }
 
   _onChangeText(text) {
     this.setState({ feedback: text });
+  }
+
+  _sendToZapier() {
+    if ( this.state.sending ) return;
+    var title, message;
+    this.setState({ sending: true });
+
+    console.log('Sending..');
+
+    fetch('https://zapier.com/hooks/catch/39b1fp/', {
+      method: 'POST',
+      headers: {
+        "Content-Type": 'application/json'
+      },
+      body: JSON.stringify({ feedback: this.state.feedback})
+    })
+    .then((response) => {
+      title = 'Thanks!';
+      message = "We'll get back to you shortly.";
+    })
+    .catch((error) => {
+      console.log('Error sending feedback to Zapier', error);
+      title = 'Error';
+      message = 'Sorry! There was an error - please try again.';
+    })
+    .then(() => {
+      this.setState({ sending: false, feedback: '' });
+      AlertIOS.alert(title, message);
+    });
   }
 
   render() {
@@ -32,8 +63,8 @@ class Feedback extends React.Component {
 
           <Text style={[styles.instructionText, {fontWeight: 'bold'}]}>Your thoughts:</Text>
         </View>
-        <TextInput onChangeText={this._onChangeText.bind(this)} multiline={true} style={styles.feedbackForm} placeholder="Tell us what you think!"></TextInput>
-        <Text style={[styles.instructionText, {color: 'green'}]}>Send Feedback ></Text>
+        <TextInput onChangeText={this._onChangeText.bind(this)} multiline={true} value={this.state.feedback} style={styles.feedbackForm} placeholder="Tell us what you think!"></TextInput>
+        <Text style={[styles.instructionText, {color: 'green'}]} onPress={this._sendToZapier.bind(this)}>Send Feedback ></Text>
       </ScrollView>
     );
   }
