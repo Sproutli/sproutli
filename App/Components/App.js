@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var SearchHome = require('./SearchHome');
+var Feedback = require('./Feedback');
 var SUGGESTIONS = require('../Constants/Suggestions');
 var {
   StyleSheet,
@@ -12,15 +13,26 @@ var {
 } = React;
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      currentTab: 'feedback'
+    }
+  }
+
   render() {
-    return(
+    return (
       <TabBarIOS>
         <TabBarIOS.Item
+          onPress={() => this.setState({currentTab: 'feedback'})}
+          selected={this.state.currentTab === 'feedback'}
           title="Give Feedback">
+            <Feedback />
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
-          selected={true}
+          onPress={() => this.setState({currentTab: 'home'})}
+          selected={this.state.currentTab === 'home'}
           title="Home">
 
           <NavigatorIOS
