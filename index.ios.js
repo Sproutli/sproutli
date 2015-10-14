@@ -1,11 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
 
 var React = require('react-native');
 var App = require('./App/Components/App');
+var Login = require('./App/Components/Login');
 var SUGGESTIONS = require('./App/Constants/Suggestions');
 var {
   AppRegistry,
@@ -20,12 +17,14 @@ var {
 class Sproutli extends React.Component {
   constructor() {
     super();
+    this.state = { token:  undefined };
     AsyncStorage.getItem('token')
-      .then((item) => this.setState({token: item}))
-      .catch((error) => console.error('Something bad happened fetching the token', error));
+      .then((token) => this.setState({token}))
+      .catch((error) => console.log('Something bad happened fetching the token', error));
   }
+
   render() {
-    return <App />
+    return this.props.token ? <App /> : <Login />
   }
 };
 
