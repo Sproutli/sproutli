@@ -17,6 +17,9 @@ var SUGGESTIONS = require('../Constants/Suggestions');
 class SearchHome extends React.Component {
   constructor() {
     super();
+    this.state = {
+      query: ''
+    };
   }
 
   _onPressSuggestion(label) {
@@ -38,6 +41,20 @@ class SearchHome extends React.Component {
     this.props.navigator.push(route);
   }
 
+  _onSearch() {
+    this.props.navigator.push({
+      component: Search,
+      title: 'Search',
+      passProps: { query: this.state.query }
+    });
+  }
+
+  _onChangeText(text) {
+    this.setState({
+      query: text
+    });
+  }
+
   render() {
     var searchSuggestions = this.props.suggestions.map( (suggestionText, index) => {
       return ( 
@@ -50,7 +67,7 @@ class SearchHome extends React.Component {
 
     return (
       <View style={styles.bigContainer}>
-        <SearchBox />
+        <SearchBox onSubmitEditing={this._onSearch.bind(this)} onChangeText={this._onChangeText.bind(this)} />
         <View style={styles.container}>
           {searchSuggestions}
         </View>

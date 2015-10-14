@@ -12,9 +12,15 @@ class SearchBox extends React.Component {
       <TextInput 
         style={{height: 40, borderColor: '#999', borderWidth: 0.2, paddingLeft: 10}}
         placeholder="Search for something"
+        onChangeText={this.props.onChangeText}
+        onSubmitEditing={this.props.onSubmitEditing}
+        autoCorrect={false}
+        autoCapitalize='none'
+        returnKeyType='search'
        /> 
     );
   }
 };
+
 
 module.exports = SearchBox;
