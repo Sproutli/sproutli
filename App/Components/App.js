@@ -3,6 +3,7 @@
 var React = require('react-native');
 var SearchHome = require('./SearchHome');
 var Feedback = require('./Feedback');
+var KindnessCard = require('./KindnessCard');
 var SUGGESTIONS = require('../Constants/Suggestions');
 var {
   StyleSheet,
@@ -16,7 +17,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentTab: 'feedback'
+      currentTab: 'kindness_card'
     }
   }
 
@@ -27,7 +28,9 @@ class App extends React.Component {
           onPress={() => this.setState({currentTab: 'feedback'})}
           selected={this.state.currentTab === 'feedback'}
           title="Give Feedback">
+
             <Feedback />
+
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
@@ -46,7 +49,12 @@ class App extends React.Component {
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
+          onPress={() => this.setState({currentTab: 'kindness_card'})}
+          selected={this.state.currentTab === 'kindness_card'}
           title="Kindness Card">
+
+            <KindnessCard />
+          
         </TabBarIOS.Item>
       </TabBarIOS>
     );

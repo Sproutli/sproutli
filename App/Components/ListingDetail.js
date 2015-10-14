@@ -21,12 +21,20 @@ class ListingDetail extends React.Component {
     }
 
     if (images.length == 1) {
-      return <Image style={styles.imageStyle} source={{uri: images[0] }} />
+      return (
+        <Image style={styles.imageStyle} source={{uri: images[0] }}>
+        </Image>
+      );
     }
 
     return (
       <Carousel autoplay={false} style={styles.imageStyle}>
-        {images.map((image, index) => <Image key={index} style={styles.imageStyle} source={{uri: image }} />)} 
+        {images.map((image, index) => { 
+          return ( 
+            <Image key={index} style={styles.imageStyle} source={{uri: image }}>
+            </Image>
+          );
+        })} 
       </Carousel>
     );
   }
@@ -42,7 +50,7 @@ class ListingDetail extends React.Component {
           <Text style={{color: "white", flex: 1, textAlign: 'center'}}>Cry</Text>
         </View>
         <View style={styles.container}>
-          <Text style={styles.description}>{this.props.listing.description}</Text>
+          <Text style={{fontSize: 16}}>{this.props.listing.description}</Text>
           <Text />
           <Text />
           <Text style={styles.bold}>Categories</Text>
