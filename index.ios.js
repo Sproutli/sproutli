@@ -6,11 +6,7 @@ var Login = require('./App/Components/Login');
 var SUGGESTIONS = require('./App/Constants/Suggestions');
 var {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  NavigatorIOS,
-  TabBarIOS,
+  Navigator,
   AsyncStorage
 } = React;
 
@@ -24,24 +20,21 @@ class Sproutli extends React.Component {
   }
 
   render() {
-    return this.props.token ? <App /> : <Login />
+    return (
+      <Navigator
+        initialRoute={{name: this.state.token ? 'app' : 'login', index: 0}}
+        renderScene={(route, navigator) => {
+          switch(route.name) {
+            case 'app':
+              return <App token={this.state.token} /> 
+            case 'login': 
+              console.log(route.signingUp);
+              return <Login navigator={navigator} signingUp={route.signingUp} />
+          }
+        }}
+      />
+    )
   }
 };
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  welcome: {
-    fontSize: 25,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('sproutli', () => Sproutli);

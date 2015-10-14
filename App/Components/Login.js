@@ -12,6 +12,38 @@ var {
 } = React;
 
 class Login extends React.Component {
+  _loginPressed() {
+    this.goToApp()
+  }
+
+  _signupPressed() {
+    if (!this.props.signingUp) {
+      // TODO: Copy details
+      this.props.navigator.push({
+        name: "login",
+        index: 1,
+        signingUp: true
+      });
+    } else {
+      this.goToApp();
+    }
+  }
+
+  goToApp() {
+    this.props.navigator.push({
+      name: "app",
+      index: 1
+    });
+  }
+
+  nameField() {
+    return this.props.signingUp ? <TextInput style={styles.loginInput} placeholder="Your name" /> : <View />
+  }
+
+  loginButton() {
+    return this.props.signingUp ? <View /> : <Text style={styles.loginButtons} onPress={this._loginPressed.bind(this)}>Login</Text>
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -24,9 +56,11 @@ class Login extends React.Component {
           <Text />
           <TextInput secureTextEntry={true} style={styles.loginInput} placeholder="Passsword" />
           <Text />
+          {this.nameField()}
+          <Text />
           <View style={styles.loginButtonsContainer}>
-            <Text style={styles.loginButtons}>Login</Text>
-            <Text style={styles.loginButtons}>Sign Up</Text>
+            {this.loginButton()}
+            <Text style={styles.loginButtons} onPress={this._signupPressed.bind(this)}>Sign Up</Text>
           </View>
         </View>
         <View style={{flex: 0.33}}/>
