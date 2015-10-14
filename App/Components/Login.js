@@ -20,11 +20,11 @@ class Login extends React.Component {
             <Text style={styles.headerText}>Welcome to Sproutli!</Text>
             <Text style={styles.subtext}>Let&apos;s get started.</Text>
           </View>
-          <TextInput keyboardType="email-address" style={{height: 40, width: width, paddingLeft: 16, borderColor: '#999', borderWidth: 0.5}} placeholder="Email" />
+          <TextInput keyboardType="email-address" style={styles.loginInput} placeholder="Email" />
           <Text />
-          <TextInput secureTextEntry={true} style={{height: 40, width: width, paddingLeft: 16, borderColor: '#999', borderWidth: 0.5}} placeholder="Passsword" />
+          <TextInput secureTextEntry={true} style={styles.loginInput} placeholder="Passsword" />
           <Text />
-          <View style={{flex: 1, justifyContent: "flex-start", width: width, paddingTop: 32}}>
+          <View style={styles.loginButtonsContainer}>
             <Text style={styles.loginButtons}>Login</Text>
             <Text style={styles.loginButtons}>Sign Up</Text>
           </View>
@@ -61,12 +61,25 @@ var styles = StyleSheet.create({
     flex: 1,
     width
   },
+  loginButtonsContainer: {
+    flex: 1, 
+    justifyContent: "flex-start", 
+    width,
+    paddingTop: 32
+  },
   loginButtons: {
     padding: 16,
     fontSize: 25,
     fontWeight: '400',
     color: '#3BBD85',
     textAlign: 'center'
+  },
+  loginInput: {
+    height: 40, 
+    width,
+    paddingLeft: 16, 
+    borderColor: '#999', 
+    borderWidth: 0.5
   }
 });
 
