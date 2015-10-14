@@ -22,5 +22,9 @@ class SearchBox extends React.Component {
   }
 };
 
+SearchBox.propTypes = {
+  onSubmitEditing: React.PropTypes.func.isRequired,
+  onChangeText: React.PropTypes.func.isRequired
+};
 
 module.exports = SearchBox;

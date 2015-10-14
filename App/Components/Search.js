@@ -13,14 +13,20 @@ var {
 } = React;
 
 class Search extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      query: props.query
     };
 
+    this.search();
+  }
+
+  search() {
     // TODO: Extract
-    fetch('http://search-sproutli-bhzq3vdfhs5jhshdoqqt67ru5a.ap-southeast-2.cloudsearch.amazonaws.com/2013-01-01/search?q=-adadad&size=1000')
+    var query = this.state.query || '-adadadadad'
+    fetch(`http://search-sproutli-bhzq3vdfhs5jhshdoqqt67ru5a.ap-southeast-2.cloudsearch.amazonaws.com/2013-01-01/search?q=${query}&size=20`)
       .then((res) => res.json())
       .then((listings) => {
         var listings = listings.hits.hit.map((l) => l.fields).filter((l) => l.name && l.name.length > 1);
@@ -31,6 +37,17 @@ class Search extends React.Component {
       .catch((error) => {
         console.log('Error fetching listings', error);
       });
+  }
+
+  componentWillUpdate() {
+  }
+
+  _onChangeText(text) {
+    this.setState({ query: text });
+  }
+
+  _onSearch() {
+    this.search();
   }
 
   listingPressed(listing) {
@@ -44,7 +61,7 @@ class Search extends React.Component {
   render() {
     return (
       <View style={styles.bigContainer}>
-        <SearchBox />
+        <SearchBox onChangeText={this._onChangeText.bind(this)} onSubmitEditing={this._onSearch.bind(this)} />
         <ListView
           dataSource={this.state.dataSource}
           renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this.listingPressed.bind(this, listing)} />}

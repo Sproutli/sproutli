@@ -30,7 +30,7 @@ class Login extends React.Component {
   }
 
   goToApp() {
-    this.props.navigator.push({
+    this.props.navigator.replace({
       name: "app",
       index: 1
     });
