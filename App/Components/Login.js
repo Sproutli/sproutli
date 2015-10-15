@@ -33,6 +33,10 @@ class Login extends React.Component {
     this.setState({ password });
   }
 
+  _onNameChanged(name) {
+    this.setState({ name });
+  }
+
   _loginPressed() {
     var credentials = {
       email: this.state.email,
@@ -58,7 +62,18 @@ class Login extends React.Component {
         password: this.state.password
       });
     } else {
-      this.goToApp();
+      var credentials = {
+        email: this.state.email,
+        password: this.state.password,
+        name: this.state.name
+      }
+
+      Authentication.signUp(credentials)
+        .then(() => this.goToApp())
+        .catch((error) => {
+          console.log('Error logging in - ', error);
+          AlertIOS.alert('Error', 'Sorry, there was an error with your email and password.');
+        });
     }
   }
 
@@ -70,7 +85,7 @@ class Login extends React.Component {
   }
 
   nameField() {
-    return this.props.signingUp ? <TextInput style={styles.loginInput} placeholder="Your name" /> : <View />
+    return this.props.signingUp ? <TextInput style={styles.loginInput} onChangeText={this._onNameChanged.bind(this)} placeholder="Your name" /> : <View />
   }
 
   loginButton() {
