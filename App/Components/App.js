@@ -25,7 +25,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <TabBarIOS>
+      <TabBarIOS tintColor="green">
         <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'feedback'})}
           selected={this.state.currentTab === 'feedback'}
@@ -44,6 +44,7 @@ class App extends React.Component {
 
           <NavigatorIOS
             style={styles.container}
+            tintColor="green"
             initialRoute={{
               component: SearchHome,
               title: 'Home',
