@@ -1,6 +1,8 @@
 'use strict';
 
 var React = require('react-native');
+var Icon = require('react-native-vector-icons/Ionicons');
+
 var SearchHome = require('./SearchHome');
 var Feedback = require('./Feedback');
 var KindnessCard = require('./KindnessCard');
@@ -17,25 +19,27 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentTab: 'kindness_card'
+      currentTab: 'home'
     }
   }
 
   render() {
     return (
       <TabBarIOS>
-        <TabBarIOS.Item
+        <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'feedback'})}
           selected={this.state.currentTab === 'feedback'}
+          iconName="thumbsup"
           title="Give Feedback">
 
             <Feedback />
 
-        </TabBarIOS.Item>
+        </Icon.TabBarItem>
 
-        <TabBarIOS.Item
+        <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'home'})}
           selected={this.state.currentTab === 'home'}
+          iconName={this.state.currentTab === 'home' ? 'ios-home' : 'ios-home-outline'}
           title="Home">
 
           <NavigatorIOS
@@ -46,16 +50,17 @@ class App extends React.Component {
               passProps: {suggestions: SUGGESTIONS.initial}
             }}/>
             
-        </TabBarIOS.Item>
+        </Icon.TabBarItem>
 
-        <TabBarIOS.Item
+        <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'kindness_card'})}
           selected={this.state.currentTab === 'kindness_card'}
+          iconName="card"
           title="Kindness Card">
 
             <KindnessCard />
           
-        </TabBarIOS.Item>
+        </Icon.TabBarItem>
       </TabBarIOS>
     );
   }
