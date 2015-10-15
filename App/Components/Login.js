@@ -15,11 +15,12 @@ var {
 var Authentication = require('../Utils/Authentication.js');
 
 class Login extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
+    console.log(props);
     this.state = {
-      email: 'enakudesu@gmail.com',
-      password: 'testing',
+      email: props.email,
+      password: props.password,
       name: ''
     };
   }
@@ -52,7 +53,9 @@ class Login extends React.Component {
       this.props.navigator.push({
         name: "login",
         index: 1,
-        signingUp: true
+        signingUp: true,
+        email: this.state.email,
+        password: this.state.password
       });
     } else {
       this.goToApp();

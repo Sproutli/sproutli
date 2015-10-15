@@ -28,8 +28,7 @@ class Sproutli extends React.Component {
       case 'app':
         return <App token={this.state.token} /> 
       case 'login': 
-        console.log(route.signingUp);
-      return <Login navigator={navigator} signingUp={route.signingUp} />
+        return <Login navigator={navigator} signingUp={route.signingUp} email={route.email} password={route.password} />
     }
   }
 
@@ -42,7 +41,7 @@ class Sproutli extends React.Component {
 
     return (
       <Navigator
-        initialRoute={{name: !this.state.token ? 'login' : 'app', index: 0}}
+        initialRoute={{name: !this.state.token ? 'login' : 'login', index: 0}}
         renderScene={this.renderScene.bind(this)}      
       />
     )
