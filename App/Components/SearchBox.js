@@ -3,21 +3,24 @@
 var React = require('react-native');
 
 var {
+  View,
   TextInput
 } = React;
 
 class SearchBox extends React.Component {
   render() {
     return (
-      <TextInput 
-        style={{height: 40, borderColor: '#999', borderWidth: 0.2, paddingLeft: 10}}
-        placeholder="Search for something"
-        onChangeText={this.props.onChangeText}
-        onSubmitEditing={this.props.onSubmitEditing}
-        autoCorrect={false}
-        autoCapitalize='none'
-        returnKeyType='search'
-       /> 
+      <View style={{height: 56, backgroundColor: 'white'}}>
+        <TextInput 
+          style={{height: 40, backgroundColor: '#f8f8f8', borderRadius: 11, paddingLeft: 10, margin: 8}}
+          placeholder="Search for something"
+          onChangeText={this.props.onChangeText}
+          onSubmitEditing={this.props.onSubmitEditing}
+          autoCorrect={false}
+          autoCapitalize='none'
+          returnKeyType='search'
+         /> 
+       </View>
     );
   }
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var Dimensions = require('Dimensions');
+var Icon = require('react-native-vector-icons/Ionicons');
 var {
   TextInput,
   StyleSheet,
@@ -9,6 +9,7 @@ var {
   TouchableHighlight,
   View
 } = React;
+var Dimensions = require('Dimensions');
 
 class SearchSuggestion extends React.Component {
   render() {
@@ -23,7 +24,7 @@ class SearchSuggestion extends React.Component {
             <Text style={styles.labelText}>{this.props.label}</Text>
           </View>
           <View style={styles.icon}>
-            <Text style={styles.iconText}>Icon</Text>
+            <Icon name={this.props.icon} size={60} color="green" />
           </View>
         </View>
 
@@ -47,7 +48,8 @@ var styles = StyleSheet.create({
     marginRight: 10
   },
   labelText: {
-    fontSize: 25,
+    fontSize: 30,
+    color: '#333',
     textAlign: 'right'
   },
   icon: {

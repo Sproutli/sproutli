@@ -7,7 +7,6 @@ var {
   Text,
   View
 } = React;
-
 var SearchSuggestion = require('./SearchSuggestion');
 var Search = require('./Search');
 var SearchBox = require('./SearchBox');
@@ -56,12 +55,13 @@ class SearchHome extends React.Component {
   }
 
   render() {
-    var searchSuggestions = this.props.suggestions.map( (suggestionText, index) => {
+    var searchSuggestions = this.props.suggestions.map( (suggestion, index) => {
       return ( 
         <SearchSuggestion 
-          label={suggestionText} 
+          label={suggestion.label} 
+          icon={suggestion.icon}
           key={index} 
-          handler={this._onPressSuggestion.bind(this, suggestionText)}/>
+          handler={this._onPressSuggestion.bind(this, suggestion.label)}/>
       );
     });
 
@@ -86,7 +86,7 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
   }
 });
 
