@@ -18,7 +18,7 @@ class Login extends React.Component {
 
   _signupPressed() {
     if (!this.props.signingUp) {
-      // TODO: Copy details
+      // TODO: Copy details to sign up screen.
       this.props.navigator.push({
         name: "login",
         index: 1,
@@ -52,7 +52,13 @@ class Login extends React.Component {
             <Text style={styles.headerText}>Welcome to Sproutli!</Text>
             <Text style={styles.subtext}>Let&apos;s get started.</Text>
           </View>
-          <TextInput keyboardType="email-address" style={styles.loginInput} placeholder="Email" />
+          <TextInput 
+            keyboardType="email-address" 
+            style={styles.loginInput} 
+            placeholder="Email" 
+            autoCorrect={false}
+            autoCapitalize="none"
+          />
           <Text />
           <TextInput secureTextEntry={true} style={styles.loginInput} placeholder="Passsword" />
           <Text />

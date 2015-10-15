@@ -22,7 +22,7 @@ class Sproutli extends React.Component {
   render() {
     return (
       <Navigator
-        initialRoute={{name: !this.state.token ? 'app' : 'login', index: 0}}
+        initialRoute={{name: !this.state.token ? 'login' : 'app', index: 0}}
         renderScene={(route, navigator) => {
           switch(route.name) {
             case 'app':
