@@ -72,7 +72,7 @@ class Login extends React.Component {
         .then(() => this.goToApp())
         .catch((error) => {
           console.log('Error logging in - ', error);
-          AlertIOS.alert('Error', 'Sorry, there was an error with your email and password.');
+          AlertIOS.alert('Error', 'Sorry, there was an error signing up! Please try again.');
         });
     }
   }
