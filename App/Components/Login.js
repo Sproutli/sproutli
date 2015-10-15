@@ -7,13 +7,43 @@ var {
   StyleSheet,
   Text,
   View,
+  AlertIOS,
   TextInput,
   NavigatorIOS,
 } = React;
 
+var Authentication = require('../Utils/Authentication.js');
+
 class Login extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      email: 'enakudesu@gmail.com',
+      password: 'testing',
+      name: ''
+    };
+  }
+
+  _onEmailChanged(email) {
+    this.setState({ email });
+  }
+
+  _onPasswordChanged(password) {
+    this.setState({ password });
+  }
+
   _loginPressed() {
-    this.goToApp()
+    var credentials = {
+      email: this.state.email,
+      password: this.state.password
+    }
+
+    Authentication.login(credentials)
+      .then(() => this.goToApp())
+      .catch((error) => {
+        console.log('Error logging in - ', error);
+        AlertIOS.alert('Error', 'Sorry, there was an error with your email and password.');
+      });
   }
 
   _signupPressed() {
@@ -57,10 +87,18 @@ class Login extends React.Component {
             style={styles.loginInput} 
             placeholder="Email" 
             autoCorrect={false}
+            value={this.state.email}
+            onChangeText={this._onEmailChanged.bind(this)}
             autoCapitalize="none"
           />
           <Text />
-          <TextInput secureTextEntry={true} style={styles.loginInput} placeholder="Passsword" />
+          <TextInput 
+            secureTextEntry={true} 
+            style={styles.loginInput} 
+            placeholder="Passsword" 
+            value={this.state.password}
+            onChangeText={this._onPasswordChanged.bind(this)}
+          />
           <Text />
           {this.nameField()}
           <Text />
