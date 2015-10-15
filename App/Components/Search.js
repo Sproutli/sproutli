@@ -17,10 +17,29 @@ class Search extends React.Component {
     super();
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      query: props.query
+      query: props.query,
+      location: {}
     };
 
+    this.getLocation();
+
     this.search();
+  }
+
+  getLocation() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => this.setState({ location: position.coords }),
+      (error) => console.log('Error getting location', error)
+    );
+
+    this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
+      console.log('Location changed!', lastPosition.coords.latitude === this.state.location.latitude);
+      this.setState({ location: lastPosition.coords });
+    });
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchID);
   }
 
   search() {
@@ -37,9 +56,6 @@ class Search extends React.Component {
       .catch((error) => {
         console.log('Error fetching listings', error);
       });
-  }
-
-  componentWillUpdate() {
   }
 
   _onChangeText(text) {
