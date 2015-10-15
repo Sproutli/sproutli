@@ -21,8 +21,10 @@ class SearchHome extends React.Component {
     };
   }
 
-  _onPressSuggestion(label) {
+  _onPressSuggestion(suggestion) {
     var route;
+    var label = suggestion.label;
+
     if (SUGGESTIONS[label]) {
       route = {
         component: SearchHome,
@@ -32,8 +34,8 @@ class SearchHome extends React.Component {
     } else {
       route = {
         component: Search,
-        title: 'Search',
-        passProps: { preCanned: label }
+        title: label,
+        passProps: { preCanned: label, searchConfig: suggestion.searchConfig }
       }
     }
 
@@ -61,7 +63,7 @@ class SearchHome extends React.Component {
           label={suggestion.label} 
           icon={suggestion.icon}
           key={index} 
-          handler={this._onPressSuggestion.bind(this, suggestion.label)}/>
+          handler={this._onPressSuggestion.bind(this, suggestion)}/>
       );
     });
 

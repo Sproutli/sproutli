@@ -1,5 +1,19 @@
 'use strict';
 
+var CATEGORIES = require('./Categories');
+
+var categories = CATEGORIES.map(function(category) {
+  return { name: category, check: false };
+});
+
+var baseSearchConfig = {
+    discount: false,
+    online_store: 'BOTH',
+    vegan_level: 1,
+    owner_is: '',
+    categories: categories
+}; 
+
 var SUGGESTIONS = {
   initial: [
     {
@@ -20,6 +34,12 @@ var SUGGESTIONS = {
     {
       label: 'Places to Eat', 
       icon: 'fork',
+      searchConfig: Object.assign(baseSearchConfig, {
+        categories: categories.map((c) => { 
+          c.check = c.name === 'Cafes & Restaurants';
+          return c;
+        })
+      })
     },
     {
       label: 'Online', 

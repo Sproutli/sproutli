@@ -17,7 +17,7 @@ var ListingDetail = require('./ListingDetail');
 
 class Search extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       query: props.query,
@@ -47,7 +47,7 @@ class Search extends React.Component {
   }
 
   search(location) {
-    SearchEngine.search(this.state.query, location)
+    SearchEngine.search(this.state.query, location, this.props.searchConfig)
       .then((listings) => {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(listings)
