@@ -1,5 +1,6 @@
 'use strict';
 
+var Icon = require('react-native-vector-icons/Ionicons');
 var React = require('react-native');
 var {
   StyleSheet,
@@ -64,7 +65,7 @@ class Feedback extends React.Component {
           <Text style={[styles.instructionText, {fontWeight: 'bold'}]}>Your thoughts:</Text>
         </View>
         <TextInput onChangeText={this._onChangeText.bind(this)} multiline={true} value={this.state.feedback} style={styles.feedbackForm} placeholder="Tell us what you think!"></TextInput>
-        <Text style={[styles.instructionText, {color: 'green'}]} onPress={this._sendToZapier.bind(this)}>Send Feedback ></Text>
+        <Text style={[styles.instructionText, {color: 'green'}]} onPress={this._sendToZapier.bind(this)}>Send Feedback  <Icon name="chevron-right" size={20} color="green" /></Text>
       </ScrollView>
     );
   }
