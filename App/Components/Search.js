@@ -1,9 +1,6 @@
 'use strict';
 
 var React = require('react-native');
-var SearchBox = require('./SearchBox');
-var Listing = require('./Listing');
-var ListingDetail = require('./ListingDetail');
 var {
   TextInput,
   StyleSheet,
@@ -11,6 +8,12 @@ var {
   ListView,
   View
 } = React;
+var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
+
+var SearchEngine = require('../Utils/SearchEngine');
+var SearchBox = require('./SearchBox');
+var Listing = require('./Listing');
+var ListingDetail = require('./ListingDetail');
 
 class Search extends React.Component {
   constructor(props) {
@@ -22,18 +25,19 @@ class Search extends React.Component {
     };
 
     this.getLocation();
-
-    this.search();
   }
 
   getLocation() {
     navigator.geolocation.getCurrentPosition(
-      (position) => this.setState({ location: position.coords }),
+      (position) => { 
+        var location = position.coords;
+        this.setState({ location })
+        this.search(location);
+      },
       (error) => console.log('Error getting location', error)
     );
 
     this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
-      console.log('Location changed!', lastPosition.coords.latitude === this.state.location.latitude);
       this.setState({ location: lastPosition.coords });
     });
   }
@@ -42,19 +46,12 @@ class Search extends React.Component {
     navigator.geolocation.clearWatch(this.watchID);
   }
 
-  search() {
-    // TODO: Extract
-    var query = this.state.query || '-adadadadad'
-    fetch(`http://search-sproutli-bhzq3vdfhs5jhshdoqqt67ru5a.ap-southeast-2.cloudsearch.amazonaws.com/2013-01-01/search?q=${query}&size=20`)
-      .then((res) => res.json())
+  search(location) {
+    SearchEngine.search(this.state.query, location)
       .then((listings) => {
-        var listings = listings.hits.hit.map((l) => l.fields).filter((l) => l.name && l.name.length > 1);
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(listings)
         });
-      })
-      .catch((error) => {
-        console.log('Error fetching listings', error);
       });
   }
 
@@ -75,9 +72,39 @@ class Search extends React.Component {
   }
 
   render() {
+    var that = this;
+
+    var GooglePlacesAutocomplete = require('react-native-google-places-autocomplete').create({
+      placeholder: 'Location',
+      onPress(place) {
+        var placeId = place.place_id;
+        fetch(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${API_KEY}`)
+          .then((res) => res.json())
+          .then((placeDetails) => {
+            var location = placeDetails.result.geometry.location;
+            console.log(placeDetails);
+            location = {
+              latitude: location.lat,
+              longitude: location.lng
+            };
+            console.log('Apres', location, 'Pres', that.state.location);
+            that.setState({ location });
+            that.search(location);
+          })
+          .catch((error) => console.warn(error));
+      },
+      minLength: 2,
+      query: {
+        key: API_KEY,
+        language: 'en',
+        types: 'geocode'
+      }
+    }).bind(this);
+
     return (
       <View style={styles.bigContainer}>
         <SearchBox onChangeText={this._onChangeText.bind(this)} onSubmitEditing={this._onSearch.bind(this)} />
+        <GooglePlacesAutocomplete />
         <ListView
           dataSource={this.state.dataSource}
           renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this.listingPressed.bind(this, listing)} />}
