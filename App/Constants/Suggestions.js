@@ -56,7 +56,9 @@ var SUGGESTIONS = {
     {
       label: 'Places to eat', 
       icon: 'fork',
+      vegan_level: 4,
       searchConfig: makeSearchConfig({
+        vegan_level: 4,
         categories: categories().map((c) => { 
           c.check = c.name === 'Cafes & Restaurants';
           return c;

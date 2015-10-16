@@ -84,7 +84,7 @@ var ListingsFilter = {
     },
 
     hasCorrectVeganLevel = function(listing) {
-      var veganLevelIsGreater = listing.vegan_level >= f.vegan_level,
+      var veganLevelIsGreater = listing.vegan_level >= Math.round(f.vegan_level),
       hasNoVeganLevel = f.vegan_level == 0 && !listing.vegan_level; //jshint ignore:line
 
       return veganLevelIsGreater || hasNoVeganLevel;

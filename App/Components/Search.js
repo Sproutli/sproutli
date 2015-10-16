@@ -6,6 +6,8 @@ var {
   StyleSheet,
   Text,
   ListView,
+  SliderIOS,
+  ActivityIndicatorIOS,
   View
 } = React;
 var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
@@ -21,7 +23,9 @@ class Search extends React.Component {
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       query: props.query,
-      location: {}
+      location: {},
+      loading: false,
+      searchConfig: props.searchConfig
     };
 
     this.getLocation();
@@ -34,7 +38,11 @@ class Search extends React.Component {
         this.setState({ location })
         this.search(location);
       },
-      (error) => console.log('Error getting location', error)
+      (error) => {
+        console.warn('Error getting location', error)
+        this.setState({ location: null })
+        this.search(null);
+      }
     );
 
     this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
@@ -47,16 +55,17 @@ class Search extends React.Component {
   }
 
   search(location) {
-    var searchConfig = this.props.searchConfig;
-    console.log(`Categories for ${this.props.preCanned} are`, searchConfig.categories);
-    location = searchConfig.online_store !== 'N' ? location : undefined; // We don't want the location if we're searching for online stuff.
+    this.setState({ loading: true });
+    var searchConfig = this.state.searchConfig;
+    location = searchConfig.online_store !== 'N' ? location : null; // We don't want the location if we're searching for online stuff.
 
     SearchEngine.search(this.state.query, location, searchConfig)
-      .then((listings) => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(listings)
-        });
+    .then((listings) => {
+      this.setState({
+        loading: false,
+        dataSource: this.state.dataSource.cloneWithRows(listings)
       });
+    });
   }
 
   _onChangeText(text) {
@@ -67,12 +76,42 @@ class Search extends React.Component {
     this.search();
   }
 
+  _onVeganLevelChanged(veganLevel) {
+    var searchConfig = this.state.searchConfig;
+    searchConfig.vegan_level = veganLevel;
+
+    this.setState({ 
+      searchConfig
+    });
+
+    this.search();
+
+  }
+
   listingPressed(listing) {
     this.props.navigator.push({
       component: ListingDetail,
       title: listing.name,
       passProps: { listing }
     });
+  }
+
+  renderListings() {
+    if (this.state.loading) { 
+      return (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicatorIOS size='large' />
+        </View>
+      );
+    }
+
+    return ( 
+      <ListView
+        styles={{paddingTop: 0}}
+        dataSource={this.state.dataSource}
+        renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this.listingPressed.bind(this, listing)} />}
+      />
+   );
   }
 
   render() {
@@ -105,14 +144,16 @@ class Search extends React.Component {
       }
     }).bind(this);
 
+
+
     return (
       <View style={styles.bigContainer}>
         <SearchBox onChangeText={this._onChangeText.bind(this)} onSubmitEditing={this._onSearch.bind(this)} />
         <GooglePlacesAutocomplete />
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this.listingPressed.bind(this, listing)} />}
-        />
+        <SliderIOS onSlidingComplete={this._onVeganLevelChanged.bind(this)} value={this.state.searchConfig.vegan_level} minimumValue={1} maximumValue={5} />
+        <Text>{ Math.round(this.state.searchConfig.vegan_level) }</Text>
+          
+        { this.renderListings() }
       </View>
     );
   }
@@ -124,6 +165,12 @@ var styles = StyleSheet.create({
     paddingTop: 64,
     paddingBottom: 32
   },
+
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  }
 });
 
 module.exports = Search;
