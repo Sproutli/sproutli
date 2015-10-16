@@ -8,6 +8,17 @@ var categories = () => {
   });
 };
 
+var productCategories = categories().map((c) => { 
+  c.check = !(c.name === 'Food Stores' || 
+              c.name === 'Cafes & Restaurants' || 
+              c.name === 'Professional Services & Trades' || 
+              c.name === 'Coaching & Classes' ||
+              c.name === 'Entertainment' ||
+              c.name === 'Accommodation' ||
+              c.name === 'Hair & Beauty');
+  return c;
+});
+
 
 var makeSearchConfig = (config) => {
   var baseSearchConfig = {
@@ -43,7 +54,7 @@ var SUGGESTIONS = {
 
   'Food': [
     {
-      label: 'Places to Eat', 
+      label: 'Places to eat', 
       icon: 'fork',
       searchConfig: makeSearchConfig({
         categories: categories().map((c) => { 
@@ -67,6 +78,14 @@ var SUGGESTIONS = {
     {
       label: 'In-store', 
       icon: 'bag',
+      searchConfig: makeSearchConfig({
+        categories: categories().map((c) => { 
+          c.check = c.name === 'Food Stores';
+          return c;
+        }),
+        online_store: 'N',
+        vegan_level: 4
+      })
     },
   ],
 
@@ -74,25 +93,55 @@ var SUGGESTIONS = {
     {
       label: 'Online', 
       icon: 'earth',
+      searchConfig: makeSearchConfig({
+        categories: productCategories,
+        online_store: 'Y',
+        vegan_level: 4
+      })
     },
     {
       label: 'In-store', 
       icon: 'bag',
+      searchConfig: makeSearchConfig({
+        categories: productCategories,
+        online_store: 'N',
+        vegan_level: 4
+      })
     },
   ],
 
   'Services': [
     {
       label: 'Hairdressers',
-      icon: 'scissors'
+      icon: 'scissors',
+      searchConfig: makeSearchConfig({
+        categories: categories().map((c) => { 
+          c.check = c.name === 'Professional Services & Trades';
+          return c;
+        }),
+        tags: ['hairdresser']
+      })
     },
     {
       label: 'Medical',
       icon: 'ios-medkit',
+      searchConfig: makeSearchConfig({
+        categories: categories().map((c) => { 
+          c.check = c.name === 'Professional Services & Trades';
+          return c;
+        })
+      }),
+      tags: ['dentist', 'doctor']
     }, 
     {
-      label: 'Other',
-      icon: 'ios-people'
+      label: 'All services',
+      icon: 'ios-people',
+      searchConfig: makeSearchConfig({
+        categories: categories().map((c) => { 
+          c.check = c.name === 'Professional Services & Trades';
+          return c;
+        })
+      }),
     }
   ]
 };
