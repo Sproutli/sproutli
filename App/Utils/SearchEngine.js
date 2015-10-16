@@ -10,9 +10,16 @@ var SearchEngine = {
       .filter((l) => ListingsFilter.filter(l, searchConfig));
   },
 
+  prepareLocationQuery(location) {
+    if (!location) { return ''; }
+
+    return `&expr.distance=haversin(${location.latitude},${location.longitude},location.latitude,location.longitude)&sort=distance asc`
+  },
+
   search(query, location, searchConfig) {
     query = query || '-aaoidwjaoiwdjaijwd';
-    var url = `http://search-sproutli-bhzq3vdfhs5jhshdoqqt67ru5a.ap-southeast-2.cloudsearch.amazonaws.com/2013-01-01/search?q=${query}&size=20&expr.distance=haversin(${location.latitude},${location.longitude},location.latitude,location.longitude)&sort=distance asc`;
+    var locationQuery = this.prepareLocationQuery(location);
+    var url = `http://search-sproutli-bhzq3vdfhs5jhshdoqqt67ru5a.ap-southeast-2.cloudsearch.amazonaws.com/2013-01-01/search?q=${query}&size=1000${locationQuery}`;
 
     return fetch(url)
       .then((res) => res.json())

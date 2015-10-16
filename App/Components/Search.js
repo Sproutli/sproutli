@@ -47,7 +47,10 @@ class Search extends React.Component {
   }
 
   search(location) {
-    SearchEngine.search(this.state.query, location, this.props.searchConfig)
+    var searchConfig = this.props.searchConfig;
+    location = searchConfig.online_store !== 'N' ? location : undefined; // We don't want the location if we're searching for online stuff.
+
+    SearchEngine.search(this.state.query, location, searchConfig)
       .then((listings) => {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(listings)

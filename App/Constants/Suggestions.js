@@ -34,16 +34,24 @@ var SUGGESTIONS = {
     {
       label: 'Places to Eat', 
       icon: 'fork',
-      searchConfig: Object.assign(baseSearchConfig, {
+      searchConfig: Object.assign({
         categories: categories.map((c) => { 
           c.check = c.name === 'Cafes & Restaurants';
           return c;
         })
-      })
+      }, baseSearchConfig)
     },
     {
       label: 'Online', 
       icon: 'earth',
+      searchConfig: Object.assign({
+        categories: categories.map((c) => { 
+          c.check = c.name === 'Food Stores';
+          return c;
+        }),
+        online_store: 'Y',
+        vegan_level: 4
+      }, baseSearchConfig)
     },
     {
       label: 'In-store', 
