@@ -6,7 +6,6 @@ var {
   StyleSheet,
   Text,
   ListView,
-  SliderIOS,
   ActivityIndicatorIOS,
   View
 } = React;
@@ -15,6 +14,7 @@ var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
 var SearchEngine = require('../Utils/SearchEngine');
 var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
+var VeganLevelSlider = require('./VeganLevelSlider');
 var ListingDetail = require('./ListingDetail');
 
 class Search extends React.Component {
@@ -150,8 +150,7 @@ class Search extends React.Component {
       <View style={styles.bigContainer}>
         <SearchBox onChangeText={this._onChangeText.bind(this)} onSubmitEditing={this._onSearch.bind(this)} />
         <GooglePlacesAutocomplete />
-        <SliderIOS onSlidingComplete={this._onVeganLevelChanged.bind(this)} value={this.state.searchConfig.vegan_level} minimumValue={1} maximumValue={5} />
-        <Text>{ Math.round(this.state.searchConfig.vegan_level) }</Text>
+        <VeganLevelSlider veganLevel={this.state.searchConfig.vegan_level} onSlidingComplete={this._onVeganLevelChanged.bind(this)} />
           
         { this.renderListings() }
       </View>
