@@ -58,7 +58,9 @@ class Search extends React.Component {
 
   search(location) {
     this.setState({ loading: true });
+
     var searchConfig = this.state.searchConfig;
+    location = location || this.state.location;
     location = searchConfig.online_store !== 'N' ? location : null; // We don't want the location if we're searching for online stuff.
 
     SearchEngine.search(this.state.query, location)
