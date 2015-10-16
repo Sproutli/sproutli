@@ -2,9 +2,6 @@
 
 var ListingsFilter = {
   filter(listing, filterBy) {
-
-    console.log(filterBy);
-
     if (typeof(listing) === 'undefined') {
       return [];
     }

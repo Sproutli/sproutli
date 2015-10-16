@@ -48,6 +48,7 @@ class Search extends React.Component {
 
   search(location) {
     var searchConfig = this.props.searchConfig;
+    console.log(`Categories for ${this.props.preCanned} are`, searchConfig.categories);
     location = searchConfig.online_store !== 'N' ? location : undefined; // We don't want the location if we're searching for online stuff.
 
     SearchEngine.search(this.state.query, location, searchConfig)

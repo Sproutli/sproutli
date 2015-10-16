@@ -2,9 +2,11 @@
 
 var CATEGORIES = require('./Categories');
 
-var categories = CATEGORIES.map(function(category) {
-  return { name: category, check: false };
-});
+var categories = () => {
+  return CATEGORIES.map((c) => { 
+    return { name: c, check: false }
+  });
+};
 
 
 var makeSearchConfig = (config) => {
@@ -13,11 +15,15 @@ var makeSearchConfig = (config) => {
       online_store: 'BOTH',
       vegan_level: 1,
       owner_is: '',
-      categories: categories
+      categories: categories()
   }; 
 
-  return Object.assign(config, baseSearchConfig);
+  var config =  Object.assign(baseSearchConfig, config);
+  console.log('Returning config', config);
+
+  return config;
 }
+
 
 var SUGGESTIONS = {
   initial: [
@@ -40,7 +46,7 @@ var SUGGESTIONS = {
       label: 'Places to Eat', 
       icon: 'fork',
       searchConfig: makeSearchConfig({
-        categories: categories.map((c) => { 
+        categories: categories().map((c) => { 
           c.check = c.name === 'Cafes & Restaurants';
           return c;
         })
@@ -50,8 +56,8 @@ var SUGGESTIONS = {
       label: 'Online', 
       icon: 'earth',
       searchConfig: makeSearchConfig({
-        categories: categories.map((c) => { 
-          c.check = c.name === 'Cafes & Restaurants';
+        categories: categories().map((c) => { 
+          c.check = c.name === 'Food Stores';
           return c;
         }),
         online_store: 'Y',
