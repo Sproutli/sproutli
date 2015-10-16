@@ -6,13 +6,18 @@ var categories = CATEGORIES.map(function(category) {
   return { name: category, check: false };
 });
 
-var baseSearchConfig = {
-    discount: false,
-    online_store: 'BOTH',
-    vegan_level: 1,
-    owner_is: '',
-    categories: categories
-}; 
+
+var makeSearchConfig = (config) => {
+  var baseSearchConfig = {
+      discount: false,
+      online_store: 'BOTH',
+      vegan_level: 1,
+      owner_is: '',
+      categories: categories
+  }; 
+
+  return Object.assign(config, baseSearchConfig);
+}
 
 var SUGGESTIONS = {
   initial: [
@@ -34,24 +39,24 @@ var SUGGESTIONS = {
     {
       label: 'Places to Eat', 
       icon: 'fork',
-      searchConfig: Object.assign({
+      searchConfig: makeSearchConfig({
         categories: categories.map((c) => { 
           c.check = c.name === 'Cafes & Restaurants';
           return c;
         })
-      }, baseSearchConfig)
+      })
     },
     {
       label: 'Online', 
       icon: 'earth',
-      searchConfig: Object.assign({
+      searchConfig: makeSearchConfig({
         categories: categories.map((c) => { 
-          c.check = c.name === 'Food Stores';
+          c.check = c.name === 'Cafes & Restaurants';
           return c;
         }),
         online_store: 'Y',
         vegan_level: 4
-      }, baseSearchConfig)
+      })
     },
     {
       label: 'In-store', 
