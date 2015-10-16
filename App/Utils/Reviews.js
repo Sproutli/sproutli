@@ -1,3 +1,4 @@
+/*global fetch */
 'use strict';
 
 var AsyncStorage = require('react-native').AsyncStorage;
@@ -31,12 +32,12 @@ var Reviews = {
             makeConfig()
           ).then((res) => res.json())
             .then((user) => { 
-              review.user = user
+              review.user = user;
               return review;
             });
         }));
       });
   }
-}
+};
 
 module.exports = Reviews;

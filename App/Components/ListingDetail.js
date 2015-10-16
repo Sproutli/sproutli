@@ -41,24 +41,16 @@ class ListingDetail extends React.Component {
   renderedImages() {
     let images = this.props.listing.images;
     if (!images || images.length == 0) {
-      return <Text>Sorry! No images for {this.props.listing.name}</Text> 
+      return <Text>Sorry! No images for {this.props.listing.name}</Text>; 
     }
 
     if (images.length == 1) {
-      return (
-        <Image style={styles.imageStyle} source={{uri: images[0] }}>
-        </Image>
-      );
+      return <Image style={styles.imageStyle} source={{uri: images[0] }} />;
     }
 
     return (
       <Carousel autoplay={false} style={styles.imageStyle}>
-        {images.map((image, index) => { 
-          return ( 
-            <Image key={index} style={styles.imageStyle} source={{uri: image }}>
-            </Image>
-          );
-        })} 
+        {images.map((image, index) => <Image key={index} style={styles.imageStyle} source={{uri: image }} />)} 
       </Carousel>
     );
   }
@@ -94,7 +86,7 @@ class ListingDetail extends React.Component {
           <Text style={{textAlign: 'center'}}>Leave a Review</Text>
         </TouchableHighlight>
         <ListView
-          renderRow={(review, index) => <Review key={index} {...review}></Review>}
+          renderRow={(review, index) => <Review key={index} {...review} />}
           dataSource={this.state.dataSource}
         />
       </View>
@@ -110,9 +102,9 @@ class ListingDetail extends React.Component {
         {this.renderedImages()}
 
         <View style={styles.actionBar}> 
-          <Text style={{color: "white", flex: 1, textAlign: 'center'}}>Call</Text>
-          <Text style={{color: "white", flex: 1, textAlign: 'center'}}>Map</Text>
-          <Text style={{color: "white", flex: 1, textAlign: 'center'}}>Cry</Text>
+          <Text style={{color: 'white', flex: 1, textAlign: 'center'}}>Call</Text>
+          <Text style={{color: 'white', flex: 1, textAlign: 'center'}}>Map</Text>
+          <Text style={{color: 'white', flex: 1, textAlign: 'center'}}>Cry</Text>
         </View>
 
         <View style={styles.container}>
