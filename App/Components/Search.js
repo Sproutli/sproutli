@@ -12,6 +12,7 @@ var {
 var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
 
 var SearchEngine = require('../Utils/SearchEngine');
+var ListingsFilter = require('../Utils/ListingsFilter');
 var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
 var VeganLevelSlider = require('./VeganLevelSlider');
@@ -24,6 +25,7 @@ class Search extends React.Component {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       query: props.query,
       location: {},
+      listings: [],
       loading: false,
       searchConfig: props.searchConfig
     };
@@ -59,13 +61,15 @@ class Search extends React.Component {
     var searchConfig = this.state.searchConfig;
     location = searchConfig.online_store !== 'N' ? location : null; // We don't want the location if we're searching for online stuff.
 
-    SearchEngine.search(this.state.query, location, searchConfig)
-    .then((listings) => {
-      this.setState({
-        loading: false,
-        dataSource: this.state.dataSource.cloneWithRows(listings)
+    SearchEngine.search(this.state.query, location)
+      .then((listings) => {
+        var filteredListings = listings.filter((l) => ListingsFilter.filter(l, searchConfig));
+        this.setState({
+          listings,
+          loading: false,
+          dataSource: this.state.dataSource.cloneWithRows(filteredListings)
+        });
       });
-    });
   }
 
   _onChangeText(text) {
@@ -79,13 +83,12 @@ class Search extends React.Component {
   _onVeganLevelChanged(veganLevel) {
     var searchConfig = this.state.searchConfig;
     searchConfig.vegan_level = veganLevel;
+    var listings = this.state.listings.filter((l) => ListingsFilter.filter(l, searchConfig));
 
     this.setState({ 
-      searchConfig
+      searchConfig,
+      dataSource: this.state.dataSource.cloneWithRows(listings)
     });
-
-    this.search();
-
   }
 
   listingPressed(listing) {
@@ -125,12 +128,10 @@ class Search extends React.Component {
           .then((res) => res.json())
           .then((placeDetails) => {
             var location = placeDetails.result.geometry.location;
-            console.log(placeDetails);
             location = {
               latitude: location.lat,
               longitude: location.lng
             };
-            console.log('Apres', location, 'Pres', that.state.location);
             that.setState({ location });
             that.search(location);
           })
