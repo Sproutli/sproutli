@@ -16,6 +16,7 @@ var Dimensions = require('Dimensions');
 var {width} = Dimensions.get('window');
 var Reviews = require('../Utils/Reviews');
 var Review = require('./Review');
+var ReviewModal = require('./ReviewModal');
 
 class ListingDetail extends React.Component {
   constructor(props) {
@@ -94,6 +95,11 @@ class ListingDetail extends React.Component {
   }
 
   _onLeaveReview() {
+    this.props.navigator.push({
+      title: 'Leave a Review',
+      component: ReviewModal,
+      passProps: { listingID: this.props.listing.id, name: this.props.listing.name }
+    });
   }
 
   render() {
