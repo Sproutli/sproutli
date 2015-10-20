@@ -9,6 +9,7 @@ var {
   ListView,
   TouchableHighlight,
   LinkingIOS,
+  ActivityIndicatorIOS,
   ScrollView,
   MapView
 } = React;
@@ -31,9 +32,10 @@ class ListingDetail extends React.Component {
 
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      currentTab: 1,
+      currentTab: 0,
       reviews: [],
-      showMap: false
+      showMap: false,
+      loadingReviews: true
     };
 
     this.getReviews(props.listing.id);
@@ -42,7 +44,10 @@ class ListingDetail extends React.Component {
   getReviews(listingID) {
     Reviews.getReviewsForListing(listingID)
       .then((reviews) => {
-        this.setState({ dataSource: this.state.dataSource.cloneWithRows(reviews) });
+        this.setState({ 
+          dataSource: this.state.dataSource.cloneWithRows(reviews),
+          loadingReviews: false
+        });
       })
       .catch((error) => console.warn(error)); 
   }
@@ -79,6 +84,8 @@ class ListingDetail extends React.Component {
   renderedDetails() {
     return (
       <View>
+        { this.renderedOffer() }
+
         <Text style={{fontSize: 16}}>{this.props.listing.description}</Text>
         <Text />
         <Text />
@@ -100,6 +107,13 @@ class ListingDetail extends React.Component {
   }
 
   renderedReviews() {
+    if (this.state.loadingReviews) {
+      return (
+        <View style={styles.loadingIndicator}>
+          <ActivityIndicatorIOS size='large' />
+        </View>
+      );
+    }
     return (
       <View>
         <TouchableHighlight onPress={this._onLeaveReview.bind(this)}>
@@ -217,8 +231,6 @@ class ListingDetail extends React.Component {
             </TouchableHighlight>
           </View>
 
-          { this.renderedOffer() }
-
           { this.state.currentTab === 0 ? this.renderedDetails() : this.renderedReviews() }
         </View>
 
@@ -290,6 +302,10 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1
+  },
+  loadingIndicator: {
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 

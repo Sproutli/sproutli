@@ -39,14 +39,12 @@ var Reviews = {
       })
       .then((res) => res.json())
       .then((reviews) => {
-        console.log('Got reviews', reviews);
         return Promise.all(reviews.map((review) => {
           return fetch(
             `http://sproutli-staging.elasticbeanstalk.com/api/v1/user/${review.user_id}`,
             makeConfig()
           ).then((res) => res.json())
           .then((user) => { 
-            console.log('Fetched user', user);
             review.user = user;
             return review;
           });
@@ -55,7 +53,6 @@ var Reviews = {
   },
 
   postReview(review) {
-    console.log('Got review text', review);
     return AsyncStorage.getItem('token')
       .then((token) => {
         jwtToken = token;
