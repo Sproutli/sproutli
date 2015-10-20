@@ -12,8 +12,10 @@ var {
 } = React;
 
 var Carousel = require('react-native-looped-carousel');
+var Communications = require('react-native-communications');
 var Dimensions = require('Dimensions');
 var {width} = Dimensions.get('window');
+
 var Reviews = require('../Utils/Reviews');
 var Review = require('./Review');
 var ReviewModal = require('./ReviewModal');
@@ -108,6 +110,26 @@ class ListingDetail extends React.Component {
     );
   }
 
+  renderedActionBar() {
+    return (
+      <View style={styles.actionBar}> 
+        <TouchableHighlight style={styles.actionBarButton} onPress={this._onCallListing.bind(this)}>
+          <Text style={{color: 'white', textAlign: 'center'}}>Call</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.actionBarButton}>
+          <Text style={{color: 'white', textAlign: 'center'}}>Map</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.actionBarButton}>
+          <Text style={{color: 'white', textAlign: 'center'}}>Cry</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
+
+  _onCallListing() {
+    Communications.phonecall(this.props.listing.phone_number, true);
+  }
+
   _onLeaveReview() {
     this.props.navigator.push({
       title: 'Leave a Review',
@@ -149,11 +171,7 @@ class ListingDetail extends React.Component {
       <ScrollView style={styles.outerContainer}>
         {this.renderedImages()}
 
-        <View style={styles.actionBar}> 
-          <Text style={{color: 'white', flex: 1, textAlign: 'center'}}>Call</Text>
-          <Text style={{color: 'white', flex: 1, textAlign: 'center'}}>Map</Text>
-          <Text style={{color: 'white', flex: 1, textAlign: 'center'}}>Cry</Text>
-        </View>
+        {this.renderedActionBar()}
 
         <View style={styles.container}>
           <View style={styles.buttonsContainer}>
@@ -232,6 +250,12 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center'
+  },
+  actionBarButton: {
+    height: 64,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1
   }
 });
 
