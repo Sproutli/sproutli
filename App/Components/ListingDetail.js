@@ -8,7 +8,8 @@ var {
   View,
   ListView,
   TouchableHighlight,
-  ScrollView
+  ScrollView,
+  MapView
 } = React;
 
 var Carousel = require('react-native-looped-carousel');
@@ -30,7 +31,8 @@ class ListingDetail extends React.Component {
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       currentTab: 1,
-      reviews: []
+      reviews: [],
+      showMap: false
     };
 
     this.getReviews(props.listing.id);
@@ -45,6 +47,18 @@ class ListingDetail extends React.Component {
   }
 
   renderedImages() {
+    if (this.state.showMap) {
+      var location = this.props.listing.location.split(',').map((n) => Number(n)),
+        region = {latitude: location[0], longitude: location[1], latitudeDelta: 0.05, longitudeDelta: 0.05},
+        annotations = [{latitude: location[0], longitude: location[1], title: this.props.listing.name, animateDrop: true}];
+      
+      return (
+        <MapView 
+          region={region}
+          annotations={annotations}
+          style={styles.imageStyle} />
+      );
+    }
     let images = this.props.listing.images;
     if (!images || images.length == 0) {
       return <Text>Sorry! No images for {this.props.listing.name}</Text>; 
@@ -113,10 +127,13 @@ class ListingDetail extends React.Component {
   renderedActionBar() {
     return (
       <View style={styles.actionBar}> 
+        <TouchableHighlight style={styles.actionBarButton} onPress={this._onShowImages.bind(this)}>
+          <Text style={{color: 'white', textAlign: 'center'}}>Images</Text>
+        </TouchableHighlight>
         <TouchableHighlight style={styles.actionBarButton} onPress={this._onCallListing.bind(this)}>
           <Text style={{color: 'white', textAlign: 'center'}}>Call</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.actionBarButton}>
+        <TouchableHighlight style={styles.actionBarButton} onPress={this._onShowMap.bind(this)}>
           <Text style={{color: 'white', textAlign: 'center'}}>Map</Text>
         </TouchableHighlight>
         <TouchableHighlight style={styles.actionBarButton}>
@@ -128,6 +145,14 @@ class ListingDetail extends React.Component {
 
   _onCallListing() {
     Communications.phonecall(this.props.listing.phone_number, true);
+  }
+
+  _onShowMap() {
+    this.setState({ showMap: true });
+  }
+
+  _onShowImages() {
+    this.setState({ showMap: false });
   }
 
   _onLeaveReview() {
