@@ -109,11 +109,11 @@ class ListingDetail extends React.Component {
 
         <View style={styles.container}>
           <View style={styles.buttonsContainer}>
-            <TouchableHighlight style={styles.leftButton} onPress={() => this.setState({currentTab: 0})} >
-              <Text>Details</Text>
+            <TouchableHighlight style={[styles.leftButton, {backgroundColor: this.state.currentTab === 0 ? '#222' : '#fff'}]} onPress={() => this.setState({currentTab: 0})} >
+              <Text style={[styles.buttonText, {color: this.state.currentTab === 0 ? '#fff' : '#222'}]}>Details</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.rightButton} onPress={() => this.setState({currentTab: 1})} >
-              <Text>Reviews</Text>
+            <TouchableHighlight style={[styles.rightButton, {backgroundColor: this.state.currentTab === 1 ? '#222' : '#fff'}]} onPress={() => this.setState({currentTab: 1})} >
+              <Text style={[styles.buttonText, {color: this.state.currentTab === 1 ? '#fff' : '#222'}]}>Reviews</Text>
             </TouchableHighlight>
           </View>
 
@@ -166,20 +166,26 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 20,
-    width
+    marginBottom: 20
   },
   leftButton: {
+    flex: 1,
+    borderColor: '#222',
     borderWidth: 2,
-    borderTopLeftRadius: 12,
-    borderBottomLeftRadius: 12,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
     padding: 6
   },
   rightButton: {
+    flex: 1,
+    borderColor: '#222',
     borderWidth: 2,
-    borderTopRightRadius: 12,
-    borderBottomRightRadius: 12,
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
     padding: 6
+  },
+  buttonText: {
+    textAlign: 'center'
   }
 });
 
