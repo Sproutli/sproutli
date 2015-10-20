@@ -4,7 +4,7 @@ var CATEGORIES = require('./Categories');
 
 var categories = () => {
   return CATEGORIES.map((c) => { 
-    return { name: c, check: false }
+    return { name: c, check: false };
   });
 };
 
@@ -24,7 +24,7 @@ var makeSearchConfig = (config) => {
   var baseSearchConfig = {
     discount: false,
     online_store: 'BOTH',
-    vegan_level: 1,
+    vegan_level: 4,
     owner_is: '',
     categories: categories()
   }; 
@@ -49,6 +49,8 @@ var SUGGESTIONS = {
       icon: 'ios-people'
     }
   ],
+
+  initialConfig: makeSearchConfig(),
 
   'Food': [
     {
@@ -86,7 +88,7 @@ var SUGGESTIONS = {
         online_store: 'N',
         vegan_level: 4
       })
-    },
+    }
   ],
 
   'Products': [
@@ -107,7 +109,7 @@ var SUGGESTIONS = {
         online_store: 'N',
         vegan_level: 4
       })
-    },
+    }
   ],
 
   'Services': [
@@ -141,7 +143,7 @@ var SUGGESTIONS = {
           c.check = c.name === 'Professional Services & Trades';
           return c;
         })
-      }),
+      })
     }
   ]
 };

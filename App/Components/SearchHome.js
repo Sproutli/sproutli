@@ -2,9 +2,7 @@
 
 var React = require('react-native');
 var {
-  TextInput,
   StyleSheet,
-  Text,
   View
 } = React;
 var SearchSuggestion = require('./SearchSuggestion');
@@ -36,7 +34,7 @@ class SearchHome extends React.Component {
         component: Search,
         title: label,
         passProps: { preCanned: label, searchConfig: suggestion.searchConfig }
-      }
+      };
     }
 
     this.props.navigator.push(route);
@@ -46,7 +44,7 @@ class SearchHome extends React.Component {
     this.props.navigator.push({
       component: Search,
       title: 'Search',
-      passProps: { query: this.state.query }
+      passProps: { query: this.state.query, searchConfig: SUGGESTIONS.initialConfig }
     });
   }
 
@@ -76,7 +74,7 @@ class SearchHome extends React.Component {
       </View>
     );
   }
-};
+}
 
 var styles = StyleSheet.create({
   bigContainer: {
@@ -88,8 +86,13 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   }
 });
+
+SearchHome.propTypes = {
+  navigator: React.PropTypes.object.isRequired,
+  suggestions: React.PropTypes.array.isRequired
+};
 
 module.exports = SearchHome;
