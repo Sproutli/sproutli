@@ -8,6 +8,7 @@ var {
   View,
   ListView,
   TouchableHighlight,
+  LinkingIOS,
   ScrollView,
   MapView
 } = React;
@@ -136,8 +137,8 @@ class ListingDetail extends React.Component {
         <TouchableHighlight style={styles.actionBarButton} onPress={this._onShowMap.bind(this)}>
           <Text style={{color: 'white', textAlign: 'center'}}>Map</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.actionBarButton}>
-          <Text style={{color: 'white', textAlign: 'center'}}>Cry</Text>
+        <TouchableHighlight style={styles.actionBarButton} onPress={this._onGoToWebsite.bind(this)}>
+          <Text style={{color: 'white', textAlign: 'center'}}>Website</Text>
         </TouchableHighlight>
       </View>
     );
@@ -153,6 +154,14 @@ class ListingDetail extends React.Component {
 
   _onShowImages() {
     this.setState({ showMap: false });
+  }
+
+  _onGoToWebsite() {
+    var url = this.props.listing.website;
+    if (!url.match('http:\/\/')) {
+      url = 'http://' + url;
+    }
+    LinkingIOS.openURL(url);
   }
 
   _onLeaveReview() {
