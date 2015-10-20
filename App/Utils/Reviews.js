@@ -37,6 +37,11 @@ var Reviews = {
             });
         }));
       });
+  },
+
+  postReview(review) {
+    console.log('Got review text', review);
+    return new Promise((resolve) => resolve());
   }
 };
 

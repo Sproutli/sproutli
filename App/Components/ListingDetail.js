@@ -131,10 +131,6 @@ class ListingDetail extends React.Component {
   }
 }
 
-ListingDetail.propTypes = {
-  listing: React.PropTypes.object.isRequired
-};
-
 var styles = StyleSheet.create({
   actionBar: {
     flex: 1,
@@ -195,5 +191,10 @@ var styles = StyleSheet.create({
   }
 });
 
+
+ListingDetail.propTypes = {
+  listing: React.PropTypes.object.isRequired,
+  navigator: React.PropTypes.object.isRequired
+};
 
 module.exports = ListingDetail;
