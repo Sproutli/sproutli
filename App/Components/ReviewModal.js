@@ -65,7 +65,10 @@ class ReviewModal extends React.Component {
           'Thanks!', 
           `Thanks for reviewing ${this.props.name}.`,
           [
-            { text: 'OK', onPress: () => this.props.navigator.pop() }
+            { text: 'OK', onPress: () => { 
+              this.props.navigator.pop();
+              this.props.getReviews();
+            }}
           ]
         );
       })
@@ -113,7 +116,8 @@ var styles = StyleSheet.create({
 ReviewModal.propTypes = {
   listingID: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
-  navigator: React.PropTypes.object.isRequired
+  navigator: React.PropTypes.object.isRequired,
+  getReviews: React.PropTypes.func.isRequired
 };
 
 Stars.propTypes = {

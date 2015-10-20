@@ -16,7 +16,6 @@ class Sproutli extends React.Component {
     this.state = { token:  undefined };
     AsyncStorage.getItem('token')
       .then((token) => {
-        console.log('Token is', token);
         this.setState({token});
       })
       .catch((error) => console.log('Something bad happened fetching the token', error));

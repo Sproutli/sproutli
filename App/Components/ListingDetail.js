@@ -27,23 +27,28 @@ var KindnessCards = require('../Utils/KindnessCards');
 var OfferModal = require('./OfferModal');
 
 class ListingDetail extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
 
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       currentTab: 0,
       reviews: [],
-      showMap: false,
-      loadingReviews: true
+      showMap: false
     };
-
-    this.getReviews(props.listing.id);
   }
 
-  getReviews(listingID) {
+  componentDidMount() {
+    this.getReviews();
+  }
+
+  getReviews() {
+    var listingID = this.props.listing.id;
+    this.setState({ loadingReviews: true });
+
     Reviews.getReviewsForListing(listingID)
       .then((reviews) => {
+        console.log(reviews);
         this.setState({ 
           dataSource: this.state.dataSource.cloneWithRows(reviews),
           loadingReviews: false
@@ -182,7 +187,7 @@ class ListingDetail extends React.Component {
     this.props.navigator.push({
       title: 'Leave a Review',
       component: ReviewModal,
-      passProps: { listingID: this.props.listing.id, name: this.props.listing.name }
+      passProps: { listingID: this.props.listing.id, name: this.props.listing.name, getReviews: this.getReviews.bind(this) }
     });
   }
 
