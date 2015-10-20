@@ -68,6 +68,10 @@ class ReviewModal extends React.Component {
             { text: 'OK', onPress: () => this.props.navigator.pop() }
           ]
         );
+      })
+      .catch((error) => {
+        console.warn('Error posting review', error);
+        AlertIOS.alert('Sorry!', 'There was an error posting your review. Please try again');
       });
   }
 

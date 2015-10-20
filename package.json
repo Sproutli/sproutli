@@ -6,6 +6,8 @@
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
+    "jwt-decode": "^1.4.0",
+    "moment": "^2.10.6",
     "react-native": "^0.12.0",
     "react-native-google-places-autocomplete": "git+https://github.com/kanerogers/react-native-google-places-autocomplete.git",
     "react-native-looped-carousel": "git+https://github.com/kanerogers/react-native-looped-carousel.git",
