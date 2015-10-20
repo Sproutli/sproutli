@@ -17,6 +17,9 @@ var {width} = Dimensions.get('window');
 var Reviews = require('../Utils/Reviews');
 var Review = require('./Review');
 var ReviewModal = require('./ReviewModal');
+var BuyKindnessCardModal = require('./BuyKindnessCardModal');
+var KindnessCards = require('../Utils/KindnessCards');
+var OfferModal = require('./OfferModal');
 
 class ListingDetail extends React.Component {
   constructor(props) {
@@ -98,7 +101,7 @@ class ListingDetail extends React.Component {
 
     return(
       <View>
-        <TouchableHighlight>
+        <TouchableHighlight onPress={this._onViewOffer.bind(this)}>
           <Text>View offer.</Text>
         </TouchableHighlight>
       </View>
@@ -111,6 +114,34 @@ class ListingDetail extends React.Component {
       component: ReviewModal,
       passProps: { listingID: this.props.listing.id, name: this.props.listing.name }
     });
+  }
+
+  _onViewOffer() {
+    var askToBuy = () => {
+      this.props.navigator.push({
+        title: 'Get a Kindness Card',
+        component: BuyKindnessCardModal,
+        passProps: { listingName: this.props.listing }
+      });
+    };
+    KindnessCards.fetchCard()
+      .then((card) => {
+        if (card.length < 1) { 
+          askToBuy();
+          return;
+        }
+
+        this.props.navigator.push({
+          title: 'View Offer',
+          component: OfferModal,
+          passProps: { 
+            offerDetails: this.props.listing.offer_details, 
+            offerConditions: this.props.listing.offer_conditions, 
+            offerInstructions: this.props.listing.offer_instructions 
+          }
+        });
+      })
+      .catch(askToBuy);
   }
 
   render() {
