@@ -1,3 +1,4 @@
+/*global fetch */
 'use strict';
 
 var AsyncStorage = require('react-native').AsyncStorage;
@@ -15,7 +16,7 @@ var Authentication = {
     .then((res) => res.json())
     .then((login) => {
       return AsyncStorage.setItem('token', login.token);
-    })
+    });
   },
 
   signUp: (credentials) => {
@@ -41,9 +42,9 @@ var Authentication = {
         name: credentials.name
       };
       console.log('Creating user..', user);
-      return fetch(`${baseURL}/user`, {
+      return fetch(`${baseURL}/user/${user.id}`, {
         body: JSON.stringify(user),
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${credentials.token}`
@@ -52,9 +53,9 @@ var Authentication = {
     })
     .then((res) => {
       console.log('..done, got response', res);
-      res.json()
+      res.json();
     });
   }
-}
+};
 
 module.exports = Authentication;

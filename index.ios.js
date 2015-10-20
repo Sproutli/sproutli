@@ -3,7 +3,6 @@
 var React = require('react-native');
 var App = require('./App/Components/App');
 var Login = require('./App/Components/Login');
-var SUGGESTIONS = require('./App/Constants/Suggestions');
 var {
   View,
   AppRegistry,
@@ -18,17 +17,17 @@ class Sproutli extends React.Component {
     AsyncStorage.getItem('token')
       .then((token) => {
         console.log('Token is', token);
-        this.setState({token})
+        this.setState({token});
       })
       .catch((error) => console.log('Something bad happened fetching the token', error));
   }
 
   renderScene(route, navigator) {
     switch(route.name) {
-      case 'app':
-        return <App token={this.state.token} /> 
-      case 'login': 
-        return <Login navigator={navigator} signingUp={route.signingUp} email={route.email} password={route.password} />
+    case 'app':
+      return <App token={this.state.token} />;
+    case 'login':
+      return <Login navigator={navigator} signingUp={route.signingUp} email={route.email} password={route.password} />;
     }
   }
 
@@ -36,7 +35,7 @@ class Sproutli extends React.Component {
   render() {
     // Render a blank view while we wait for our token.
     if (this.state.token === undefined) {
-      return <View />
+      return <View />;
     }
 
     return (
@@ -44,8 +43,8 @@ class Sproutli extends React.Component {
         initialRoute={{name: this.state.token ? 'app' : 'login', index: 0}}
         renderScene={this.renderScene.bind(this)}      
       />
-    )
+    );
   }
-};
+}
 
 AppRegistry.registerComponent('sproutli', () => Sproutli);

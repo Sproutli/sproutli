@@ -22,33 +22,31 @@ var productCategories = categories().map((c) => {
 
 var makeSearchConfig = (config) => {
   var baseSearchConfig = {
-      discount: false,
-      online_store: 'BOTH',
-      vegan_level: 1,
-      owner_is: '',
-      categories: categories()
+    discount: false,
+    online_store: 'BOTH',
+    vegan_level: 1,
+    owner_is: '',
+    categories: categories()
   }; 
 
-  var config =  Object.assign(baseSearchConfig, config);
-  console.log('Returning config', config);
-
+  config = Object.assign(baseSearchConfig, config);
   return config;
-}
+};
 
 
 var SUGGESTIONS = {
   initial: [
     {
       label: 'Food', 
-      icon: 'pizza',
+      icon: 'pizza'
     },
     {
       label: 'Products', 
-      icon: 'ios-cart',
+      icon: 'ios-cart'
     },
     {
       label: 'Services', 
-      icon: 'ios-people',
+      icon: 'ios-people'
     }
   ],
 

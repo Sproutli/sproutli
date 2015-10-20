@@ -4,7 +4,7 @@ var React = require('react-native');
 var {
   View,
   StyleSheet,
-  Text,
+  Text
 } = React;
 
 class Review extends React.Component {
@@ -25,5 +25,11 @@ var styles = StyleSheet.create({
     paddingBottom: 10
   }
 });
+
+Review.propTypes = {
+  rating: React.PropTypes.number.isRequired,
+  user: React.PropTypes.object.isRequired,
+  content: React.PropTypes.string.isRequired
+};
 
 module.exports = Review;
