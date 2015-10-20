@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var KindnessCards = require('../Utils/KindnessCards');
 var {
   StyleSheet,
   Text,
@@ -8,10 +9,19 @@ var {
 } = React;
 
 class KindnessCard extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      card: {}
+    };
+    KindnessCards.fetchCard()
+      .then((card) => this.setState({ card: card[0] }))
+      .catch((error) => console.warn(`Error getting card ${error}`));
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}> INCOMPREHENSIBLE MUMBLING </Text>
+        <Text style={styles.text}> {this.state.card.start_date} </Text>
       </View>
     );
   }
