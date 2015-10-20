@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var KindnessCards = require('../Utils/KindnessCards');
+var BuyKindnessCardModal = require('./BuyKindnessCardModal');
 var {
   StyleSheet,
   Text,
@@ -19,6 +20,10 @@ class KindnessCard extends React.Component {
       .catch((error) => console.warn(`Error getting card ${error}`));
   }
   render() {
+    if (!this.state.card) {
+      return <BuyKindnessCardModal />;
+    }
+
     return (
       <View style={styles.container}>
         <Text style={styles.text}> {this.state.card.start_date} </Text>
