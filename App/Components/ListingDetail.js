@@ -79,7 +79,6 @@ class ListingDetail extends React.Component {
     );
   }
 
-
   renderedReviews() {
     return (
       <View>
@@ -90,6 +89,18 @@ class ListingDetail extends React.Component {
           renderRow={(review, index) => <Review key={index} {...review} />}
           dataSource={this.state.dataSource}
         />
+      </View>
+    );
+  }
+
+  renderedOffer() {
+    if (!this.props.listing.offer_details) { return <View />; }
+
+    return(
+      <View>
+        <TouchableHighlight>
+          <Text>View offer.</Text>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -122,6 +133,8 @@ class ListingDetail extends React.Component {
               <Text style={[styles.buttonText, {color: this.state.currentTab === 1 ? '#fff' : '#222'}]}>Reviews</Text>
             </TouchableHighlight>
           </View>
+
+          { this.renderedOffer() }
 
           { this.state.currentTab === 0 ? this.renderedDetails() : this.renderedReviews() }
         </View>
