@@ -1,14 +1,50 @@
+/* global fetch */
 'use strict';
 
-var SearchEngine = {
-  parse(listings) { 
-    return listings.hits.hit.map((l) => l.fields);
-  },
+var prepareProps = (location) => {
+  var props = [
+    'rating',
+    'description',
+    'tags',
+    'location',
+    'images',
+    'id',
+    'name',
+    'locality',
+    'vegan_level',
+    'online_store',
+    'categories',
+    'owner_is',
+    'premium',
+    'cover_image',
+    'offer_details',
+    'offer_instructions',
+    'offer_conditions'
+  ];
 
+  if (location) { props.push('distance'); }
+
+  return props.join(',');
+};
+
+var parse = (listings, location) => { 
+  console.log(listings);
+  return listings.hits.hit
+  .filter((l) => {
+    if (!location) { return true; }
+
+    l.fields.distance = l.exprs.distance;
+
+    return l.fields.distance < 20;
+  })
+  .map((l) => l.fields);
+};
+
+var SearchEngine = {
   prepareLocationQuery(location) {
     if (!location) { return ''; }
 
-    return `&expr.distance=haversin(${location.latitude},${location.longitude},location.latitude,location.longitude)&sort=distance asc`
+    return `&expr.distance=haversin(${location.latitude},${location.longitude},location.latitude,location.longitude)&sort=distance asc&return=${prepareProps(location)}`;
   },
 
   search(query, location) {
@@ -18,11 +54,11 @@ var SearchEngine = {
 
     return fetch(url)
       .then((res) => res.json())
-      .then((listings) => this.parse(listings))
+      .then((listings) => parse(listings, location))
       .catch((error) => {
         console.warn('Error fetching listings', error);
       });
   }
-}
+};
 
 module.exports = SearchEngine;
