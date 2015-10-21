@@ -11,7 +11,7 @@ var COLOURS = require('../Constants/Colours');
 class SearchBox extends React.Component {
   render() {
     return (
-      <View style={{height: 56, backgroundColor: 'white'}}>
+      <View style={{marginTop: 4, height: 56, backgroundColor: 'white'}}>
         <SearchBar 
           barTintColour={COLOURS.GREEN}
           placeholder='Search'
