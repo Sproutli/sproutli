@@ -3,13 +3,16 @@
 var React = require('react-native');
 var Icon = require('react-native-vector-icons/Ionicons');
 var {
-  TextInput,
   StyleSheet,
   Text,
   TouchableHighlight,
   View
 } = React;
 var Dimensions = require('Dimensions');
+var windowSize = Dimensions.get('window');
+var boxWidth = windowSize.width / 2;
+
+var COLOURS = require('../Constants/Colours');
 
 class SearchSuggestion extends React.Component {
   render() {
@@ -24,7 +27,7 @@ class SearchSuggestion extends React.Component {
             <Text style={styles.labelText}>{this.props.label}</Text>
           </View>
           <View style={styles.icon}>
-            <Icon name={this.props.icon} size={60} color="green" />
+            <Icon name={this.props.icon} size={60} color={COLOURS.GREEN} />
           </View>
         </View>
 
@@ -33,8 +36,6 @@ class SearchSuggestion extends React.Component {
   }
 }
 
-var windowSize = Dimensions.get('window');
-var boxWidth = windowSize.width / 2;
 var styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -49,7 +50,7 @@ var styles = StyleSheet.create({
   },
   labelText: {
     fontSize: 30,
-    color: '#333',
+    color: COLOURS.GREY,
     textAlign: 'right'
   },
   icon: {
@@ -58,5 +59,11 @@ var styles = StyleSheet.create({
     width: boxWidth
   }
 });
+
+SearchSuggestion.propTypes = {
+  handler: React.PropTypes.func.isRequired,
+  label: React.PropTypes.string.isRequired,
+  icon: React.PropTypes.string.isRequired
+};
 
 module.exports = SearchSuggestion;
