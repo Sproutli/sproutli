@@ -14,7 +14,9 @@ class SearchBox extends React.Component {
       <View style={{height: 56, backgroundColor: 'white'}}>
         <SearchBar 
           barTintColour={COLOURS.GREEN}
-          placeholder='Search for something'
+          placeholder='Search'
+          hideBackground
+          textFieldBackgroundColor='#f8f8f8'
           tintColor={COLOURS.GREEN}
           onChangeText={this.props.onChangeText}
           onSearchButtonPress={this.props.onSubmitEditing}
@@ -26,7 +28,6 @@ class SearchBox extends React.Component {
 }
 
 SearchBox.propTypes = {
-  text: React.PropTypes.string.isRequired,
   onSubmitEditing: React.PropTypes.func.isRequired,
   onBlur: React.PropTypes.func.isRequired,
   onFocus: React.PropTypes.func.isRequired,
