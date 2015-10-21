@@ -53,6 +53,7 @@ var styles = StyleSheet.create({
   },
 
   veganLevelText: {
+    textAlign: 'center',
     color: COLOURS.GREY
   }
 });

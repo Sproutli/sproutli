@@ -16,7 +16,10 @@ class SearchBox extends React.Component {
 
     return (
       <Text style={styles.searchText}>
-        {this.props.numberOfListings} {this.props.searchLabel} around {this.props.location} that are {this.props.veganLevelText}
+        <Text style={styles.bold}>{this.props.numberOfListings} {this.props.searchLabel} </Text> 
+        around 
+        <Text style={styles.bold}> {this.props.location}</Text> that are  
+        <Text style={styles.bold}> {this.props.veganLevelText}</Text>
       </Text>
     );
   }
@@ -56,8 +59,13 @@ SearchBox.propTypes = {
 
 var styles = StyleSheet.create({
   searchText: {
+    paddingTop: 4,
     textAlign: 'center',
     color: COLOURS.GREY
+  },
+
+  bold: {
+    fontWeight: 'bold'
   }
 });
 

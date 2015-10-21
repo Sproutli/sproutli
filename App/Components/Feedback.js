@@ -1,3 +1,4 @@
+/* global fetch */
 'use strict';
 
 var Icon = require('react-native-vector-icons/Ionicons');
@@ -8,8 +9,11 @@ var {
   View,
   ScrollView,
   TextInput,
+  TouchableHighlight,
   AlertIOS
 } = React;
+
+var COLOURS = require('../Constants/Colours');
 
 class Feedback extends React.Component {
   constructor() {
@@ -25,25 +29,23 @@ class Feedback extends React.Component {
   }
 
   _sendToZapier() {
-    if ( this.state.sending ) return;
+    if ( this.state.sending || this.state.feedback.length < 1 ) return;
     var title, message;
     this.setState({ sending: true });
-
-    console.log('Sending..');
 
     fetch('https://zapier.com/hooks/catch/39b1fp/', {
       method: 'POST',
       headers: {
-        "Content-Type": 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ feedback: this.state.feedback})
     })
-    .then((response) => {
+    .then(() => {
       title = 'Thanks!';
-      message = "We'll get back to you shortly.";
+      message = `We'll get back to you shortly.`;
     })
     .catch((error) => {
-      console.log('Error sending feedback to Zapier', error);
+      console.warn('Error sending feedback to Zapier', error);
       title = 'Error';
       message = 'Sorry! There was an error - please try again.';
     })
@@ -51,6 +53,14 @@ class Feedback extends React.Component {
       this.setState({ sending: false, feedback: '' });
       AlertIOS.alert(title, message);
     });
+  }
+
+  getButtonColour() {
+    if (this.state.sending || this.state.feedback.length < 1) {
+      return COLOURS.GREY;
+    } else {
+      return COLOURS.GREEN;
+    }
   }
 
   render() {
@@ -64,8 +74,18 @@ class Feedback extends React.Component {
 
           <Text style={[styles.instructionText, {fontWeight: 'bold'}]}>Your thoughts:</Text>
         </View>
-        <TextInput onChangeText={this._onChangeText.bind(this)} multiline={true} value={this.state.feedback} style={styles.feedbackForm} placeholder="Tell us what you think!"></TextInput>
-        <Text style={[styles.instructionText, {color: 'green'}]} onPress={this._sendToZapier.bind(this)}>Send Feedback  <Icon name="chevron-right" size={20} color="green" /></Text>
+        <TextInput 
+          onChangeText={this._onChangeText.bind(this)} 
+          multiline
+          value={this.state.feedback} 
+          style={styles.feedbackForm} 
+          placeholder='Tell us what you think!'
+        />
+        <TouchableHighlight onPress={this._sendToZapier.bind(this)}>
+          <Text style={[styles.instructionText, {color: this.getButtonColour()}]}>
+            Send Feedback <Icon name='chevron-right' size={20} color={this.getButtonColour()} />
+          </Text>
+        </TouchableHighlight>
       </ScrollView>
     );
   }
@@ -75,20 +95,21 @@ var styles= StyleSheet.create({
   container: {
     flex: 1,
     top: 32,
-    padding: 12,
+    padding: 12
   }, 
   headerText: {
-    color: 'grey',
+    color: COLOURS.GREY,
     fontSize: 30
   },
   instructionText: {
+    color: COLOURS.GREY,
     fontSize: 20,
     marginTop: 24
   },
   feedbackForm: {
     height: 100,
     fontSize: 16,
-    backgroundColor: 'f8f8f8',
+    backgroundColor: COLOURS.LIGHT_GREY,
     padding: 2
   }
 });
