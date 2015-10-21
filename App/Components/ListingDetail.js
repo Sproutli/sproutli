@@ -16,6 +16,7 @@ var {
 
 var Carousel = require('react-native-looped-carousel');
 var Communications = require('react-native-communications');
+var Icon = require('react-native-vector-icons/Ionicons');
 var Dimensions = require('Dimensions');
 var {width} = Dimensions.get('window');
 
@@ -146,21 +147,57 @@ class ListingDetail extends React.Component {
     );
   }
 
+  renderedMapButton() {
+    if (!this.props.listing.location) return <View />;
+
+    return (
+      <TouchableHighlight style={styles.actionBarButton} onPress={this._onShowMap.bind(this)}>
+        <View style={styles.actionBarButton}>
+          <Icon name='map' size={40} color='white' />
+          <Text style={{color: 'white', textAlign: 'center'}}>Map</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  }
+
+  renderedWebsiteButton() {
+    if (!this.props.listing.website) return <View />;
+
+    return (
+      <TouchableHighlight style={styles.actionBarButton} onPress={this._onGoToWebsite.bind(this)}>
+        <View style={styles.actionBarButton}>
+          <Icon name='earth' size={40} color='white' />
+          <Text style={{color: 'white', textAlign: 'center'}}>Website</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  }
+
+  renderedCallButton() {
+    if (!this.props.listing.phone_number) return <View />;
+
+    return (
+      <TouchableHighlight style={styles.actionBarButton} onPress={this._onCallListing.bind(this)}>
+        <View style={styles.actionBarButton}>
+          <Icon name='ios-telephone' size={40} color='white' />
+          <Text style={{color: 'white', textAlign: 'center'}}>Call</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  }
+
   renderedActionBar() {
     return (
       <View style={styles.actionBar}> 
         <TouchableHighlight style={styles.actionBarButton} onPress={this._onShowImages.bind(this)}>
-          <Text style={{color: 'white', textAlign: 'center'}}>Images</Text>
+          <View style={styles.actionBarButton}>
+            <Icon name='images' size={40} color='white' />
+            <Text style={{color: 'white', textAlign: 'center'}}>Images</Text>
+          </View>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.actionBarButton} onPress={this._onCallListing.bind(this)}>
-          <Text style={{color: 'white', textAlign: 'center'}}>Call</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.actionBarButton} onPress={this._onShowMap.bind(this)}>
-          <Text style={{color: 'white', textAlign: 'center'}}>Map</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.actionBarButton} onPress={this._onGoToWebsite.bind(this)}>
-          <Text style={{color: 'white', textAlign: 'center'}}>Website</Text>
-        </TouchableHighlight>
+        { this.renderedMapButton() }
+        { this.renderedCallButton() }
+        { this.renderedWebsiteButton() }
       </View>
     );
   }
