@@ -1,7 +1,6 @@
 /* global fetch */
 'use strict';
 
-var Icon = require('react-native-vector-icons/Ionicons');
 var React = require('react-native');
 var {
   StyleSheet,
@@ -9,11 +8,11 @@ var {
   View,
   ScrollView,
   TextInput,
-  TouchableHighlight,
   AlertIOS
 } = React;
 
 var COLOURS = require('../Constants/Colours');
+var Button = require('./Button');
 
 class Feedback extends React.Component {
   constructor() {
@@ -81,11 +80,9 @@ class Feedback extends React.Component {
           style={styles.feedbackForm} 
           placeholder='Tell us what you think!'
         />
-        <TouchableHighlight onPress={this._sendToZapier.bind(this)}>
-          <Text style={[styles.instructionText, {color: this.getButtonColour()}]}>
-            Send Feedback <Icon name='chevron-right' size={20} color={this.getButtonColour()} />
-          </Text>
-        </TouchableHighlight>
+        <Button color={this.getButtonColour()} onPress={this._sendToZapier.bind(this)}>
+          Send Feedback 
+        </Button>
       </ScrollView>
     );
   }

@@ -124,7 +124,7 @@ class ListingDetail extends React.Component {
     return (
       <View>
         <TouchableHighlight onPress={this._onLeaveReview.bind(this)}>
-          <Text style={{textAlign: 'center'}}>Leave a Review</Text>
+          <Text style={[{}, {textAlign: 'center'}]}>Leave a Review</Text>
         </TouchableHighlight>
         <ListView
           renderRow={(review, index) => <Review style={styles.text} key={index} {...review} />}
