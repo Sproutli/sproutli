@@ -1,4 +1,4 @@
-/*global navigator, fetch*/
+/*global navigator */
 'use strict';
 
 var React = require('react-native');
@@ -8,14 +8,13 @@ var {
   ActivityIndicatorIOS,
   View
 } = React;
-var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
 
 var SearchEngine = require('../Utils/SearchEngine');
 var ListingsFilter = require('../Utils/ListingsFilter');
 var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
-var VeganLevelSlider = require('./VeganLevelSlider');
 var ListingDetail = require('./ListingDetail');
+var AdvancedSearchOptions = require('./AdvancedSearchOptions');
 
 class Search extends React.Component {
   constructor(props) {
@@ -96,6 +95,11 @@ class Search extends React.Component {
     this.setState({ showAdvancedSearchOptions: true });
   }
 
+  _onLocationSelected(location) {
+    this.setState(location);
+    this.search(location);
+  }
+
   listingPressed(listing) {
     this.props.navigator.push({
       component: ListingDetail,
@@ -122,42 +126,6 @@ class Search extends React.Component {
    );
   }
 
-  renderAdvancedSearchOptions() {
-    var that = this;
-
-    var GooglePlacesAutocomplete = require('react-native-google-places-autocomplete').create({
-      placeholder: 'Location',
-      onPress(place) {
-        var placeId = place.place_id;
-        fetch(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${API_KEY}`)
-          .then((res) => res.json())
-          .then((placeDetails) => {
-            var location = placeDetails.result.geometry.location;
-            location = {
-              latitude: location.lat,
-              longitude: location.lng
-            };
-            that.setState({ location });
-            that.search(location);
-          })
-          .catch((error) => console.warn(error));
-      },
-      minLength: 2,
-      query: {
-        key: API_KEY,
-        language: 'en',
-        types: 'geocode'
-      }
-    }).bind(this);
-
-    return (
-      <View>
-        <GooglePlacesAutocomplete />
-        <VeganLevelSlider veganLevel={this.state.searchConfig.vegan_level} onSlidingComplete={this._onVeganLevelChanged.bind(this)} />
-      </View>
-    );
-  }
-
   render() {
     return (
       <View style={styles.bigContainer}>
@@ -166,7 +134,11 @@ class Search extends React.Component {
           onSubmitEditing={this._onSearch.bind(this)} 
           onFocus={this._onFocus.bind(this)} />
 
-        { this.state.showAdvancedSearchOptions ? this.renderAdvancedSearchOptions() : <View /> }
+        { this.state.showAdvancedSearchOptions ? <AdvancedSearchOptions 
+          veganLevel={this.state.searchConfig.vegan_level}
+          onLocationSelected={this._onLocationSelected.bind(this)} 
+          onVeganLevelChanged={this._onVeganLevelChanged.bind(this)}
+          /> : <View /> }
 
         { this.renderListings() }
       </View>
