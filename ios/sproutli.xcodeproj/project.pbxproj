@@ -24,6 +24,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		C34DABDB1BD7341900EB08C8 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C34DABDA1BD7341000EB08C8 /* libBVLinearGradient.a */; };
 		C34DABE21BD751B100EB08C8 /* libRNSearchBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C34DABE11BD751AC00EB08C8 /* libRNSearchBar.a */; };
+		C34DABEA1BD7824500EB08C8 /* RNGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = C34DABE91BD7824500EB08C8 /* RNGeocoder.m */; settings = {ASSET_TAGS = (); }; };
 		C35B3EAC1BCC904E005AB832 /* sproutliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B3EAB1BCC904E005AB832 /* sproutliUITests.swift */; };
 		C371A2FC1BCF0D4C00589DFD /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C371A2FB1BCF0D4000589DFD /* libRNVectorIcons.a */; };
 		C371A3061BCF2D4700589DFD /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A2FE1BCF2D4700589DFD /* Entypo.ttf */; settings = {ASSET_TAGS = (); }; };
@@ -158,6 +159,8 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		C34DABD51BD7341000EB08C8 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		C34DABDC1BD751AB00EB08C8 /* RNSearchBar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSearchBar.xcodeproj; path = "../node_modules/react-native-search-bar/RNSearchBar.xcodeproj"; sourceTree = "<group>"; };
+		C34DABE81BD7824500EB08C8 /* RNGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGeocoder.h; sourceTree = "<group>"; };
+		C34DABE91BD7824500EB08C8 /* RNGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGeocoder.m; sourceTree = "<group>"; };
 		C35B3EA91BCC904E005AB832 /* sproutliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sproutliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35B3EAB1BCC904E005AB832 /* sproutliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sproutliUITests.swift; sourceTree = "<group>"; };
 		C35B3EAD1BCC904E005AB832 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -292,6 +295,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				C34DABE71BD7824500EB08C8 /* RNGeocoder */,
 				C34DABDC1BD751AB00EB08C8 /* RNSearchBar.xcodeproj */,
 				C34DABD51BD7341000EB08C8 /* BVLinearGradient.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -353,6 +357,16 @@
 				C34DABE11BD751AC00EB08C8 /* libRNSearchBar.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C34DABE71BD7824500EB08C8 /* RNGeocoder */ = {
+			isa = PBXGroup;
+			children = (
+				C34DABE81BD7824500EB08C8 /* RNGeocoder.h */,
+				C34DABE91BD7824500EB08C8 /* RNGeocoder.m */,
+			);
+			name = RNGeocoder;
+			path = "../node_modules/react-native-geocoder/RNGeocoder";
 			sourceTree = "<group>";
 		};
 		C35B3EAA1BCC904E005AB832 /* sproutliUITests */ = {
@@ -645,6 +659,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				C34DABEA1BD7824500EB08C8 /* RNGeocoder.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -697,6 +712,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.next;
 				PRODUCT_NAME = sproutli;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -716,6 +732,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.next;
 				PRODUCT_NAME = sproutli;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

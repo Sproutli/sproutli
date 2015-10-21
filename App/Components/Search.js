@@ -15,6 +15,7 @@ var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
 var ListingDetail = require('./ListingDetail');
 var AdvancedSearchOptions = require('./AdvancedSearchOptions');
+var RNGeocoder = require('react-native-geocoder');
 
 class Search extends React.Component {
   constructor(props) {
@@ -41,9 +42,12 @@ class Search extends React.Component {
       var location = position.coords;
       this.setState({ location });
       this.search(location);
+      RNGeocoder.reverseGeocodeLocation(location)
+        .then((geocodedLocation) => this.setState({ geocodedLocation }))
+        .catch((error) => this.warn('[Search] - Error getting reverse geocode', error));
     },
       (error) => {
-      console.warn('Error getting location', error);
+      console.warn('[Search] - Error getting location', error);
       this.setState({ location: null });
       this.search(null);
     }
