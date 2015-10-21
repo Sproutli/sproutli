@@ -7,12 +7,14 @@ var BuyKindnessCardModal = require('./BuyKindnessCardModal');
 var {
   StyleSheet,
   Text,
+  ActivityIndicatorIOS,
   View
 } = React;
 
 var LinearGradient = require('react-native-linear-gradient');
 var Dimensions = require('Dimensions');
 var {height, width} = Dimensions.get('window');
+var Moment = require('moment');
 
 class KindnessCard extends React.Component {
   constructor() {
@@ -28,9 +30,30 @@ class KindnessCard extends React.Component {
       .then((user) => this.setState({ user }))
       .catch((error) => console.warn(`[KindnessCard] - Error getting user - ${error}`));
   }
+
+  nextPaymentDate() {
+    if (!this.state.card.start_date) { return ''; }
+
+    var startDate = Moment(this.state.card.start_date),
+      interval = this.state.card.membership_type,
+      timeToAdd = interval.split('ly')[0], // hee heee
+      nextPayment = startDate.add(1, timeToAdd);
+
+    return nextPayment.format('DD/MM/YYYY');
+  }
+
   render() {
-    if (!this.state.card) {
+    if (this.state.card === undefined) {
       return <BuyKindnessCardModal />;
+    }
+
+    if (!this.state.card.start_date) {
+      return (
+        <View style={styles.container}>
+          <ActivityIndicatorIOS size='large' />
+          <Text style={styles.thanks}>Just a moment..</Text>
+        </View>
+      );
     }
 
     return (
@@ -39,7 +62,7 @@ class KindnessCard extends React.Component {
           <Text style={styles.title}>Kindness Card</Text>
           <View style={styles.detail}>
             <Text style={styles.text}>{this.state.user.name}</Text>
-            <Text style={styles.text}>Expires: {this.state.card.start_date}</Text>
+            <Text style={styles.text}>Expires: {this.nextPaymentDate()}</Text>
           </View>
         </LinearGradient>
         <Text style={styles.thanks}>You are a great person and Sproutli loves you.</Text>
