@@ -10,6 +10,7 @@ var {
   View
 } = React;
 
+var LinearGradient = require('react-native-linear-gradient');
 var Dimensions = require('Dimensions');
 var {height, width} = Dimensions.get('window');
 
@@ -34,13 +35,14 @@ class KindnessCard extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.card}>
+        <LinearGradient colors={['4c669f', '3b5998', '192f6a']} style={styles.card}>
           <Text style={styles.title}>Kindness Card</Text>
           <View style={styles.detail}>
             <Text style={styles.text}>{this.state.user.name}</Text>
             <Text style={styles.text}>Expires: {this.state.card.start_date}</Text>
           </View>
-        </View>
+        </LinearGradient>
+        <Text style={styles.thanks}>You are a great person and Sproutli loves you.</Text>
       </View>
     );
   }
@@ -57,6 +59,11 @@ var styles = StyleSheet.create({
     color: 'white',
     textAlign: 'left'
   },
+  thanks: {
+    paddingTop: 30,
+    fontSize: 20,
+    color: '#222'
+  },
   title: {
     flex: 1,
     fontSize: 30,
@@ -69,7 +76,6 @@ var styles = StyleSheet.create({
     padding: 20,
     alignItems: 'flex-start',
     justifyContent: 'center',
-    backgroundColor: 'green',
     width: width - 20,
     height: height / 3
   }
