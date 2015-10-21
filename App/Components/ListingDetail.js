@@ -25,6 +25,7 @@ var ReviewModal = require('./ReviewModal');
 var BuyKindnessCardModal = require('./BuyKindnessCardModal');
 var KindnessCards = require('../Utils/KindnessCards');
 var OfferModal = require('./OfferModal');
+var Button = require('./Button');
 
 var COLOURS = require('../Constants/Colours');
 
@@ -123,9 +124,10 @@ class ListingDetail extends React.Component {
     }
     return (
       <View>
-        <TouchableHighlight onPress={this._onLeaveReview.bind(this)}>
-          <Text style={[{}, {textAlign: 'center'}]}>Leave a Review</Text>
-        </TouchableHighlight>
+        <View style={styles.buttonContainer}>
+          <Button onPress={this._onLeaveReview.bind(this)}>Leave a Review</Button>
+        </View>
+
         <ListView
           renderRow={(review, index) => <Review style={styles.text} key={index} {...review} />}
           dataSource={this.state.dataSource}
@@ -138,10 +140,8 @@ class ListingDetail extends React.Component {
     if (!this.props.listing.offer_details) { return <View />; }
 
     return(
-      <View>
-        <TouchableHighlight onPress={this._onViewOffer.bind(this)}>
-          <Text>View offer.</Text>
-        </TouchableHighlight>
+      <View style={styles.buttonContainer}>
+        <Button onPress={this._onViewOffer.bind(this)}>View Kindness Card offer</Button>
       </View>
     );
   }
@@ -250,6 +250,7 @@ var styles = StyleSheet.create({
   description: {
     color: COLOURS.GREY,
     fontSize: 17,
+    paddingTop: 15,
     paddingBottom: 15
   },
 
@@ -322,6 +323,9 @@ var styles = StyleSheet.create({
   loadingIndicator: {
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  buttonContainer: {
+    alignItems: 'center'
   }
 });
 

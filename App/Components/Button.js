@@ -16,9 +16,6 @@ class Button extends React.Component {
   render() {
     var color = this.props.color || COLOURS.GREEN;
 
-    console.log(color);
-
-    
     return (
       <TouchableHighlight onPress={this.props.onPress}>
         <View style={styles.container}>
