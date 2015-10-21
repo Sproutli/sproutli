@@ -1,26 +1,24 @@
 'use strict';
 
 var React = require('react-native');
-
 var {
-  View,
-  TextInput
+  View
 } = React;
+
+var SearchBar = require('react-native-search-bar');
+var COLOURS = require('../Constants/Colours');
 
 class SearchBox extends React.Component {
   render() {
     return (
       <View style={{height: 56, backgroundColor: 'white'}}>
-        <TextInput 
-          style={{height: 40, backgroundColor: '#f8f8f8', borderRadius: 11, paddingLeft: 10, margin: 8}}
+        <SearchBar 
+          barTintColour={COLOURS.GREEN}
           placeholder='Search for something'
+          tintColor={COLOURS.GREEN}
           onChangeText={this.props.onChangeText}
-          onSubmitEditing={this.props.onSubmitEditing}
-          autoCorrect={false}
-          autoCapitalize='none'
+          onSearchButtonPress={this.props.onSubmitEditing}
           onFocus={this.props.onFocus}
-          onBlur={this.props.onFocus}
-          returnKeyType='search'
          /> 
        </View>
     );
@@ -28,6 +26,7 @@ class SearchBox extends React.Component {
 }
 
 SearchBox.propTypes = {
+  text: React.PropTypes.string.isRequired,
   onSubmitEditing: React.PropTypes.func.isRequired,
   onBlur: React.PropTypes.func.isRequired,
   onFocus: React.PropTypes.func.isRequired,

@@ -23,6 +23,7 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		C34DABDB1BD7341900EB08C8 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C34DABDA1BD7341000EB08C8 /* libBVLinearGradient.a */; };
+		C34DABE21BD751B100EB08C8 /* libRNSearchBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C34DABE11BD751AC00EB08C8 /* libRNSearchBar.a */; };
 		C35B3EAC1BCC904E005AB832 /* sproutliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B3EAB1BCC904E005AB832 /* sproutliUITests.swift */; };
 		C371A2FC1BCF0D4C00589DFD /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C371A2FB1BCF0D4000589DFD /* libRNVectorIcons.a */; };
 		C371A3061BCF2D4700589DFD /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A2FE1BCF2D4700589DFD /* Entypo.ttf */; settings = {ASSET_TAGS = (); }; };
@@ -113,6 +114,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = BVLinearGradient;
 		};
+		C34DABE01BD751AC00EB08C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C34DABDC1BD751AB00EB08C8 /* RNSearchBar.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNSearchBar;
+		};
 		C35B3EAE1BCC904E005AB832 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
@@ -149,6 +157,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		C34DABD51BD7341000EB08C8 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
+		C34DABDC1BD751AB00EB08C8 /* RNSearchBar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSearchBar.xcodeproj; path = "../node_modules/react-native-search-bar/RNSearchBar.xcodeproj"; sourceTree = "<group>"; };
 		C35B3EA91BCC904E005AB832 /* sproutliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sproutliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35B3EAB1BCC904E005AB832 /* sproutliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sproutliUITests.swift; sourceTree = "<group>"; };
 		C35B3EAD1BCC904E005AB832 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -168,6 +177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C34DABE21BD751B100EB08C8 /* libRNSearchBar.a in Frameworks */,
 				C34DABDB1BD7341900EB08C8 /* libBVLinearGradient.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -282,6 +292,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				C34DABDC1BD751AB00EB08C8 /* RNSearchBar.xcodeproj */,
 				C34DABD51BD7341000EB08C8 /* BVLinearGradient.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -332,6 +343,14 @@
 			isa = PBXGroup;
 			children = (
 				C34DABDA1BD7341000EB08C8 /* libBVLinearGradient.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C34DABDD1BD751AB00EB08C8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C34DABE11BD751AC00EB08C8 /* libRNSearchBar.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -482,6 +501,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = C34DABDD1BD751AB00EB08C8 /* Products */;
+					ProjectRef = C34DABDC1BD751AB00EB08C8 /* RNSearchBar.xcodeproj */;
+				},
+				{
 					ProductGroup = C371A2F71BCF0D4000589DFD /* Products */;
 					ProjectRef = C371A2F61BCF0D4000589DFD /* RNVectorIcons.xcodeproj */;
 				},
@@ -570,6 +593,13 @@
 			fileType = archive.ar;
 			path = libBVLinearGradient.a;
 			remoteRef = C34DABD91BD7341000EB08C8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C34DABE11BD751AC00EB08C8 /* libRNSearchBar.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSearchBar.a;
+			remoteRef = C34DABE01BD751AC00EB08C8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C371A2FB1BCF0D4000589DFD /* libRNVectorIcons.a */ = {
