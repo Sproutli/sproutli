@@ -25,8 +25,12 @@ class Search extends React.Component {
       location: {},
       listings: [],
       loading: false,
-      searchConfig: props.searchConfig
+      showSearch: true,
+      searchConfig: props.searchConfig,
+      showAdvancedSearchOptions: false
     };
+
+    this.lastOffset = 0;
 
     this.getLocation();
   }
@@ -100,12 +104,53 @@ class Search extends React.Component {
     this.search(location);
   }
 
+  _onScroll(scrollEvent) {
+    var offset = scrollEvent.nativeEvent.contentOffset.y,
+      delta = offset - this.lastOffset;
+
+    if (offset < 0) { return; }
+
+    if (delta < 1) {
+      this.setState({ showSearch: true });
+    } else if (delta > 1 ) {
+      this.setState({ 
+        showSearch: false,
+        showAdvancedSearchOptions: false
+      });
+    }
+
+    this.lastOffset = offset;
+  }
+
   listingPressed(listing) {
     this.props.navigator.push({
       component: ListingDetail,
       title: listing.name,
       passProps: { listing }
     });
+  }
+
+  renderSearch() {
+    if (!this.state.showSearch) { return <View />; }
+
+    return (
+      <SearchBox
+      onChangeText={this._onChangeText.bind(this)} 
+      onSubmitEditing={this._onSearch.bind(this)} 
+      onFocus={this._onFocus.bind(this)} /> 
+    );
+  }
+
+  renderAdvancedSearch() {
+    if (!this.state.showSearch || !this.state.showAdvancedSearchOptions) { return <View />; }
+
+    return (
+      <AdvancedSearchOptions 
+      veganLevel={this.state.searchConfig.vegan_level}
+      onLocationSelected={this._onLocationSelected.bind(this)} 
+      onVeganLevelChanged={this._onVeganLevelChanged.bind(this)}
+      />
+    );
   }
 
   renderListings() {
@@ -119,6 +164,7 @@ class Search extends React.Component {
 
     return ( 
       <ListView
+        onScroll={this._onScroll.bind(this)}
         styles={{paddingTop: 0}}
         dataSource={this.state.dataSource}
         renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this.listingPressed.bind(this, listing)} />}
@@ -129,16 +175,9 @@ class Search extends React.Component {
   render() {
     return (
       <View style={styles.bigContainer}>
-        <SearchBox 
-          onChangeText={this._onChangeText.bind(this)} 
-          onSubmitEditing={this._onSearch.bind(this)} 
-          onFocus={this._onFocus.bind(this)} />
+        { this.renderSearch() }
 
-        { this.state.showAdvancedSearchOptions ? <AdvancedSearchOptions 
-          veganLevel={this.state.searchConfig.vegan_level}
-          onLocationSelected={this._onLocationSelected.bind(this)} 
-          onVeganLevelChanged={this._onVeganLevelChanged.bind(this)}
-          /> : <View /> }
+        { this.renderAdvancedSearch() }
 
         { this.renderListings() }
       </View>
