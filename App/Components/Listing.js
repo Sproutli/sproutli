@@ -8,6 +8,8 @@ var {
   View
 } = React;
 
+var COLOURS = require('../Constants/Colours');
+
 class Listing extends React.Component {
   render() {
     return (
@@ -19,15 +21,15 @@ class Listing extends React.Component {
           <Text style={styles.tags}>{this.props.listing.tags.join('#')}</Text>
         </View>
       </TouchableHighlight>
-    )
+    );
   }
 }
 
-var styles = {
+var styles = StyleSheet.create({
   card: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'green',
+    backgroundColor: COLOURS.GREEN,
     margin: 10,
     paddingTop: 20,
     paddingBottom: 20,
@@ -35,23 +37,27 @@ var styles = {
     paddingRight: 10
   },
   title: {
-    fontSize: 25,
+    fontSize: 30,
     textAlign: 'left',
     color: 'white',
+    fontWeight: '300'
   },
   subTitle: {
     fontSize: 20,
+    color: 'white'
   },
   tags: {
     fontSize: 15,
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+    color: 'white'
   },
   padding: {
   }
-}
+});
 
 Listing.propTypes = {
-  listing: React.PropTypes.object.isRequired
+  listing: React.PropTypes.object.isRequired,
+  handler: React.PropTypes.func.isRequired
 };
 
 module.exports = Listing;

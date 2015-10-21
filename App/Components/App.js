@@ -18,7 +18,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentTab: 'kindness_card'
+      currentTab: 'home'
     };
   }
 
