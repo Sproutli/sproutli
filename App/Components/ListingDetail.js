@@ -26,6 +26,8 @@ var BuyKindnessCardModal = require('./BuyKindnessCardModal');
 var KindnessCards = require('../Utils/KindnessCards');
 var OfferModal = require('./OfferModal');
 
+var COLOURS = require('../Constants/Colours');
+
 class ListingDetail extends React.Component {
   constructor() {
     super();
@@ -48,7 +50,8 @@ class ListingDetail extends React.Component {
 
     Reviews.getReviewsForListing(listingID)
       .then((reviews) => {
-        console.log(reviews);
+        reviews = reviews.sort((a, b) => a.created - b.created);
+
         this.setState({ 
           dataSource: this.state.dataSource.cloneWithRows(reviews),
           loadingReviews: false
@@ -91,22 +94,21 @@ class ListingDetail extends React.Component {
       <View>
         { this.renderedOffer() }
 
-        <Text style={{fontSize: 16}}>{this.props.listing.description}</Text>
-        <Text />
-        <Text />
+        <Text style={styles.description}>{this.props.listing.description}</Text>
+
         <Text style={styles.bold}>Categories</Text>
-        <Text>{this.props.listing.categories.join(', ')}</Text>
-        <Text />
+        <Text style={styles.text}>{this.props.listing.categories.join(', ')}</Text>
+
         <Text style={styles.bold}>Tags</Text>
         <Text style={styles.tags}>
           {this.props.listing.tags.map((tag) => '#' + tag.toLowerCase() + ' ')}
         </Text>
-        <Text />
+
         <Text style={styles.bold}>Vegan Level</Text>
-        <Text>{this.props.listing.vegan_level}</Text>
-        <Text />
+        <Text style={styles.text}>{this.props.listing.vegan_level}</Text>
+
         <Text style={styles.bold}>Rating</Text>
-        <Text>{this.props.listing.rating}</Text>
+        <Text style={styles.text}>{this.props.listing.rating ? `${this.props.listing.rating}/5.0` : 'No rating yet' }</Text>
       </View>
     );
   }
@@ -125,7 +127,7 @@ class ListingDetail extends React.Component {
           <Text style={{textAlign: 'center'}}>Leave a Review</Text>
         </TouchableHighlight>
         <ListView
-          renderRow={(review, index) => <Review key={index} {...review} />}
+          renderRow={(review, index) => <Review style={styles.text} key={index} {...review} />}
           dataSource={this.state.dataSource}
         />
       </View>
@@ -228,10 +230,10 @@ class ListingDetail extends React.Component {
 
         <View style={styles.container}>
           <View style={styles.buttonsContainer}>
-            <TouchableHighlight style={[styles.leftButton, {backgroundColor: this.state.currentTab === 0 ? '#222' : '#fff'}]} onPress={() => this.setState({currentTab: 0})} >
+            <TouchableHighlight style={[styles.leftButton, {backgroundColor: this.state.currentTab === 0 ? COLOURS.GREY : '#fff'}]} onPress={() => this.setState({currentTab: 0})} >
               <Text style={[styles.buttonText, {color: this.state.currentTab === 0 ? '#fff' : '#222'}]}>Details</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={[styles.rightButton, {backgroundColor: this.state.currentTab === 1 ? '#222' : '#fff'}]} onPress={() => this.setState({currentTab: 1})} >
+            <TouchableHighlight style={[styles.rightButton, {backgroundColor: this.state.currentTab === 1 ? COLOURS.GREY : '#fff'}]} onPress={() => this.setState({currentTab: 1})} >
               <Text style={[styles.buttonText, {color: this.state.currentTab === 1 ? '#fff' : '#222'}]}>Reviews</Text>
             </TouchableHighlight>
           </View>
@@ -245,12 +247,23 @@ class ListingDetail extends React.Component {
 }
 
 var styles = StyleSheet.create({
+  description: {
+    color: COLOURS.GREY,
+    fontSize: 17,
+    paddingBottom: 15
+  },
+
+  text: {
+    color: COLOURS.GREY,
+    paddingBottom: 15
+  },
+
   actionBar: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     height: 64,
-    backgroundColor: '#222',
+    backgroundColor: COLOURS.GREY,
     flexDirection: 'row'
   },
   outerContainer: {
@@ -267,15 +280,13 @@ var styles = StyleSheet.create({
     height: width
   },
   bold: {
-    color: '#222',
+    color: COLOURS.GREY,
     fontWeight: 'bold'
   },
   tags: {
-    color: '#222',
-    fontStyle: 'italic'
-  },
-  description: {
-    fontSize: 15
+    color: COLOURS.GREY,
+    fontStyle: 'italic',
+    paddingBottom: 15
   },
   buttonsContainer: {
     flexDirection: 'row',
@@ -285,7 +296,7 @@ var styles = StyleSheet.create({
   },
   leftButton: {
     flex: 1,
-    borderColor: '#222',
+    borderColor: COLOURS.GREY,
     borderWidth: 2,
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
@@ -293,7 +304,7 @@ var styles = StyleSheet.create({
   },
   rightButton: {
     flex: 1,
-    borderColor: '#222',
+    borderColor: COLOURS.GREY,
     borderWidth: 2,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
