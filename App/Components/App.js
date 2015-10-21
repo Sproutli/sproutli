@@ -44,6 +44,7 @@ class App extends React.Component {
           <NavigatorIOS
             style={styles.container}
             tintColor={COLOURS.GREEN}
+            titleTextColor={COLOURS.GREY}
             initialRoute={{
               component: SearchHome,
               title: 'Home',
