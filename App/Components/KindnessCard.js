@@ -15,6 +15,7 @@ var LinearGradient = require('react-native-linear-gradient');
 var Dimensions = require('Dimensions');
 var {height, width} = Dimensions.get('window');
 var Moment = require('moment');
+var COLOURS = require('../Constants/Colours');
 
 class KindnessCard extends React.Component {
   constructor() {
@@ -58,7 +59,7 @@ class KindnessCard extends React.Component {
 
     return (
       <View style={styles.container}>
-        <LinearGradient colors={['4c669f', '3b5998', '192f6a']} style={styles.card}>
+        <LinearGradient colors={[COLOURS.GREEN, COLOURS.BLUE]} style={styles.card}>
           <Text style={styles.title}>Kindness Card</Text>
           <View style={styles.detail}>
             <Text style={styles.text}>{this.state.user.name}</Text>
@@ -85,7 +86,7 @@ var styles = StyleSheet.create({
   thanks: {
     paddingTop: 30,
     fontSize: 20,
-    color: '#222'
+    color: COLOURS.GREY
   },
   title: {
     flex: 1,
