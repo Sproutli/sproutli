@@ -1,7 +1,6 @@
 'use strict';
 var React = require('react-native');
 var {
-  Text,
   View
 } = React;
 var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
@@ -40,8 +39,11 @@ class AdvancedSearchOptions extends React.Component {
     return (
       <View>
         <GooglePlacesAutocomplete />
-        <Text>Vegan Level:</Text>
-        <VeganLevelSlider veganLevel={this.props.veganLevel} onSlidingComplete={this.props.onVeganLevelChanged.bind(this)} />
+
+        <VeganLevelSlider 
+          veganLevel={this.props.veganLevel} 
+          onSlidingComplete={this.props.onVeganLevelChanged.bind(this)} 
+        />
       </View>
     );
   }

@@ -19,6 +19,7 @@ var Listing = require('./Listing');
 var ListingDetail = require('./ListingDetail');
 var AdvancedSearchOptions = require('./AdvancedSearchOptions');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
+var COLOURS = require('../Constants/Colours');
 
 class Search extends React.Component {
   constructor(props) {
@@ -143,9 +144,12 @@ class Search extends React.Component {
     });
   }
 
+  veganLevelText() {
+    return VEGAN_LEVELS[Math.round(this.state.searchConfig.vegan_level)].short;
+  }
+
   renderSearch() {
     if (!this.state.showSearch) { return <View />; }
-    var veganLevelText = VEGAN_LEVELS[this.state.searchConfig.vegan_level].short;
 
     return (
       <SearchBox
@@ -155,7 +159,7 @@ class Search extends React.Component {
         location={this.state.locationName}
         searchLabel={this.props.searchLabel}
         numberOfListings={this.state.numberOfListings}
-        veganLevelText={veganLevelText}
+        veganLevelText={this.veganLevelText()}
         showSearchText={this.state.numberOfListings && !this.state.showAdvancedSearchOptions}
       /> 
     );
@@ -179,7 +183,7 @@ class Search extends React.Component {
       return (
         <View style={styles.loadingContainer}>
           <ActivityIndicatorIOS size='large' />
-          <Text>Hold on just one second.</Text>
+          <Text style={styles.loadingText}>Just a moment..</Text>
         </View>
       );
     }
@@ -217,6 +221,12 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+
+  loadingText: {
+    paddingTop: 30,
+    fontSize: 20,
+    color: COLOURS.GREY
   }
 });
 

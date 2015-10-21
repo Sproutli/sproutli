@@ -43,15 +43,15 @@ class SearchBox extends React.Component {
 
 SearchBox.propTypes = {
   onSubmitEditing: React.PropTypes.func.isRequired,
-  onBlur: React.PropTypes.func.isRequired,
-  onFocus: React.PropTypes.func.isRequired,
   onChangeText: React.PropTypes.func.isRequired,
 
   searchLabel: React.PropTypes.string,
   location: React.PropTypes.string,
   veganLevelText: React.PropTypes.string,
   numberOfListings: React.PropTypes.number,
-  showSearchText: React.PropTypes.bool
+  showSearchText: React.PropTypes.bool,
+  onBlur: React.PropTypes.func,
+  onFocus: React.PropTypes.func
 };
 
 var styles = StyleSheet.create({
