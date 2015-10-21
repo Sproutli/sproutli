@@ -2,16 +2,17 @@
 
 var React = require('react-native');
 var Icon = require('react-native-vector-icons/Ionicons');
-
-var SearchHome = require('./SearchHome');
-var Feedback = require('./Feedback');
-var KindnessCard = require('./KindnessCard');
-var SUGGESTIONS = require('../Constants/Suggestions');
 var {
   StyleSheet,
   NavigatorIOS,
   TabBarIOS
 } = React;
+
+var SearchHome = require('./SearchHome');
+var Feedback = require('./Feedback');
+var KindnessCard = require('./KindnessCard');
+var SUGGESTIONS = require('../Constants/Suggestions');
+var COLOURS = require('../Constants/Colours');
 
 class App extends React.Component {
   constructor() {
@@ -23,7 +24,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <TabBarIOS tintColor='green'>
+      <TabBarIOS tintColor={COLOURS.GREEN}>
         <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'feedback'})}
           selected={this.state.currentTab === 'feedback'}
@@ -73,11 +74,6 @@ var styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
   }
 });
 
