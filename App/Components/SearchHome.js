@@ -33,7 +33,7 @@ class SearchHome extends React.Component {
       route = {
         component: Search,
         title: label,
-        passProps: { preCanned: label, searchConfig: suggestion.searchConfig }
+        passProps: { searchLabel: label, searchConfig: suggestion.searchConfig }
       };
     }
 
@@ -44,7 +44,7 @@ class SearchHome extends React.Component {
     this.props.navigator.push({
       component: Search,
       title: 'Search',
-      passProps: { query: this.state.query, searchConfig: SUGGESTIONS.initialConfig }
+      passProps: { query: this.state.query, searchConfig: SUGGESTIONS.initialConfig, searchLabel: this.state.query }
     });
   }
 

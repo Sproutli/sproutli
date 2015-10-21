@@ -6,8 +6,11 @@ var {
   StyleSheet,
   ListView,
   ActivityIndicatorIOS,
+  Text,
   View
 } = React;
+
+var RNGeocoder = require('react-native-geocoder');
 
 var SearchEngine = require('../Utils/SearchEngine');
 var ListingsFilter = require('../Utils/ListingsFilter');
@@ -15,7 +18,7 @@ var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
 var ListingDetail = require('./ListingDetail');
 var AdvancedSearchOptions = require('./AdvancedSearchOptions');
-var RNGeocoder = require('react-native-geocoder');
+var VEGAN_LEVELS = require('../Constants/VeganLevels');
 
 class Search extends React.Component {
   constructor(props) {
@@ -25,6 +28,7 @@ class Search extends React.Component {
       query: props.query,
       location: {},
       listings: [],
+      numberOfListings: null,
       loading: false,
       showSearch: true,
       locationName: '',
@@ -75,6 +79,7 @@ class Search extends React.Component {
         var filteredListings = listings.filter((l) => ListingsFilter.filter(l, searchConfig));
         this.setState({
           listings,
+          numberOfListings: filteredListings.length,
           loading: false,
           dataSource: this.state.dataSource.cloneWithRows(filteredListings)
         });
@@ -140,12 +145,19 @@ class Search extends React.Component {
 
   renderSearch() {
     if (!this.state.showSearch) { return <View />; }
+    var veganLevelText = VEGAN_LEVELS[this.state.searchConfig.vegan_level].short;
 
     return (
       <SearchBox
-      onChangeText={this._onChangeText.bind(this)} 
-      onSubmitEditing={this._onSearch.bind(this)} 
-      onFocus={this._onFocus.bind(this)} /> 
+        onChangeText={this._onChangeText.bind(this)} 
+        onSubmitEditing={this._onSearch.bind(this)} 
+        onFocus={this._onFocus.bind(this)} 
+        location={this.state.locationName}
+        searchLabel={this.props.searchLabel}
+        numberOfListings={this.state.numberOfListings}
+        veganLevelText={veganLevelText}
+        showSearchText={this.state.numberOfListings && !this.state.showAdvancedSearchOptions}
+      /> 
     );
   }
 
@@ -167,6 +179,7 @@ class Search extends React.Component {
       return (
         <View style={styles.loadingContainer}>
           <ActivityIndicatorIOS size='large' />
+          <Text>Hold on just one second.</Text>
         </View>
       );
     }
@@ -174,7 +187,6 @@ class Search extends React.Component {
     return ( 
       <ListView
         onScroll={this._onScroll.bind(this)}
-        styles={{paddingTop: 0}}
         dataSource={this.state.dataSource}
         renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this.listingPressed.bind(this, listing)} />}
       />
@@ -204,12 +216,14 @@ var styles = StyleSheet.create({
   loadingContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'center'
   }
 });
 
 Search.propTypes = {
-  navigator: React.PropTypes.object.isRequired
+  navigator: React.PropTypes.object.isRequired,
+  query: React.PropTypes.string,
+  searchLabel: React.PropTypes.string.isRequired
 };
 
 module.exports = Search;
