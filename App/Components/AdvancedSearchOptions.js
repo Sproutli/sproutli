@@ -15,13 +15,18 @@ class AdvancedSearchOptions extends React.Component {
       placeholder: 'Location',
       fetchDetails: true,
       styles: styles,
+      getDefaultValue: () => this.props.locationName,
       onPress(place, placeDetails) {
-        console.log(placeDetails);
-        var location = placeDetails.geometry.location;
-        location = {
-          latitude: location.lat,
-          longitude: location.lng
+        var geometry = placeDetails.geometry.location;
+        geometry = {
+          latitude: geometry.lat,
+          longitude: geometry.lng
         };
+        var location = {
+          geometry,
+          name: placeDetails.name
+        };
+
         that.props.onLocationSelected(location);
       },
       minLength: 2,
@@ -63,7 +68,8 @@ var styles = {
 AdvancedSearchOptions.propTypes = {
   onLocationSelected: React.PropTypes.func.isRequired,
   onVeganLevelChanged: React.PropTypes.func.isRequired,
-  veganLevel: React.PropTypes.number.isRequired
+  veganLevel: React.PropTypes.number.isRequired,
+  locationName: React.PropTypes.string.isRequired
 };
 
 module.exports = AdvancedSearchOptions;

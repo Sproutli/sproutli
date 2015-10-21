@@ -27,6 +27,7 @@ class Search extends React.Component {
       listings: [],
       loading: false,
       showSearch: true,
+      locationName: '',
       searchConfig: props.searchConfig,
       showAdvancedSearchOptions: false
     };
@@ -43,7 +44,7 @@ class Search extends React.Component {
       this.setState({ location });
       this.search(location);
       RNGeocoder.reverseGeocodeLocation(location)
-        .then((geocodedLocation) => this.setState({ geocodedLocation }))
+        .then((geocodedLocation) => this.setState({ locationName: geocodedLocation[0].locality }))
         .catch((error) => this.warn('[Search] - Error getting reverse geocode', error));
     },
       (error) => {
@@ -104,8 +105,11 @@ class Search extends React.Component {
   }
 
   _onLocationSelected(location) {
-    this.setState(location);
-    this.search(location);
+    this.setState({
+      location: location.geometry,
+      locationName: location.name
+    });
+    this.search(location.geometry);
   }
 
   _onScroll(scrollEvent) {
@@ -150,9 +154,10 @@ class Search extends React.Component {
 
     return (
       <AdvancedSearchOptions 
-      veganLevel={this.state.searchConfig.vegan_level}
-      onLocationSelected={this._onLocationSelected.bind(this)} 
-      onVeganLevelChanged={this._onVeganLevelChanged.bind(this)}
+        veganLevel={this.state.searchConfig.vegan_level}
+        onLocationSelected={this._onLocationSelected.bind(this)} 
+        onVeganLevelChanged={this._onVeganLevelChanged.bind(this)}
+        locationName={this.state.locationName}
       />
     );
   }
