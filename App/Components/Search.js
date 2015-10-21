@@ -1,10 +1,9 @@
+/*global navigator, fetch*/
 'use strict';
 
 var React = require('react-native');
 var {
-  TextInput,
   StyleSheet,
-  Text,
   ListView,
   ActivityIndicatorIOS,
   View
@@ -36,15 +35,15 @@ class Search extends React.Component {
   getLocation() {
     navigator.geolocation.getCurrentPosition(
       (position) => { 
-        var location = position.coords;
-        this.setState({ location })
-        this.search(location);
-      },
+      var location = position.coords;
+      this.setState({ location });
+      this.search(location);
+    },
       (error) => {
-        console.warn('Error getting location', error)
-        this.setState({ location: null })
-        this.search(null);
-      }
+      console.warn('Error getting location', error);
+      this.setState({ location: null });
+      this.search(null);
+    }
     );
 
     this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
@@ -93,6 +92,10 @@ class Search extends React.Component {
     });
   }
 
+  _onFocus() {
+    this.setState({ showAdvancedSearchOptions: true });
+  }
+
   listingPressed(listing) {
     this.props.navigator.push({
       component: ListingDetail,
@@ -119,7 +122,7 @@ class Search extends React.Component {
    );
   }
 
-  render() {
+  renderAdvancedSearchOptions() {
     var that = this;
 
     var GooglePlacesAutocomplete = require('react-native-google-places-autocomplete').create({
@@ -147,19 +150,29 @@ class Search extends React.Component {
       }
     }).bind(this);
 
-
-
     return (
-      <View style={styles.bigContainer}>
-        <SearchBox onChangeText={this._onChangeText.bind(this)} onSubmitEditing={this._onSearch.bind(this)} />
+      <View>
         <GooglePlacesAutocomplete />
         <VeganLevelSlider veganLevel={this.state.searchConfig.vegan_level} onSlidingComplete={this._onVeganLevelChanged.bind(this)} />
-          
+      </View>
+    );
+  }
+
+  render() {
+    return (
+      <View style={styles.bigContainer}>
+        <SearchBox 
+          onChangeText={this._onChangeText.bind(this)} 
+          onSubmitEditing={this._onSearch.bind(this)} 
+          onFocus={this._onFocus.bind(this)} />
+
+        { this.state.showAdvancedSearchOptions ? this.renderAdvancedSearchOptions() : <View /> }
+
         { this.renderListings() }
       </View>
     );
   }
-};
+}
 
 var styles = StyleSheet.create({
   bigContainer: {
@@ -174,5 +187,9 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start'
   }
 });
+
+Search.propTypes = {
+  navigator: React.PropTypes.object.isRequired
+};
 
 module.exports = Search;
