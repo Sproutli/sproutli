@@ -15,6 +15,8 @@ var prepareProps = (location) => {
     'online_store',
     'categories',
     'owner_is',
+    'phone_number',
+    'website',
     'premium',
     'cover_image',
     'offer_details',
@@ -55,7 +57,7 @@ var SearchEngine = {
       .then((res) => res.json())
       .then((listings) => parse(listings, location))
       .catch((error) => {
-        console.warn('Error fetching listings', error);
+        console.warn('[SearchEngine] - Error fetching listings', error);
       });
   }
 };
