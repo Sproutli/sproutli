@@ -8,6 +8,7 @@ var {
   StyleSheet,
   Text,
   ActivityIndicatorIOS,
+  Animated,
   View
 } = React;
 
@@ -22,14 +23,26 @@ class KindnessCard extends React.Component {
     super();
     this.state = {
       user: {},
+      bounceValue: new Animated.Value(0),
       card: {}
     };
     KindnessCards.fetchCard()
-      .then((card) => this.setState({ card: card[0] }))
+      .then((card) => this.setState({ card: card[0] }, this.bounceCard))
       .catch((error) => console.warn(`[KindnessCard] - Error getting card - ${error}`));
     Users.fetchUser()
       .then((user) => this.setState({ user }))
       .catch((error) => console.warn(`[KindnessCard] - Error getting user - ${error}`));
+  }
+
+  bounceCard() {
+    this.state.bounceValue.setValue(1.5);
+    Animated.spring(
+      this.state.bounceValue,
+      {
+        toValue: 1.0,
+        friction: 1
+      }
+    ).start();
   }
 
   nextPaymentDate() {
@@ -59,13 +72,15 @@ class KindnessCard extends React.Component {
 
     return (
       <View style={styles.container}>
-        <LinearGradient colors={[COLOURS.GREEN, COLOURS.BLUE]} style={styles.card}>
-          <Text style={styles.title}>Kindness Card</Text>
-          <View style={styles.detail}>
-            <Text style={styles.text}>{this.state.user.name}</Text>
-            <Text style={styles.text}>Expires: {this.nextPaymentDate()}</Text>
-          </View>
-        </LinearGradient>
+        <Animated.View style={{transform: [{scale: this.state.bounceValue}]}}>
+          <LinearGradient colors={[COLOURS.GREEN, COLOURS.BLUE]} style={styles.card}>
+            <Text style={styles.title}>Kindness Card</Text>
+            <View style={styles.detail}>
+              <Text style={styles.text}>{this.state.user.name}</Text>
+              <Text style={styles.text}>Expires: {this.nextPaymentDate()}</Text>
+            </View>
+          </LinearGradient>
+        </Animated.View>
         <Text style={styles.thanks}>You are a great person and Sproutli loves you.</Text>
       </View>
     );
