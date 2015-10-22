@@ -100,9 +100,9 @@ class App extends React.Component {
             tintColor={COLOURS.GREEN}
             titleTextColor={COLOURS.GREY}
             initialRoute={{
-              component: SearchHome,
-              title: 'Home',
-              passProps: {suggestions: SUGGESTIONS.initial}
+              component: ListingDetail,
+              title: 'Street Espress',
+              passProps: { listing: testListing }
             }}/>
             
         </Icon.TabBarItem>
@@ -131,5 +131,8 @@ var styles = StyleSheet.create({
     margin: 10
   }
 });
+              // component: SearchHome,
+              // title: 'Home',
+              // passProps: {suggestions: SUGGESTIONS.initial}
 
 module.exports = App;

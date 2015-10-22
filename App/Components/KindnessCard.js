@@ -9,14 +9,18 @@ var {
   Text,
   ActivityIndicatorIOS,
   Animated,
+  PixelRatio,
   View
 } = React;
 
 var LinearGradient = require('react-native-linear-gradient');
 var Dimensions = require('Dimensions');
-var {height, width} = Dimensions.get('window');
 var Moment = require('moment');
+
 var COLOURS = require('../Constants/Colours');
+
+var {height, width} = Dimensions.get('window');
+var pixelRatio = PixelRatio.get();
 
 class KindnessCard extends React.Component {
   constructor() {
@@ -94,7 +98,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   text: {
-    fontSize: 25,
+    fontSize: pixelRatio === 3 ? 25 : 17,
     color: 'white',
     textAlign: 'left'
   },
@@ -105,7 +109,7 @@ var styles = StyleSheet.create({
   },
   title: {
     flex: 1,
-    fontSize: 30,
+    fontSize: pixelRatio * 10,
     width: width - 60,
     color: 'white',
     textAlign: 'right'

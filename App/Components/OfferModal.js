@@ -4,6 +4,7 @@ var React = require('react-native');
 var {
   Text,
   StyleSheet,
+  PixelRatio,
   View
 } = React;
 
@@ -23,7 +24,7 @@ class OfferModal extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.cardContainer}>
-          <Icon color='white' name='card' size={200} />
+          <Icon color='white' name='card' size={150} />
           <Text style={styles.headerText}>Claim your offer!</Text>
         </View>
         <View style={styles.detailsContainer}>
@@ -49,12 +50,12 @@ var styles = StyleSheet.create({
 
   headerText: {
     color: 'white',
-    fontSize: 30
+    fontSize: PixelRatio.get() === 3 ? 30 : 22
   },
 
   detailsText: {
     color: COLOURS.GREY,
-    fontSize: 17,
+    fontSize: PixelRatio.get() === 3 ? 17 : 13,
     paddingBottom: 17
   },
 

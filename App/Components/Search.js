@@ -7,6 +7,7 @@ var {
   ListView,
   ActivityIndicatorIOS,
   Text,
+  PixelRatio,
   View
 } = React;
 
@@ -227,7 +228,7 @@ var styles = StyleSheet.create({
 
   loadingText: {
     paddingTop: 30,
-    fontSize: 20,
+    fontSize: PixelRatio.get() === 3 ? 20 : 12,
     color: COLOURS.GREY
   }
 });

@@ -7,12 +7,14 @@ var {
   Text,
   View,
   ScrollView,
+  PixelRatio,
   TextInput,
   AlertIOS
 } = React;
 
 var COLOURS = require('../Constants/Colours');
 var Button = require('./Button');
+var pixelRatio = PixelRatio.get();
 
 class Feedback extends React.Component {
   constructor() {
@@ -96,11 +98,12 @@ var styles= StyleSheet.create({
   }, 
   headerText: {
     color: COLOURS.GREY,
-    fontSize: 30
+    fontSize: pixelRatio * 10
   },
+
   instructionText: {
     color: COLOURS.GREY,
-    fontSize: 20,
+    fontSize: pixelRatio === 3 ? 20 : 14,
     marginTop: 24
   },
   feedbackForm: {
