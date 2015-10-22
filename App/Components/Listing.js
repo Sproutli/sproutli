@@ -12,6 +12,7 @@ var {
 var Icon = require('react-native-vector-icons/Ionicons');
 var COLOURS = require('../Constants/Colours');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
+var pixelRatio = PixelRatio.get();
 
 class Listing extends React.Component {
   renderedVeganLevel() {
@@ -79,18 +80,18 @@ var styles = StyleSheet.create({
     paddingRight: 10
   },
   title: {
-    fontSize: 10 * PixelRatio.get(),
+    fontSize: pixelRatio * 9, 
     textAlign: 'left',
     color: 'white',
     fontWeight: '200'
   },
   subTitle: {
-    fontSize: 8 * PixelRatio.get(),
+    fontSize: pixelRatio === 3 ? 18 : 14,
     color: 'white',
     fontWeight: '300'
   },
   tags: {
-    fontSize: 6 * PixelRatio.get(),
+    fontSize: pixelRatio === 3 ? 15 : 12,
     fontStyle: 'italic',
     color: 'white',
     paddingTop: 20,

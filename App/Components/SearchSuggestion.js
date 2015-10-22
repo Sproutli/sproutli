@@ -6,11 +6,14 @@ var {
   StyleSheet,
   Text,
   TouchableHighlight,
+  PixelRatio,
   View
 } = React;
 var Dimensions = require('Dimensions');
 var windowSize = Dimensions.get('window');
 var boxWidth = windowSize.width / 2;
+
+var pixelRatio = PixelRatio.get();
 
 var COLOURS = require('../Constants/Colours');
 
@@ -27,7 +30,7 @@ class SearchSuggestion extends React.Component {
             <Text style={styles.labelText}>{this.props.label}</Text>
           </View>
           <View style={styles.icon}>
-            <Icon name={this.props.icon} size={60} color={COLOURS.GREEN} />
+            <Icon name={this.props.icon} size={20 * pixelRatio} color={COLOURS.GREEN} />
           </View>
         </View>
 
@@ -49,7 +52,7 @@ var styles = StyleSheet.create({
     marginRight: 10
   },
   labelText: {
-    fontSize: 30,
+    fontSize: 10 * pixelRatio,
     color: COLOURS.GREY,
     textAlign: 'right'
   },

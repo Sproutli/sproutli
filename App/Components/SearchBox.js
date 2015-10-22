@@ -4,11 +4,13 @@ var React = require('react-native');
 var {
   Text,
   View,
+  PixelRatio,
   StyleSheet
 } = React;
 
 var SearchBar = require('react-native-search-bar');
 var COLOURS = require('../Constants/Colours');
+var pixelRatio = PixelRatio.get();
 
 class SearchBox extends React.Component {
   renderedSearchText() {
@@ -59,6 +61,7 @@ SearchBox.propTypes = {
 
 var styles = StyleSheet.create({
   searchText: {
+    fontSize: 5 * pixelRatio, 
     paddingTop: 4,
     textAlign: 'center',
     color: COLOURS.GREY

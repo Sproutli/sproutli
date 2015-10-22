@@ -5,10 +5,12 @@ var {
   Text,
   View,
   TouchableHighlight,
+  PixelRatio,
   StyleSheet
 } = React;
 
 var Icon = require('react-native-vector-icons/Ionicons');
+var pixelRatio = PixelRatio.get();
 
 var COLOURS = require('../Constants/Colours');
 
@@ -35,7 +37,7 @@ var styles = StyleSheet.create({
   },
 
   buttonText: {
-    fontSize: 20,
+    fontSize: pixelRatio === 3 ? 20 : 17,
     paddingRight: 5
   }
 });

@@ -11,6 +11,7 @@ var {
   LinkingIOS,
   ActivityIndicatorIOS,
   ScrollView,
+  PixelRatio,
   MapView
 } = React;
 
@@ -19,6 +20,7 @@ var Communications = require('react-native-communications');
 var Icon = require('react-native-vector-icons/Ionicons');
 var Dimensions = require('Dimensions');
 var {width} = Dimensions.get('window');
+var pixelRatio = PixelRatio.get();
 
 var Reviews = require('../Utils/Reviews');
 var Review = require('./Review');
@@ -154,8 +156,8 @@ class ListingDetail extends React.Component {
     return (
       <TouchableHighlight style={styles.actionBarButton} onPress={this._onShowMap.bind(this)} underlayColor={COLOURS.LIGHTER_GREY}>
         <View style={styles.actionBarButton}>
-          <Icon name='map' size={40} color='white' />
-          <Text style={{color: 'white', textAlign: 'center'}}>Map</Text>
+          <Icon name='map' size={13 * pixelRatio} color='white' />
+          <Text style={styles.actionBarText}>Map</Text>
         </View>
       </TouchableHighlight>
     );
@@ -167,8 +169,8 @@ class ListingDetail extends React.Component {
     return (
       <TouchableHighlight style={styles.actionBarButton} onPress={this._onGoToWebsite.bind(this)} underlayColor={COLOURS.LIGHTER_GREY}>
         <View style={styles.actionBarButton}>
-          <Icon name='earth' size={40} color='white' />
-          <Text style={{color: 'white', textAlign: 'center'}}>Website</Text>
+          <Icon name='earth' size={13 * pixelRatio} color='white' />
+          <Text style={styles.actionBarText}>Website</Text>
         </View>
       </TouchableHighlight>
     );
@@ -181,8 +183,8 @@ class ListingDetail extends React.Component {
     return (
       <TouchableHighlight style={styles.actionBarButton} onPress={this._onCallListing.bind(this)} underlayColor={COLOURS.LIGHTER_GREY}>
         <View style={styles.actionBarButton}>
-          <Icon name='ios-telephone' size={40} color='white' />
-          <Text style={{color: 'white', textAlign: 'center'}}>Call</Text>
+          <Icon name='ios-telephone' size={13 * pixelRatio} color='white' />
+          <Text style={styles.actionBarText}>Call</Text>
         </View>
       </TouchableHighlight>
     );
@@ -193,8 +195,8 @@ class ListingDetail extends React.Component {
       <View style={styles.actionBar}> 
         <TouchableHighlight underlayColor={COLOURS.LIGHTER_GREY} style={styles.actionBarButton} onPress={this._onShowImages.bind(this)}>
           <View style={styles.actionBarButton}>
-            <Icon name='images' size={40} color='white' />
-            <Text style={{color: 'white', textAlign: 'center'}}>Images</Text>
+            <Icon name='images' size={13 * pixelRatio} color='white' />
+            <Text style={styles.actionBarText}>Images</Text>
           </View>
         </TouchableHighlight>
         { this.renderedMapButton() }
@@ -288,7 +290,7 @@ class ListingDetail extends React.Component {
 var styles = StyleSheet.create({
   description: {
     color: COLOURS.GREY,
-    fontSize: 17,
+    fontSize: 7 * pixelRatio - 1,
     paddingTop: 15,
     paddingBottom: 15
   },
@@ -358,6 +360,10 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1
+  },
+  actionBarText: {
+    color: 'white',
+    fontSize: pixelRatio === 2 ? 12 : 15
   },
   loadingIndicator: {
     alignItems: 'center',
