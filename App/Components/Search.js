@@ -74,7 +74,6 @@ class Search extends React.Component {
     this.setState({ loading: true });
 
     var searchConfig = this.state.searchConfig;
-    location = location || this.state.location;
     location = searchConfig.online_store !== 'N' ? location : null; // We don't want the location if we're searching for online stuff.
 
     SearchEngine.search(this.state.query, location)
@@ -94,7 +93,7 @@ class Search extends React.Component {
   }
 
   _onSearch() {
-    this.search();
+    this.search(this.state.location);
   }
 
   _onVeganLevelChanged(veganLevel) {
@@ -118,8 +117,7 @@ class Search extends React.Component {
       this.setState({
         location: null,
         locationName: null
-      });
-      this.search(null);
+      }, this.search(null));
       return;
     }
 
