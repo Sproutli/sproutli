@@ -57,10 +57,10 @@ class BuyKindnessCardModal extends React.Component {
         <Text style={styles.text}>The Sproutli Kindness Card provides you with discounts and deals for online and physical stores.</Text>
         <Text style={styles.text}>New deals are added every day, and it only costs $4 a month.</Text>
 
-        <Text style={styles.text}>Interested? Get yours now.</Text>
+        <Text style={styles.text}>Interested? Get yours now!</Text>
 
         <Animated.View style={{alignItems: 'center', paddingTop: 20, transform: [{translateX: this.state.translateXValue}]}}>
-          <Button color='black' onPress={this._onGetKindnessCard.bind(this)}>Get your kindness card</Button>
+          <Button color={COLOURS.GREY} onPress={this._onGetKindnessCard.bind(this)}>Get your kindness card</Button>
         </Animated.View>
       </View>
     );
