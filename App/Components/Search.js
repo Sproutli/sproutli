@@ -43,6 +43,10 @@ class Search extends React.Component {
   }
 
   getLocation() {
+    // if (this.props.searchConfig.online_store === 'Y') {
+    //   this.state.location = null;
+    //   return;
+    // }
     navigator.geolocation.getCurrentPosition(
       (position) => { 
       var location = position.coords;

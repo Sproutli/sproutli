@@ -5,6 +5,7 @@ var {
   StyleSheet,
   Text,
   TouchableHighlight,
+  PixelRatio,
   View
 } = React;
 
@@ -73,24 +74,23 @@ var styles = StyleSheet.create({
     borderRadius: 3,
     borderWidth: 0.1,
     borderColor: COLOURS.GREY,
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingVertical: 6 * PixelRatio.get(),
     paddingLeft: 10,
     paddingRight: 10
   },
   title: {
-    fontSize: 27,
+    fontSize: 10 * PixelRatio.get(),
     textAlign: 'left',
     color: 'white',
     fontWeight: '200'
   },
   subTitle: {
-    fontSize: 20,
+    fontSize: 8 * PixelRatio.get(),
     color: 'white',
     fontWeight: '300'
   },
   tags: {
-    fontSize: 15,
+    fontSize: 6 * PixelRatio.get(),
     fontStyle: 'italic',
     color: 'white',
     paddingTop: 20,

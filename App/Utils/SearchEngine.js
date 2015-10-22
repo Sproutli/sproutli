@@ -24,15 +24,16 @@ var prepareProps = (location) => {
     'offer_conditions'
   ];
 
-  if (location) { props.push('distance'); }
+  if (location && location.latitude) { props.push('distance'); }
 
   return props.join(',');
 };
 
 var parse = (listings, location) => { 
+  console.log(listings);
   return listings.hits.hit
   .filter((l) => {
-    if (!location) { return true; }
+    if (!location || !location.latitude) { return true; }
 
     l.fields.distance = l.exprs.distance;
 
@@ -43,7 +44,7 @@ var parse = (listings, location) => {
 
 var SearchEngine = {
   prepareLocationQuery(location) {
-    if (!location) { return ''; }
+    if (!location || !location.latitude) { return ''; }
 
     return `&expr.distance=haversin(${location.latitude},${location.longitude},location.latitude,location.longitude)&sort=distance asc&return=${prepareProps(location)}`;
   },
