@@ -108,7 +108,7 @@ var styles= StyleSheet.create({
   },
   feedbackForm: {
     height: 100,
-    fontSize: 16,
+    fontSize: pixelRatio === 3 ? 16 : 12,
     backgroundColor: COLOURS.LIGHT_GREY,
     padding: 2
   }

@@ -147,7 +147,7 @@
 		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = "../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* sproutli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sproutli.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Sproutli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sproutli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = sproutli/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = sproutli/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		C34DABDC1BD751AB00EB08C8 /* RNSearchBar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSearchBar.xcodeproj; path = "../node_modules/react-native-search-bar/RNSearchBar.xcodeproj"; sourceTree = "<group>"; };
 		C34DABE81BD7824500EB08C8 /* RNGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGeocoder.h; sourceTree = "<group>"; };
 		C34DABE91BD7824500EB08C8 /* RNGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGeocoder.m; sourceTree = "<group>"; };
-		C35B3EA91BCC904E005AB832 /* sproutliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sproutliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C35B3EA91BCC904E005AB832 /* Sproutli.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sproutli.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35B3EAB1BCC904E005AB832 /* sproutliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sproutliUITests.swift; sourceTree = "<group>"; };
 		C35B3EAD1BCC904E005AB832 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C371A2F61BCF0D4000589DFD /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -337,8 +337,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* sproutli.app */,
-				C35B3EA91BCC904E005AB832 /* sproutliUITests.xctest */,
+				13B07F961A680F5B00A75B9A /* Sproutli.app */,
+				C35B3EA91BCC904E005AB832 /* Sproutli.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -419,7 +419,7 @@
 			);
 			name = sproutli;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* sproutli.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Sproutli.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C35B3EA81BCC904E005AB832 /* sproutliUITests */ = {
@@ -437,7 +437,7 @@
 			);
 			name = sproutliUITests;
 			productName = sproutliUITests;
-			productReference = C35B3EA91BCC904E005AB832 /* sproutliUITests.xctest */;
+			productReference = C35B3EA91BCC904E005AB832 /* Sproutli.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -447,7 +447,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0700;
-				ORGANIZATIONNAME = Facebook;
+				ORGANIZATIONNAME = Sproutli;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = T2TG9M3MRR;
@@ -458,7 +458,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sproutli" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Sproutli" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -711,7 +711,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.next;
-				PRODUCT_NAME = sproutli;
+				PRODUCT_NAME = Sproutli;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -731,7 +731,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.next;
-				PRODUCT_NAME = sproutli;
+				PRODUCT_NAME = Sproutli;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -833,7 +833,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kanerogers.sproutliUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Sproutli;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_TARGET_NAME = sproutli;
 				USES_XCTRUNNER = YES;
@@ -850,7 +850,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kanerogers.sproutliUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Sproutli;
 				TEST_TARGET_NAME = sproutli;
 				USES_XCTRUNNER = YES;
 			};
@@ -868,7 +868,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sproutli" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Sproutli" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

@@ -39,7 +39,7 @@ class Sproutli extends React.Component {
 
     return (
       <Navigator
-        initialRoute={{name: this.state.token ? 'login' : 'login', index: 0}}
+        initialRoute={{name: this.state.token ? 'app' : 'login', index: 0}}
         renderScene={this.renderScene.bind(this)}      
       />
     );
