@@ -5,12 +5,15 @@ var {
   Text,
   StyleSheet,
   LinkingIOS,
+  PixelRatio,
   Animated,
   View
 } = React;
 
 var Button = require('./Button');
 var COLOURS = require('../Constants/Colours');
+
+var pixelRatio = PixelRatio.get();
 
 class BuyKindnessCardModal extends React.Component {
   constructor() {
@@ -71,13 +74,13 @@ var styles = StyleSheet.create({
   headerText: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 30,
+    fontSize: pixelRatio === 3 ? 30 : 22,
     fontWeight: '300',
     paddingVertical: 30
   },
 
   text: {
-    fontSize: 20,
+    fontSize: pixelRatio === 3 ? 20 : 15,
     color: 'white',
     paddingBottom: 20,
     textAlign: 'left'
