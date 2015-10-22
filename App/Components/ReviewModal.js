@@ -7,32 +7,41 @@ var {
   TextInput,
   View,
   AlertIOS,
-  TouchableHighlight
+  TouchableOpacity
 } = React;
+
+var Icon = require('react-native-vector-icons/Ionicons');
+
+var Button = require('./Button');
 var Reviews = require('../Utils/Reviews');
+var COLOURS = require('../Constants/Colours');
 
 class Stars extends React.Component {
+  getStarIcon(num) {
+    return num <= this.props.stars ? 'ios-star' : 'ios-star-outline';
+  }
   render() {
     return (
       <View style={styles.stars}>
-        <TouchableHighlight onPress={this.props.handler.bind(this, 1)}>
-          <Text>1 Star</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.props.handler.bind(this, 2)}>
-          <Text>2 Star</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.props.handler.bind(this, 3)}>
-          <Text>3 Star</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.props.handler.bind(this, 4)}>
-          <Text>4 Star</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.props.handler.bind(this, 5)}>
-          <Text>5 Star</Text>
-        </TouchableHighlight>
+        <TouchableOpacity onPress={this.props.handler.bind(this, 1)}>
+          <Icon name={this.getStarIcon(1)} size={50} color={COLOURS.GREEN} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.handler.bind(this, 2)}>
+          <Icon name={this.getStarIcon(2)} size={50} color={COLOURS.GREEN} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.handler.bind(this, 3)}>
+          <Icon name={this.getStarIcon(3)} size={50} color={COLOURS.GREEN} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.handler.bind(this, 4)}>
+          <Icon name={this.getStarIcon(4)} size={50} color={COLOURS.GREEN} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.handler.bind(this, 5)}>
+          <Icon name={this.getStarIcon(5)}size={50} color={COLOURS.GREEN} />
+        </TouchableOpacity>
       </View>
     );
   }
+
 }
 
 class ReviewModal extends React.Component {
@@ -40,7 +49,8 @@ class ReviewModal extends React.Component {
     super();
     this.state = {
       reviewText: '',
-      stars: 0
+      stars: 0,
+      sending: false
     };
   }
 
@@ -53,6 +63,9 @@ class ReviewModal extends React.Component {
   }
 
   _onLeaveReview() {
+    if ( this.state.sending || this.state.reviewText.length < 1 ) return;
+    this.setState({ sending: true });
+
     var review = {
       content: this.state.reviewText,
       listing_id: this.props.listingID,
@@ -78,20 +91,26 @@ class ReviewModal extends React.Component {
       });
   }
 
+  getButtonColour() {
+    if (this.state.sending || this.state.reviewText.length < 1) {
+      return COLOURS.GREY;
+    } else {
+      return COLOURS.GREEN;
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Leave a review for {this.props.name} </Text>
-        <Stars handler={this._onPressStars.bind(this)} />
-        <Text>{this.state.stars}</Text>
+        <Text style={styles.headerText}>What did you think of {this.props.name}?</Text>
+        <Stars stars={this.state.stars} handler={this._onPressStars.bind(this)} />
+        <Text style={styles.starsText}>{this.state.stars} Stars</Text>
         <TextInput
           style={styles.reviewForm}
           onChangeText={this._onChangeText.bind(this)}
           value={this.state.reviewText}
           multiline />
-        <TouchableHighlight onPress={this._onLeaveReview.bind(this)}>
-          <Text>Save</Text>
-        </TouchableHighlight>
+        <Button color={this.getButtonColour()} onPress={this._onLeaveReview.bind(this)}>Leave your review </Button>
       </View>
     );
   }
@@ -106,11 +125,27 @@ var styles = StyleSheet.create({
     height: 100,
     fontSize: 16,
     backgroundColor: 'f8f8f8',
+    marginTop: 10,
+    marginBottom: 10,
     padding: 2
   },
+  headerText: {
+    color: COLOURS.GREY,
+    textAlign: 'center',
+    fontSize: 20
+  },
   stars: {
+    padding: 10,
+    justifyContent: 'center',
     flexDirection: 'row'
+  },
+  starsText: {
+    fontSize: 17,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: COLOURS.GREY
   }
+
 });
 
 ReviewModal.propTypes = {
@@ -121,7 +156,8 @@ ReviewModal.propTypes = {
 };
 
 Stars.propTypes = {
-  handler: React.PropTypes.func.isRequired
+  handler: React.PropTypes.func.isRequired,
+  stars: React.PropTypes.number.isRequired
 };
 
 module.exports = ReviewModal;

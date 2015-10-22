@@ -29,6 +29,7 @@ var OfferModal = require('./OfferModal');
 var Button = require('./Button');
 
 var COLOURS = require('../Constants/Colours');
+var VEGAN_LEVELS = require('../Constants/VeganLevels');
 
 class ListingDetail extends React.Component {
   constructor() {
@@ -107,7 +108,7 @@ class ListingDetail extends React.Component {
         </Text>
 
         <Text style={styles.bold}>Vegan Level</Text>
-        <Text style={styles.text}>{this.props.listing.vegan_level}</Text>
+        <Text style={styles.text}>{VEGAN_LEVELS[this.props.listing.vegan_level].long}</Text>
 
         <Text style={styles.bold}>Rating</Text>
         <Text style={styles.text}>{this.props.listing.rating ? `${this.props.listing.rating}/5.0` : 'No rating yet' }</Text>
