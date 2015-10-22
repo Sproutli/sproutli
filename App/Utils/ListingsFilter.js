@@ -6,6 +6,7 @@ var ListingsFilter = {
       return [];
     }
 
+
     // Helpers
     var f = filterBy,
     // Make string checking ignore case
@@ -84,8 +85,9 @@ var ListingsFilter = {
     },
 
     hasCorrectVeganLevel = function(listing) {
-      var veganLevelIsGreater = listing.vegan_level >= Math.round(f.vegan_level),
-      hasNoVeganLevel = f.vegan_level == 0 && !listing.vegan_level; //jshint ignore:line
+      var veganLevel = Number(listing.vegan_level);
+      var veganLevelIsGreater = veganLevel >= Math.round(f.vegan_level),
+      hasNoVeganLevel = f.vegan_level == 0 && !veganLevel; //jshint ignore:line
 
       return veganLevelIsGreater || hasNoVeganLevel;
     },
@@ -95,6 +97,7 @@ var ListingsFilter = {
       if (!f.tags || f.tags.length === 0) { return true; }
 
       if (!listing.tags) { return false; }
+
 
       var hasTags = false;
       f.tags.forEach(function(filterTag) {

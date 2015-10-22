@@ -1,6 +1,7 @@
 'use strict';
 
 var CATEGORIES = require('./Categories');
+var Extend = require('extend');
 
 var categories = () => {
   return CATEGORIES.map((c) => { 
@@ -24,13 +25,13 @@ var makeSearchConfig = (config) => {
   var baseSearchConfig = {
     discount: false,
     online_store: 'BOTH',
-    vegan_level: 4,
+    vegan_level: 2,
     owner_is: '',
     categories: categories()
   }; 
 
-  config = Object.assign(baseSearchConfig, config);
-  return config;
+  var newConfig = Extend(true, baseSearchConfig, config);
+  return newConfig;
 };
 
 
@@ -50,7 +51,7 @@ var SUGGESTIONS = {
     }
   ],
 
-  initialConfig: makeSearchConfig(),
+  initialConfig: makeSearchConfig({}),
 
   'Food': [
     {
@@ -116,11 +117,10 @@ var SUGGESTIONS = {
     {
       label: 'Hairdressers',
       icon: 'scissors',
+      vegan_level: 3,
+      online_store: 'N',
       searchConfig: makeSearchConfig({
-        categories: categories().map((c) => { 
-          c.check = c.name === 'Professional Services & Trades';
-          return c;
-        }),
+        categories: categories(),
         tags: ['hairdresser']
       })
     },
