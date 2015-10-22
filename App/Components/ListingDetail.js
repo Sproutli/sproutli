@@ -44,7 +44,8 @@ class ListingDetail extends React.Component {
   }
 
   componentDidMount() {
-    this.getReviews();
+    // this.getReviews();
+    this._onViewOffer();
   }
 
   getReviews() {
