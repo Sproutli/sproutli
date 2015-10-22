@@ -2,17 +2,19 @@
 
 var React = require('react-native');
 var Dimensions = require('Dimensions');
-var { height, width } = Dimensions.get('window');
+var { width } = Dimensions.get('window');
 var {
   StyleSheet,
   Text,
   View,
+  PixelRatio,
   AlertIOS,
-  TextInput,
-  NavigatorIOS,
+  TextInput
 } = React;
 
-var Authentication = require('../Utils/Authentication.js');
+var Authentication = require('../Utils/Authentication');
+var COLOURS = require('../Constants/Colours');
+var pixelRatio = PixelRatio.get();
 
 class Login extends React.Component {
   constructor(props) {
@@ -41,7 +43,7 @@ class Login extends React.Component {
     var credentials = {
       email: this.state.email,
       password: this.state.password
-    }
+    };
 
     Authentication.login(credentials)
       .then(() => this.goToApp())
@@ -55,7 +57,7 @@ class Login extends React.Component {
     if (!this.props.signingUp) {
       // TODO: Copy details to sign up screen.
       this.props.navigator.push({
-        name: "login",
+        name: 'login',
         index: 1,
         signingUp: true,
         email: this.state.email,
@@ -66,7 +68,7 @@ class Login extends React.Component {
         email: this.state.email,
         password: this.state.password,
         name: this.state.name
-      }
+      };
 
       Authentication.signUp(credentials)
         .then(() => this.goToApp())
@@ -79,17 +81,26 @@ class Login extends React.Component {
 
   goToApp() {
     this.props.navigator.replace({
-      name: "app",
+      name: 'app',
       index: 1
     });
   }
 
   nameField() {
-    return this.props.signingUp ? <TextInput style={styles.loginInput} onChangeText={this._onNameChanged.bind(this)} placeholder="Your name" /> : <View />
+    if (!this.props.signingUp) return <View />;
+    return ( 
+      <TextInput 
+        style={styles.loginInput} 
+        returnKeyType='done'
+        onSubmitEditing={this._signupPressed.bind(this)}
+        onChangeText={this._onNameChanged.bind(this)} 
+        placeholder='Your name' 
+      />
+     );
   }
 
   loginButton() {
-    return this.props.signingUp ? <View /> : <Text style={styles.loginButtons} onPress={this._loginPressed.bind(this)}>Login</Text>
+    return this.props.signingUp ? <View /> : <Text style={styles.loginButtons} onPress={this._loginPressed.bind(this)}>Login</Text>;
   }
 
   render() {
@@ -101,25 +112,22 @@ class Login extends React.Component {
             <Text style={styles.subtext}>Let&apos;s get started.</Text>
           </View>
           <TextInput 
-            keyboardType="email-address" 
+            keyboardType='email-address' 
             style={styles.loginInput} 
-            placeholder="Email" 
+            placeholder='Email' 
             autoCorrect={false}
             value={this.state.email}
             onChangeText={this._onEmailChanged.bind(this)}
-            autoCapitalize="none"
+            autoCapitalize='none'
           />
-          <Text />
           <TextInput 
-            secureTextEntry={true} 
+            secureTextEntry
             style={styles.loginInput} 
-            placeholder="Passsword" 
+            placeholder='Passsword' 
             value={this.state.password}
             onChangeText={this._onPasswordChanged.bind(this)}
           />
-          <Text />
           {this.nameField()}
-          <Text />
           <View style={styles.loginButtonsContainer}>
             {this.loginButton()}
             <Text style={styles.loginButtons} onPress={this._signupPressed.bind(this)}>Sign Up</Text>
@@ -136,47 +144,54 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   header: {
+    marginTop: 50,
     justifyContent: 'center',
     flex: 1
   },
   subtext: {
-    fontSize: 20,
+    fontSize: pixelRatio === 3 ? 20 : 15,
     backgroundColor: '#fff',
     paddingTop: 16,
+    color: COLOURS.GREY,
     textAlign: 'center'
   },
   headerText: {
     textAlign: 'center',
-    fontSize: 30,
-    color: '#5D656C'
+    fontSize: pixelRatio === 3 ? 30 : 22,
+    color: COLOURS.GREY
   },
   loginContainer: {
-    flex: 1,
+    flex: 0.4,
     width
   },
   loginButtonsContainer: {
     flex: 1, 
-    justifyContent: "flex-start", 
-    width,
-    paddingTop: 32
+    justifyContent: 'flex-start', 
+    width
   },
   loginButtons: {
     padding: 16,
-    fontSize: 25,
+    fontSize: pixelRatio === 3 ? 25 : 20,
     fontWeight: '400',
-    color: '#3BBD85',
+    color: COLOURS.GREEN,
     textAlign: 'center'
   },
   loginInput: {
     height: 40, 
     width,
-    paddingLeft: 16, 
-    borderColor: '#999', 
-    borderWidth: 0.5
+    backgroundColor: COLOURS.LIGHT_GREY,
+    margin: 5,
+    borderRadius: 5,
+    paddingHorizontal: 10
   }
 });
+
+Login.propTypes = {
+  signingUp: React.PropTypes.bool.isRequired,
+  navigator: React.PropTypes.object.isRequired
+};
 
 module.exports = Login;
