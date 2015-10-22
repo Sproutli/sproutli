@@ -9,6 +9,7 @@ var {
 } = React;
 
 var ListingDetail = require('./ListingDetail');
+var SearchHome = require('./SearchHome');
 var Feedback = require('./Feedback');
 var KindnessCard = require('./KindnessCard');
 var SUGGESTIONS = require('../Constants/Suggestions');
@@ -99,9 +100,9 @@ class App extends React.Component {
             tintColor={COLOURS.GREEN}
             titleTextColor={COLOURS.GREY}
             initialRoute={{
-              component: ListingDetail,
-              title: 'Street Espress Cafe',
-              passProps: {listing: testListing}
+              component: SearchHome,
+              title: 'Home',
+              passProps: {suggestions: SUGGESTIONS.initial}
             }}/>
             
         </Icon.TabBarItem>

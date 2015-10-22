@@ -44,8 +44,7 @@ class ListingDetail extends React.Component {
   }
 
   componentDidMount() {
-    // this.getReviews();
-    this._onViewOffer();
+    this.getReviews();
   }
 
   getReviews() {
@@ -153,7 +152,7 @@ class ListingDetail extends React.Component {
     if (!this.props.listing.location) return <View />;
 
     return (
-      <TouchableHighlight style={styles.actionBarButton} onPress={this._onShowMap.bind(this)}>
+      <TouchableHighlight style={styles.actionBarButton} onPress={this._onShowMap.bind(this)} underlayColor={COLOURS.LIGHTER_GREY}>
         <View style={styles.actionBarButton}>
           <Icon name='map' size={40} color='white' />
           <Text style={{color: 'white', textAlign: 'center'}}>Map</Text>
@@ -166,7 +165,7 @@ class ListingDetail extends React.Component {
     if (!this.props.listing.website) return <View />;
 
     return (
-      <TouchableHighlight style={styles.actionBarButton} onPress={this._onGoToWebsite.bind(this)}>
+      <TouchableHighlight style={styles.actionBarButton} onPress={this._onGoToWebsite.bind(this)} underlayColor={COLOURS.LIGHTER_GREY}>
         <View style={styles.actionBarButton}>
           <Icon name='earth' size={40} color='white' />
           <Text style={{color: 'white', textAlign: 'center'}}>Website</Text>
@@ -179,7 +178,7 @@ class ListingDetail extends React.Component {
     if (!this.props.listing.phone_number) return <View />;
 
     return (
-      <TouchableHighlight style={styles.actionBarButton} onPress={this._onCallListing.bind(this)}>
+      <TouchableHighlight style={styles.actionBarButton} onPress={this._onCallListing.bind(this)} underlayColor={COLOURS.LIGHTER_GREY}>
         <View style={styles.actionBarButton}>
           <Icon name='ios-telephone' size={40} color='white' />
           <Text style={{color: 'white', textAlign: 'center'}}>Call</Text>
@@ -191,7 +190,7 @@ class ListingDetail extends React.Component {
   renderedActionBar() {
     return (
       <View style={styles.actionBar}> 
-        <TouchableHighlight style={styles.actionBarButton} onPress={this._onShowImages.bind(this)}>
+        <TouchableHighlight underlayColor={COLOURS.LIGHTER_GREY} style={styles.actionBarButton} onPress={this._onShowImages.bind(this)}>
           <View style={styles.actionBarButton}>
             <Icon name='images' size={40} color='white' />
             <Text style={{color: 'white', textAlign: 'center'}}>Images</Text>
@@ -269,10 +268,10 @@ class ListingDetail extends React.Component {
 
         <View style={styles.container}>
           <View style={styles.buttonsContainer}>
-            <TouchableHighlight style={[styles.leftButton, {backgroundColor: this.state.currentTab === 0 ? COLOURS.GREY : '#fff'}]} onPress={() => this.setState({currentTab: 0})} >
+            <TouchableHighlight underlayColor={COLOURS.LIGHT_GREY} style={[styles.leftButton, {backgroundColor: this.state.currentTab === 0 ? COLOURS.GREY : '#fff'}]} onPress={() => this.setState({currentTab: 0})} >
               <Text style={[styles.buttonText, {color: this.state.currentTab === 0 ? '#fff' : '#222'}]}>Details</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={[styles.rightButton, {backgroundColor: this.state.currentTab === 1 ? COLOURS.GREY : '#fff'}]} onPress={() => this.setState({currentTab: 1})} >
+            <TouchableHighlight underlayColor={COLOURS.LIGHT_GREY} style={[styles.rightButton, {backgroundColor: this.state.currentTab === 1 ? COLOURS.GREY : '#fff'}]} onPress={() => this.setState({currentTab: 1})} >
               <Text style={[styles.buttonText, {color: this.state.currentTab === 1 ? '#fff' : '#222'}]}>Reviews</Text>
             </TouchableHighlight>
           </View>

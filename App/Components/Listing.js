@@ -49,7 +49,7 @@ class Listing extends React.Component {
 
   render() {
     return (
-      <TouchableHighlight style={styles.card} onPress={this.props.handler}>
+      <TouchableHighlight style={styles.card} onPress={this.props.handler} underlayColor={COLOURS.DARKER_GREEN}>
         <View>
           <Text style={styles.title}>{this.props.listing.name}</Text>
 

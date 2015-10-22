@@ -17,7 +17,7 @@ class Button extends React.Component {
     var color = this.props.color || COLOURS.GREEN;
 
     return (
-      <TouchableHighlight onPress={this.props.onPress}>
+      <TouchableHighlight onPress={this.props.onPress} underlayColor={COLOURS.LIGHT_GREY}>
         <View style={styles.container}>
           <Text style={[styles.buttonText, { color }]}>{this.props.children}</Text>
           <Icon name='chevron-right' size={25} color={color} />
