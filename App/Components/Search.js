@@ -12,6 +12,7 @@ var {
 } = React;
 
 var RNGeocoder = require('react-native-geocoder');
+var Icon = require('react-native-vector-icons/Ionicons');
 
 var SearchEngine = require('../Utils/SearchEngine');
 var ListingsFilter = require('../Utils/ListingsFilter');
@@ -197,6 +198,15 @@ class Search extends React.Component {
         <View style={styles.loadingContainer}>
           <ActivityIndicatorIOS size='large' />
           <Text style={styles.loadingText}>Just a moment..</Text>
+        </View>
+      );
+    }
+
+    if (this.state.listings.length < 1) {
+      return (
+        <View style={styles.loadingContainer}>
+          <Icon name='sad-outline' size={100} color={COLOURS.GREY} />
+          <Text style={styles.loadingText}>Sorry! No listings found.</Text>
         </View>
       );
     }
