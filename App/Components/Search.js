@@ -112,6 +112,16 @@ class Search extends React.Component {
   }
 
   _onLocationSelected(location) {
+    // TODO: Horrible, refactor.
+    if (location === null) {
+      this.setState({
+        location: null,
+        locationName: null
+      });
+      this.search(null);
+      return;
+    }
+
     this.setState({
       location: location.geometry,
       locationName: location.name

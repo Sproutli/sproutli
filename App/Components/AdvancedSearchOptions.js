@@ -16,6 +16,11 @@ class AdvancedSearchOptions extends React.Component {
       styles: styles,
       getDefaultValue: () => this.props.locationName,
       onPress(place, placeDetails) {
+        if (place === null) { 
+          that.props.onLocationSelected(null); 
+          return;
+        }
+
         var geometry = placeDetails.geometry.location;
         geometry = {
           latitude: geometry.lat,
