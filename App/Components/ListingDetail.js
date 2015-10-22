@@ -290,9 +290,9 @@ class ListingDetail extends React.Component {
 var styles = StyleSheet.create({
   description: {
     color: COLOURS.GREY,
-    fontSize: 7 * pixelRatio - 1,
+    fontSize: pixelRatio === 3 ? 18 : 15,
     paddingTop: 15,
-    paddingBottom: 15
+    paddingBottom: 30
   },
 
   text: {
@@ -341,18 +341,17 @@ var styles = StyleSheet.create({
     borderColor: COLOURS.GREY,
     borderWidth: 2,
     borderTopLeftRadius: 5,
-    borderBottomLeftRadius: 5,
-    padding: 6
+    borderBottomLeftRadius: 5
   },
   rightButton: {
     flex: 1,
     borderColor: COLOURS.GREY,
     borderWidth: 2,
     borderTopRightRadius: 5,
-    borderBottomRightRadius: 5,
-    padding: 6
+    borderBottomRightRadius: 5
   },
   buttonText: {
+    margin: 6,
     textAlign: 'center'
   },
   actionBarButton: {
