@@ -69,7 +69,7 @@ class KindnessCard extends React.Component {
       return (
         <View style={styles.container}>
           <ActivityIndicatorIOS size='large' />
-          <Text style={styles.thanks}>Just a moment..</Text>
+          <Text style={styles.loadingText}>Just a moment..</Text>
         </View>
       );
     }
@@ -105,6 +105,11 @@ var styles = StyleSheet.create({
   thanks: {
     paddingTop: 30,
     fontSize: 20,
+    color: COLOURS.GREY
+  },
+  loadingText: {
+    paddingTop: 30,
+    fontSize: PixelRatio.get() === 3 ? 20 : 12,
     color: COLOURS.GREY
   },
   title: {
