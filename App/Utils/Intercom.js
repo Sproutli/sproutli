@@ -7,7 +7,7 @@ var user;
 
 var Intercom = {
   userLoggedIn() {
-    Users.fetchUser()
+    return Users.fetchUser()
       .then((fetchedUser) => {
         user = fetchedUser;
         return IntercomAPI.registerIdentifiedUser({ userId: user.id });
@@ -18,8 +18,12 @@ var Intercom = {
           name: user.name
         });
       })
-      .then(() => console.log('Registered user', user))
+      .then(() => console.log('[Intercom] - Registered user', user))
       .catch((error) => console.warn('[Intercom] - Unable to register user - ', error));
+  },
+
+  logEvent(name, metadata) {
+    return IntercomAPI.logEvent(name, metadata);
   }
 };
 
