@@ -15,6 +15,8 @@ var {
 var COLOURS = require('../Constants/Colours');
 var Button = require('./Button');
 var pixelRatio = PixelRatio.get();
+var GoogleAnalytics = require('../Utils/GoogleAnalytics');
+var Intercom = require('../Utils/Intercom');
 
 class Feedback extends React.Component {
   constructor() {
@@ -23,6 +25,7 @@ class Feedback extends React.Component {
       feedback: '',
       sending: false
     };
+    GoogleAnalytics.viewedScreen('Give Feedback');
   }
 
   _onChangeText(text) {
@@ -31,6 +34,7 @@ class Feedback extends React.Component {
 
   _sendToZapier() {
     if ( this.state.sending || this.state.feedback.length < 1 ) return;
+    Intercom.logEvent('gave_feedback');
     var title, message;
     this.setState({ sending: true });
 
