@@ -12,6 +12,8 @@ var {
 
 var Button = require('./Button');
 var COLOURS = require('../Constants/Colours');
+var GoogleAnalytics = require('../Utils/GoogleAnalytics');
+var Intercom = require('../Utils/Intercom');
 
 var pixelRatio = PixelRatio.get();
 
@@ -23,9 +25,12 @@ class BuyKindnessCardModal extends React.Component {
       bounceValue: new Animated.Value(0),
       translateXValue: new Animated.Value(0)
     };
+    GoogleAnalytics.viewedScreen('Buy Kindness Card');
   }
 
   _onGetKindnessCard() {
+    GoogleAnalytics.trackEvent('Kindness Card', 'openLink');
+    Intercom.logEvent('viewed_buy_kindness_card');
     LinkingIOS.openURL('http://www.sproutli.com/kindness-card.html');
   }
 
@@ -58,7 +63,7 @@ class BuyKindnessCardModal extends React.Component {
       <View style={styles.container}>
         <Animated.Text style={[styles.headerText, {transform: [{scale: this.state.bounceValue}]}]}>Get your Kindness card today.</Animated.Text>
         <Text style={styles.text}>The Sproutli Kindness Card provides you with discounts and deals for online and physical stores.</Text>
-        <Text style={styles.text}>New deals are added every day, and it only costs $4 a month.</Text>
+        <Text style={styles.text}>New deals are added every day, and it only costs $3.90 a month.</Text>
 
         <Text style={styles.text}>Interested? Get yours now!</Text>
 

@@ -11,6 +11,7 @@ var {
 var Icon = require('react-native-vector-icons/Ionicons');
 var COLOURS = require('../Constants/Colours');
 var Intercom = require('../Utils/Intercom');
+var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 
 class OfferModal extends React.Component {
   constructor() {
@@ -21,6 +22,7 @@ class OfferModal extends React.Component {
     };
 
     Intercom.logEvent('viewed_offer');
+    GoogleAnalytics.trackEvent('Kindness Card', 'viewOffer');
   }
 
   render() {

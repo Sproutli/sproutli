@@ -15,6 +15,10 @@ var Users = {
         });
     })
     .then((res) => res.json());
+  },
+
+  getUserID() {
+    return AsyncStorage.getItem('token').then((token) => JWTDecode(token).UserID);
   }
 };
 
