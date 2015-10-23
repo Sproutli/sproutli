@@ -5,9 +5,12 @@ var {
   StyleSheet,
   View
 } = React;
+
 var SearchSuggestion = require('./SearchSuggestion');
 var Search = require('./Search');
 var SearchBox = require('./SearchBox');
+
+var Intercom = require('../Utils/Intercom');
 
 var SUGGESTIONS = require('../Constants/Suggestions');
 
@@ -17,6 +20,8 @@ class SearchHome extends React.Component {
     this.state = {
       query: ''
     };
+
+    Intercom.userLoggedIn();
   }
 
   _onPressSuggestion(suggestion) {

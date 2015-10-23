@@ -14,12 +14,14 @@ var {
 var RNGeocoder = require('react-native-geocoder');
 var Icon = require('react-native-vector-icons/Ionicons');
 
-var SearchEngine = require('../Utils/SearchEngine');
-var ListingsFilter = require('../Utils/ListingsFilter');
 var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
 var ListingDetail = require('./ListingDetail');
 var AdvancedSearchOptions = require('./AdvancedSearchOptions');
+
+var SearchEngine = require('../Utils/SearchEngine');
+var ListingsFilter = require('../Utils/ListingsFilter');
+
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 var COLOURS = require('../Constants/Colours');
 
