@@ -12,9 +12,11 @@ var {
 var Icon = require('react-native-vector-icons/Ionicons');
 var COLOURS = require('../Constants/Colours');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
+
 var pixelRatio = PixelRatio.get();
 
 class Listing extends React.Component {
+
   renderedVeganLevel() {
     if (!this.props.listing.vegan_level) { return <View />; }
     return <Text style={styles.subTitle}><Icon style={styles.subTitle} name='ios-nutrition' /> {VEGAN_LEVELS[this.props.listing.vegan_level].short}</Text>;

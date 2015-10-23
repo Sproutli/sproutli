@@ -1,0 +1,10 @@
+PODS:
+  - Intercom (2.3.11)
+
+DEPENDENCIES:
+  - Intercom
+
+SPEC CHECKSUMS:
+  Intercom: 255c9c1d85106b567fbc73c13eff6c54182dd220
+
+COCOAPODS: 0.39.0

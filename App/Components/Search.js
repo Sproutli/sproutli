@@ -14,12 +14,15 @@ var {
 var RNGeocoder = require('react-native-geocoder');
 var Icon = require('react-native-vector-icons/Ionicons');
 
-var SearchEngine = require('../Utils/SearchEngine');
-var ListingsFilter = require('../Utils/ListingsFilter');
 var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
 var ListingDetail = require('./ListingDetail');
 var AdvancedSearchOptions = require('./AdvancedSearchOptions');
+
+var SearchEngine = require('../Utils/SearchEngine');
+var ListingsFilter = require('../Utils/ListingsFilter');
+var Intercom = require('../Utils/Intercom');
+
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 var COLOURS = require('../Constants/Colours');
 
@@ -42,6 +45,11 @@ class Search extends React.Component {
     this.lastOffset = 0;
 
     this.getLocation();
+
+    var action = props.query ? 'custom search' : props.searchLabel;
+    Intercom.logEvent(`searched_for_${action}`, {
+      query: props.query
+    });
   }
 
   getLocation() {
@@ -78,7 +86,9 @@ class Search extends React.Component {
 
     SearchEngine.search(this.state.query, location)
       .then((listings) => {
+        console.log('Filtering listings..');
         var filteredListings = listings.filter((l) => ListingsFilter.filter(l, searchConfig));
+        console.log('Done.');
         this.setState({
           listings,
           numberOfListings: filteredListings.length,
@@ -97,6 +107,7 @@ class Search extends React.Component {
   }
 
   _onVeganLevelChanged(veganLevel) {
+    Intercom.logEvent('changed_vegan_level', { veganLevel });
     var searchConfig = this.state.searchConfig;
     searchConfig.vegan_level = veganLevel;
     var listings = this.state.listings.filter((l) => ListingsFilter.filter(l, searchConfig));
@@ -114,6 +125,7 @@ class Search extends React.Component {
   _onLocationSelected(location) {
     // TODO: Horrible, refactor.
     if (location === null) {
+      Intercom.logEvent('cleared_location');
       this.setState({
         location: null,
         locationName: null
@@ -121,6 +133,8 @@ class Search extends React.Component {
       return;
     }
 
+
+    Intercom.logEvent('changed_location');
     this.setState({
       location: location.geometry,
       locationName: location.name
@@ -165,6 +179,7 @@ class Search extends React.Component {
 
     return (
       <SearchBox
+        query={this.state.query}
         onChangeText={this._onChangeText.bind(this)} 
         onSubmitEditing={this._onSearch.bind(this)} 
         onFocus={this._onFocus.bind(this)} 
@@ -172,7 +187,6 @@ class Search extends React.Component {
         searchLabel={this.props.searchLabel}
         numberOfListings={this.state.numberOfListings}
         veganLevelText={this.veganLevelText()}
-        showSearchText={this.state.numberOfListings && !this.state.showAdvancedSearchOptions}
       /> 
     );
   }
@@ -191,6 +205,7 @@ class Search extends React.Component {
   }
 
   renderListings() {
+    console.log('Rendering listings');
     if (this.state.loading) { 
       return (
         <View style={styles.loadingContainer}>
@@ -208,6 +223,7 @@ class Search extends React.Component {
         </View>
       );
     }
+    console.log('Actually Rendering listings');
 
     return ( 
       <ListView
