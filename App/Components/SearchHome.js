@@ -11,17 +11,21 @@ var Search = require('./Search');
 var SearchBox = require('./SearchBox');
 
 var Intercom = require('../Utils/Intercom');
+var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 
 var SUGGESTIONS = require('../Constants/Suggestions');
 
 class SearchHome extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       query: ''
     };
 
     Intercom.userLoggedIn();
+    var screenName = !props.label ? 'Search Home' : `Search Home - ${props.label}`;
+    console.log(screenName);
+    GoogleAnalytics.viewedScreen(screenName);
   }
 
   _onPressSuggestion(suggestion) {
@@ -32,7 +36,7 @@ class SearchHome extends React.Component {
       route = {
         component: SearchHome,
         title: label,
-        passProps: { suggestions: SUGGESTIONS[label] }
+        passProps: { suggestions: SUGGESTIONS[label], label: label }
       };
     } else {
       route = {
@@ -97,7 +101,9 @@ var styles = StyleSheet.create({
 
 SearchHome.propTypes = {
   navigator: React.PropTypes.object.isRequired,
-  suggestions: React.PropTypes.array.isRequired
+  suggestions: React.PropTypes.array.isRequired,
+
+  label: React.PropTypes.string
 };
 
 module.exports = SearchHome;

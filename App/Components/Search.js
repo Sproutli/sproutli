@@ -22,6 +22,7 @@ var AdvancedSearchOptions = require('./AdvancedSearchOptions');
 var SearchEngine = require('../Utils/SearchEngine');
 var ListingsFilter = require('../Utils/ListingsFilter');
 var Intercom = require('../Utils/Intercom');
+var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 var COLOURS = require('../Constants/Colours');
@@ -50,6 +51,8 @@ class Search extends React.Component {
     Intercom.logEvent(`searched_for_${action}`, {
       query: props.query
     });
+
+    GoogleAnalytics.viewedScreen('Search');
   }
 
   getLocation() {
@@ -79,6 +82,11 @@ class Search extends React.Component {
   }
 
   search(location) {
+    GoogleAnalytics.trackEvent('Search', 'query', this.state.query);
+    GoogleAnalytics.trackEvent('Search', 'has_location', location !== null);
+    GoogleAnalytics.trackEvent('Search', 'vegan_level', this.state.searchConfig.vegan_level);
+    GoogleAnalytics.trackEvent('Search', 'pre_canned', this.props.searchLabel);
+
     this.setState({ loading: true });
 
     var searchConfig = this.state.searchConfig;
@@ -86,9 +94,7 @@ class Search extends React.Component {
 
     SearchEngine.search(this.state.query, location)
       .then((listings) => {
-        console.log('Filtering listings..');
         var filteredListings = listings.filter((l) => ListingsFilter.filter(l, searchConfig));
-        console.log('Done.');
         this.setState({
           listings,
           numberOfListings: filteredListings.length,
@@ -205,7 +211,6 @@ class Search extends React.Component {
   }
 
   renderListings() {
-    console.log('Rendering listings');
     if (this.state.loading) { 
       return (
         <View style={styles.loadingContainer}>
@@ -223,7 +228,6 @@ class Search extends React.Component {
         </View>
       );
     }
-    console.log('Actually Rendering listings');
 
     return ( 
       <ListView

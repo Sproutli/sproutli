@@ -23,6 +23,7 @@ var {width} = Dimensions.get('window');
 var pixelRatio = PixelRatio.get();
 
 var Intercom = require('../Utils/Intercom');
+var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 var Reviews = require('../Utils/Reviews');
 var KindnessCards = require('../Utils/KindnessCards');
 
@@ -47,6 +48,8 @@ class ListingDetail extends React.Component {
     };
 
     Intercom.logEvent('viewed_listing', { listingID: props.listing.id, listingName: props.listing.name });
+    GoogleAnalytics.viewedScreen('View Listing Detail');
+    GoogleAnalytics.trackEvent('Listing', 'View', props.listing.id);
   }
 
   componentDidMount() {

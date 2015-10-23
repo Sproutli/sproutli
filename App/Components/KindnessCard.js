@@ -19,6 +19,8 @@ var Moment = require('moment');
 
 var COLOURS = require('../Constants/Colours');
 
+var GoogleAnalytics = require('../Utils/GoogleAnalytics');
+
 var {height, width} = Dimensions.get('window');
 var pixelRatio = PixelRatio.get();
 
@@ -36,6 +38,8 @@ class KindnessCard extends React.Component {
     Users.fetchUser()
       .then((user) => this.setState({ user }))
       .catch((error) => console.warn(`[KindnessCard] - Error getting user - ${error}`));
+
+    GoogleAnalytics.viewedScreen('Kindness Card');
   }
 
   bounceCard() {
