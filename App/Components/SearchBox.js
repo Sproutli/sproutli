@@ -30,6 +30,7 @@ class SearchBox extends React.Component {
     return (
       <View style={{marginTop: 4, marginBottom: 4, backgroundColor: 'white'}}>
         <SearchBar 
+          text={this.props.query}
           barTintColour={COLOURS.GREEN}
           placeholder='Search'
           hideBackground
@@ -54,7 +55,8 @@ SearchBox.propTypes = {
   numberOfListings: React.PropTypes.number,
   showSearchText: React.PropTypes.bool,
   onBlur: React.PropTypes.func,
-  onFocus: React.PropTypes.func
+  onFocus: React.PropTypes.func,
+  query: React.PropTypes.string
 };
 
 var styles = StyleSheet.create({

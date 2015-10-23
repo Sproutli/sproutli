@@ -21,6 +21,7 @@ var AdvancedSearchOptions = require('./AdvancedSearchOptions');
 
 var SearchEngine = require('../Utils/SearchEngine');
 var ListingsFilter = require('../Utils/ListingsFilter');
+var Intercom = require('../Utils/Intercom');
 
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 var COLOURS = require('../Constants/Colours');
@@ -44,6 +45,10 @@ class Search extends React.Component {
     this.lastOffset = 0;
 
     this.getLocation();
+
+    Intercom.logEvent(`searched_for ${props.searchLabel || 'custom search'}`, {
+      query: props.query
+    });
   }
 
   getLocation() {
@@ -167,6 +172,7 @@ class Search extends React.Component {
 
     return (
       <SearchBox
+        query={this.state.query}
         onChangeText={this._onChangeText.bind(this)} 
         onSubmitEditing={this._onSearch.bind(this)} 
         onFocus={this._onFocus.bind(this)} 
