@@ -39,8 +39,6 @@ class SearchBox extends React.Component {
           onSearchButtonPress={this.props.onSubmitEditing}
           onFocus={this.props.onFocus}
          /> 
-         
-         { this.renderedSearchText() }
        </View>
     );
   }

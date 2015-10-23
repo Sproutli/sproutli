@@ -36,7 +36,7 @@ class Search extends React.Component {
       showSearch: true,
       locationName: '',
       searchConfig: props.searchConfig,
-      showAdvancedSearchOptions: false
+      showAdvancedSearchOptions: true
     };
 
     this.lastOffset = 0;
@@ -178,7 +178,7 @@ class Search extends React.Component {
   }
 
   renderAdvancedSearch() {
-    if (!this.state.showSearch || !this.state.showAdvancedSearchOptions) { return <View />; }
+    if (!this.state.showSearch) { return <View />; }
 
     return (
       <AdvancedSearchOptions 
