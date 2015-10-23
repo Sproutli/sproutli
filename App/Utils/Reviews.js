@@ -5,6 +5,8 @@ var AsyncStorage = require('react-native').AsyncStorage;
 var Moment = require('moment');
 var JWTDecode = require('jwt-decode');
 
+var Intercom = require('../Utils/Intercom');
+
 var jwtToken;
 
 var makeConfig = () => {
@@ -62,6 +64,7 @@ var Reviews = {
         config.method = 'POST';
         config.body = JSON.stringify(review);
 
+        Intercom.logEvent('reviewed_listing', { listingId: review.listing_id });
         return fetch(
           `http://sproutli-staging.elasticbeanstalk.com/api/v1/review`,
           config

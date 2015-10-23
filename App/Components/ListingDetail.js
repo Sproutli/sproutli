@@ -22,11 +22,13 @@ var Dimensions = require('Dimensions');
 var {width} = Dimensions.get('window');
 var pixelRatio = PixelRatio.get();
 
+var Intercom = require('../Utils/Intercom');
 var Reviews = require('../Utils/Reviews');
+var KindnessCards = require('../Utils/KindnessCards');
+
 var Review = require('./Review');
 var ReviewModal = require('./ReviewModal');
 var BuyKindnessCardModal = require('./BuyKindnessCardModal');
-var KindnessCards = require('../Utils/KindnessCards');
 var OfferModal = require('./OfferModal');
 var Button = require('./Button');
 
@@ -34,7 +36,7 @@ var COLOURS = require('../Constants/Colours');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 
 class ListingDetail extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
 
     this.state = {
@@ -43,6 +45,8 @@ class ListingDetail extends React.Component {
       reviews: [],
       showMap: false
     };
+
+    Intercom.logEvent('viewed_listing', { listingID: props.listing.id, listingName: props.listing.name });
   }
 
   componentDidMount() {

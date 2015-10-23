@@ -46,7 +46,8 @@ class Search extends React.Component {
 
     this.getLocation();
 
-    Intercom.logEvent(`searched_for ${props.searchLabel || 'custom search'}`, {
+    var action = props.query ? 'custom search' : props.searchLabel;
+    Intercom.logEvent(`searched_for_${action}`, {
       query: props.query
     });
   }
@@ -85,7 +86,9 @@ class Search extends React.Component {
 
     SearchEngine.search(this.state.query, location)
       .then((listings) => {
+        console.log('Filtering listings..');
         var filteredListings = listings.filter((l) => ListingsFilter.filter(l, searchConfig));
+        console.log('Done.');
         this.setState({
           listings,
           numberOfListings: filteredListings.length,
@@ -104,6 +107,7 @@ class Search extends React.Component {
   }
 
   _onVeganLevelChanged(veganLevel) {
+    Intercom.logEvent('changed_vegan_level', { veganLevel });
     var searchConfig = this.state.searchConfig;
     searchConfig.vegan_level = veganLevel;
     var listings = this.state.listings.filter((l) => ListingsFilter.filter(l, searchConfig));
@@ -121,6 +125,7 @@ class Search extends React.Component {
   _onLocationSelected(location) {
     // TODO: Horrible, refactor.
     if (location === null) {
+      Intercom.logEvent('cleared_location');
       this.setState({
         location: null,
         locationName: null
@@ -128,6 +133,8 @@ class Search extends React.Component {
       return;
     }
 
+
+    Intercom.logEvent('changed_location');
     this.setState({
       location: location.geometry,
       locationName: location.name
@@ -180,7 +187,6 @@ class Search extends React.Component {
         searchLabel={this.props.searchLabel}
         numberOfListings={this.state.numberOfListings}
         veganLevelText={this.veganLevelText()}
-        showSearchText={this.state.numberOfListings && !this.state.showAdvancedSearchOptions}
       /> 
     );
   }
@@ -199,6 +205,7 @@ class Search extends React.Component {
   }
 
   renderListings() {
+    console.log('Rendering listings');
     if (this.state.loading) { 
       return (
         <View style={styles.loadingContainer}>
@@ -216,6 +223,7 @@ class Search extends React.Component {
         </View>
       );
     }
+    console.log('Actually Rendering listings');
 
     return ( 
       <ListView

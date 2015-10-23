@@ -10,6 +10,7 @@ var {
 
 var Icon = require('react-native-vector-icons/Ionicons');
 var COLOURS = require('../Constants/Colours');
+var Intercom = require('../Utils/Intercom');
 
 class OfferModal extends React.Component {
   constructor() {
@@ -18,6 +19,8 @@ class OfferModal extends React.Component {
     this.state = {
       cardIcon: { uri: null}
     };
+
+    Intercom.logEvent('viewed_offer');
   }
 
   render() {

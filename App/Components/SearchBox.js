@@ -14,7 +14,7 @@ var pixelRatio = PixelRatio.get();
 
 class SearchBox extends React.Component {
   renderedSearchText() {
-    if (!this.props.searchLabel || !this.props.showSearchText) { return <View />; }
+    if (!this.props.searchLabel) { return <View />; }
 
     return (
       <Text style={styles.searchText}>
@@ -53,7 +53,6 @@ SearchBox.propTypes = {
   location: React.PropTypes.string,
   veganLevelText: React.PropTypes.string,
   numberOfListings: React.PropTypes.number,
-  showSearchText: React.PropTypes.bool,
   onBlur: React.PropTypes.func,
   onFocus: React.PropTypes.func,
   query: React.PropTypes.string
