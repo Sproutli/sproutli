@@ -71,7 +71,7 @@ class Feedback extends React.Component {
           <Text style={styles.headerText}>Thanks for using Sproutli!</Text>
 
           <Text style={styles.instructionText}>Have a burning question? Are we missing an awesome business? Did we screw something up?</Text>
-          <Text style={styles.instructionText}>Fill out the form below and get back to you by email.</Text>
+          <Text style={styles.instructionText}>Fill out the form below and we&apos;ll get back to you by email.</Text>
 
           <Text style={[styles.instructionText, {fontWeight: 'bold'}]}>Your thoughts:</Text>
         </View>
