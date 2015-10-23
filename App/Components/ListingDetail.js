@@ -126,6 +126,7 @@ class ListingDetail extends React.Component {
   }
 
   renderedReviews() {
+    GoogleAnalytics.viewedScreen('Reviews');
     if (this.state.loadingReviews) {
       return (
         <View style={styles.loadingIndicator}>
