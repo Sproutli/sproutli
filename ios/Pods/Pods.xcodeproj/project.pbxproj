@@ -1,0 +1,320 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C7E9CFC1EF8E8F1C7EC82A6357BB979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		93B684DD8DE3A4D97558F730F1EAAC93 /* Pods-sproutli-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAAE60F1366EF4C19BDD13926487147 /* Pods-sproutli-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1658167CC72F0A70B8207802844D4B8C /* Pods-sproutli-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-sproutli-acknowledgements.markdown"; sourceTree = "<group>"; };
+		1DE38879FC41F63B772E5FFC8265F6F1 /* Intercom.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; path = Intercom.bundle; sourceTree = "<group>"; };
+		3CE4F0FE4FB45514107D31DE08715C54 /* Pods-sproutli-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-sproutli-acknowledgements.plist"; sourceTree = "<group>"; };
+		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		51B073486865DE0915CA337F2011277B /* libPods-sproutli.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sproutli.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		672FC7F99E7ABF75D12DD3CFB7C30185 /* Pods-sproutli-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-sproutli-frameworks.sh"; sourceTree = "<group>"; };
+		9F1B4162B37A227E9AD68CDCF079B847 /* Pods-sproutli-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-sproutli-resources.sh"; sourceTree = "<group>"; };
+		A6B06C4B9DB63C7676E87602069EDD16 /* Intercom.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Intercom.framework; sourceTree = "<group>"; };
+		AEAAE60F1366EF4C19BDD13926487147 /* Pods-sproutli-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-sproutli-dummy.m"; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BF72228DB178A394865464BDA58597A3 /* Pods-sproutli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-sproutli.release.xcconfig"; sourceTree = "<group>"; };
+		DB12DDEFF2A6A7ADC86FD4D2FF45B0BB /* Pods-sproutli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-sproutli.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BD878E25C053349DC63AF8F27B566450 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C7E9CFC1EF8E8F1C7EC82A6357BB979 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		47F9C4FE06047402741BDE97ECB53C9C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				51B073486865DE0915CA337F2011277B /* libPods-sproutli.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		55FDCE914E9B5F19EABEA013B73971EB /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				59D17B9F31B0EDD21DF07ECB6B5118EC /* Pods-sproutli */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		59D17B9F31B0EDD21DF07ECB6B5118EC /* Pods-sproutli */ = {
+			isa = PBXGroup;
+			children = (
+				1658167CC72F0A70B8207802844D4B8C /* Pods-sproutli-acknowledgements.markdown */,
+				3CE4F0FE4FB45514107D31DE08715C54 /* Pods-sproutli-acknowledgements.plist */,
+				AEAAE60F1366EF4C19BDD13926487147 /* Pods-sproutli-dummy.m */,
+				672FC7F99E7ABF75D12DD3CFB7C30185 /* Pods-sproutli-frameworks.sh */,
+				9F1B4162B37A227E9AD68CDCF079B847 /* Pods-sproutli-resources.sh */,
+				DB12DDEFF2A6A7ADC86FD4D2FF45B0BB /* Pods-sproutli.debug.xcconfig */,
+				BF72228DB178A394865464BDA58597A3 /* Pods-sproutli.release.xcconfig */,
+			);
+			name = "Pods-sproutli";
+			path = "Target Support Files/Pods-sproutli";
+			sourceTree = "<group>";
+		};
+		5D846F7EFFD66F1A84038CDBF5746017 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A6B06C4B9DB63C7676E87602069EDD16 /* Intercom.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6094F55BA6559E19FFF4778357B84682 /* Intercom */ = {
+			isa = PBXGroup;
+			children = (
+				5D846F7EFFD66F1A84038CDBF5746017 /* Frameworks */,
+				701787233797E551859DABC48A8A4D55 /* Resources */,
+			);
+			path = Intercom;
+			sourceTree = "<group>";
+		};
+		701787233797E551859DABC48A8A4D55 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1DE38879FC41F63B772E5FFC8265F6F1 /* Intercom.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				C780E86A25BD60C1BFFBDEACC27F5631 /* Pods */,
+				47F9C4FE06047402741BDE97ECB53C9C /* Products */,
+				55FDCE914E9B5F19EABEA013B73971EB /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		C780E86A25BD60C1BFFBDEACC27F5631 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6094F55BA6559E19FFF4778357B84682 /* Intercom */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		129EE107103C89A7AA504583D00DBB86 /* Pods-sproutli */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 116743F011CEAA9815EF0AF3B73A11FA /* Build configuration list for PBXNativeTarget "Pods-sproutli" */;
+			buildPhases = (
+				C7301BD9495C584404BFD18E21449128 /* Sources */,
+				BD878E25C053349DC63AF8F27B566450 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-sproutli";
+			productName = "Pods-sproutli";
+			productReference = 51B073486865DE0915CA337F2011277B /* libPods-sproutli.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 47F9C4FE06047402741BDE97ECB53C9C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				129EE107103C89A7AA504583D00DBB86 /* Pods-sproutli */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C7301BD9495C584404BFD18E21449128 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93B684DD8DE3A4D97558F730F1EAAC93 /* Pods-sproutli-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		052A17875CB827423D627183396CEB60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ADBD0FC756B6E22CB48A4FD65D9F166C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB12DDEFF2A6A7ADC86FD4D2FF45B0BB /* Pods-sproutli.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		FB5E85C8E180FAAD9808A6BD07DA1527 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF72228DB178A394865464BDA58597A3 /* Pods-sproutli.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		116743F011CEAA9815EF0AF3B73A11FA /* Build configuration list for PBXNativeTarget "Pods-sproutli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADBD0FC756B6E22CB48A4FD65D9F166C /* Debug */,
+				FB5E85C8E180FAAD9808A6BD07DA1527 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */,
+				052A17875CB827423D627183396CEB60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

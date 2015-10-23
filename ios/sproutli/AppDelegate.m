@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 
 #import "RCTRootView.h"
+#import "Intercom/intercom.h"
 
 @implementation AppDelegate
 
@@ -56,6 +57,10 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  // Initialize Intercom
+  [Intercom setApiKey:@"ios_sdk-0ded67ded471358f3ace64df38a7e82f0906fa65" forAppId:@"r18lw9fx"];
+  
   return YES;
 }
 
