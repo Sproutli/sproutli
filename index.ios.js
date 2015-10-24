@@ -18,7 +18,7 @@ class Sproutli extends React.Component {
       .then((token) => {
         this.setState({token});
       })
-      .catch((error) => console.log('Something bad happened fetching the token', error));
+      .catch((error) => console.warn('[SproutliMain] - Something bad happened fetching the token', error));
   }
 
   renderScene(route, navigator) {

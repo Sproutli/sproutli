@@ -9,6 +9,9 @@ var Users = require('./Users');
 
 class GoogleAnalytics {
   constructor() {
+    this.ga = {
+      send() {} // No-op to begin with.
+    };
     Users.getUserID().then((userID) => this.ga = new Analytics('UA-66202608-2', userID));
   }
 

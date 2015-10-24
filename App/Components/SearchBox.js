@@ -2,30 +2,13 @@
 
 var React = require('react-native');
 var {
-  Text,
-  View,
-  PixelRatio,
-  StyleSheet
+  View
 } = React;
 
 var SearchBar = require('react-native-search-bar');
 var COLOURS = require('../Constants/Colours');
-var pixelRatio = PixelRatio.get();
 
 class SearchBox extends React.Component {
-  renderedSearchText() {
-    if (!this.props.searchLabel) { return <View />; }
-
-    return (
-      <Text style={styles.searchText}>
-        <Text style={styles.bold}>{this.props.numberOfListings} {this.props.searchLabel} </Text> 
-        around 
-        <Text style={styles.bold}> {this.props.location}</Text> that are  
-        <Text style={styles.bold}> {this.props.veganLevelText}</Text>
-      </Text>
-    );
-  }
-
   render() {
     return (
       <View style={{marginTop: 4, marginBottom: 4, backgroundColor: 'white'}}>
@@ -50,25 +33,11 @@ SearchBox.propTypes = {
   onChangeText: React.PropTypes.func.isRequired,
 
   searchLabel: React.PropTypes.string,
-  location: React.PropTypes.string,
   veganLevelText: React.PropTypes.string,
   numberOfListings: React.PropTypes.number,
   onBlur: React.PropTypes.func,
   onFocus: React.PropTypes.func,
   query: React.PropTypes.string
 };
-
-var styles = StyleSheet.create({
-  searchText: {
-    fontSize: 5 * pixelRatio, 
-    paddingTop: 4,
-    textAlign: 'center',
-    color: COLOURS.GREY
-  },
-
-  bold: {
-    fontWeight: 'bold'
-  }
-});
 
 module.exports = SearchBox;

@@ -24,25 +24,30 @@ var SearchEngine = require('../Utils/SearchEngine');
 var ListingsFilter = require('../Utils/ListingsFilter');
 var Intercom = require('../Utils/Intercom');
 var GoogleAnalytics = require('../Utils/GoogleAnalytics');
+var VeganLevelManager = require('../Utils/VeganLevelManager');
 
-var VEGAN_LEVELS = require('../Constants/VeganLevels');
 var COLOURS = require('../Constants/Colours');
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       query: props.query,
       location: {},
       listings: [],
       numberOfListings: null,
-      loading: false,
+      loading: true,
       showSearch: true,
       locationName: '',
+      veganLevel: VeganLevelManager.veganLevel,
       searchConfig: props.searchConfig,
       showAdvancedSearchOptions: true
     };
+
+    this.state.searchConfig.vegan_level = VeganLevelManager.veganLevel;
+    VeganLevelManager.handlers.push(this._onVeganLevelChanged.bind(this));
 
     this.lastOffset = 0;
 
@@ -98,8 +103,12 @@ class Search extends React.Component {
     this.startedSearch = new Moment();
     SearchEngine.search(this.state.query, location)
       .then((listings) => {
-        console.log('[Search] - Time elapsed:', new Moment().diff(this.startedSearch));
+        var searchTime = new Moment().diff(this.startedSearch);
+        console.log('[Search] - Time elapsed:', searchTime);
+        GoogleAnalytics.trackEvent('Search', 'time_taken', searchTime);
+
         var filteredListings = listings.filter((l) => ListingsFilter.filter(l, searchConfig));
+
         this.setState({
           listings,
           numberOfListings: filteredListings.length,
@@ -118,9 +127,16 @@ class Search extends React.Component {
     this.search(this.state.location);
   }
 
-  _onVeganLevelChanged(veganLevel) {
+  _onVeganSliderChanged(veganLevel) {
     Intercom.logEvent('changed_vegan_level', { veganLevel });
+    VeganLevelManager.set(veganLevel);
+  }
+
+  _onVeganLevelChanged(veganLevel) {
+    this.setState({ veganLevel });
+
     var searchConfig = this.state.searchConfig;
+
     searchConfig.vegan_level = veganLevel;
     var listings = this.state.listings.filter((l) => ListingsFilter.filter(l, searchConfig));
 
@@ -144,7 +160,6 @@ class Search extends React.Component {
       }, this.search(null));
       return;
     }
-
 
     Intercom.logEvent('changed_location');
     this.setState({
@@ -182,10 +197,6 @@ class Search extends React.Component {
     });
   }
 
-  veganLevelText() {
-    return VEGAN_LEVELS[Math.round(this.state.searchConfig.vegan_level)].short;
-  }
-
   renderSearch() {
     if (!this.state.showSearch) { return <View />; }
 
@@ -198,7 +209,6 @@ class Search extends React.Component {
         location={this.state.locationName}
         searchLabel={this.props.searchLabel}
         numberOfListings={this.state.numberOfListings}
-        veganLevelText={this.veganLevelText()}
       /> 
     );
   }
@@ -206,15 +216,17 @@ class Search extends React.Component {
   renderAdvancedSearch() {
     if (!this.state.showSearch) { return <View />; }
 
-    return (
-      <AdvancedSearchOptions 
-        veganLevel={this.state.searchConfig.vegan_level}
-        onLocationSelected={this._onLocationSelected.bind(this)} 
-        onVeganLevelChanged={this._onVeganLevelChanged.bind(this)}
-        locationName={this.state.locationName}
-        showLocationBar={this.state.searchConfig.online_store !== 'Y'}
-      />
-    );
+    try {
+      return (
+        <AdvancedSearchOptions 
+          veganLevel={this.state.veganLevel}
+          onLocationSelected={this._onLocationSelected.bind(this)} 
+          onVeganLevelChanged={this._onVeganSliderChanged.bind(this)}
+          locationName={this.state.locationName}
+          showLocationBar={this.state.searchConfig.online_store !== 'Y'}
+        />
+      );
+    } catch (error) { console.warn('GOT SOME BAD ERROR', error); }
   }
 
   renderListings() {
@@ -240,6 +252,7 @@ class Search extends React.Component {
       <ListView
         onScroll={this._onScroll.bind(this)}
         dataSource={this.state.dataSource}
+        keyboardShouldPersistTaps={false}
         renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this.listingPressed.bind(this, listing)} />}
       />
    );

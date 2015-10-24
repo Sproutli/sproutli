@@ -20,7 +20,7 @@ class VeganLevelSlider extends React.Component{
   }
 
   veganLevelText() {
-    var veganLevel = VEGAN_LEVELS[Math.round(this.state.veganLevel)];
+    var veganLevel = VEGAN_LEVELS[Math.round(this.props.veganLevel)];
     return (
       <View>
         <Text style={[styles.veganLevelText, {fontWeight: 'bold'}]}>{veganLevel.short}</Text>
