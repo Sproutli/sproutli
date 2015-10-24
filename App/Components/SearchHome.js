@@ -10,7 +10,6 @@ var SearchSuggestion = require('./SearchSuggestion');
 var Search = require('./Search');
 var SearchBox = require('./SearchBox');
 
-var Intercom = require('../Utils/Intercom');
 var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 
 var SUGGESTIONS = require('../Constants/Suggestions');
@@ -22,7 +21,6 @@ class SearchHome extends React.Component {
       query: ''
     };
 
-    Intercom.userLoggedIn();
     var screenName = !props.label ? 'Search Home' : `Search Home - ${props.label}`;
     console.log(screenName);
     GoogleAnalytics.viewedScreen(screenName);

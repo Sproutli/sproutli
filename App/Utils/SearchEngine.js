@@ -30,7 +30,6 @@ var prepareProps = (location) => {
 };
 
 var parse = (listings, location) => { 
-  console.log(listings);
   return listings.hits.hit
   .filter((l) => {
     if (!location || !location.latitude) { return true; }
