@@ -13,6 +13,7 @@ var {
 
 var RNGeocoder = require('react-native-geocoder');
 var Icon = require('react-native-vector-icons/Ionicons');
+var Moment = require('moment');
 
 var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
@@ -81,7 +82,8 @@ class Search extends React.Component {
     navigator.geolocation.clearWatch(this.watchID);
   }
 
-  search(location) {
+  search(location, query) {
+    query = query || this.state.query;
     GoogleAnalytics.trackEvent('Search', 'query', this.state.query);
     GoogleAnalytics.trackEvent('Search', 'has_location', location !== null);
     GoogleAnalytics.trackEvent('Search', 'vegan_level', this.state.searchConfig.vegan_level);
@@ -90,10 +92,13 @@ class Search extends React.Component {
     this.setState({ loading: true });
 
     var searchConfig = this.state.searchConfig;
-    location = searchConfig.online_store !== 'N' ? location : null; // We don't want the location if we're searching for online stuff.
+    location = searchConfig.online_store === 'Y' ? null : location; // We don't want the location if we're searching for online stuff.
 
+
+    this.startedSearch = new Moment();
     SearchEngine.search(this.state.query, location)
       .then((listings) => {
+        console.log('[Search] - Time elapsed:', new Moment().diff(this.startedSearch));
         var filteredListings = listings.filter((l) => ListingsFilter.filter(l, searchConfig));
         this.setState({
           listings,
@@ -101,7 +106,8 @@ class Search extends React.Component {
           loading: false,
           dataSource: this.state.dataSource.cloneWithRows(filteredListings)
         });
-      });
+      })
+      .catch((error) => console.warn('[Search] - Error searching:', error));
   }
 
   _onChangeText(text) {
@@ -206,6 +212,7 @@ class Search extends React.Component {
         onLocationSelected={this._onLocationSelected.bind(this)} 
         onVeganLevelChanged={this._onVeganLevelChanged.bind(this)}
         locationName={this.state.locationName}
+        showLocationBar={this.state.searchConfig.online_store !== 'Y'}
       />
     );
   }
