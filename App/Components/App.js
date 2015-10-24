@@ -8,8 +8,7 @@ var {
   TabBarIOS
 } = React;
 
-var ListingDetail = require('./ListingDetail');
-var SearchHome = require('./SearchHome');
+var Search = require('./Search');
 var Feedback = require('./Feedback');
 var KindnessCard = require('./KindnessCard');
 var SUGGESTIONS = require('../Constants/Suggestions');
@@ -72,46 +71,65 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentTab: 'home'
+      currentTab: 'food'
     };
+  }
+
+  makeNavigator(name) {
+    return (
+      <NavigatorIOS
+        style={styles.container}
+        tintColor={COLOURS.GREEN}
+        titleTextColor={COLOURS.GREY}
+        initialRoute={{
+          component: Search,
+          title: name,
+          passProps: {searchConfig: SUGGESTIONS[name].searchConfig, searchLabel:name}
+        }}
+      />
+    );
   }
 
   render() {
     return (
       <TabBarIOS tintColor={COLOURS.GREEN}>
         <Icon.TabBarItem
-          onPress={() => this.setState({currentTab: 'feedback'})}
-          selected={this.state.currentTab === 'feedback'}
-          iconName='thumbsup'
-          title='Give Feedback'>
-
-            <Feedback />
-
+          onPress={() => this.setState({currentTab: 'food'})}
+          selected={this.state.currentTab === 'food'}
+          iconName='fork'
+          title='Food'>
+          { this.makeNavigator('Food') }
         </Icon.TabBarItem>
 
         <Icon.TabBarItem
-          onPress={() => this.setState({currentTab: 'home'})}
-          selected={this.state.currentTab === 'home'}
-          iconName={this.state.currentTab === 'home' ? 'ios-home' : 'ios-home-outline'}
-          title='Home'>
+          onPress={() => this.setState({currentTab: 'shops'})}
+          selected={this.state.currentTab === 'shops'}
+          iconName='bag'
+          title='Shops'>
+          { this.makeNavigator('Shops') }
+        </Icon.TabBarItem>
 
-          <NavigatorIOS
-            style={styles.container}
-            tintColor={COLOURS.GREEN}
-            titleTextColor={COLOURS.GREY}
-            initialRoute={{
-              component: SearchHome,
-              title: 'Home',
-              passProps: {suggestions: SUGGESTIONS.initial}
-            }}/>
-            
+        <Icon.TabBarItem
+          onPress={() => this.setState({currentTab: 'online'})}
+          selected={this.state.currentTab === 'online'}
+          iconName='earth'
+          title='Online'>
+          { this.makeNavigator('Online') }
+        </Icon.TabBarItem>
+
+        <Icon.TabBarItem
+          onPress={() => this.setState({currentTab: 'services'})}
+          selected={this.state.currentTab === 'services'}
+          iconName='ios-people'
+          title='Services'>
+          { this.makeNavigator('Services') }
         </Icon.TabBarItem>
 
         <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'kindness_card'})}
           selected={this.state.currentTab === 'kindness_card'}
           iconName='card'
-          title='Kindness Card'>
+          title='Search'>
 
             <KindnessCard />
           

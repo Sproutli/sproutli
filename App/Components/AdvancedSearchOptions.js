@@ -43,7 +43,7 @@ class AdvancedSearchOptions extends React.Component {
 
     return (
       <View>
-        <GooglePlacesAutocomplete />
+        { this.props.showLocationBar ? <GooglePlacesAutocomplete /> : <View /> }
 
         <VeganLevelSlider 
           veganLevel={this.props.veganLevel} 
@@ -76,7 +76,9 @@ AdvancedSearchOptions.propTypes = {
   onLocationSelected: React.PropTypes.func.isRequired,
   onVeganLevelChanged: React.PropTypes.func.isRequired,
   veganLevel: React.PropTypes.number.isRequired,
-  locationName: React.PropTypes.string.isRequired
+  locationName: React.PropTypes.string.isRequired,
+
+  showLocationBar: React.PropTypes.bool
 };
 
 module.exports = AdvancedSearchOptions;
