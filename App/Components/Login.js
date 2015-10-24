@@ -19,7 +19,6 @@ var pixelRatio = PixelRatio.get();
 class Login extends React.Component {
   constructor(props) {
     super();
-    console.log(props);
     this.state = {
       email: props.email,
       password: props.password,
@@ -48,7 +47,7 @@ class Login extends React.Component {
     Authentication.login(credentials)
       .then(() => this.goToApp())
       .catch((error) => {
-        console.log('Error logging in - ', error);
+        console.warn('[Login] - Error logging in - ', error);
         AlertIOS.alert('Error', 'Sorry, there was an error with your email and password.');
       });
   }
@@ -73,7 +72,7 @@ class Login extends React.Component {
       Authentication.signUp(credentials)
         .then(() => this.goToApp())
         .catch((error) => {
-          console.log('Error logging in - ', error);
+          console.warn('[Login] - Error logging in - ', error);
           AlertIOS.alert('Error', 'Sorry, there was an error signing up! Please try again.');
         });
     }

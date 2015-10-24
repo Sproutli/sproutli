@@ -20,7 +20,6 @@ var Authentication = {
   },
 
   signUp: (credentials) => {
-    console.log('Signing up..');
     return fetch(`${baseURL}/signup`, {
       body: JSON.stringify(credentials),
       method: 'POST',
@@ -30,7 +29,6 @@ var Authentication = {
     })
     .then((res) => res.json())
     .then((signup) => {
-      console.log('..done, got signup:', signup);
       credentials.id = signup.id;
       credentials.token = signup.token;
       return AsyncStorage.setItem('token', signup.token);
@@ -41,7 +39,6 @@ var Authentication = {
         id: credentials.id,
         name: credentials.name
       };
-      console.log('Creating user..', user);
       return fetch(`${baseURL}/user/${user.id}`, {
         body: JSON.stringify(user),
         method: 'PUT',
@@ -52,7 +49,6 @@ var Authentication = {
       });
     })
     .then((res) => {
-      console.log('..done, got response', res);
       res.json();
     });
   }

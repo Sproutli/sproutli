@@ -32,7 +32,6 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log('Built search, haters');
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       query: props.query,
@@ -63,7 +62,6 @@ class Search extends React.Component {
   }
 
   getLocation() {
-    console.log('Looking for location.');
     navigator.geolocation.getCurrentPosition(
       (position) => { 
       var location = position.coords;

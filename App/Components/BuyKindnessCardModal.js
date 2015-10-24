@@ -58,7 +58,6 @@ class BuyKindnessCardModal extends React.Component {
   }
 
   render() {
-    console.log(this.state.translateXValue);
     return (
       <View style={styles.container}>
         <Animated.Text style={[styles.headerText, {transform: [{scale: this.state.bounceValue}]}]}>Get your Kindness card today.</Animated.Text>

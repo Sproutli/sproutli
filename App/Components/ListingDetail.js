@@ -185,7 +185,6 @@ class ListingDetail extends React.Component {
   }
 
   renderedCallButton() {
-    console.log(this.props.listing.phone_number);
     if (!this.props.listing.phone_number) return <View />;
 
     return (

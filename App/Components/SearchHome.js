@@ -22,7 +22,6 @@ class SearchHome extends React.Component {
     };
 
     var screenName = !props.label ? 'Search Home' : `Search Home - ${props.label}`;
-    console.log(screenName);
     GoogleAnalytics.viewedScreen(screenName);
   }
 

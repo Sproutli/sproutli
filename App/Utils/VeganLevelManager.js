@@ -12,7 +12,6 @@ class VeganLevelManager {
   }
 
   set(veganLevel) {
-    console.log(`Setting veganLevel to ${veganLevel} for handlers:`, this.handlers);
     this.veganLevel = veganLevel;
     this.handlers.forEach((handler) => handler(veganLevel));
     AsyncStorage.setItem('vegan_level', veganLevel.toString());
