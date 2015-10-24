@@ -129,10 +129,8 @@ class App extends React.Component {
           onPress={() => this.setState({currentTab: 'kindness_card'})}
           selected={this.state.currentTab === 'kindness_card'}
           iconName='card'
-          title='Search'>
-
+          title='Kindness Card'>
             <KindnessCard />
-          
         </Icon.TabBarItem>
       </TabBarIOS>
     );
