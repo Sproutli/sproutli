@@ -8,13 +8,13 @@ var CATEGORIES = [
   'Health, Wellness & Lifestyle',
   'Home & Living',
   'Causes',
-  'Shoes & Accessories',
+  'Clothing, Shoes & Accessories',
   'Coaching & Classes',
   'Entertainment',
   'Beer & Wine',
   'Media & Publishing',
   'Professional Services & Trades',
   'Pets'
-]
+];
 
 module.exports = CATEGORIES;

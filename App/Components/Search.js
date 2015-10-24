@@ -7,6 +7,7 @@ var {
   ListView,
   ActivityIndicatorIOS,
   Text,
+  ScrollView,
   PixelRatio,
   View
 } = React;
@@ -239,12 +240,12 @@ class Search extends React.Component {
       );
     }
 
-    if (this.state.listings.length < 1) {
+    if (this.state.numberOfListings < 1) {
       return (
-        <View style={styles.loadingContainer}>
+        <ScrollView contentContainerStyle={styles.loadingContainer} keyboardShouldPersistTaps={false}>
           <Icon name='sad-outline' size={100} color={COLOURS.GREY} />
           <Text style={styles.loadingText}>Sorry! No listings found.</Text>
-        </View>
+        </ScrollView>
       );
     }
 

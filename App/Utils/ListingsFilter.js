@@ -122,6 +122,7 @@ var ListingsFilter = {
       listingIsBoth = strEquals(listing.online_store, 'BOTH'),
       bothAreEqual = strEquals(listing.online_store, f.online_store);
 
+
       return unspecified || filterIsBoth || listingIsBoth || bothAreEqual;
     };
 
