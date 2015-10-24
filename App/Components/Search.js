@@ -26,19 +26,20 @@ var Intercom = require('../Utils/Intercom');
 var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 var VeganLevelManager = require('../Utils/VeganLevelManager');
 
-var VEGAN_LEVELS = require('../Constants/VeganLevels');
 var COLOURS = require('../Constants/Colours');
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
+
+    console.log('Built search, haters');
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       query: props.query,
       location: {},
       listings: [],
       numberOfListings: null,
-      loading: false,
+      loading: true,
       showSearch: true,
       locationName: '',
       veganLevel: VeganLevelManager.veganLevel,
@@ -62,6 +63,7 @@ class Search extends React.Component {
   }
 
   getLocation() {
+    console.log('Looking for location.');
     navigator.geolocation.getCurrentPosition(
       (position) => { 
       var location = position.coords;
@@ -197,10 +199,6 @@ class Search extends React.Component {
     });
   }
 
-  veganLevelText() {
-    return VEGAN_LEVELS[Math.round(this.state.searchConfig.vegan_level)].short;
-  }
-
   renderSearch() {
     if (!this.state.showSearch) { return <View />; }
 
@@ -213,7 +211,6 @@ class Search extends React.Component {
         location={this.state.locationName}
         searchLabel={this.props.searchLabel}
         numberOfListings={this.state.numberOfListings}
-        veganLevelText={this.veganLevelText()}
       /> 
     );
   }
@@ -221,15 +218,17 @@ class Search extends React.Component {
   renderAdvancedSearch() {
     if (!this.state.showSearch) { return <View />; }
 
-    return (
-      <AdvancedSearchOptions 
-        veganLevel={this.state.veganLevel}
-        onLocationSelected={this._onLocationSelected.bind(this)} 
-        onVeganLevelChanged={this._onVeganSliderChanged.bind(this)}
-        locationName={this.state.locationName}
-        showLocationBar={this.state.searchConfig.online_store !== 'Y'}
-      />
-    );
+    try {
+      return (
+        <AdvancedSearchOptions 
+          veganLevel={this.state.veganLevel}
+          onLocationSelected={this._onLocationSelected.bind(this)} 
+          onVeganLevelChanged={this._onVeganSliderChanged.bind(this)}
+          locationName={this.state.locationName}
+          showLocationBar={this.state.searchConfig.online_store !== 'Y'}
+        />
+      );
+    } catch (error) { console.warn('GOT SOME BAD ERROR', error); }
   }
 
   renderListings() {
