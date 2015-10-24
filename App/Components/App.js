@@ -58,19 +58,19 @@ class App extends React.Component {
         </Icon.TabBarItem>
 
         <Icon.TabBarItem
-          onPress={() => this.setState({currentTab: 'online'})}
-          selected={this.state.currentTab === 'online'}
-          iconName='earth'
-          title='Online'>
-          { this.makeNavigator('Online') }
-        </Icon.TabBarItem>
-
-        <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'services'})}
           selected={this.state.currentTab === 'services'}
           iconName='ios-people'
           title='Services'>
           { this.makeNavigator('Services') }
+        </Icon.TabBarItem>
+
+        <Icon.TabBarItem
+          onPress={() => this.setState({currentTab: 'online'})}
+          selected={this.state.currentTab === 'online'}
+          iconName='earth'
+          title='Online'>
+          { this.makeNavigator('Online') }
         </Icon.TabBarItem>
 
         <Icon.TabBarItem
