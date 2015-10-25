@@ -2,17 +2,20 @@
 
 var React = require('react-native');
 var Dimensions = require('Dimensions');
-var { width } = Dimensions.get('window');
+var { width, height } = Dimensions.get('window');
 var {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   PixelRatio,
+  ActivityIndicatorIOS,
   AlertIOS,
   TextInput
 } = React;
 
 var Authentication = require('../Utils/Authentication');
+var Button = require('./Button');
 var COLOURS = require('../Constants/Colours');
 var pixelRatio = PixelRatio.get();
 
@@ -22,6 +25,7 @@ class Login extends React.Component {
     this.state = {
       email: props.email,
       password: props.password,
+      loading: true,
       name: ''
     };
   }
@@ -53,6 +57,7 @@ class Login extends React.Component {
   }
 
   _signupPressed() {
+    console.log('Signup pressed');
     if (!this.props.signingUp) {
       // TODO: Copy details to sign up screen.
       this.props.navigator.push({
@@ -63,6 +68,7 @@ class Login extends React.Component {
         password: this.state.password
       });
     } else {
+      this.setState({loading: true});
       var credentials = {
         email: this.state.email,
         password: this.state.password,
@@ -72,6 +78,7 @@ class Login extends React.Component {
       Authentication.signUp(credentials)
         .then(() => this.goToApp())
         .catch((error) => {
+          this.setState({loading: false});
           console.warn('[Login] - Error logging in - ', error);
           AlertIOS.alert('Error', 'Sorry, there was an error signing up! Please try again.');
         });
@@ -83,6 +90,34 @@ class Login extends React.Component {
       name: 'app',
       index: 1
     });
+  }
+
+  emailField() {
+    if (height === 480 && this.props.signingUp) { return <View />; }
+    return (
+      <TextInput 
+        keyboardType='email-address' 
+        style={styles.loginInput} 
+        placeholder='Email' 
+        autoCorrect={false}
+        value={this.state.email}
+        onChangeText={this._onEmailChanged.bind(this)}
+        autoCapitalize='none'
+      />
+    );
+  }
+
+  passwordField() {
+    if (height === 480 && this.props.signingUp) { return <View />; }
+    return (
+      <TextInput 
+        secureTextEntry
+        style={styles.loginInput} 
+        placeholder='Passsword' 
+        value={this.state.password}
+        onChangeText={this._onPasswordChanged.bind(this)}
+      />
+    );
   }
 
   nameField() {
@@ -99,41 +134,33 @@ class Login extends React.Component {
   }
 
   loginButton() {
-    return this.props.signingUp ? <View /> : <Text style={styles.loginButtons} onPress={this._loginPressed.bind(this)}>Login</Text>;
+    if (this.props.signingUp) return <View />;
+    return (
+      <View style={{paddingVertical: 20}}>
+        <Button onPress={this._loginPressed.bind(this)}>Login</Button>
+      </View>
+    );
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView containerStyle={styles.container} keyboardShouldPersistTaps={false} keyboardDismissMode='on-drag'>
         <View style={styles.loginContainer}>
           <View style={styles.header}>
             <Text style={styles.headerText}>Welcome to Sproutli!</Text>
             <Text style={styles.subtext}>Let&apos;s get started.</Text>
           </View>
-          <TextInput 
-            keyboardType='email-address' 
-            style={styles.loginInput} 
-            placeholder='Email' 
-            autoCorrect={false}
-            value={this.state.email}
-            onChangeText={this._onEmailChanged.bind(this)}
-            autoCapitalize='none'
-          />
-          <TextInput 
-            secureTextEntry
-            style={styles.loginInput} 
-            placeholder='Passsword' 
-            value={this.state.password}
-            onChangeText={this._onPasswordChanged.bind(this)}
-          />
+          {this.emailField() }
+          {this.passwordField()}
           {this.nameField()}
           <View style={styles.loginButtonsContainer}>
             {this.loginButton()}
-            <Text style={styles.loginButtons} onPress={this._signupPressed.bind(this)}>Sign Up</Text>
+            <Button onPress={this._signupPressed.bind(this)}>Sign Up</Button>
+            { this.state.loading ? <ActivityIndicatorIOS style={{paddingTop: 10}} /> : <View /> }
           </View>
         </View>
         <View style={{flex: 0.33}}/>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -168,7 +195,9 @@ var styles = StyleSheet.create({
   },
   loginButtonsContainer: {
     flex: 1, 
-    justifyContent: 'flex-start', 
+    alignItems: 'center',
+    justifyContent: height === 480 ? 'center' : 'flex-start', 
+    flexDirection: height === 480 ? 'row' : 'column',
     width
   },
   loginButtons: {
