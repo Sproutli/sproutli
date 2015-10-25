@@ -9,6 +9,7 @@ var CATEGORIES = [
   'Home & Living',
   'Causes',
   'Clothing, Shoes & Accessories',
+  'Shoes & Accessories',
   'Coaching & Classes',
   'Entertainment',
   'Beer & Wine',

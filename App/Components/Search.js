@@ -121,7 +121,11 @@ class Search extends React.Component {
   }
 
   _onChangeText(text) {
-    this.setState({ query: text });
+    this.setState({ query: text }, () => {
+      // Search for everything if the text was cleared.
+      if (text.length < 1) { this.search(this.state.location); }
+    });
+
   }
 
   _onSearch() {
@@ -242,7 +246,7 @@ class Search extends React.Component {
 
     if (this.state.numberOfListings < 1) {
       return (
-        <ScrollView contentContainerStyle={styles.loadingContainer} keyboardShouldPersistTaps={false}>
+        <ScrollView contentContainerStyle={styles.loadingContainer} keyboardShouldPersistTaps={false} keyboardDismissMode='on-drag'>
           <Icon name='sad-outline' size={100} color={COLOURS.GREY} />
           <Text style={styles.loadingText}>Sorry! No listings found.</Text>
         </ScrollView>
