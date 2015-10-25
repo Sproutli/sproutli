@@ -180,15 +180,16 @@ class Search extends React.Component {
 
     var bounced = ((offset - scrollEvent.nativeEvent.contentSize.height) > -scrollEvent.nativeEvent.layoutMeasurement.height);
 
+    console.log(scrollEvent.nativeEvent, this.lastOffset);
+
     if (offset < 0 || bounced) { return; }
 
-    if (delta < 1) {
+    if (delta < 1 || offset == 0) {
+      this.setState({ showSearch: true });
+    } else if (this.state.showSearch && delta < 50) {
       this.setState({ showSearch: true });
     } else if (delta > 1 ) {
-      this.setState({ 
-        showSearch: false,
-        showAdvancedSearchOptions: false
-      });
+      this.setState({ showSearch: false });
     }
 
     this.lastOffset = offset;
@@ -258,6 +259,7 @@ class Search extends React.Component {
         onScroll={this._onScroll.bind(this)}
         dataSource={this.state.dataSource}
         keyboardShouldPersistTaps={false}
+        keyboardDismissMode='on-drag'
         renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this.listingPressed.bind(this, listing)} />}
       />
    );
