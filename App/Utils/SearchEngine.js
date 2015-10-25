@@ -49,7 +49,7 @@ var SearchEngine = {
   },
 
   search(query, location) {
-    console.log('Searching', location);
+    console.log('Searching', query, location);
     query = query || '-aaoidwjaoiwdjaijwd';
     var locationQuery = this.prepareLocationQuery(location);
     var url = `http://search-sproutli-bhzq3vdfhs5jhshdoqqt67ru5a.ap-southeast-2.cloudsearch.amazonaws.com/2013-01-01/search?q=${query}&size=1000${locationQuery}`;

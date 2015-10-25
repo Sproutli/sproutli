@@ -7,6 +7,7 @@ var {
   ListView,
   ActivityIndicatorIOS,
   Text,
+  ScrollView,
   PixelRatio,
   View
 } = React;
@@ -120,7 +121,11 @@ class Search extends React.Component {
   }
 
   _onChangeText(text) {
-    this.setState({ query: text });
+    this.setState({ query: text }, () => {
+      // Search for everything if the text was cleared.
+      if (text.length < 1) { this.search(this.state.location); }
+    });
+
   }
 
   _onSearch() {
@@ -175,15 +180,16 @@ class Search extends React.Component {
 
     var bounced = ((offset - scrollEvent.nativeEvent.contentSize.height) > -scrollEvent.nativeEvent.layoutMeasurement.height);
 
+    console.log(scrollEvent.nativeEvent, this.lastOffset);
+
     if (offset < 0 || bounced) { return; }
 
-    if (delta < 1) {
+    if (delta < 1 || offset == 0) {
+      this.setState({ showSearch: true });
+    } else if (this.state.showSearch && delta < 50) {
       this.setState({ showSearch: true });
     } else if (delta > 1 ) {
-      this.setState({ 
-        showSearch: false,
-        showAdvancedSearchOptions: false
-      });
+      this.setState({ showSearch: false });
     }
 
     this.lastOffset = offset;
@@ -239,12 +245,12 @@ class Search extends React.Component {
       );
     }
 
-    if (this.state.listings.length < 1) {
+    if (this.state.numberOfListings < 1) {
       return (
-        <View style={styles.loadingContainer}>
+        <ScrollView contentContainerStyle={styles.loadingContainer} keyboardShouldPersistTaps={false} keyboardDismissMode='on-drag'>
           <Icon name='sad-outline' size={100} color={COLOURS.GREY} />
           <Text style={styles.loadingText}>Sorry! No listings found.</Text>
-        </View>
+        </ScrollView>
       );
     }
 
@@ -253,6 +259,7 @@ class Search extends React.Component {
         onScroll={this._onScroll.bind(this)}
         dataSource={this.state.dataSource}
         keyboardShouldPersistTaps={false}
+        keyboardDismissMode='on-drag'
         renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this.listingPressed.bind(this, listing)} />}
       />
    );
