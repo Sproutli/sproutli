@@ -1,52 +1,49 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
 
 var React = require('react-native');
+var App = require('./App/Components/App');
+var Login = require('./App/Components/Login');
 var {
-  AppRegistry,
-  StyleSheet,
-  Text,
   View,
+  AppRegistry,
+  Navigator,
+  AsyncStorage
 } = React;
 
-var sproutli = React.createClass({
-  render: function() {
+class Sproutli extends React.Component {
+  constructor() {
+    super();
+    this.state = { token:  undefined };
+    AsyncStorage.getItem('token')
+      .then((token) => {
+        this.setState({token});
+      })
+      .catch((error) => console.warn('[SproutliMain] - Something bad happened fetching the token', error));
+  }
+
+  renderScene(route, navigator) {
+    switch(route.name) {
+    case 'app':
+      return <App token={this.state.token} />;
+    case 'login':
+      return <Login navigator={navigator} signingUp={route.signingUp} email={route.email} password={route.password} />;
+    }
+  }
+
+
+  render() {
+    // Render a blank view while we wait for our token.
+    if (this.state.token === undefined) {
+      return <View />;
+    }
+
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <Navigator
+        initialRoute={{name: this.state.token ? 'app' : 'login', index: 0}}
+        renderScene={this.renderScene.bind(this)}      
+      />
     );
   }
-});
+}
 
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-
-AppRegistry.registerComponent('sproutli', () => sproutli);
+AppRegistry.registerComponent('sproutli', () => Sproutli);

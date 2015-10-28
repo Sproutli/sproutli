@@ -35,23 +35,6 @@ var makeSearchConfig = (config) => {
 
 
 var SUGGESTIONS = {
-  initial: [
-    {
-      label: 'Food', 
-      icon: 'pizza'
-    },
-    {
-      label: 'Products', 
-      icon: 'ios-cart'
-    },
-    {
-      label: 'Services', 
-      icon: 'ios-people'
-    }
-  ],
-
-  initialConfig: makeSearchConfig({}),
-
   'Food': {
     label: 'Places to eat', 
     icon: 'fork',
