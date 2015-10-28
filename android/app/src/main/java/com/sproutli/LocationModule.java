@@ -21,11 +21,11 @@ public class LocationModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void getCurrentPosition(Callback successCallback, Callback failureCallback) {
-    successCallback.invoke("Sorry, not implemented yet.");
+    failureCallback.invoke("Sorry, not implemented yet.");
   }
 
   @ReactMethod
   public void watchPosition(Callback successCallback) {
-    successCallback.invoke("Sorry, not implemented yet.");
+    // Do nothing.
   }
 }
