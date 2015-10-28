@@ -11,6 +11,8 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
+import com.oblador.vectoricons.VectorIconsPackage;
+
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
 
     private ReactInstanceManager mReactInstanceManager;
@@ -27,6 +29,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
                 .addPackage(new LocationPackage())
+                .addPackage(new VectorIconsPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
