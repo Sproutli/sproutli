@@ -12,7 +12,6 @@ var {
   View
 } = React;
 
-var Location = require('../Utils/Location');
 var RNGeocoder = require('react-native-geocoder');
 var Icon = require('react-native-vector-icons/Ionicons');
 var Moment = require('moment');
@@ -64,7 +63,7 @@ class Search extends React.Component {
   }
 
   getLocation() {
-    Location.getCurrentPosition(
+    navigator.geolocation.getCurrentPosition(
       (position) => { 
       var location = position.coords;
       this.setState({ location });
@@ -80,9 +79,9 @@ class Search extends React.Component {
     }
     );
 
-    this.watchID = Location.watchPosition((lastPosition) => {
-      this.setState({ location: lastPosition.coords });
-    });
+    // this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
+    //   this.setState({ location: lastPosition.coords });
+    // });
   }
 
   componentWillUnmount() {
@@ -300,9 +299,11 @@ var styles = StyleSheet.create({
 });
 
 Search.propTypes = {
+  searchConfig: React.PropTypes.object.isRequired,
   navigator: React.PropTypes.object.isRequired,
-  query: React.PropTypes.string,
-  searchLabel: React.PropTypes.string.isRequired
+  searchLabel: React.PropTypes.string.isRequired,
+
+  query: React.PropTypes.string
 };
 
 module.exports = Search;
