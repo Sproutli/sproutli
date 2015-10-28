@@ -40,7 +40,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Search searchConfig={SUGGESTIONS['Food']} searchLabel="Food" veganLevel={4} />
+      <Search searchConfig={SUGGESTIONS['Food'].searchConfig} searchLabel="Food" veganLevel={4} />
     )
   }
 }
