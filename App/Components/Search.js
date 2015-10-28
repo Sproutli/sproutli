@@ -12,6 +12,7 @@ var {
   View
 } = React;
 
+var Location = require('../Utils/Location');
 var RNGeocoder = require('react-native-geocoder');
 var Icon = require('react-native-vector-icons/Ionicons');
 var Moment = require('moment');
@@ -63,7 +64,7 @@ class Search extends React.Component {
   }
 
   getLocation() {
-    navigator.geolocation.getCurrentPosition(
+    Location.getCurrentPosition(
       (position) => { 
       var location = position.coords;
       this.setState({ location });
@@ -79,7 +80,7 @@ class Search extends React.Component {
     }
     );
 
-    this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
+    this.watchID = Location.watchPosition((lastPosition) => {
       this.setState({ location: lastPosition.coords });
     });
   }
