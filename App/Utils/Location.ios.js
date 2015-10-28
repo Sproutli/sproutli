@@ -1,1 +1,2 @@
-module.exports = require('react-native-geocoder');
+/* global navigator */
+module.exports = navigator.geolocation;

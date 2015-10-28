@@ -8,11 +8,12 @@ var {
   TabBarIOS
 } = React;
 
-var Search = require('./Search');
+var ReviewModal = require('./ReviewModal');
 var Intercom = require('../Utils/Intercom');
 var KindnessCard = require('./KindnessCard');
 var SUGGESTIONS = require('../Constants/Suggestions');
 var COLOURS = require('../Constants/Colours');
+var testListing = require('../Constants/TestListing');
 
 class App extends React.Component {
   constructor() {
@@ -40,7 +41,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Search searchConfig={SUGGESTIONS['Food'].searchConfig} searchLabel="Food" veganLevel={4} />
+      <KindnessCard  />
     )
   }
 }
