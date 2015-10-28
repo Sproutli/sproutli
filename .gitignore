@@ -26,3 +26,6 @@ project.xcworkspace
 #
 node_modules/
 npm-debug.log
+
+# Gradle
+android/.gradle/2.4/taskArtifacts/
