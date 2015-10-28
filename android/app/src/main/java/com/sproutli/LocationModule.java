@@ -13,6 +13,7 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -27,6 +28,7 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
 
   GoogleApiClient mGoogleApiClient;
   Location mLastLocation;
+  boolean observingLocation;
 
   public LocationModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -44,7 +46,7 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
   public void getCurrentPosition(ReadableMap options, Callback successCallback, Callback failureCallback) {
     Log.d(TAG, "getCurrentPosition called. mLastLocation:" + mLastLocation + " ,successCallback: " + successCallback);
     if (mLastLocation != null) {
-      successCallback.invoke(convertLocation(mLastLocation));
+      successCallback.invoke(buildResponse(mLastLocation));
     } else {
       RCTLocationRequest request = new RCTLocationRequest(options, successCallback, failureCallback);
       pendingRequests.add(request);
@@ -59,15 +61,16 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
   @Override
   public void onConnected(Bundle connectionHint) {
     mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+    WritableMap response = buildResponse(mLastLocation);
 
-    if (pendingRequests.size() < 1) { return; }
+    for (RCTLocationRequest request : pendingRequests) {
+      request.successCallback.invoke(response);
+    }
 
-    try {
-      for (RCTLocationRequest request : pendingRequests) {
-        request.successCallback.invoke(mLastLocation);
-      }
-    } catch (Exception e) {
-      Log.e(TAG, "Unable to invoke callbacks - " + pendingRequests, e);
+    pendingRequests.clear();
+
+    if (observingLocation) {
+      sendEvent("geolocationDidChange", response);
     }
   }
 
@@ -87,7 +90,6 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
     }
   }
 
-
   protected synchronized void buildGoogleApiClient(ReactContext reactContext) {
     mGoogleApiClient = new GoogleApiClient.Builder(reactContext)
       .addConnectionCallbacks(this)
@@ -96,7 +98,7 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
       .build();
   }
 
-  private WritableMap convertLocation(Location location) {
+  private WritableMap buildResponse(Location location) {
     WritableMap coords = Arguments.createMap();
     coords.putDouble("latitude", location.getLatitude());
     coords.putDouble("longitude", location.getLongitude());
@@ -105,6 +107,12 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
     result.putMap("coords", coords);
 
     return result;
+  }
+
+  private void sendEvent(String eventName, WritableMap params) {
+    getReactApplicationContext()
+      .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+      .emit(eventName, params);
   }
 }
 
