@@ -82,7 +82,7 @@ var styles = StyleSheet.create({
     paddingRight: 10
   },
   title: {
-    fontSize: pixelRatio * 9, 
+    fontSize: 20,
     textAlign: 'left',
     color: 'white',
     fontWeight: '200'
