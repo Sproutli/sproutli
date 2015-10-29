@@ -1,5 +1,8 @@
 package com.sproutli;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,22 +22,20 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.*;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationListener;
 
-import java.util.ArrayList;
-
-public class LocationModule extends ReactContextBaseJavaModule implements ConnectionCallbacks, OnConnectionFailedListener{
+public class LocationModule extends ReactContextBaseJavaModule implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
   private static final String TAG = "Sproutli";
   private static final ArrayList<RCTLocationRequest> pendingRequests = new ArrayList<>();
 
   GoogleApiClient mGoogleApiClient;
   Location mLastLocation;
+  long mLastUpdateTime;
   boolean observingLocation;
 
   public LocationModule(ReactApplicationContext reactContext) {
     super(reactContext);
-
-    buildGoogleApiClient(reactContext);
-    mGoogleApiClient.connect();
   }
 
   @Override
@@ -44,8 +45,8 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
 
   @ReactMethod
   public void getCurrentPosition(ReadableMap options, Callback successCallback, Callback failureCallback) {
-    Log.d(TAG, "getCurrentPosition called. mLastLocation:" + mLastLocation + " ,successCallback: " + successCallback);
-    if (mLastLocation != null) {
+    Log.d(TAG, "getCurrentPosition called.");
+    if (currentLocationValid(options)) {
       successCallback.invoke(buildResponse(mLastLocation));
     } else {
       RCTLocationRequest request = new RCTLocationRequest(options, successCallback, failureCallback);
@@ -54,24 +55,33 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
   }
 
   @ReactMethod
-  public void watchPosition(Callback successCallback) {
-    // Do nothing.
+  public void startObserving(ReadableMap options) {
+    buildGoogleApiClient();
+    observingLocation = true;
   }
+
+  @ReactMethod
+  public void stopObserving() {
+    observingLocation = false;
+
+    if (pendingRequests.size() == 0) {
+      stopObservingLocation();
+    }
+  }
+
+  // LocationServices Lifecycle Methods
+  @Override
+  public void onLocationChanged(Location currentLocation) {
+    receivedLocation(currentLocation);
+  }
+
+  // GoogleAPIService Lifecycle Methods
 
   @Override
   public void onConnected(Bundle connectionHint) {
-    mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-    WritableMap response = buildResponse(mLastLocation);
-
-    for (RCTLocationRequest request : pendingRequests) {
-      request.successCallback.invoke(response);
-    }
-
-    pendingRequests.clear();
-
-    if (observingLocation) {
-      sendEvent("geolocationDidChange", response);
-    }
+    LocationRequest mLocationRequest = createLocationRequest(null);
+    LocationServices.FusedLocationApi.requestLocationUpdates(
+                    mGoogleApiClient, mLocationRequest, this);
   }
 
   @Override
@@ -90,12 +100,16 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
     }
   }
 
-  protected synchronized void buildGoogleApiClient(ReactContext reactContext) {
-    mGoogleApiClient = new GoogleApiClient.Builder(reactContext)
+  protected synchronized void buildGoogleApiClient() {
+    if (mGoogleApiClient != null) { return; }
+
+    mGoogleApiClient = new GoogleApiClient.Builder(getReactApplicationContext())
       .addConnectionCallbacks(this)
       .addOnConnectionFailedListener(this)
       .addApi(LocationServices.API)
       .build();
+
+    mGoogleApiClient.connect();
   }
 
   private WritableMap buildResponse(Location location) {
@@ -113,6 +127,47 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
     getReactApplicationContext()
       .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
       .emit(eventName, params);
+  }
+
+  private void receivedLocation(Location location) {
+    mLastLocation = location;
+    mLastUpdateTime = System.currentTimeMillis();
+
+    WritableMap response = buildResponse(location);
+
+    for (RCTLocationRequest request : pendingRequests) {
+      request.successCallback.invoke(response);
+    }
+
+    // WritableMaps may only be dispatched once, so create a new one.
+    response = buildResponse(location);
+
+    pendingRequests.clear();
+
+    if (observingLocation) {
+      sendEvent("geolocationDidChange", response);
+    } else {
+      stopObservingLocation();
+    }
+  }
+
+  private LocationRequest createLocationRequest(ReadableMap options) {
+    //TODO Support reading from options.
+    LocationRequest mLocationRequest = new LocationRequest();
+    mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+    return mLocationRequest;
+  }
+
+  private void stopObservingLocation() {
+    LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+  }
+
+  private boolean currentLocationValid(ReadableMap options) {
+    // TODO: Fetch maximumAge from options.
+    Log.d(TAG, "Checking if current location is valid. Last update time: " + mLastUpdateTime + ", delta: " + (mLastUpdateTime - System.currentTimeMillis())); 
+    return (mLastLocation != null && 
+           ((mLastUpdateTime - System.currentTimeMillis()) < 2000));
   }
 }
 

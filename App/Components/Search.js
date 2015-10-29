@@ -79,9 +79,9 @@ class Search extends React.Component {
     }
     );
 
-    // this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
-    //   this.setState({ location: lastPosition.coords });
-    // });
+    this.watchID = navigator.geolocation.watchPosition((lastPosition) => {
+      this.setState({ location: lastPosition.coords });
+    });
   }
 
   componentWillUnmount() {
