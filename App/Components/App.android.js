@@ -4,16 +4,12 @@ var React = require('react-native');
 var Icon = require('react-native-vector-icons/Ionicons');
 var {
   StyleSheet,
-  NavigatorIOS,
-  TabBarIOS
 } = React;
 
-var ReviewModal = require('./ReviewModal');
+var Search = require('./Search');
 var Intercom = require('../Utils/Intercom');
-var KindnessCard = require('./KindnessCard');
 var SUGGESTIONS = require('../Constants/Suggestions');
 var COLOURS = require('../Constants/Colours');
-var testListing = require('../Constants/TestListing');
 
 class App extends React.Component {
   constructor() {
@@ -41,8 +37,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <KindnessCard  />
-    )
+      <Search searchConfig={SUGGESTIONS['Food'].searchConfig} searchLabel={'Food'} />
+    );
   }
 }
 
