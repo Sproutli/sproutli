@@ -5,6 +5,7 @@ var {
   StyleSheet,
   View,
   Text,
+  TouchableHighlight,
   ToolbarAndroid,
   Navigator
 } = React;
@@ -16,32 +17,41 @@ var SUGGESTIONS = require('../Constants/Suggestions');
 var COLOURS = require('../Constants/Colours');
 
 class Tab extends React.Component {
+  _switchTab(name) {
+    this.props.navigator.replace({ name });
+  }
+
   getSelected() {
     return this.props.children === 'Food' ? styles.selectedTab : {};
   }
 
   render() {
     return (
-      <View style={[styles.tab, this.getSelected()]}>
+      <TouchableHighlight style={[styles.tab, this.getSelected()]} onPress={this._switchTab.bind(this, this.props.children)} underlayColor='rgba(0,0,0,0.6)'>
         <Text style={styles.tabText}>{this.props.children.toUpperCase()}</Text>
-      </View>
+      </TouchableHighlight>
     );
   }
 }
 
 Tab.propTypes = {
-  children: React.PropTypes.string.isRequired
+  children: React.PropTypes.string.isRequired,
+  navigator: React.PropTypes.object.isRequired
 };
 
 class TabBar extends React.Component {
   render() {
     return (
       <View style={styles.tabBar}>
-       { ['Food', 'Shops', 'Online', 'Services'].map((n) => <Tab>{n}</Tab> ) }
+       { ['Food', 'Shops', 'Online', 'Services'].map((n) => <Tab navigator={this.props.navigator}>{n}</Tab> ) }
       </View>
     );
   }
 }
+
+TabBar.propTypes = {
+  navigator: React.PropTypes.object.isRequired
+};
 
 class App extends React.Component {
   constructor() {
@@ -52,19 +62,18 @@ class App extends React.Component {
     Intercom.userLoggedIn();
   }
 
+
   buildSearch(name, navigator) {
     return <Search navigator={navigator} searchLabel={name} searchConfig={SUGGESTIONS[name].searchConfig} />;
   }
   
   _renderScene(route, navigator) {
     switch(route.name) {
-    case 'food': return this.buildSearch('Food', navigator);
-    case 'shops': return this.buildSearch('Shops', navigator);
-    case 'online': return this.buildSearch('Online', navigator);
-    case 'services': return this.buildSearch('Services', navigator);
-    case 'listing': 
-      this.setState({ title: route.listing.name });
-      return <ListingDetail listing={route.listing} navigator={navigator} />;
+    case 'Food': return this.buildSearch('Food', navigator);
+    case 'Shops': return this.buildSearch('Shops', navigator);
+    case 'Online': return this.buildSearch('Online', navigator);
+    case 'Services': return this.buildSearch('Services', navigator);
+    case 'listing': return <ListingDetail listing={route.listing} navigator={navigator} />;
     }
   }
 
@@ -76,9 +85,12 @@ class App extends React.Component {
           title={this.state.title}
           style={styles.toolbar}
         />
-        <TabBar />
+        <TabBar navigator={this.state.navigator} />
         <Navigator
-          initialRoute={{name: 'food'}}
+          ref={(c) => {
+            if (!this.state.navigator) { this.setState({ navigator: c }); }
+          }}
+          initialRoute={{name: 'Food'}}
           renderScene={this._renderScene.bind(this)}
         />
       </View>
