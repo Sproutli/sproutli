@@ -5,9 +5,9 @@ var {
   StyleSheet,
   View,
   Text,
+  ViewPagerAndroid,
   TouchableHighlight,
-  ToolbarAndroid,
-  Navigator
+  ToolbarAndroid
 } = React;
 
 var Search = require('./Search');
@@ -16,55 +16,54 @@ var Intercom = require('../Utils/Intercom');
 var SUGGESTIONS = require('../Constants/Suggestions');
 var COLOURS = require('../Constants/Colours');
 
-class Tab extends React.Component {
-  _switchTab(name) {
-    this.props.navigator.replace({ name });
-  }
+var SCREENS = ['Food', 'Shops', 'Online', 'Services'];
 
-  getSelected() {
-    return this.props.children === 'Food' ? styles.selectedTab : {};
-  }
-
-  render() {
+class App extends React.Component {
+  createTab(name, index) {
     return (
-      <TouchableHighlight style={[styles.tab, this.getSelected()]} onPress={this._switchTab.bind(this, this.props.children)} underlayColor='rgba(0,0,0,0.6)'>
-        <Text style={styles.tabText}>{this.props.children.toUpperCase()}</Text>
+      <TouchableHighlight 
+        key={index} 
+        style={[styles.tab, index === this.state.page ? styles.selectedTab : {}]} 
+        onPress={this._onTabSelected.bind(this, index)} 
+        underlayColor='rgba(0,0,0,0.6)'
+      >
+        <Text style={styles.tabText}>{name.toUpperCase()}</Text>
       </TouchableHighlight>
     );
   }
-}
 
-Tab.propTypes = {
-  children: React.PropTypes.string.isRequired,
-  navigator: React.PropTypes.object.isRequired
-};
-
-class TabBar extends React.Component {
-  render() {
+  tabBar() {
     return (
       <View style={styles.tabBar}>
-       { ['Food', 'Shops', 'Online', 'Services'].map((n) => <Tab navigator={this.props.navigator}>{n}</Tab> ) }
+       { SCREENS.map((n, i) => this.createTab(n, i)) }
       </View>
     );
   }
-}
 
-TabBar.propTypes = {
-  navigator: React.PropTypes.object.isRequired
-};
-
-class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      title: 'Search'
+      title: 'Search',
+      page: 0
     },
     Intercom.userLoggedIn();
   }
 
+  _onTabSelected(page) {
+    this.viewPager && this.viewPager.setPage(page);
+    this.setState({ page });
+  }
+
+  _onPageSelected(e) {
+    this.setState({ page: e.nativeEvent.position });
+  }
 
   buildSearch(name, navigator) {
-    return <Search navigator={navigator} searchLabel={name} searchConfig={SUGGESTIONS[name].searchConfig} />;
+    return (
+      <View>
+        <Search key={name} navigator={navigator} searchLabel={name} searchConfig={SUGGESTIONS[name].searchConfig} />
+      </View>
+    );
   }
   
   _renderScene(route, navigator) {
@@ -78,6 +77,8 @@ class App extends React.Component {
   }
 
   render() {
+    var pages = SCREENS.map((s) => this.buildSearch(s, this.state.navigator));
+
     return (
       <View style={{flex: 1}}>
         <ToolbarAndroid
@@ -85,20 +86,25 @@ class App extends React.Component {
           title={this.state.title}
           style={styles.toolbar}
         />
-        <TabBar navigator={this.state.navigator} />
-        <Navigator
-          ref={(c) => {
-            if (!this.state.navigator) { this.setState({ navigator: c }); }
-          }}
-          initialRoute={{name: 'Food'}}
-          renderScene={this._renderScene.bind(this)}
-        />
+        { this.tabBar() }
+        <ViewPagerAndroid
+          style={styles.viewPager}
+          initialPage={0}
+          onPageSelected={this._onPageSelected.bind(this)}
+          ref={viewPager => { this.viewPager = viewPager ; } }
+        >
+          {pages}
+        </ViewPagerAndroid>
       </View>
     );
   }
 }
 
 var styles = StyleSheet.create({
+  viewPager: {
+    flex: 1
+  },
+
   toolbar: {
     height: 56,
     marginBottom: 0,
@@ -119,11 +125,12 @@ var styles = StyleSheet.create({
     backgroundColor: COLOURS.GREY,
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderBottomColor: COLOURS.GREY,
+    borderBottomWidth: 2
   },
 
   selectedTab: {
-    borderBottomWidth: 2,
     borderBottomColor: COLOURS.GREEN
   },
 
