@@ -7,7 +7,6 @@ var {
   Image,
   View,
   ListView,
-  TouchableHighlight,
   ProgressBarAndroid,
   ScrollView,
   PixelRatio
@@ -17,7 +16,6 @@ var CallIntent = require('react-native-callintent');
 var MapIntent = require('react-native-mapintent');
 
 var Carousel = require('react-native-looped-carousel');
-var Icon = require('react-native-vector-icons/Ionicons');
 var Dimensions = require('Dimensions');
 var {width} = Dimensions.get('window');
 var pixelRatio = PixelRatio.get();
@@ -123,7 +121,9 @@ class ListingDetail extends React.Component {
   componentDidMount() {
     var actions = [
       { 
-        title: 'Reviews ' + this.props.listing.name, func: () => {
+        title: 'Reviews', 
+        icon: require('image!ic_star_black_24dp'),
+        func: () => {
           this.props.navigator.push({
             title: `Reviews for ${this.props.listing.name}`,
             component: ReviewsComponent,
@@ -196,61 +196,6 @@ class ListingDetail extends React.Component {
     return(
       <View style={styles.buttonContainer}>
         <Button onPress={this._onViewOffer.bind(this)}>View Kindness Card offer</Button>
-      </View>
-    );
-  }
-
-  renderedMapButton() {
-    if (!this.props.listing.location) return <View />;
-
-    return (
-      <TouchableHighlight style={styles.actionBarButton} onPress={this._onShowMap.bind(this)} underlayColor={COLOURS.LIGHTER_GREY}>
-        <View style={styles.actionBarButton}>
-          <Icon name='map' size={13 * pixelRatio} color='white' />
-          <Text style={styles.actionBarText}>Map</Text>
-        </View>
-      </TouchableHighlight>
-    );
-  }
-
-  renderedWebsiteButton() {
-    if (!this.props.listing.website) return <View />;
-
-    return (
-      <TouchableHighlight style={styles.actionBarButton} onPress={this._onGoToWebsite.bind(this)} underlayColor={COLOURS.LIGHTER_GREY}>
-        <View style={styles.actionBarButton}>
-          <Icon name='earth' size={13 * pixelRatio} color='white' />
-          <Text style={styles.actionBarText}>Website</Text>
-        </View>
-      </TouchableHighlight>
-    );
-  }
-
-  renderedCallButton() {
-    if (!this.props.listing.phone_number) return <View />;
-
-    return (
-      <TouchableHighlight style={styles.actionBarButton} onPress={this._onCallListing.bind(this)} underlayColor={COLOURS.LIGHTER_GREY}>
-        <View style={styles.actionBarButton}>
-          <Icon name='ios-telephone' size={13 * pixelRatio} color='white' />
-          <Text style={styles.actionBarText}>Call</Text>
-        </View>
-      </TouchableHighlight>
-    );
-  }
-
-  renderedActionBar() {
-    return (
-      <View style={styles.actionBar}> 
-        <TouchableHighlight underlayColor={COLOURS.LIGHTER_GREY} style={styles.actionBarButton} onPress={this._onShowImages.bind(this)}>
-          <View style={styles.actionBarButton}>
-            <Icon name='images' size={13 * pixelRatio} color='white' />
-            <Text style={styles.actionBarText}>Images</Text>
-          </View>
-        </TouchableHighlight>
-        { this.renderedMapButton() }
-        { this.renderedCallButton() }
-        { this.renderedWebsiteButton() }
       </View>
     );
   }
