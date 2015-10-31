@@ -7,6 +7,7 @@ var user;
 
 var Intercom = {
   userLoggedIn() {
+    console.log('User logged in..');
     return Users.fetchUser()
       .then((fetchedUser) => {
         user = fetchedUser;

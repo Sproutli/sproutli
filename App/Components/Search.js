@@ -55,11 +55,6 @@ class Search extends React.Component {
 
     this.getLocation();
 
-    var action = props.query ? 'custom search' : props.searchLabel;
-    Intercom.logEvent(`searched_for_${action}`, {
-      query: props.query
-    });
-
     GoogleAnalytics.viewedScreen('Search');
   }
 

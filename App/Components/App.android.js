@@ -73,12 +73,18 @@ class App extends React.Component {
   }
 
   _onTabSelected(page) {
+    var action = SCREENS[page];
+    Intercom.logEvent(`searched_for_${action}`);
     this.viewPager && this.viewPager.setPage(page);
     this.setState({ page });
   }
 
   _onPageSelected(e) {
-    this.setState({ page: e.nativeEvent.position });
+    var page = e.nativeEvent.position;
+    var action = SCREENS[page];
+    Intercom.logEvent(`searched_for_${action}`);
+    this.viewPager && this.viewPager.setPage(page);
+    this.setState({ page });
   }
 
   makeNavigatorOperations(index) {
