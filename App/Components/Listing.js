@@ -77,7 +77,7 @@ var styles = StyleSheet.create({
     borderRadius: 3,
     borderWidth: 0.1,
     borderColor: COLOURS.GREY,
-    paddingVertical: 6 * PixelRatio.get(),
+    paddingVertical: 6,
     paddingLeft: 10,
     paddingRight: 10
   },
@@ -88,7 +88,7 @@ var styles = StyleSheet.create({
     fontWeight: '200'
   },
   subTitle: {
-    fontSize: pixelRatio === 3 ? 18 : 14,
+    fontSize: 12,
     color: 'white',
     fontWeight: '300'
   },
