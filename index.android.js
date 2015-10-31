@@ -45,5 +45,4 @@ class Sproutli extends React.Component {
     );
   }
 }
-
 AppRegistry.registerComponent('sproutli', () => Sproutli);
