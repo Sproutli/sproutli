@@ -14,9 +14,9 @@ var {
 } = React;
 var Mapbox = require('react-native-mapbox-gl');
 var WebIntent = require('react-native-webintent');
+var CallIntent = require('react-native-callintent');
 
 var Carousel = require('react-native-looped-carousel');
-var Communications = require('react-native-communications');
 var Icon = require('react-native-vector-icons/Ionicons');
 var Dimensions = require('Dimensions');
 var {width} = Dimensions.get('window');
@@ -221,7 +221,7 @@ class ListingDetail extends React.Component {
   }
 
   _onCallListing() {
-    Communications.phonecall(this.props.listing.phone_number, true);
+    CallIntent.open(this.props.listing.phone_number);
   }
 
   _onShowMap() {

@@ -39,6 +39,7 @@ dependencies {
   compile project(':RNMaterialKit')
   compile project(':reactnativemapboxgl')
   compile project(':RNWebIntent')
+  compile project(':RNCallIntent')
   compile ('io.intercom.android:intercom-sdk:1.+@aar') {
     transitive = true
   }
