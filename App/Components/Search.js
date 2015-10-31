@@ -5,7 +5,7 @@ var React = require('react-native');
 var {
   StyleSheet,
   ListView,
-  ActivityIndicatorIOS,
+  ProgressBarAndroid,
   Text,
   ScrollView,
   Platform,
@@ -240,7 +240,7 @@ class Search extends React.Component {
     if (this.state.loading) { 
       return (
         <View style={styles.loadingContainer}>
-          <ActivityIndicatorIOS size='large' />
+          <ProgressBarAndroid styleAttr='Large' />
           <Text style={styles.loadingText}>Just a moment..</Text>
         </View>
       );
@@ -293,8 +293,8 @@ var styles = StyleSheet.create({
   },
 
   loadingText: {
-    paddingTop: 30,
-    fontSize: PixelRatio.get() === 3 ? 20 : 12,
+    marginTop: 30,
+    fontSize: PixelRatio.get() === 3 ? 16 : 12,
     color: COLOURS.GREY
   }
 });
