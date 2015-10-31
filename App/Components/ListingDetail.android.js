@@ -38,7 +38,7 @@ var VEGAN_LEVELS = require('../Constants/VeganLevels');
 
 class ListingDetail extends React.Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
@@ -50,9 +50,11 @@ class ListingDetail extends React.Component {
     Intercom.logEvent('viewed_listing', { listingID: props.listing.id, listingName: props.listing.name });
     GoogleAnalytics.viewedScreen('View Listing Detail');
     GoogleAnalytics.trackEvent('Listing', 'View', props.listing.id);
+
   }
 
   componentDidMount() {
+    this.props.navigator.setActions([{title: this.props.listing.name}]);
     this.getReviews();
   }
 

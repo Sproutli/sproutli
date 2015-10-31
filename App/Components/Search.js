@@ -197,6 +197,7 @@ class Search extends React.Component {
 
   _onListingPressed(listing) {
     this.props.navigator.push({
+      hasActions: true,
       navigator: this.props.navigator,
       component: ListingDetail,
       title: listing.name,
