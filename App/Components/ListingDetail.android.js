@@ -9,13 +9,13 @@ var {
   ListView,
   ProgressBarAndroid,
   ScrollView,
+  ViewPagerAndroid,
   PixelRatio
 } = React;
 var WebIntent = require('react-native-webintent');
 var CallIntent = require('react-native-callintent');
 var MapIntent = require('react-native-mapintent');
 
-var Carousel = require('react-native-looped-carousel');
 var Dimensions = require('Dimensions');
 var {width} = Dimensions.get('window');
 var pixelRatio = PixelRatio.get();
@@ -160,9 +160,9 @@ class ListingDetail extends React.Component {
     }
 
     return (
-      <Carousel autoplay={false} style={styles.imageStyle}>
-        {images.map((image, index) => <Image key={index} style={styles.imageStyle} source={{uri: image }} />)} 
-      </Carousel>
+      <ViewPagerAndroid style={styles.imageStyle}>
+        {images.map((image, index) => <View><Image key={index} style={styles.imageStyle} source={{uri: image }} /></View>)} 
+      </ViewPagerAndroid>
     );
   }
 
@@ -186,6 +186,12 @@ class ListingDetail extends React.Component {
 
         <Text style={styles.bold}>Rating</Text>
         <Text style={styles.text}>{this.props.listing.rating ? `${this.props.listing.rating}/5.0` : 'No rating yet' }</Text>
+
+        <Text style={styles.bold}>Address</Text>
+        <Text style={[styles.text, {paddingBottom: 0}]}>{this.props.listing.address_line_1}</Text>
+        <Text style={[styles.text, {paddingBottom: 0}]}>{this.props.listing.locality}</Text>
+        <Text style={[styles.text, {paddingBottom: 0}]}>{this.props.listing.administrative_area_level_1}</Text>
+        <Text style={[styles.text, {paddingBottom: 0}]}>{this.props.listing.postcode}</Text>
       </View>
     );
   }
@@ -264,7 +270,7 @@ class ListingDetail extends React.Component {
 var styles = StyleSheet.create({
   description: {
     color: COLOURS.GREY,
-    fontSize: pixelRatio === 3 ? 16 : 15,
+    fontSize: pixelRatio === 3 ? 15 : 12,
     paddingTop: 15,
     paddingBottom: 15
   },
@@ -336,7 +342,8 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: 10
   }
 });
 

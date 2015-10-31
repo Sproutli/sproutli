@@ -6,11 +6,10 @@ var {
   StyleSheet,
   TextInput,
   View,
+  Image,
   ToastAndroid,
   TouchableOpacity
 } = React;
-
-var Icon = require('react-native-vector-icons/Ionicons');
 
 var Button = require('./Button');
 var Reviews = require('../Utils/Reviews');
@@ -18,25 +17,25 @@ var COLOURS = require('../Constants/Colours');
 
 class Stars extends React.Component {
   getStarIcon(num) {
-    return num <= this.props.stars ? 'ios-star' : 'ios-star-outline';
+    return num <= this.props.stars ? require('image!ic_star_black_24dp') : require('image!ic_star_border_black_24dp');
   }
   render() {
     return (
       <View style={styles.stars}>
         <TouchableOpacity onPress={this.props.handler.bind(this, 1)}>
-          <Icon name={this.getStarIcon(1)} size={50} color={COLOURS.GREEN} />
+          <Image style={styles.star} source={this.getStarIcon(1)} />
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.handler.bind(this, 2)}>
-          <Icon name={this.getStarIcon(2)} size={50} color={COLOURS.GREEN} />
+          <Image style={styles.star} source={this.getStarIcon(2)} />
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.handler.bind(this, 3)}>
-          <Icon name={this.getStarIcon(3)} size={50} color={COLOURS.GREEN} />
+          <Image style={styles.star} source={this.getStarIcon(3)} />
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.handler.bind(this, 4)}>
-          <Icon name={this.getStarIcon(4)} size={50} color={COLOURS.GREEN} />
+          <Image style={styles.star} source={this.getStarIcon(4)} />
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.handler.bind(this, 5)}>
-          <Icon name={this.getStarIcon(5)}size={50} color={COLOURS.GREEN} />
+          <Image style={styles.star} source={this.getStarIcon(5)} />
         </TouchableOpacity>
       </View>
     );
@@ -99,18 +98,20 @@ class ReviewModal extends React.Component {
         <Stars stars={this.state.stars} handler={this._onPressStars.bind(this)} />
         <Text style={styles.starsText}>{this.state.stars} Stars</Text>
         <TextInput
+          placeholder='Your review'
           style={styles.reviewForm}
           onChangeText={this._onChangeText.bind(this)}
           value={this.state.reviewText}
           multiline />
-        <Button color={this.getButtonColour()} onPress={this._onLeaveReview.bind(this)}>Leave your review </Button>
+        <View style={{alignItems: 'center'}}>
+          <Button color={this.getButtonColour()} onPress={this._onLeaveReview.bind(this)}>Leave your review </Button>
+        </View>
       </View>
     );
   }
 }
 var styles = StyleSheet.create({
   container: {
-    marginTop: 64,
     flex: 1,
     padding: 10
   },
@@ -126,6 +127,10 @@ var styles = StyleSheet.create({
     color: COLOURS.GREY,
     textAlign: 'center',
     fontSize: 20
+  },
+  star: {
+    width: 24,
+    height: 24
   },
   stars: {
     padding: 10,

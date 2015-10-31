@@ -4,12 +4,12 @@ var React = require('react-native');
 var {
   Text,
   StyleSheet,
-  LinkingIOS,
   PixelRatio,
   Animated,
   View
 } = React;
 
+var WebIntent = require('react-native-webintent');
 var Button = require('./Button');
 var COLOURS = require('../Constants/Colours');
 var GoogleAnalytics = require('../Utils/GoogleAnalytics');
@@ -31,7 +31,7 @@ class BuyKindnessCardModal extends React.Component {
   _onGetKindnessCard() {
     GoogleAnalytics.trackEvent('Kindness Card', 'openLink');
     Intercom.logEvent('viewed_buy_kindness_card');
-    LinkingIOS.openURL('http://www.sproutli.com/kindness-card.html');
+    WebIntent.open('http://www.sproutli.com/kindness-card.html');
   }
 
   componentDidMount() {
@@ -78,13 +78,13 @@ var styles = StyleSheet.create({
   headerText: {
     textAlign: 'center',
     color: 'white',
-    fontSize: pixelRatio === 3 ? 30 : 22,
+    fontSize: pixelRatio === 3 ? 20 : 15,
     fontWeight: '300',
     paddingVertical: 30
   },
 
   text: {
-    fontSize: pixelRatio === 3 ? 20 : 15,
+    fontSize: pixelRatio === 3 ? 15 : 10,
     color: 'white',
     paddingBottom: 20,
     textAlign: 'left'
@@ -93,7 +93,6 @@ var styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     backgroundColor: COLOURS.GREEN,
-    marginTop: 64,
     flex: 1,
     padding: 10,
     shadowColor: 'black',
