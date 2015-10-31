@@ -96,7 +96,7 @@ class App extends React.Component {
   }
 
   _onActionSelected(actionIndex) {
-    console.log(actionIndex);
+    this.state.actions[actionIndex].func();
   }
 
   makeNavigatorOperations(index) {

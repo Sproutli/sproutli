@@ -36,16 +36,83 @@ var Button = require('./Button');
 var COLOURS = require('../Constants/Colours');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 
+class ReviewsComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      reviews: [],
+      loadingReviews: true
+    };
+  }
+
+  componentDidMount() {
+    GoogleAnalytics.viewedScreen('Reviews');
+    this.getReviews();
+  }
+
+  _onLeaveReview() {
+    this.props.navigator.push({
+      title: 'Leave a Review',
+      component: ReviewModal,
+      passProps: { listingID: this.props.listingID, name: this.props.listingName, getReviews: this.getReviews.bind(this) }
+    });
+  }
+
+  getReviews() {
+    var listingID = this.props.listingID;
+
+    Reviews.getReviewsForListing(listingID)
+      .then((reviews) => {
+        reviews = reviews.sort((a, b) => a.created - b.created);
+
+        this.setState({ 
+          reviews,
+          dataSource: this.state.dataSource.cloneWithRows(reviews),
+          loadingReviews: false
+        });
+      })
+      .catch((error) => console.warn(error)); 
+  }
+
+  render() {
+    if (this.state.loadingReviews) {
+      return (
+        <View style={styles.loadingIndicator}>
+          <ProgressBarAndroid styleAttr='Large' />
+        </View>
+      );
+    }
+
+    if (this.state.reviews.length < 1) {
+      return (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.description}>No reviews for {this.props.listingName} yet.</Text>
+          <View style={styles.buttonContainer}>
+            <Button onPress={this._onLeaveReview.bind(this)}>Leave the first review</Button>
+          </View>
+        </View>
+      );
+    }
+
+    return (
+      <View style={styles.container}>
+        <View style={styles.buttonContainer}>
+          <Button onPress={this._onLeaveReview.bind(this)}>Leave a Review</Button>
+        </View>
+
+        <ListView
+          renderRow={(review, index) => <Review style={styles.text} key={index} {...review} />}
+          dataSource={this.state.dataSource}
+        />
+      </View>
+    );
+  }
+}
+
 class ListingDetail extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      currentTab: 0,
-      reviews: [],
-      showMap: false
-    };
 
     Intercom.logEvent('viewed_listing', { listingID: props.listing.id, listingName: props.listing.name });
     GoogleAnalytics.viewedScreen('View Listing Detail');
@@ -54,25 +121,33 @@ class ListingDetail extends React.Component {
   }
 
   componentDidMount() {
-    this.props.navigator.setActions([{title: this.props.listing.name}]);
-    this.getReviews();
+    var actions = [
+      { 
+        title: 'Reviews', func: () => {
+          this.props.navigator.push({
+            title: `Reviews for ${this.props.listing.name}`,
+            component: ReviewsComponent,
+            passProps: { listingID: this.props.listing.id, listingName: this.props.listing.name }
+          });
+        }
+      }
+    ];
+
+    if (this.props.listing.location) {
+      actions.push({title: 'Map', func: this._onShowMap.bind(this)});
+    }
+
+    if (this.props.listing.phone_number) {
+      actions.push({title: 'Call', func: this._onCallListing.bind(this)});
+    }
+
+    if (this.props.listing.website) {
+      actions.push({title: 'Website', func: this._onGoToWebsite.bind(this)});
+    }
+
+    this.props.navigator.setActions(actions);
   }
 
-  getReviews() {
-    var listingID = this.props.listing.id;
-    this.setState({ loadingReviews: true });
-
-    Reviews.getReviewsForListing(listingID)
-      .then((reviews) => {
-        reviews = reviews.sort((a, b) => a.created - b.created);
-
-        this.setState({ 
-          dataSource: this.state.dataSource.cloneWithRows(reviews),
-          loadingReviews: false
-        });
-      })
-      .catch((error) => console.warn(error)); 
-  }
 
   renderedImages() {
     let images = this.props.listing.images;
@@ -111,29 +186,6 @@ class ListingDetail extends React.Component {
 
         <Text style={styles.bold}>Rating</Text>
         <Text style={styles.text}>{this.props.listing.rating ? `${this.props.listing.rating}/5.0` : 'No rating yet' }</Text>
-      </View>
-    );
-  }
-
-  renderedReviews() {
-    GoogleAnalytics.viewedScreen('Reviews');
-    if (this.state.loadingReviews) {
-      return (
-        <View style={styles.loadingIndicator}>
-          <ProgressBarAndroid styleAttr='Large' />
-        </View>
-      );
-    }
-    return (
-      <View>
-        <View style={styles.buttonContainer}>
-          <Button onPress={this._onLeaveReview.bind(this)}>Leave a Review</Button>
-        </View>
-
-        <ListView
-          renderRow={(review, index) => <Review style={styles.text} key={index} {...review} />}
-          dataSource={this.state.dataSource}
-        />
       </View>
     );
   }
@@ -225,14 +277,6 @@ class ListingDetail extends React.Component {
     WebIntent.open(url);
   }
 
-  _onLeaveReview() {
-    this.props.navigator.push({
-      title: 'Leave a Review',
-      component: ReviewModal,
-      passProps: { listingID: this.props.listing.id, name: this.props.listing.name, getReviews: this.getReviews.bind(this) }
-    });
-  }
-
   _onViewOffer() {
     var askToBuy = () => {
       this.props.navigator.push({
@@ -266,21 +310,7 @@ class ListingDetail extends React.Component {
       <ScrollView style={styles.outerContainer}>
         {this.renderedImages()}
 
-        {this.renderedActionBar()}
-
-        <View style={styles.container}>
-          <View style={styles.buttonsContainer}>
-            <TouchableHighlight underlayColor={COLOURS.LIGHT_GREY} style={[styles.leftButton, {backgroundColor: this.state.currentTab === 0 ? COLOURS.GREY : '#fff'}]} onPress={() => this.setState({currentTab: 0})} >
-              <Text style={[styles.buttonText, {color: this.state.currentTab === 0 ? '#fff' : '#222'}]}>Details</Text>
-            </TouchableHighlight>
-            <TouchableHighlight underlayColor={COLOURS.LIGHT_GREY} style={[styles.rightButton, {backgroundColor: this.state.currentTab === 1 ? COLOURS.GREY : '#fff'}]} onPress={() => this.setState({currentTab: 1})} >
-              <Text style={[styles.buttonText, {color: this.state.currentTab === 1 ? '#fff' : '#222'}]}>Reviews</Text>
-            </TouchableHighlight>
-          </View>
-
-          { this.state.currentTab === 0 ? this.renderedDetails() : this.renderedReviews() }
-        </View>
-
+        { this.renderedDetails() }
       </ScrollView>
     );
   }
@@ -297,6 +327,12 @@ var styles = StyleSheet.create({
   text: {
     color: COLOURS.GREY,
     paddingBottom: 15
+  },
+
+  emptyContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
   actionBar: {
@@ -349,10 +385,6 @@ var styles = StyleSheet.create({
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5
   },
-  buttonText: {
-    margin: 6,
-    textAlign: 'center'
-  },
   actionBarButton: {
     height: 64,
     alignItems: 'center',
@@ -372,6 +404,12 @@ var styles = StyleSheet.create({
   }
 });
 
+
+ReviewsComponent.propTypes = {
+  listingID: React.PropTypes.string.isRequired,
+  listingName: React.PropTypes.string.isRequired,
+  navigator: React.PropTypes.object.isRequired
+};
 
 ListingDetail.propTypes = {
   listing: React.PropTypes.object.isRequired,
