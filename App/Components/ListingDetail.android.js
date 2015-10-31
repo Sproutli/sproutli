@@ -8,12 +8,12 @@ var {
   View,
   ListView,
   TouchableHighlight,
-  LinkingIOS,
   ProgressBarAndroid,
   ScrollView,
   PixelRatio
 } = React;
 var Mapbox = require('react-native-mapbox-gl');
+var WebIntent = require('react-native-webintent');
 
 var Carousel = require('react-native-looped-carousel');
 var Communications = require('react-native-communications');
@@ -237,7 +237,8 @@ class ListingDetail extends React.Component {
     if (!url.match('http:\/\/')) {
       url = 'http://' + url;
     }
-    LinkingIOS.openURL(url);
+
+    WebIntent.open(url);
   }
 
   _onLeaveReview() {

@@ -38,6 +38,7 @@ dependencies {
   compile 'com.google.android.gms:play-services:8.1.0'
   compile project(':RNMaterialKit')
   compile project(':reactnativemapboxgl')
+  compile project(':RNWebIntent')
   compile ('io.intercom.android:intercom-sdk:1.+@aar') {
     transitive = true
   }

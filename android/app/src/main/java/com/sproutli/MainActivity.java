@@ -19,6 +19,8 @@ import com.mapbox.reactnativemapboxgl.ReactNativeMapboxGLPackage;
 
 import io.intercom.android.sdk.Intercom;
 
+import com.ivanph.webintent.RNWebIntentPackage;
+
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
 
     private ReactInstanceManager mReactInstanceManager;
@@ -40,6 +42,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .addPackage(new VectorIconsPackage())
                 .addPackage(new ReactMaterialKitPackage())
                 .addPackage(new ReactNativeMapboxGLPackage())
+                .addPackage(new RNWebIntentPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
