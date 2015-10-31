@@ -12,24 +12,12 @@ var {
 } = React;
 
 var Search = require('./Search');
-var ListingDetail = require('./ListingDetail');
 var Intercom = require('../Utils/Intercom');
 var SUGGESTIONS = require('../Constants/Suggestions');
 var COLOURS = require('../Constants/Colours');
 
 var SCREENS = ['Food', 'Shops', 'Online', 'Services'];
 
-var RouteMapper = (route) => {
-  console.log('Route mapper called!');
-  return (
-    <Search 
-      key={route.name} 
-      searchLabel={route.name} 
-      navigator={route.navigator}
-      searchConfig={SUGGESTIONS[route.name].searchConfig} 
-    />
-  );
-};
 
 class App extends React.Component {
   constructor() {
@@ -39,7 +27,19 @@ class App extends React.Component {
       page: 0
     },
     this.navigators = [];
+    this.navigationOperations = SCREENS.map((s, i) => this.makeNavigatorOperations(i));
+    this.pages = SCREENS.map((s, i) => this.buildSearch(s, i));
     Intercom.userLoggedIn();
+  }
+
+  RouteMapper(route) {
+    console.log(route.title);
+    if (this.state.title !== route.title) this.setState({ title: route.title });
+
+    var Component = route.component;
+    return (
+      <Component {...route.passProps} />
+    );
   }
 
   createTab(name, index) {
@@ -72,7 +72,7 @@ class App extends React.Component {
     this.setState({ page: e.nativeEvent.position });
   }
 
-  makeNavigator(index) {
+  makeNavigatorOperations(index) {
     return {
       push: (route) => {
         this.navigators[index].push(route);
@@ -81,30 +81,27 @@ class App extends React.Component {
   }
 
   buildSearch(name, index) {
-    var navigator = this.makeNavigator(index);
+    var navigationOperations = this.navigationOperations[index];
 
     return (
       <View key={index}>
         <Navigator 
-          renderScene={RouteMapper}
-          initialRoute={{ name, navigator }}
+          renderScene={this.RouteMapper.bind(this)}
+          initialRoute={{
+            title: 'Search',
+            component: Search,
+            passProps: { 
+              searchLabel: name,
+              navigator: navigationOperations,
+              searchConfig: SUGGESTIONS[name].searchConfig
+            }
+          }}
           ref={(n) => this.navigators[index] = n} />
       </View>
     );
   }
   
-  _renderScene(route, navigator) {
-    switch(route.name) {
-    case 'Food': return this.buildSearch('Food', navigator);
-    case 'Shops': return this.buildSearch('Shops', navigator);
-    case 'Online': return this.buildSearch('Online', navigator);
-    case 'Services': return this.buildSearch('Services', navigator);
-    case 'listing': return <ListingDetail listing={route.listing} navigator={navigator} />;
-    }
-  }
-
   render() {
-    var pages = SCREENS.map((s, i) => this.buildSearch(s, i));
 
     return (
       <View style={{flex: 1}}>
@@ -120,7 +117,7 @@ class App extends React.Component {
           onPageSelected={this._onPageSelected.bind(this)}
           ref={viewPager => { this.viewPager = viewPager ; } }
         >
-          {pages}
+          {this.pages}
         </ViewPagerAndroid>
       </View>
     );
