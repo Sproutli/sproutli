@@ -7,6 +7,7 @@ var {
   Text,
   ViewPagerAndroid,
   Navigator,
+  BackAndroid,
   TouchableHighlight,
   ToolbarAndroid
 } = React;
@@ -30,6 +31,15 @@ class App extends React.Component {
     this.navigationOperations = SCREENS.map((s, i) => this.makeNavigatorOperations(i));
     this.pages = SCREENS.map((s, i) => this.buildSearch(s, i));
     Intercom.userLoggedIn();
+
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+      var navigator = this.navigators[this.state.page];
+      if (navigator && navigator.getCurrentRoutes().length > 1) {
+        navigator.pop();
+        return true;
+      }
+      return false;
+    });
   }
 
   RouteMapper(index) {

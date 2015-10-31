@@ -181,8 +181,6 @@ class Search extends React.Component {
 
     var bounced = ((offset - scrollEvent.nativeEvent.contentSize.height) > -scrollEvent.nativeEvent.layoutMeasurement.height);
 
-    console.log(scrollEvent.nativeEvent, this.lastOffset);
-
     if (offset < 0 || bounced) { return; }
 
     if (delta < 1 || offset == 0) {
