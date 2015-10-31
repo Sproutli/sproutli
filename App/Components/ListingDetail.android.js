@@ -12,9 +12,9 @@ var {
   ScrollView,
   PixelRatio
 } = React;
-var Mapbox = require('react-native-mapbox-gl');
 var WebIntent = require('react-native-webintent');
 var CallIntent = require('react-native-callintent');
+var MapIntent = require('react-native-mapintent');
 
 var Carousel = require('react-native-looped-carousel');
 var Icon = require('react-native-vector-icons/Ionicons');
@@ -73,25 +73,6 @@ class ListingDetail extends React.Component {
   }
 
   renderedImages() {
-    if (this.state.showMap) {
-      var location = this.props.listing.location.split(',').map((n) => Number(n)),
-        region = {latitude: location[0], longitude: location[1]},
-        annotations = [{coordinates: location, title: this.props.listing.name, type: 'point'}];
-     
-      return (
-        <Mapbox
-          annotations={annotations}
-          accessToken='pk.eyJ1Ijoic3Byb3V0bGkiLCJhIjoiY2lnZmE3aXBsNzFpYXR5bTZycnBlbTY1bCJ9._E6NvRNNbPHOywP-Rh-IYw'
-          centerCoordinate={region}
-          debugActive={false}
-          zoomLevel={14}
-          styleUrl={'asset://styles/streets-v8.json'}
-          zoomEnabled
-          scrollEnabled
-          style={styles.imageStyle}
-         />
-      );
-    }
     let images = this.props.listing.images;
     if (!images || images.length == 0) {
       return <Text>Sorry! No images for {this.props.listing.name}</Text>; 
@@ -225,7 +206,8 @@ class ListingDetail extends React.Component {
   }
 
   _onShowMap() {
-    this.setState({ showMap: true });
+    var location = this.props.listing.location.split(',');
+    MapIntent.open(location[0], location[1], this.props.listing.name);
   }
 
   _onShowImages() {
