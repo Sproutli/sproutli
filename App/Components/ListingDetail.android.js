@@ -168,7 +168,7 @@ class ListingDetail extends React.Component {
 
   renderedDetails() {
     return (
-      <View>
+      <View style={styles.container}>
         { this.renderedOffer() }
 
         <Text style={styles.description}>{this.props.listing.description}</Text>
@@ -319,9 +319,9 @@ class ListingDetail extends React.Component {
 var styles = StyleSheet.create({
   description: {
     color: COLOURS.GREY,
-    fontSize: pixelRatio === 3 ? 18 : 15,
+    fontSize: pixelRatio === 3 ? 16 : 15,
     paddingTop: 15,
-    paddingBottom: 30
+    paddingBottom: 15
   },
 
   text: {
@@ -335,18 +335,9 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
-  actionBar: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 64,
-    backgroundColor: COLOURS.GREY,
-    flexDirection: 'row'
-  },
   outerContainer: {
     flex: 1,
-    paddingTop: 0,
-    bottom: 16
+    paddingTop: 0
   },
   container: {
     padding: 10,
