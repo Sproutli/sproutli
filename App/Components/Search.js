@@ -134,16 +134,22 @@ class Search extends React.Component {
   }
 
   _onVeganLevelChanged(veganLevel) {
+    console.log(veganLevel);
     this.setState({ veganLevel });
-
     var searchConfig = this.state.searchConfig;
+    var previousVeganLevel = searchConfig.vegan_level;
 
     searchConfig.vegan_level = veganLevel;
     var listings = this.state.listings.filter((l) => ListingsFilter.filter(l, searchConfig));
 
     this.setState({ 
-      searchConfig,
-      dataSource: this.state.dataSource.cloneWithRows(listings)
+      listings,
+      veganLevel,
+      searchConfig
+    }, () => {
+      if (Math.round(previousVeganLevel) !== Math.round(veganLevel)) {
+        this.search();
+      }
     });
   }
 
