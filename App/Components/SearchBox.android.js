@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var {
+  StyleSheet,
   TextInput
 } = React;
 
@@ -11,6 +12,7 @@ class SearchBox extends React.Component {
   render() {
     return (
       <TextInput
+        style={styles.search}
         text={this.props.query}
         barTintColour={COLOURS.GREEN}
         placeholder='Search'
@@ -36,5 +38,12 @@ SearchBox.propTypes = {
   onFocus: React.PropTypes.func,
   query: React.PropTypes.string
 };
+
+var styles = StyleSheet.create({
+  search: {
+    height: 44,
+    marginHorizontal: 4
+  }
+});
 
 module.exports = SearchBox;

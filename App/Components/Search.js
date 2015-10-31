@@ -184,9 +184,11 @@ class Search extends React.Component {
 
     if (offset < 0 || bounced) { return; }
 
-    if (delta < 1 || offset == 0) {
+    if (delta < -20 || offset == 0) {
+      console.log('Delta < 1');
       this.setState({ showSearch: true });
-    } else if (this.state.showSearch && delta < 50) {
+    } else if (this.state.showSearch && delta < 20) {
+      console.log('Delta < 1');
       this.setState({ showSearch: true });
     } else if (delta > 1 ) {
       this.setState({ showSearch: false });
