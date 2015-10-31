@@ -28,6 +28,7 @@ class App extends React.Component {
       page: 0
     },
     this.navigators = [];
+    this.actionsCache = [];
     this.navigationOperations = SCREENS.map((s, i) => this.makeNavigatorOperations(i));
     this.pages = SCREENS.map((s, i) => this.buildSearch(s, i));
     Intercom.userLoggedIn();
@@ -78,10 +79,12 @@ class App extends React.Component {
 
     this.viewPager && this.viewPager.setPage(page);
 
-    var currentRoutes = this.navigators[page].getCurrentRoutes(); 
-    var title = currentRoutes[currentRoutes.length - 1].title;
+    var currentRoutes = this.navigators[page].getCurrentRoutes(), 
+      currentRoute = currentRoutes[currentRoutes.length - 1],
+      title = currentRoute.title;
 
     this.setState({ 
+      actions: this.actionsCache[page] || [],
       page,
       title 
     });
@@ -92,10 +95,19 @@ class App extends React.Component {
     this._onTabSelected(page);
   }
 
+  _onActionSelected(actionIndex) {
+    this.state.actions[actionIndex].func();
+  }
+
   makeNavigatorOperations(index) {
     return {
+      setActions: (actions) => {
+        this.actionsCache[index] = actions;
+        this.setState({ actions });
+      },
+
       push: (route) => {
-        setTimeout(() => { this.setState({ title: route.title }); }, 100);
+        this.setState({ actions: [], title: route.title });
         this.navigators[index].push(route);
       },
 
@@ -103,7 +115,11 @@ class App extends React.Component {
         var navigator = this.navigators[index];
         var previousRouteIndex = navigator.getCurrentRoutes().length - 2;
         var previousRoute = navigator.getCurrentRoutes()[previousRouteIndex];
-        setTimeout(() => { this.setState({ title: previousRoute.title }); }, 100);
+
+        var actions = previousRoute.passProps.listing ? this.actionsCache[index] : [];
+        if (actions.length < 1) { this.actionsCache[index] = []; }
+
+        this.setState({ title: previousRoute.title, actions});
         navigator.pop();
       }
     };
@@ -138,6 +154,8 @@ class App extends React.Component {
     return (
       <View style={{flex: 1}}>
         <ToolbarAndroid
+          actions={this.state.actions}
+          onActionSelected={this._onActionSelected.bind(this)}
           navIcon={this.needsNavIcon()}
           titleColor='white'
           onIconClicked={() => {
