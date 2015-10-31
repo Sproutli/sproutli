@@ -33,8 +33,8 @@ class App extends React.Component {
     Intercom.userLoggedIn();
 
     BackAndroid.addEventListener('hardwareBackPress', () => {
-      var navigator = this.navigators[this.state.page];
-      if (navigator && navigator.getCurrentRoutes().length > 1) {
+      var navigator = this.navigationOperations[this.state.page];
+      if (navigator && this.navigators[this.state.page].getCurrentRoutes().length > 1) {
         navigator.pop();
         return true;
       }
@@ -84,7 +84,16 @@ class App extends React.Component {
   makeNavigatorOperations(index) {
     return {
       push: (route) => {
+        setTimeout(() => { this.setState({ title: route.title }); }, 100);
         this.navigators[index].push(route);
+      },
+
+      pop: () => {
+        var navigator = this.navigators[index];
+        var previousRouteIndex = navigator.getCurrentRoutes().length - 2;
+        var previousRoute = navigator.getCurrentRoutes()[previousRouteIndex];
+        setTimeout(() => { this.setState({ title: previousRoute.title }); }, 100);
+        navigator.pop();
       }
     };
   }
@@ -109,15 +118,19 @@ class App extends React.Component {
       </View>
     );
   }
+
+  needsNavIcon() {
+    if (this.state.title !== 'Search') return require('image!android_back_white');
+  }
   
   render() {
     return (
       <View style={{flex: 1}}>
         <ToolbarAndroid
-          navIcon={require('image!android_back_white')}
+          navIcon={this.needsNavIcon()}
           titleColor='white'
           onIconClicked={() => {
-            this.navigators[this.state.page].pop();
+            this.navigationOperations[this.state.page].pop();
           }}
           title={this.state.title}
           style={styles.toolbar}
