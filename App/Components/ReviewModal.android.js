@@ -99,6 +99,8 @@ class ReviewModal extends React.Component {
         <Text style={styles.starsText}>{this.state.stars} Stars</Text>
         <TextInput
           placeholder='Your review'
+          onSubmitEditing={this._onLeaveReview.bind(this)}
+          textAlignVertical='top'
           style={styles.reviewForm}
           onChangeText={this._onChangeText.bind(this)}
           value={this.state.reviewText}
@@ -116,7 +118,7 @@ var styles = StyleSheet.create({
     padding: 10
   },
   reviewForm: {
-    height: 100,
+    height: 50,
     fontSize: 16,
     backgroundColor: 'f8f8f8',
     marginTop: 10,
