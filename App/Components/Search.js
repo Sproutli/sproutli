@@ -198,6 +198,7 @@ class Search extends React.Component {
 
   _onListingPressed(listing) {
     this.props.navigator.push({
+      navigator: this.props.navigator,
       component: ListingDetail,
       title: listing.name,
       passProps: { listing }

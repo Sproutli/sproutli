@@ -33,9 +33,6 @@ class App extends React.Component {
   }
 
   RouteMapper(route) {
-    console.log(route.title);
-    if (this.state.title !== route.title) this.setState({ title: route.title });
-
     var Component = route.component;
     return (
       <Component {...route.passProps} />
@@ -102,11 +99,14 @@ class App extends React.Component {
   }
   
   render() {
-
     return (
       <View style={{flex: 1}}>
         <ToolbarAndroid
+          navIcon={require('image!android_back_white')}
           titleColor='white'
+          onIconClicked={() => {
+            this.navigators[this.state.page].pop();
+          }}
           title={this.state.title}
           style={styles.toolbar}
         />
