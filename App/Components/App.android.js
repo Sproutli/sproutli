@@ -6,6 +6,7 @@ var {
   View,
   Text,
   ViewPagerAndroid,
+  Navigator,
   TouchableHighlight,
   ToolbarAndroid
 } = React;
@@ -18,7 +19,29 @@ var COLOURS = require('../Constants/Colours');
 
 var SCREENS = ['Food', 'Shops', 'Online', 'Services'];
 
+var RouteMapper = (route) => {
+  console.log('Route mapper called!');
+  return (
+    <Search 
+      key={route.name} 
+      searchLabel={route.name} 
+      navigator={route.navigator}
+      searchConfig={SUGGESTIONS[route.name].searchConfig} 
+    />
+  );
+};
+
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      title: 'Search',
+      page: 0
+    },
+    this.navigators = [];
+    Intercom.userLoggedIn();
+  }
+
   createTab(name, index) {
     return (
       <TouchableHighlight 
@@ -40,15 +63,6 @@ class App extends React.Component {
     );
   }
 
-  constructor() {
-    super();
-    this.state = {
-      title: 'Search',
-      page: 0
-    },
-    Intercom.userLoggedIn();
-  }
-
   _onTabSelected(page) {
     this.viewPager && this.viewPager.setPage(page);
     this.setState({ page });
@@ -58,10 +72,23 @@ class App extends React.Component {
     this.setState({ page: e.nativeEvent.position });
   }
 
-  buildSearch(name, navigator) {
+  makeNavigator(index) {
+    return {
+      push: (route) => {
+        this.navigators[index].push(route);
+      }
+    };
+  }
+
+  buildSearch(name, index) {
+    var navigator = this.makeNavigator(index);
+
     return (
-      <View>
-        <Search key={name} navigator={navigator} searchLabel={name} searchConfig={SUGGESTIONS[name].searchConfig} />
+      <View key={index}>
+        <Navigator 
+          renderScene={RouteMapper}
+          initialRoute={{ name, navigator }}
+          ref={(n) => this.navigators[index] = n} />
       </View>
     );
   }
@@ -77,7 +104,7 @@ class App extends React.Component {
   }
 
   render() {
-    var pages = SCREENS.map((s) => this.buildSearch(s, this.state.navigator));
+    var pages = SCREENS.map((s, i) => this.buildSearch(s, i));
 
     return (
       <View style={{flex: 1}}>

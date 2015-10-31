@@ -197,18 +197,11 @@ class Search extends React.Component {
   }
 
   _onListingPressed(listing) {
-    if (Platform.OS === 'ios') {
-      this.props.navigator.push({
-        component: ListingDetail,
-        title: listing.name,
-        passProps: { listing }
-      });
-    } else {
-      this.props.navigator.push({
-        name: 'listing',
-        listing: listing
-      });
-    }
+    this.props.navigator.push({
+      component: ListingDetail,
+      title: listing.name,
+      passProps: { listing }
+    });
   }
 
   renderSearch() {
