@@ -1,7 +1,7 @@
 package com.sproutli;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import android.location.Location;
 import android.os.Bundle;
@@ -26,8 +26,8 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationListener;
 
 public class LocationModule extends ReactContextBaseJavaModule implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
-  private static final String TAG = "Sproutli";
-  private static final ArrayList<RCTLocationRequest> pendingRequests = new ArrayList<>();
+  private static final String TAG = "LocationObserver";
+  private static final CopyOnWriteArrayList<RCTLocationRequest> pendingRequests = new CopyOnWriteArrayList<>();
 
   GoogleApiClient mGoogleApiClient;
   Location mLastLocation;
@@ -45,7 +45,6 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
 
   @ReactMethod
   public void getCurrentPosition(ReadableMap options, Callback successCallback, Callback failureCallback) {
-    Log.d(TAG, "getCurrentPosition called.");
     if (currentLocationValid(options)) {
       successCallback.invoke(buildResponse(mLastLocation));
     } else {
@@ -87,16 +86,19 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
   @Override
   public void onConnectionSuspended(int something) {
     Log.d(TAG, "Connection suspended?");
+    pendingRequests.clear();
   }
 
   @Override
   public void onConnectionFailed(ConnectionResult connectionResult) {
     try {
       for (RCTLocationRequest request : pendingRequests) {
-        request.failureCallback.invoke("Error connecting to Google Services");
+        request.failureCallback.invoke("[LocationObserver] - Error connecting to Google Services - " + connectionResult);
+        pendingRequests.clear();
       }
     } catch (Exception e) {
       Log.e(TAG, "Unable to invoke failure callbacks - " + pendingRequests, e);
+      pendingRequests.clear();
     }
   }
 
@@ -165,7 +167,6 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
 
   private boolean currentLocationValid(ReadableMap options) {
     // TODO: Fetch maximumAge from options.
-    Log.d(TAG, "Checking if current location is valid. Last update time: " + mLastUpdateTime + ", delta: " + (mLastUpdateTime - System.currentTimeMillis())); 
     return (mLastLocation != null && 
            ((mLastUpdateTime - System.currentTimeMillis()) < 2000));
   }
