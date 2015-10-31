@@ -16,7 +16,7 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableType;
-import com.facebook.react.bridge.ReadableMapKeySeyIterator;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
@@ -66,7 +66,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
   }
 
   private Map getMapFromOptions(ReadableMap options) {
-    ReadableMapKeySeyIterator iterator = options.keySetIterator();
+    ReadableMapKeySetIterator iterator = options.keySetIterator();
     Map optionsMap = new HashMap<>();
     while (iterator.hasNextKey()) {
       String key = iterator.nextKey();

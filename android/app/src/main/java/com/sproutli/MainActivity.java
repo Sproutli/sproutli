@@ -13,6 +13,8 @@ import com.facebook.soloader.SoLoader;
 
 import com.oblador.vectoricons.VectorIconsPackage;
 
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
+
 import io.intercom.android.sdk.Intercom;
 
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
@@ -34,6 +36,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .addPackage(new LocationPackage())
                 .addPackage(new IntercomPackage())
                 .addPackage(new VectorIconsPackage())
+                .addPackage(new ReactMaterialKitPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
