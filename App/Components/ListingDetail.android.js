@@ -123,7 +123,7 @@ class ListingDetail extends React.Component {
   componentDidMount() {
     var actions = [
       { 
-        title: 'Reviews', func: () => {
+        title: 'Reviews ' + this.props.listing.name, func: () => {
           this.props.navigator.push({
             title: `Reviews for ${this.props.listing.name}`,
             component: ReviewsComponent,

@@ -108,16 +108,18 @@ class App extends React.Component {
 
       push: (route) => {
         this.setState({ actions: [], title: route.title });
-        this.actionsCache[index] = [];
         this.navigators[index].push(route);
       },
 
       pop: () => {
-        this.actionsCache[index] = [];
         var navigator = this.navigators[index];
         var previousRouteIndex = navigator.getCurrentRoutes().length - 2;
         var previousRoute = navigator.getCurrentRoutes()[previousRouteIndex];
-        this.setState({ title: previousRoute.title, actions: []});
+
+        var actions = previousRoute.passProps.listing ? this.actionsCache[index] : [];
+        if (actions.length < 1) { this.actionsCache[index] = []; }
+
+        this.setState({ title: previousRoute.title, actions});
         navigator.pop();
       }
     };
