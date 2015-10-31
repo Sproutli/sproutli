@@ -8,6 +8,7 @@ var {
   ActivityIndicatorIOS,
   Text,
   ScrollView,
+  Platform,
   PixelRatio,
   View
 } = React;
@@ -180,8 +181,6 @@ class Search extends React.Component {
 
     var bounced = ((offset - scrollEvent.nativeEvent.contentSize.height) > -scrollEvent.nativeEvent.layoutMeasurement.height);
 
-    console.log(scrollEvent.nativeEvent, this.lastOffset);
-
     if (offset < 0 || bounced) { return; }
 
     if (delta < 1 || offset == 0) {
@@ -195,8 +194,9 @@ class Search extends React.Component {
     this.lastOffset = offset;
   }
 
-  listingPressed(listing) {
+  _onListingPressed(listing) {
     this.props.navigator.push({
+      navigator: this.props.navigator,
       component: ListingDetail,
       title: listing.name,
       passProps: { listing }
@@ -260,7 +260,7 @@ class Search extends React.Component {
         dataSource={this.state.dataSource}
         keyboardShouldPersistTaps={false}
         keyboardDismissMode='on-drag'
-        renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this.listingPressed.bind(this, listing)} />}
+        renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this._onListingPressed.bind(this, listing)} />}
       />
    );
   }
@@ -281,8 +281,8 @@ class Search extends React.Component {
 var styles = StyleSheet.create({
   bigContainer: {
     flex: 1,
-    paddingTop: 64,
-    paddingBottom: 32
+    paddingTop: Platform.OS === 'ios' ? 64 : 0,
+    paddingBottom: Platform.OS === 'ios' ? 32 : 0
   },
 
   loadingContainer: {
