@@ -32,11 +32,13 @@ class App extends React.Component {
     Intercom.userLoggedIn();
   }
 
-  RouteMapper(route) {
-    var Component = route.component;
-    return (
-      <Component {...route.passProps} />
-    );
+  RouteMapper(index) {
+    return (route) => {
+      var Component = route.component;
+      return (
+        <Component navigator={this.navigationOperations[index]} {...route.passProps} />
+      );
+    };
   }
 
   createTab(name, index) {
@@ -83,7 +85,7 @@ class App extends React.Component {
     return (
       <View key={index}>
         <Navigator 
-          renderScene={this.RouteMapper.bind(this)}
+          renderScene={this.RouteMapper(index).bind(this)}
           initialRoute={{
             title: 'Search',
             component: Search,
