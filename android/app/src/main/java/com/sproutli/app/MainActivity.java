@@ -1,4 +1,4 @@
-package com.sproutli;
+package com.sproutli.app;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -48,7 +48,6 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .addPackage(new RNCallIntentPackage())
                 .addPackage(new RNWebIntentPackage())
                 .addPackage(new RNMapIntentPackage())
-                .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
 

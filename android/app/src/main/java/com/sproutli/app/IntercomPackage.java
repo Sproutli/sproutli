@@ -1,4 +1,4 @@
-package com.sproutli;
+package com.sproutli.app;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;

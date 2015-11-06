@@ -1,4 +1,4 @@
-package com.sproutli;
+package com.sproutli.app;
 
 import java.util.Date;
 import java.util.concurrent.CopyOnWriteArrayList;
