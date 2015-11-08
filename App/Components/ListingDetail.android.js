@@ -178,7 +178,7 @@ class ListingDetail extends React.Component {
 
         <Text style={styles.bold}>Tags</Text>
         <Text style={styles.tags}>
-          {this.props.listing.tags.map((tag) => '#' + tag.toLowerCase() + ' ')}
+          {(this.props.listing.tags || []).map((tag) => '#' + tag.toLowerCase() + ' ')}
         </Text>
 
         <Text style={styles.bold}>Vegan Level</Text>
