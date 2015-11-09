@@ -53,7 +53,7 @@ class Search extends React.Component {
 
     this.lastOffset = 0;
 
-    // this.getLocation();
+    this.getLocation();
 
     GoogleAnalytics.viewedScreen('Search');
   }
