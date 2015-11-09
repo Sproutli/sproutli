@@ -129,8 +129,8 @@ class Search extends React.Component {
   }
 
   _onVeganSliderChanged(veganLevel) {
-    Intercom.logEvent('changed_vegan_level', { veganLevel });
     VeganLevelManager.set(veganLevel);
+    Intercom.logEvent('changed_vegan_level', { veganLevel });
   }
 
   _onVeganLevelChanged(veganLevel) {
@@ -148,7 +148,7 @@ class Search extends React.Component {
       searchConfig
     }, () => {
       if (Math.round(previousVeganLevel) !== Math.round(veganLevel)) {
-        this.search();
+        this.search(this.state.location);
       }
     });
   }

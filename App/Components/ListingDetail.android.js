@@ -94,7 +94,7 @@ class ReviewsComponent extends React.Component {
     }
 
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.buttonContainer}>
           <Button onPress={this._onLeaveReview.bind(this)}>Leave a Review</Button>
         </View>
@@ -103,7 +103,7 @@ class ReviewsComponent extends React.Component {
           renderRow={(review, index) => <Review style={styles.text} key={index} {...review} />}
           dataSource={this.state.dataSource}
         />
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -178,7 +178,7 @@ class ListingDetail extends React.Component {
 
         <Text style={styles.bold}>Tags</Text>
         <Text style={styles.tags}>
-          {this.props.listing.tags.map((tag) => '#' + tag.toLowerCase() + ' ')}
+          {(this.props.listing.tags || []).map((tag) => '#' + tag.toLowerCase() + ' ')}
         </Text>
 
         <Text style={styles.bold}>Vegan Level</Text>

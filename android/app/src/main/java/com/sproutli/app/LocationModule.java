@@ -1,4 +1,4 @@
-package com.sproutli;
+package com.sproutli.app;
 
 import java.util.Date;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -135,13 +135,14 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
     mLastLocation = location;
     mLastUpdateTime = System.currentTimeMillis();
 
-    WritableMap response = buildResponse(location);
 
     for (RCTLocationRequest request : pendingRequests) {
+      WritableMap response = buildResponse(location);
       request.successCallback.invoke(response);
     }
 
     // WritableMaps may only be dispatched once, so create a new one.
+    WritableMap response = buildResponse(location);
     response = buildResponse(location);
 
     pendingRequests.clear();

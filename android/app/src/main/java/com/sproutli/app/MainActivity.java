@@ -1,4 +1,4 @@
-package com.sproutli;
+package com.sproutli.app;
 
 import android.app.Activity;
 import android.os.Bundle;

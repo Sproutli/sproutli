@@ -19,7 +19,7 @@ class Listing extends React.Component {
 
   renderedVeganLevel() {
     if (!this.props.listing.vegan_level) { return <View />; }
-    return <Text style={styles.subTitle}><Icon style={styles.subTitle} name='ios-nutrition' /> {VEGAN_LEVELS[this.props.listing.vegan_level].short}</Text>;
+    return <Text style={styles.subTitle}>{VEGAN_LEVELS[this.props.listing.vegan_level].short}</Text>;
   }
 
   renderedLocation() {
@@ -28,7 +28,7 @@ class Listing extends React.Component {
 
     distance = parseFloat(distance).toFixed(1);
 
-    return <Text style={styles.subTitle}><Icon style={styles.subTitle} name='location' />  {this.props.listing.locality} ({distance} km)</Text>;
+    return <Text style={styles.subTitle}>{this.props.listing.locality} ({distance} km)</Text>;
   }
 
   renderedRating() {
@@ -39,7 +39,7 @@ class Listing extends React.Component {
       rating = `${rating}/5.0`;
     }
 
-    return <Text style={styles.subTitle}><Icon style={styles.subTitle} name='ios-star' /> {rating}</Text>;
+    return <Text style={styles.subTitle}>{rating}</Text>;
   }
 
   renderedTags() {
@@ -77,7 +77,7 @@ var styles = StyleSheet.create({
     borderRadius: 3,
     borderWidth: 0.1,
     borderColor: COLOURS.GREY,
-    paddingVertical: 6,
+    paddingTop: 10,
     paddingLeft: 10,
     paddingRight: 10
   },
@@ -88,16 +88,16 @@ var styles = StyleSheet.create({
     fontWeight: '200'
   },
   subTitle: {
-    fontSize: 12,
+    fontSize: 13,
     color: 'white',
     fontWeight: '300'
   },
   tags: {
-    fontSize: pixelRatio === 3 ? 15 : 12,
+    fontSize: pixelRatio === 3 ? 15 : 10,
     fontStyle: 'italic',
     color: 'white',
     paddingTop: 20,
-    fontWeight: '300'
+    fontWeight: '200'
   },
   tagContainer: {
     flexDirection: 'row'

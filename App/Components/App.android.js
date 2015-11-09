@@ -17,7 +17,7 @@ var Intercom = require('../Utils/Intercom');
 var SUGGESTIONS = require('../Constants/Suggestions');
 var COLOURS = require('../Constants/Colours');
 
-var SCREENS = ['Food', 'Shops', 'Online', 'Services'];
+var SCREENS = ['Food', 'Shops', 'Services', 'Online'];
 
 
 class App extends React.Component {

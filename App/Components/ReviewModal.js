@@ -107,6 +107,7 @@ class ReviewModal extends React.Component {
         <Text style={styles.starsText}>{this.state.stars} Stars</Text>
         <TextInput
           style={styles.reviewForm}
+          onSubmitEditing={this._onLeaveReview.bind(this)}
           onChangeText={this._onChangeText.bind(this)}
           value={this.state.reviewText}
           multiline />

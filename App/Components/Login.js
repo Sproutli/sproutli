@@ -113,7 +113,7 @@ class Login extends React.Component {
       <TextInput 
         secureTextEntry
         style={styles.loginInput} 
-        placeholder='Passsword' 
+        placeholder='Password' 
         value={this.state.password}
         onChangeText={this._onPasswordChanged.bind(this)}
       />
@@ -170,7 +170,6 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff'
   },
   header: {
     marginTop: 50,
@@ -179,7 +178,6 @@ var styles = StyleSheet.create({
   },
   subtext: {
     fontSize: pixelRatio === 3 ? 20 : 15,
-    backgroundColor: '#fff',
     paddingTop: 16,
     color: COLOURS.GREY,
     textAlign: 'center'
@@ -210,7 +208,6 @@ var styles = StyleSheet.create({
   loginInput: {
     height: 40, 
     width,
-    backgroundColor: COLOURS.LIGHT_GREY,
     margin: 5,
     borderRadius: 5,
     paddingHorizontal: 10
