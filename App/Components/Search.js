@@ -134,7 +134,6 @@ class Search extends React.Component {
   }
 
   _onVeganLevelChanged(veganLevel) {
-    console.log(veganLevel);
     this.setState({ veganLevel });
     var searchConfig = this.state.searchConfig;
     var previousVeganLevel = searchConfig.vegan_level;
@@ -185,10 +184,8 @@ class Search extends React.Component {
     if (offset < 0 || bounced) { return; }
 
     if (delta < -20 || offset == 0) {
-      console.log('Delta < 1');
       this.setState({ showSearch: true });
     } else if (this.state.showSearch && delta < 20) {
-      console.log('Delta < 1');
       this.setState({ showSearch: true });
     } else if (delta > 1 ) {
       this.setState({ showSearch: false });

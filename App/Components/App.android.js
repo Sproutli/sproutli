@@ -147,7 +147,7 @@ class App extends React.Component {
   }
 
   needsNavIcon() {
-    if (this.state.title !== 'Search') return require('image!android_back_white');
+    if (this.state.title !== 'Search') return require('../Images/ic_arrow_back_white_48dp.png');
   }
   
   render() {
