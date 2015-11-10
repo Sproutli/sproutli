@@ -126,6 +126,7 @@ class App extends React.Component {
     return (
       <View style={{flex: 1}} key={index}>
         <Navigator 
+          configureScene={() => Navigator.SceneConfigs.FadeAndroid}
           renderScene={this.RouteMapper(index).bind(this)}
           initialRoute={{
             title: 'Search',
