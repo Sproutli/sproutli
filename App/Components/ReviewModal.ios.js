@@ -6,7 +6,7 @@ var {
   StyleSheet,
   TextInput,
   View,
-  Image,
+  AlertIOS,
   TouchableOpacity
 } = React;
 
@@ -24,7 +24,7 @@ class Stars extends React.Component {
     return (
       <View style={styles.stars}>
         <TouchableOpacity onPress={this.props.handler.bind(this, 1)}>
-          <Image source={require('image!ic_star_black_24dp')} />
+          <Icon name={this.getStarIcon(1)} size={50} color={COLOURS.GREEN} />
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.handler.bind(this, 2)}>
           <Icon name={this.getStarIcon(2)} size={50} color={COLOURS.GREEN} />

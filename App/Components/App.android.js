@@ -5,7 +5,6 @@ var {
   StyleSheet,
   View,
   Text,
-  ViewPagerAndroid,
   Navigator,
   BackAndroid,
   TouchableHighlight,
@@ -74,19 +73,15 @@ class App extends React.Component {
   }
 
   _onTabSelected(page) {
-    var action = SCREENS[page];
-    Intercom.logEvent(`searched_for_${action}`);
+    this.setState({ page }, () => {
+      var currentRoutes = this.navigators[page].getCurrentRoutes(), 
+        currentRoute = currentRoutes[currentRoutes.length - 1],
+        title = currentRoute.title;
 
-    this.viewPager && this.viewPager.setPage(page);
-
-    var currentRoutes = this.navigators[page].getCurrentRoutes(), 
-      currentRoute = currentRoutes[currentRoutes.length - 1],
-      title = currentRoute.title;
-
-    this.setState({ 
-      actions: this.actionsCache[page] || [],
-      page,
-      title 
+      this.setState({ 
+        actions: this.actionsCache[page] || [],
+        title 
+      });
     });
   }
 
@@ -129,8 +124,9 @@ class App extends React.Component {
     var navigationOperations = this.navigationOperations[index];
 
     return (
-      <View key={index}>
+      <View style={{flex: 1}} key={index}>
         <Navigator 
+          configureScene={() => Navigator.SceneConfigs.FadeAndroid}
           renderScene={this.RouteMapper(index).bind(this)}
           initialRoute={{
             title: 'Search',
@@ -147,13 +143,16 @@ class App extends React.Component {
   }
 
   needsNavIcon() {
-    if (this.state.title !== 'Search') return require('image!android_back_white');
+    var image = require('../Images/ic_arrow_back_white_48dp.png');
+    if (this.state.title !== 'Search') return image;
   }
   
   render() {
+    console.log('Nav Icon?', this.needsNavIcon());
     return (
       <View style={{flex: 1}}>
         <ToolbarAndroid
+          overflowIcon={require('../Images/ic_more_vert_white_48pt.png')}
           actions={this.state.actions}
           onActionSelected={this._onActionSelected.bind(this)}
           navIcon={this.needsNavIcon()}
@@ -165,14 +164,7 @@ class App extends React.Component {
           style={styles.toolbar}
         />
         { this.tabBar() }
-        <ViewPagerAndroid
-          style={styles.viewPager}
-          initialPage={0}
-          onPageSelected={this._onPageSelected.bind(this)}
-          ref={viewPager => { this.viewPager = viewPager ; } }
-        >
-          {this.pages}
-        </ViewPagerAndroid>
+        {this.pages[this.state.page]}
       </View>
     );
   }

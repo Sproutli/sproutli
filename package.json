@@ -10,7 +10,7 @@
     "extend": "^3.0.0",
     "jwt-decode": "^1.4.0",
     "moment": "^2.10.6",
-    "react-native": "^0.13.0",
+    "react-native": "^0.14.0",
     "react-native-callintent": "^1.0.4",
     "react-native-communications": "0.0.6",
     "react-native-geocoder": "^0.1.4",

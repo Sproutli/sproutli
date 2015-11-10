@@ -16,6 +16,7 @@ var {
 var RNGeocoder = require('react-native-geocoder');
 var Icon = require('react-native-vector-icons/Ionicons');
 var Moment = require('moment');
+var Debounce = require('debounce');
 
 var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
@@ -49,7 +50,8 @@ class Search extends React.Component {
     };
 
     this.state.searchConfig.vegan_level = VeganLevelManager.veganLevel;
-    VeganLevelManager.handlers.push(this._onVeganLevelChanged.bind(this));
+    var debouncedVeganLevel = Debounce(this._onVeganLevelChanged.bind(this), 500);
+    VeganLevelManager.handlers.push(debouncedVeganLevel);
 
     this.lastOffset = 0;
 
@@ -130,26 +132,19 @@ class Search extends React.Component {
 
   _onVeganSliderChanged(veganLevel) {
     VeganLevelManager.set(veganLevel);
-    Intercom.logEvent('changed_vegan_level', { veganLevel });
   }
 
   _onVeganLevelChanged(veganLevel) {
-    console.log(veganLevel);
-    this.setState({ veganLevel });
     var searchConfig = this.state.searchConfig;
-    var previousVeganLevel = searchConfig.vegan_level;
 
     searchConfig.vegan_level = veganLevel;
-    var listings = this.state.listings.filter((l) => ListingsFilter.filter(l, searchConfig));
+    var filteredListings = this.state.listings.filter((l) => ListingsFilter.filter(l, searchConfig));
 
     this.setState({ 
-      listings,
+      filteredListings,
       veganLevel,
-      searchConfig
-    }, () => {
-      if (Math.round(previousVeganLevel) !== Math.round(veganLevel)) {
-        this.search(this.state.location);
-      }
+      searchConfig,
+      dataSource: this.state.dataSource.cloneWithRows(filteredListings)
     });
   }
 
@@ -185,10 +180,8 @@ class Search extends React.Component {
     if (offset < 0 || bounced) { return; }
 
     if (delta < -20 || offset == 0) {
-      console.log('Delta < 1');
       this.setState({ showSearch: true });
     } else if (this.state.showSearch && delta < 20) {
-      console.log('Delta < 1');
       this.setState({ showSearch: true });
     } else if (delta > 1 ) {
       this.setState({ showSearch: false });
