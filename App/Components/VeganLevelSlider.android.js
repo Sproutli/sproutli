@@ -43,7 +43,7 @@ class VeganLevelSlider extends React.Component{
           onChange={(veganLevel) => {
             this.props.onSlidingComplete(veganLevel);
           }}
-          thumbRadius={10}
+          thumbRadius={15}
           lowerTrackColor={COLOURS.GREEN}
           ref={(s) => this.slider = s}
           min={1}

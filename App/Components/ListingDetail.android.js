@@ -122,7 +122,8 @@ class ListingDetail extends React.Component {
     var actions = [
       { 
         title: 'Reviews', 
-        icon: require('../Images/ic_star_black_24dp.png'),
+        icon: require('../Images/ic_star_white_48pt.png'),
+        show: 'always',
         func: () => {
           this.props.navigator.push({
             title: `Reviews for ${this.props.listing.name}`,

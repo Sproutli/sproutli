@@ -73,16 +73,16 @@ class App extends React.Component {
   }
 
   _onTabSelected(page) {
-    this.setState({ page });
-      // var currentRoutes = this.navigators[page].getCurrentRoutes(), 
-      //   currentRoute = currentRoutes[currentRoutes.length - 1],
-      //   title = currentRoute.title;
+    this.setState({ page }, () => {
+      var currentRoutes = this.navigators[page].getCurrentRoutes(), 
+        currentRoute = currentRoutes[currentRoutes.length - 1],
+        title = currentRoute.title;
 
-      // this.setState({ 
-      //   actions: this.actionsCache[page] || [],
-      //   title 
-      // });
-    // });
+      this.setState({ 
+        actions: this.actionsCache[page] || [],
+        title 
+      });
+    });
   }
 
   _onPageSelected(e) {
@@ -142,14 +142,16 @@ class App extends React.Component {
   }
 
   needsNavIcon() {
-    if (this.state.title !== 'Search') return require('../Images/ic_arrow_back_white_48dp.png');
+    var image = require('../Images/ic_arrow_back_white_48dp.png');
+    if (this.state.title !== 'Search') return image;
   }
   
   render() {
-    console.log('Pages', this.pages);
+    console.log('Nav Icon?', this.needsNavIcon());
     return (
       <View style={{flex: 1}}>
         <ToolbarAndroid
+          overflowIcon={require('../Images/ic_more_vert_white_48pt.png')}
           actions={this.state.actions}
           onActionSelected={this._onActionSelected.bind(this)}
           navIcon={this.needsNavIcon()}
