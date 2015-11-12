@@ -23,6 +23,9 @@ import com.ivanph.webintent.RNWebIntentPackage;
 import com.syarul.callintent.RNCallIntentPackage;
 import com.syarul.mapintent.RNMapIntentPackage;
 
+import io.fabric.sdk.android.Fabric;
+import com.crashlytics.android.Crashlytics;
+
 
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
 
@@ -32,6 +35,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         Intercom.initialize(getApplication(), "android_sdk-aba6524a84e6953392e1a8583c15970a6dbe851c", "r18lw9fx");
         mReactRootView = new ReactRootView(this);
 
