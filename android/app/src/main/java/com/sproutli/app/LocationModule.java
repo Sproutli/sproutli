@@ -3,10 +3,14 @@ package com.sproutli.app;
 import java.util.Date;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import android.content.Intent;
+import android.content.IntentSender.SendIntentException;
 import android.location.Location;
 import android.os.Bundle;
+import android.app.Activity;
 import android.util.Log;
 
+import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -24,18 +28,33 @@ import com.google.android.gms.common.api.GoogleApiClient.*;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationSettingsStates;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.common.api.Result;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.common.api.ResultCallback;
 
-public class LocationModule extends ReactContextBaseJavaModule implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener {
+public class LocationModule extends ReactContextBaseJavaModule implements ConnectionCallbacks, OnConnectionFailedListener, LocationListener, ResultCallback, ActivityEventListener {
   private static final String TAG = "LocationObserver";
   private static final CopyOnWriteArrayList<RCTLocationRequest> pendingRequests = new CopyOnWriteArrayList<>();
+  protected static final int REQUEST_CHECK_SETTINGS = 0x1;
 
+  Activity parentActivity;
   GoogleApiClient mGoogleApiClient;
   Location mLastLocation;
+  LocationRequest mLocationRequest;
   long mLastUpdateTime;
   boolean observingLocation;
 
-  public LocationModule(ReactApplicationContext reactContext) {
+  public LocationModule(ReactApplicationContext reactContext, Activity activity) {
     super(reactContext);
+    parentActivity = activity;
+
+    // Register for ActivityEvent updates.
+    getReactApplicationContext().addActivityEventListener(this);
   }
 
   @Override
@@ -71,6 +90,7 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
   // LocationServices Lifecycle Methods
   @Override
   public void onLocationChanged(Location currentLocation) {
+    Log.d(TAG, "Received location!");
     receivedLocation(currentLocation);
   }
 
@@ -78,10 +98,18 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
 
   @Override
   public void onConnected(Bundle connectionHint) {
-    LocationRequest mLocationRequest = createLocationRequest(null);
-    LocationServices.FusedLocationApi.requestLocationUpdates(
-                    mGoogleApiClient, mLocationRequest, this);
+    mLocationRequest = createLocationRequest(null);
+    LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+           .addLocationRequest(mLocationRequest)
+           .setAlwaysShow(true);
+
+    PendingResult<LocationSettingsResult> result =
+               LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
+
+    Log.d(TAG, "Checking for Location Settings");
+    result.setResultCallback(this);
   }
+
 
   @Override
   public void onConnectionSuspended(int something) {
@@ -99,6 +127,56 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
     } catch (Exception e) {
       Log.e(TAG, "Unable to invoke failure callbacks - " + pendingRequests, e);
       pendingRequests.clear();
+    }
+  }
+
+  // LocationSettingsRequest Lifecycle Methods
+  @Override
+  public void onResult(Result result) {
+    final Status status = result.getStatus();
+    Log.d(TAG, "LocationSettingsStates - " + status);
+    switch (status.getStatusCode()) {
+      case LocationSettingsStatusCodes.SUCCESS:
+        Log.d(TAG, "Success, LocationSettingsStates are fine. Requesting location..");
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+            mGoogleApiClient, mLocationRequest, this);
+        break;
+      case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+        Log.d(TAG, "ResolutionRequired. Prompting user.");
+        try {
+          status.startResolutionForResult(
+            parentActivity,
+            REQUEST_CHECK_SETTINGS);
+        } catch (SendIntentException e) {
+        }
+        break;
+      case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+        Log.d(TAG, "Settings change unavailable.");
+        locationFailed("Settings change unavailable.");
+        break;
+    }
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    final LocationSettingsStates states = LocationSettingsStates.fromIntent(data);
+    Log.d(TAG, "onActivityResult returned with " + data);
+    switch (requestCode) {
+      case REQUEST_CHECK_SETTINGS:
+        switch (resultCode) {
+          case Activity.RESULT_OK:
+            Log.d(TAG, "Hooray, user enabled location!");
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                mGoogleApiClient, mLocationRequest, this);
+            break;
+          case Activity.RESULT_CANCELED:
+            Log.d(TAG, "Bad news, user declined to turn on location.");
+            locationFailed("User declined to enable location");
+            break;
+          default:
+            break;
+        }
+        break;
     }
   }
 
@@ -170,6 +248,13 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
     // TODO: Fetch maximumAge from options.
     return (mLastLocation != null && 
            ((mLastUpdateTime - System.currentTimeMillis()) < 2000));
+  }
+
+  private void locationFailed(String error) {
+    for (RCTLocationRequest request : pendingRequests) {
+      request.failureCallback.invoke(error);
+      pendingRequests.clear();
+    }
   }
 }
 

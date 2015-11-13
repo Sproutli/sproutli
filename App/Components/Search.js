@@ -120,7 +120,7 @@ class Search extends React.Component {
         console.warn(message, error);
         GoogleAnalytics.trackError(message + ' ' + error, false);
         this.setState({ 
-          searching: false,
+          loading: false,
           hasError: true
         });
       });
@@ -241,6 +241,15 @@ class Search extends React.Component {
   }
 
   renderListings() {
+    if (this.state.hasError) { 
+      return (
+        <ScrollView contentContainerStyle={styles.loadingContainer} keyboardShouldPersistTaps={false} keyboardDismissMode='on-drag'>
+          <Icon name='sad-outline' size={100} color={COLOURS.GREY} />
+          <Text style={styles.loadingText}>There was an error searching - please try again!</Text>
+        </ScrollView>
+      );
+    }
+
     if (this.state.loading) { 
       return (
         <View style={styles.loadingContainer}>
