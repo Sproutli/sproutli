@@ -48,6 +48,7 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
   LocationRequest mLocationRequest;
   long mLastUpdateTime;
   boolean observingLocation;
+  boolean userDeclined;
 
   public LocationModule(ReactApplicationContext reactContext, Activity activity) {
     super(reactContext);
@@ -66,6 +67,8 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
   public void getCurrentPosition(ReadableMap options, Callback successCallback, Callback failureCallback) {
     if (currentLocationValid(options)) {
       successCallback.invoke(buildResponse(mLastLocation));
+    } else if (userDeclined) {
+      failureCallback.invoke("User declined to enable location");
     } else {
       RCTLocationRequest request = new RCTLocationRequest(options, successCallback, failureCallback);
       pendingRequests.add(request);
@@ -172,6 +175,7 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
           case Activity.RESULT_CANCELED:
             Log.d(TAG, "Bad news, user declined to turn on location.");
             locationFailed("User declined to enable location");
+            userDeclined = true;
             break;
           default:
             break;
