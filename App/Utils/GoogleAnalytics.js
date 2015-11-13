@@ -16,12 +16,16 @@ class GoogleAnalytics {
   }
 
   viewedScreen(screenName) {
-    var screenView = new Hits.ScreenView('Sproutli', '2.0', 'com.sproutli.app', null, screenName);
+    var screenView = new Hits.ScreenView('Sproutli', '2.1', 'com.sproutli.app', null, screenName);
     this.ga.send(screenView);
   }
 
   trackEvent(eventCategory, eventAction, eventLabel) {
     this.ga.send(new Hits.Event(eventCategory, eventAction, eventLabel));
+  }
+
+  trackError(message, fatal) {
+    this.ga.send(new Hits.Exception(message, fatal));
   }
 }
 

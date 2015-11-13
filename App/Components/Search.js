@@ -115,7 +115,15 @@ class Search extends React.Component {
           dataSource: this.state.dataSource.cloneWithRows(filteredListings)
         });
       })
-      .catch((error) => console.warn('[Search] - Error searching:', error));
+      .catch((error) => {
+        var message = '[Search] - Error searching';
+        console.warn(message, error);
+        GoogleAnalytics.trackError(message + ' ' + error, false);
+        this.setState({ 
+          searching: false,
+          hasError: true
+        });
+      });
   }
 
   _onChangeText(text) {
