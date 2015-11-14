@@ -4,12 +4,13 @@ var React = require('react-native');
 var {
   StyleSheet,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   PixelRatio,
+  Image,
   View
 } = React;
 
-var Icon = require('react-native-vector-icons/Ionicons');
+// var Icon = require('react-native-vector-icons/Ionicons');
 var COLOURS = require('../Constants/Colours');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 
@@ -52,18 +53,32 @@ class Listing extends React.Component {
   }
 
   render() {
+    var listing = (
+      <View>
+        <Text style={styles.title}>{this.props.listing.name}</Text>
+
+        { this.renderedVeganLevel() }
+        { this.renderedRating() }
+        { this.renderedLocation() }
+
+        { this.renderedTags() }
+      </View>
+    );
+
+    if (this.props.listing.premium && this.props.listing.cover_image) {
+      return (
+        <TouchableOpacity onPress={this.props.handler} activeOpacity={0.8}> 
+          <Image style={styles.card} source={{uri: this.props.listing.cover_image}}>
+            { listing }
+          </Image>
+        </TouchableOpacity>
+      );
+    }
+
     return (
-      <TouchableHighlight style={styles.card} onPress={this.props.handler} underlayColor={COLOURS.DARKER_GREEN}>
-        <View>
-          <Text style={styles.title}>{this.props.listing.name}</Text>
-
-          { this.renderedVeganLevel() }
-          { this.renderedRating() }
-          { this.renderedLocation() }
-
-          { this.renderedTags() }
-        </View>
-      </TouchableHighlight>
+      <TouchableOpacity style={[styles.card, {backgroundColor: COLOURS.GREEN }]} onPress={this.props.handler} activeOpacity={0.8}> 
+        { listing }
+      </TouchableOpacity>
     );
   }
 }
@@ -72,7 +87,6 @@ var styles = StyleSheet.create({
   card: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: COLOURS.GREEN,
     margin: 10,
     borderRadius: 3,
     borderWidth: 0.1,

@@ -20,6 +20,7 @@ var prepareProps = (location) => {
     'phone_number',
     'website',
     'cover_image',
+    'premium',
     'offer_details',
     'offer_instructions',
     'offer_conditions'
