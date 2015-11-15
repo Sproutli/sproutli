@@ -245,7 +245,11 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
   }
 
   private void stopObservingLocation() {
-    LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+    try {
+      LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+    } catch (Exception e) {
+      Log.e(TAG, "Error in stopObservingLocation: ", e);
+    }
   }
 
   private boolean currentLocationValid(ReadableMap options) {
