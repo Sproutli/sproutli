@@ -14,11 +14,8 @@ class SearchBox extends React.Component {
       <TextInput
         style={styles.search}
         text={this.props.query}
-        barTintColour={COLOURS.GREEN}
         placeholder='Search'
-        hideBackground
-        textFieldBackgroundColor='#f8f8f8'
-        tintColor={COLOURS.GREEN}
+        underlineColorAndroid={COLOURS.GREEN}
         onChangeText={this.props.onChangeText}
         onSubmitEditing={this.props.onSubmitEditing}
         onFocus={this.props.onFocus}
