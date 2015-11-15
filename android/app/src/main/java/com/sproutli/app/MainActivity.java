@@ -1,5 +1,6 @@
 package com.sproutli.app;
 
+import android.content.Intent;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -14,8 +15,6 @@ import com.facebook.soloader.SoLoader;
 import com.oblador.vectoricons.VectorIconsPackage;
 
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
-
-import com.mapbox.reactnativemapboxgl.ReactNativeMapboxGLPackage;
 
 import io.intercom.android.sdk.Intercom;
 
@@ -44,11 +43,10 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
-                .addPackage(new LocationPackage())
+                .addPackage(new LocationPackage(this))
                 .addPackage(new IntercomPackage())
                 .addPackage(new VectorIconsPackage())
                 .addPackage(new ReactMaterialKitPackage())
-                .addPackage(new ReactNativeMapboxGLPackage())
                 .addPackage(new RNCallIntentPackage())
                 .addPackage(new RNWebIntentPackage())
                 .addPackage(new RNMapIntentPackage())
@@ -96,10 +94,19 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
 
     @Override
     protected void onResume() {
-        super.onResume();
+      super.onResume();
 
-        if (mReactInstanceManager != null) {
-            mReactInstanceManager.onResume(this);
-        }
+      if (mReactInstanceManager != null) {
+          mReactInstanceManager.onResume(this, this);
+      }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+      super.onActivityResult(requestCode, resultCode, data);
+
+      if (mReactInstanceManager != null) {
+        mReactInstanceManager.onActivityResult(requestCode, resultCode, data);
+      }
     }
 }

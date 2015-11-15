@@ -115,7 +115,15 @@ class Search extends React.Component {
           dataSource: this.state.dataSource.cloneWithRows(filteredListings)
         });
       })
-      .catch((error) => console.warn('[Search] - Error searching:', error));
+      .catch((error) => {
+        var message = '[Search] - Error searching';
+        console.warn(message, error);
+        GoogleAnalytics.trackError(message + ' ' + error, false);
+        this.setState({ 
+          loading: false,
+          hasError: true
+        });
+      });
   }
 
   _onChangeText(text) {
@@ -233,6 +241,15 @@ class Search extends React.Component {
   }
 
   renderListings() {
+    if (this.state.hasError) { 
+      return (
+        <ScrollView contentContainerStyle={styles.loadingContainer} keyboardShouldPersistTaps={false} keyboardDismissMode='on-drag'>
+          <Icon name='sad-outline' size={100} color={COLOURS.GREY} />
+          <Text style={styles.loadingText}>There was an error searching - please try again!</Text>
+        </ScrollView>
+      );
+    }
+
     if (this.state.loading) { 
       return (
         <View style={styles.loadingContainer}>

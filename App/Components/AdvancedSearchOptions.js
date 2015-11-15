@@ -1,17 +1,21 @@
 'use strict';
 var React = require('react-native');
 var {
+  Platform,
   View
 } = React;
-var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
+
 var VeganLevelSlider = require('./VeganLevelSlider');
+var COLOURS = require('../Constants/Colours');
+
 class AdvancedSearchOptions extends React.Component {
   render() {
     var that = this;
+    var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
     var GooglePlacesAutocomplete = require('react-native-google-places-autocomplete').create({
       placeholder: 'Location',
       fetchDetails: true,
-      styles: styles,
+      styles: styles[Platform.OS],
       getDefaultValue: () => this.props.locationName,
       onPress(place, placeDetails) {
         if (place === null) { 
@@ -53,9 +57,23 @@ class AdvancedSearchOptions extends React.Component {
 }
 
 var styles = {
-  textInput: {
-    marginHorizontal: 4,
-    height: 44
+  'ios' : {
+    textInput: {
+      paddingTop: 4.5,
+      paddingBottom: 4.5,
+      marginTop: 7.5,
+      marginHorizontal: 8,
+      paddingHorizontal: 8,
+      borderRadius: 6,
+      backgroundColor: COLOURS.LIGHT_GREY,
+      height: 34
+    }
+  }, 
+  'android' : {
+    textInput: {
+      height: 44,
+      marginHorizontal: 4
+    }
   }
 };
 

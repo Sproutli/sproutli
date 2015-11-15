@@ -4,8 +4,9 @@ var React = require('react-native');
 var {
   StyleSheet,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   PixelRatio,
+  Image,
   View
 } = React;
 
@@ -19,7 +20,7 @@ class Listing extends React.Component {
 
   renderedVeganLevel() {
     if (!this.props.listing.vegan_level) { return <View />; }
-    return <Text style={styles.subTitle}>{VEGAN_LEVELS[this.props.listing.vegan_level].short}</Text>;
+    return <Text style={styles.subTitle}><Icon name='heart' /> {VEGAN_LEVELS[this.props.listing.vegan_level].short}</Text>;
   }
 
   renderedLocation() {
@@ -28,7 +29,7 @@ class Listing extends React.Component {
 
     distance = parseFloat(distance).toFixed(1);
 
-    return <Text style={styles.subTitle}>{this.props.listing.locality} ({distance} km)</Text>;
+    return <Text style={styles.subTitle}><Icon name='ios-location' /> {this.props.listing.locality} ({distance} km)</Text>;
   }
 
   renderedRating() {
@@ -39,7 +40,7 @@ class Listing extends React.Component {
       rating = `${rating}/5.0`;
     }
 
-    return <Text style={styles.subTitle}>{rating}</Text>;
+    return <Text style={styles.subTitle}><Icon name='ios-star' /> {rating}</Text>;
   }
 
   renderedTags() {
@@ -52,18 +53,32 @@ class Listing extends React.Component {
   }
 
   render() {
+    var listing = (
+      <View style={{backgroundColor: 'transparent'}}>
+        <Text style={styles.title}>{this.props.listing.name}</Text>
+
+        { this.renderedVeganLevel() }
+        { this.renderedRating() }
+        { this.renderedLocation() }
+
+        { this.renderedTags() }
+      </View>
+    );
+
+    if (this.props.listing.premium && this.props.listing.cover_image) {
+      return (
+        <TouchableOpacity onPress={this.props.handler} activeOpacity={0.8}> 
+          <Image style={styles.card} source={{uri: this.props.listing.cover_image}}>
+            { listing }
+          </Image>
+        </TouchableOpacity>
+      );
+    }
+
     return (
-      <TouchableHighlight style={styles.card} onPress={this.props.handler} underlayColor={COLOURS.DARKER_GREEN}>
-        <View>
-          <Text style={styles.title}>{this.props.listing.name}</Text>
-
-          { this.renderedVeganLevel() }
-          { this.renderedRating() }
-          { this.renderedLocation() }
-
-          { this.renderedTags() }
-        </View>
-      </TouchableHighlight>
+      <TouchableOpacity style={[styles.card, {backgroundColor: COLOURS.GREEN }]} onPress={this.props.handler} activeOpacity={0.8}> 
+        { listing }
+      </TouchableOpacity>
     );
   }
 }
@@ -72,14 +87,11 @@ var styles = StyleSheet.create({
   card: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: COLOURS.GREEN,
     margin: 10,
     borderRadius: 3,
     borderWidth: 0.1,
     borderColor: COLOURS.GREY,
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10
+    padding: 10
   },
   title: {
     fontSize: 20,

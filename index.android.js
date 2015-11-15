@@ -3,6 +3,7 @@
 var React = require('react-native');
 var App = require('./App/Components/App');
 var Login = require('./App/Components/Login');
+var GoogleAnalytics = require('./App/Utils/GoogleAnalytics');
 var {
   View,
   AppRegistry,
@@ -18,7 +19,10 @@ class Sproutli extends React.Component {
       .then((token) => {
         this.setState({token});
       })
-      .catch((error) => console.warn('[SproutliMain] - Something bad happened fetching the token', error));
+      .catch((error) => {
+        console.warn('[SproutliMain] - Something bad happened fetching the token', error);
+        GoogleAnalytics.trackError(error, true);
+      });
   }
 
   renderScene(route, navigator) {
