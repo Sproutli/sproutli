@@ -5,6 +5,7 @@ var {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Platform,
   PixelRatio,
   Image,
   View
@@ -91,7 +92,8 @@ var styles = StyleSheet.create({
     borderRadius: 3,
     borderWidth: 0.1,
     borderColor: COLOURS.GREY,
-    padding: 10
+    padding: 10,
+    paddingBottom: Platform.OS === 'ios' ? 10 : 0
   },
   title: {
     fontSize: 20,
