@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         maven { url 'https://maven.fabric.io/public' }
     }
 
@@ -9,6 +10,8 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+
+//android.enforceUniquePackageName=false
 
 /**
  * The react.gradle file registers two tasks: bundleDebugJsAndAssets and bundleReleaseJsAndAssets.
@@ -71,7 +74,7 @@ android {
 
     defaultConfig {
         applicationId "com.sproutli.app"
-        minSdkVersion 16
+        minSdkVersion 22
         targetSdkVersion 22
         versionCode 230000
         versionName "2.3"
@@ -108,7 +111,8 @@ dependencies {
   compile 'com.android.support:multidex:1.0.0'
   compile fileTree(dir: 'libs', include: ['*.jar'])
   compile 'com.android.support:appcompat-v7:23.0.1'
-  compile 'com.facebook.react:react-native:0.15.+'
+  //compile project(':ReactAndroid')
+  compile 'com.facebook.react:react-native:0.15.1'
   compile project(':react-native-vector-icons')
   compile 'com.google.android.gms:play-services:8.1.0'
   compile project(':RNMaterialKit')
