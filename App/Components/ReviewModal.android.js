@@ -17,7 +17,7 @@ var COLOURS = require('../Constants/Colours');
 
 class Stars extends React.Component {
   getStarIcon(num) {
-    return num <= this.props.stars ? require('../Images/ic_star_black_24dp.png') : require('../Images/ic_star_border_black_24dp.png');
+    return num <= this.props.stars ? require('../Images/ic_star_black.png') : require('../Images/ic_star_border_black.png');
   }
   render() {
     return (
