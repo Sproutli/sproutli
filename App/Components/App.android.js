@@ -143,7 +143,7 @@ class App extends React.Component {
   }
 
   needsNavIcon() {
-    var image = require('../Images/ic_arrow_back_white_48dp.png');
+    var image = require('../Images/ic_arrow_back_white.png');
     if (this.state.title !== 'Search') return image;
   }
   
@@ -152,7 +152,7 @@ class App extends React.Component {
     return (
       <View style={{flex: 1}}>
         <ToolbarAndroid
-          overflowIcon={require('../Images/ic_more_vert_white_48pt.png')}
+          overflowIcon={require('../Images/ic_more_vert_white.png')}
           actions={this.state.actions}
           onActionSelected={this._onActionSelected.bind(this)}
           navIcon={this.needsNavIcon()}
