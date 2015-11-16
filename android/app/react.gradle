@@ -21,6 +21,7 @@ def inputExcludes = config.inputExcludes ?: ["android/**", "ios/**"]
 
 def jsBundleFileDebug = file("$jsBundleDirDebug/$bundleAssetName")
 def jsBundleFileRelease = file("$jsBundleDirRelease/$bundleAssetName")
+def jsBundleFileReleaseMap = file("$jsBundleDirRelease/$bundleAssetName" + ".map")
 
 task bundleDebugJsAndAssets(type: Exec) {
     // create dirs if they are not there (e.g. the "clean" task just ran)
@@ -57,7 +58,9 @@ task bundleReleaseJsAndAssets(type: Exec) {
     // set up the call to the react-native cli
     workingDir reactRoot
     commandLine "react-native", "bundle", "--platform", "android", "--dev", "false", "--entry-file",
-            entryFile, "--bundle-output", jsBundleFileRelease, "--assets-dest", resourcesDirRelease
+            entryFile, "--bundle-output", jsBundleFileRelease, "--assets-dest", resourcesDirRelease,
+            "--sourcemap-output", "$jsBundleDirRelease/index.android.map"
+  
 
     enabled config.bundleInRelease ?: true
 }
