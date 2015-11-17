@@ -33,7 +33,7 @@
    */
 
   //jsCodeLocation = [NSURL URLWithString:@"http://172.20.10.3:8081/index.ios.bundle?platform=ios&dev=true"];
-  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+  //jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
 
   /**
    * OPTION 2
@@ -45,7 +45,7 @@
    * see http://facebook.github.io/react-native/docs/runningondevice.html
    */
 
-  //jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"sproutli"
@@ -62,6 +62,28 @@
   [Intercom setApiKey:@"ios_sdk-0ded67ded471358f3ace64df38a7e82f0906fa65" forAppId:@"r18lw9fx"];
   
   return YES;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+  if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]){ // iOS 8 (User notifications)
+    [application registerUserNotificationSettings:
+     [UIUserNotificationSettings settingsForTypes:
+      (UIUserNotificationTypeBadge |
+       UIUserNotificationTypeSound |
+       UIUserNotificationTypeAlert)
+                                       categories:nil]];
+    [application registerForRemoteNotifications];
+  } else { // iOS 7 (Remote notifications)
+    [application registerForRemoteNotificationTypes:
+     (UIRemoteNotificationType)
+     (UIRemoteNotificationTypeBadge |
+      UIRemoteNotificationTypeSound |
+      UIRemoteNotificationTypeAlert)];
+  }
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  [Intercom setDeviceToken:deviceToken];
 }
 
 @end

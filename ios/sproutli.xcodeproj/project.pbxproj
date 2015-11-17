@@ -483,6 +483,11 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = T2TG9M3MRR;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					C35B3EA81BCC904E005AB832 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -797,6 +802,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.app;
 				PRODUCT_NAME = Sproutli;
+				PROVISIONING_PROFILE = "9bf4216b-7b3d-435f-b9a3-8bf14938c5f2";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -807,7 +813,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Sproutli PTY LTD (T2TG9M3MRR)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -821,6 +827,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.app;
 				PRODUCT_NAME = Sproutli;
+				PROVISIONING_PROFILE = "9bf4216b-7b3d-435f-b9a3-8bf14938c5f2";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
