@@ -75,8 +75,8 @@ android {
         applicationId "com.sproutli.app"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 232000
-        versionName "2.3.2"
+        versionCode 240000
+        versionName "2.4.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
