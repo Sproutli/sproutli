@@ -787,7 +787,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -802,7 +802,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.app;
 				PRODUCT_NAME = Sproutli;
-				PROVISIONING_PROFILE = "9bf4216b-7b3d-435f-b9a3-8bf14938c5f2";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;

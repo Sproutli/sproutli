@@ -5,10 +5,13 @@ var {
   View,
   StyleSheet,
   ScrollView,
+  Text,
+  TouchableOpacity,
   AlertIOS
 } = React;
 
 var t = require('tcomb-form-native');
+var Icon = require('react-native-vector-icons/Ionicons');
 var Form = t.form.Form;
 
 var Button = require('./Button');
@@ -106,6 +109,10 @@ class AddListing extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container} keyboardDismissMode='on-drag'>
+        <TouchableOpacity style={styles.buttonContainer} onPress={() => console.log('Image')}>
+          <Icon color={COLOURS.GREY} size={96} name='image' />
+          <Text style={{color: COLOURS.GREY}}>Add an image!</Text>
+        </TouchableOpacity>
         <Form
           value={defaults}
           options={formOptions}
@@ -113,7 +120,7 @@ class AddListing extends React.Component {
           type={Listing}
         />
         <View style={styles.buttonContainer}>
-          <Button onPress={this._formPressed.bind(this)}>Add your listing</Button>
+          <Button onPress={this._formPressed.bind(this)}>Add listing</Button>
         </View>
       </ScrollView>
     );
