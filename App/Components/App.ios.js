@@ -46,7 +46,7 @@ class App extends React.Component {
           passProps: {searchConfig: SUGGESTIONS[name].searchConfig, searchLabel:name, veganLevel: this.veganLevel},
           onRightButtonPress: () => { this.refs.navigator.push({
             component: AddListing,
-            title: 'Add a Listing!'
+            title: 'Add a Listing'
           }); }
         }}
       />
