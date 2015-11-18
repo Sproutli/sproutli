@@ -144,6 +144,10 @@ class AddListing extends React.Component {
     });
   }
 
+  _imageLongPressed(imageIndex) {
+    console.log(imageIndex);
+  }
+
   imagePicker() {
     if (this.state.images.length > 2) {
       return false;
@@ -167,12 +171,20 @@ class AddListing extends React.Component {
     }
   }
 
+  renderImage(source, imageIndex) {
+    return (
+      <TouchableOpacity activeOpacity={0.9} onLongPress={this._imageLongPressed.bind(this, imageIndex)} key={imageIndex}>
+        <Image style={styles.image} source={source} />
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     console.log('Images!', this.state.images);
     return (
       <ScrollView style={styles.container} keyboardDismissMode='on-drag'>
         <View style={styles.images}>
-          { this.state.images.map((i, k) => <Image style={styles.image} key={k} source={i} />) }
+          { this.state.images.map((i, k) => this.renderImage(i, k)) }
           { this.imagePicker() }
         </View>
         <Form
