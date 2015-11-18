@@ -15,6 +15,7 @@ var {
 
 var RNGeocoder = require('react-native-geocoder');
 var Icon = require('react-native-vector-icons/Ionicons');
+var ActionButton = require('react-native-action-button');
 var Moment = require('moment');
 var Debounce = require('debounce');
 
@@ -279,6 +280,16 @@ class Search extends React.Component {
    );
   }
 
+  renderFab() {
+    if (Platform.OS === 'ios') { return; }
+
+    return (
+      <ActionButton buttonColor={COLOURS.GREY} onPress={() => { console.log('Hey!'); }}>
+        <Icon name='android-create' style={styles.actionButtonIcon} />
+      </ActionButton>
+    );
+  }
+
   render() {
     return (
       <View style={styles.bigContainer}>
@@ -287,6 +298,8 @@ class Search extends React.Component {
         { this.renderAdvancedSearch() }
 
         { this.renderListings() }
+
+        { this.renderFab() }
       </View>
     );
   }
@@ -309,6 +322,12 @@ var styles = StyleSheet.create({
     marginTop: 30,
     fontSize: PixelRatio.get() === 3 ? 16 : 12,
     color: COLOURS.GREY
+  },
+
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white'
   }
 });
 

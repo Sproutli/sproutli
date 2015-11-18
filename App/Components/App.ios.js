@@ -1,12 +1,13 @@
 'use strict';
 
 var React = require('react-native');
-var Icon = require('react-native-vector-icons/Ionicons');
 var {
   StyleSheet,
   NavigatorIOS,
   TabBarIOS
 } = React;
+
+var Icon = require('react-native-vector-icons/Ionicons');
 
 var Search = require('./Search');
 var Intercom = require('../Utils/Intercom');
@@ -21,22 +22,32 @@ class App extends React.Component {
     this.state = {
       currentTab: 'food'
     };
+
+    Icon.getImageSource('plus', 24, COLOURS.GREEN).then((source) => {
+      console.log('Hell yeah:', source);
+      this.setState({ addIcon: source });
+    });
   }
 
   makeNavigator(name) {
+    if (!this.state.addIcon) { return false; }
+
     return (
       <NavigatorIOS
         style={styles.container}
         tintColor={COLOURS.GREEN}
         titleTextColor={COLOURS.GREY}
         initialRoute={{
+          rightButtonIcon: this.state.addIcon,
           component: Search,
           title: name,
-          passProps: {searchConfig: SUGGESTIONS[name].searchConfig, searchLabel:name, veganLevel: this.veganLevel}
+          passProps: {searchConfig: SUGGESTIONS[name].searchConfig, searchLabel:name, veganLevel: this.veganLevel},
+          onRightButtonPress: () => { console.log('Hey there!'); }
         }}
       />
     );
   }
+
 
   render() {
     return (
