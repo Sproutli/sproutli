@@ -23,6 +23,7 @@ var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
 var ListingDetail = require('./ListingDetail');
 var AdvancedSearchOptions = require('./AdvancedSearchOptions');
+var AddListing = require('./AddListing');
 
 var SearchEngine = require('../Utils/SearchEngine');
 var ListingsFilter = require('../Utils/ListingsFilter');
@@ -280,11 +281,21 @@ class Search extends React.Component {
    );
   }
 
+  showAddListingScreen() {
+    this.props.navigator.push({
+      hasActions: false,
+      navigator: this.props.navigator,
+      component: AddListing,
+      title: 'Add a Listing'
+    });
+  }
+
   renderFab() {
     if (Platform.OS === 'ios') { return; }
 
+
     return (
-      <ActionButton buttonColor={COLOURS.GREY} onPress={() => { console.log('Hey!'); }}>
+      <ActionButton buttonColor={COLOURS.GREY} onPress={this.showAddListingScreen.bind(this)}>
         <Icon name='android-create' style={styles.actionButtonIcon} />
       </ActionButton>
     );
