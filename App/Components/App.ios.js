@@ -9,6 +9,7 @@ var {
 
 var Icon = require('react-native-vector-icons/Ionicons');
 
+var AddListing = require('./AddListing');
 var Search = require('./Search');
 var Intercom = require('../Utils/Intercom');
 var KindnessCard = require('./KindnessCard');
@@ -37,12 +38,16 @@ class App extends React.Component {
         style={styles.container}
         tintColor={COLOURS.GREEN}
         titleTextColor={COLOURS.GREY}
+        ref='navigator'
         initialRoute={{
           rightButtonIcon: this.state.addIcon,
           component: Search,
           title: name,
           passProps: {searchConfig: SUGGESTIONS[name].searchConfig, searchLabel:name, veganLevel: this.veganLevel},
-          onRightButtonPress: () => { console.log('Hey there!'); }
+          onRightButtonPress: () => { this.refs.navigator.push({
+            component: AddListing,
+            title: 'Add a Listing!'
+          }); }
         }}
       />
     );
