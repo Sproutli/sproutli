@@ -2,6 +2,7 @@
 
 var React = require('react-native');
 var {
+  Image,
   View,
   StyleSheet,
   ScrollView,
@@ -10,6 +11,8 @@ var {
   AlertIOS
 } = React;
 
+var Dimensions = require('Dimensions');
+var UIImagePickerManager = require('NativeModules').UIImagePickerManager;
 var t = require('tcomb-form-native');
 var Icon = require('react-native-vector-icons/Ionicons');
 var Form = t.form.Form;
@@ -22,6 +25,9 @@ var COLOURS = require('../Constants/Colours');
 
 var categoryEnums = {};
 var veganLevelEnums = {};
+
+var { width } = Dimensions.get('window');
+var imageSize = width / 3 - 16;
 
 CATEGORIES.forEach((c) => { categoryEnums[c] = c; });
 VEGAN_LEVELS.forEach((l, i) => { 
@@ -98,6 +104,12 @@ var formOptions = {
 };
 
 class AddListing extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      images: []
+    };
+  }
   _formPressed() {
     var valid = this.refs.form.getValue();
     if (valid) {
@@ -106,13 +118,63 @@ class AddListing extends React.Component {
       AlertIOS.alert('Uh oh!', 'Sorry, there were errors with your listing!');
     }
   }
+
+  _addImagePressed() {
+    var options = {
+      title: 'Select Image', // specify null or empty string to remove the title
+      cancelButtonTitle: 'Cancel',
+      takePhotoButtonTitle: 'Take Photo...', // specify null or empty string to remove this button
+      chooseFromLibraryButtonTitle: 'Choose from Library...', // specify null or empty string to remove this button
+      quality: 1,
+      allowsEditing: true, // Built in iOS functionality to resize/reposition the image
+      noData: false, // Disables the base64 `data` field from being generated (greatly improves performance on large photos)
+      storageOptions: { // if this key is provided, the image will get saved in the documents directory (rather than a temporary directory)
+        skipBackup: true, // image will NOT be backed up to icloud
+        path: 'images' // will save image at /Documents/images rather than the root
+      }
+    };
+
+    UIImagePickerManager.showImagePicker(options, (didCancel, response) => {
+      if (didCancel) { return ; }
+      var source = {uri: response.uri.replace('file://', ''), isStatic: true};
+      var images = this.state.images;
+      images.push(source);
+
+      this.setState({ images });
+    });
+  }
+
+  imagePicker() {
+    if (this.state.images.length > 2) {
+      return false;
+    }
+
+    if (this.state.images.length < 1) { 
+      return (
+        <TouchableOpacity style={styles.image} onPress={this._addImagePressed.bind(this)}>
+          <Icon color={COLOURS.GREY} size={80} name='image' />
+          <Text style={{color: COLOURS.GREY}}>Add image</Text>
+        </TouchableOpacity>
+      );
+    }
+
+    if (this.state.images.length > 0) {
+      return (
+        <TouchableOpacity style={styles.image} onPress={this._addImagePressed.bind(this)}>
+          <Icon color={COLOURS.GREY} size={64} name='plus' />
+        </TouchableOpacity>
+      );
+    }
+  }
+
   render() {
+    console.log('Images!', this.state.images);
     return (
       <ScrollView style={styles.container} keyboardDismissMode='on-drag'>
-        <TouchableOpacity style={styles.buttonContainer} onPress={() => console.log('Image')}>
-          <Icon color={COLOURS.GREY} size={96} name='image' />
-          <Text style={{color: COLOURS.GREY}}>Add an image!</Text>
-        </TouchableOpacity>
+        <View style={styles.images}>
+          { this.state.images.map((i, k) => <Image style={styles.image} key={k} source={i} />) }
+          { this.imagePicker() }
+        </View>
         <Form
           value={defaults}
           options={formOptions}
@@ -139,6 +201,19 @@ var styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center'
+  },
+  images: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16
+  },
+  image: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: imageSize,
+    height: imageSize,
+    margin: 8
   }
 });
 
