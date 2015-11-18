@@ -4,7 +4,8 @@ var React = require('react-native');
 var {
   View,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  AlertIOS
 } = React;
 
 var t = require('tcomb-form-native');
@@ -85,6 +86,14 @@ var formOptions = {
 };
 
 class AddListing extends React.Component {
+  _formPressed() {
+    var valid = this.refs.form.getValue();
+    if (valid) {
+      AlertIOS.alert('Hooray!', 'Your listing has been added!');
+    } else {
+      AlertIOS.alert('Uh oh!', 'Sorry, there were errors with your listing!');
+    }
+  }
   render() {
     return (
       <ScrollView style={styles.container}>
@@ -95,7 +104,7 @@ class AddListing extends React.Component {
           type={Listing}
         />
         <View style={styles.buttonContainer}>
-          <Button onPress={() => console.log(this.refs.form.getValue() || this.refs.form.validate())}>Add your listing</Button>
+          <Button onPress={this._formPressed.bind(this)}>Add your listing</Button>
         </View>
       </ScrollView>
     );
