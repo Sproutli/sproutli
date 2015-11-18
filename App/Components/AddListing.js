@@ -40,6 +40,9 @@ var OnlineStore = t.enums({
 var Tag = t.refinement(t.String, (s) => {
   return s.includes(' ') ? s.includes(',') : true;
 });
+var PhoneNumber = t.refinement(t.String, (s) => {
+  return s.startsWith('+61');
+});
 
 var defaults = {
   online_store: 'both',
@@ -51,7 +54,7 @@ var Listing = t.struct({
   name: t.String,
   description: t.String,
   tags: Tag,
-  phone_number: t.Number,
+  phone_number: PhoneNumber,
   vegan_level: VeganLevel,
   categories: Category,
   online_store: OnlineStore
@@ -63,14 +66,17 @@ var formOptions = {
       placeholder: 'eg. Dessert Place'
     },
     description: {
-      placeholder: 'eg. A cool place that offers dessert'
+      placeholder: 'eg. A great place that offers dessert'
     },
     phone_number: {
-      placeholder: 'eg. +61 9898 0000'
+      placeholder: 'eg. +61 9898 0000',
+      keyboardType: 'phone-pad',
+      error: (value) => value ? '' : 'Phone numbers must start with +61'
     },
     tags: {
+      keyboardType: 'twitter',
       placeholder: 'eg. #cake, #dessert',
-      error: (value) => { (value && value.length === 0) ? '' : 'Separate multiple tags with commas'; }
+      error: (value) => (value && value.length === 0) ? '' : 'Separate multiple tags with commas'
     },
     vegan_level: {
       nullOption: false
@@ -89,14 +95,14 @@ class AddListing extends React.Component {
   _formPressed() {
     var valid = this.refs.form.getValue();
     if (valid) {
-      AlertIOS.alert('Hooray!', 'Your listing has been added!');
+      AlertIOS.alert('Hooray!', 'Your listing has been added!', [{ text: 'OK', onPress: () => this.props.navigator.pop() }]);
     } else {
       AlertIOS.alert('Uh oh!', 'Sorry, there were errors with your listing!');
     }
   }
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} keyboardDismissMode='on-drag'>
         <Form
           value={defaults}
           options={formOptions}
@@ -110,6 +116,10 @@ class AddListing extends React.Component {
     );
   }
 }
+
+AddListing.propTypes = {
+  navigator: React.PropTypes.object.isRequired
+};
 
 var styles = StyleSheet.create({
   container: {
