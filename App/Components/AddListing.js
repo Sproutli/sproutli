@@ -15,6 +15,7 @@ var Button = require('./Button');
 
 var CATEGORIES = require('../Constants/Categories');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
+var COLOURS = require('../Constants/Colours');
 
 var categoryEnums = {};
 var veganLevelEnums = {};
@@ -59,6 +60,8 @@ var Listing = t.struct({
   categories: Category,
   online_store: OnlineStore
 });
+
+t.form.Form.stylesheet.controlLabel.normal.color = COLOURS.GREY;
 
 var formOptions = {
   fields: {
