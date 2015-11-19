@@ -15,6 +15,7 @@ var {
 
 var RNGeocoder = require('react-native-geocoder');
 var Icon = require('react-native-vector-icons/Ionicons');
+var ActionButton = require('react-native-action-button');
 var Moment = require('moment');
 var Debounce = require('debounce');
 
@@ -22,6 +23,7 @@ var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
 var ListingDetail = require('./ListingDetail');
 var AdvancedSearchOptions = require('./AdvancedSearchOptions');
+var AddListing = require('./AddListing');
 
 var SearchEngine = require('../Utils/SearchEngine');
 var ListingsFilter = require('../Utils/ListingsFilter');
@@ -279,6 +281,26 @@ class Search extends React.Component {
    );
   }
 
+  showAddListingScreen() {
+    this.props.navigator.push({
+      hasActions: false,
+      navigator: this.props.navigator,
+      component: AddListing,
+      title: 'Add a Listing'
+    });
+  }
+
+  renderFab() {
+    if (Platform.OS === 'ios') { return; }
+
+
+    return (
+      <ActionButton buttonColor={COLOURS.GREY} onPress={this.showAddListingScreen.bind(this)}>
+        <Icon name='android-create' style={styles.actionButtonIcon} />
+      </ActionButton>
+    );
+  }
+
   render() {
     return (
       <View style={styles.bigContainer}>
@@ -287,6 +309,8 @@ class Search extends React.Component {
         { this.renderAdvancedSearch() }
 
         { this.renderListings() }
+
+        { this.renderFab() }
       </View>
     );
   }
@@ -309,6 +333,12 @@ var styles = StyleSheet.create({
     marginTop: 30,
     fontSize: PixelRatio.get() === 3 ? 16 : 12,
     color: COLOURS.GREY
+  },
+
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white'
   }
 });
 
