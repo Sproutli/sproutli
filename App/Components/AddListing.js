@@ -8,6 +8,7 @@ var {
   ScrollView,
   Text,
   TouchableOpacity,
+  ActionSheetIOS,
   AlertIOS
 } = React;
 
@@ -145,7 +146,19 @@ class AddListing extends React.Component {
   }
 
   _imageLongPressed(imageIndex) {
-    console.log(imageIndex);
+    var BUTTONS = ['Delete', 'Cancel']; 
+
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: BUTTONS,
+      cancelButtonIndex: 1,
+      destructiveButtonIndex: 0
+    },
+    () => {
+      var images = this.state.images;
+      images.splice(imageIndex, 1);
+
+      this.setState({ images });
+    });
   }
 
   imagePicker() {
