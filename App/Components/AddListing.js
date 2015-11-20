@@ -145,7 +145,7 @@ class AddListing extends React.Component {
     });
   }
 
-  _imageLongPressed(imageIndex) {
+  _imagePressed(imageIndex) {
     var BUTTONS = ['Delete', 'Cancel']; 
 
     ActionSheetIOS.showActionSheetWithOptions({
@@ -153,7 +153,9 @@ class AddListing extends React.Component {
       cancelButtonIndex: 1,
       destructiveButtonIndex: 0
     },
-    () => {
+    (buttonIndex) => {
+      if (buttonIndex != 0) { return ; } // We only want the delete button.
+
       var images = this.state.images;
       images.splice(imageIndex, 1);
 
@@ -168,16 +170,16 @@ class AddListing extends React.Component {
 
     if (this.state.images.length < 1) { 
       return (
-        <TouchableOpacity style={styles.image} onPress={this._addImagePressed.bind(this)}>
+        <TouchableOpacity style={styles.addImageContainer} onPress={this._addImagePressed.bind(this)}>
           <Icon color={COLOURS.GREY} size={80} name='image' />
-          <Text style={{color: COLOURS.GREY}}>Add image</Text>
+          <Text style={styles.addImageText}>Add Image</Text>
         </TouchableOpacity>
       );
     }
 
     if (this.state.images.length > 0) {
       return (
-        <TouchableOpacity style={styles.image} onPress={this._addImagePressed.bind(this)}>
+        <TouchableOpacity style={styles.addImageContainer} onPress={this._addImagePressed.bind(this)}>
           <Icon color={COLOURS.GREY} size={64} name='plus' />
         </TouchableOpacity>
       );
@@ -186,7 +188,7 @@ class AddListing extends React.Component {
 
   renderImage(source, imageIndex) {
     return (
-      <TouchableOpacity activeOpacity={0.9} onLongPress={this._imageLongPressed.bind(this, imageIndex)} key={imageIndex}>
+      <TouchableOpacity activeOpacity={0.9} onPress={this._imagePressed.bind(this, imageIndex)} key={imageIndex}>
         <Image style={styles.image} source={source} />
       </TouchableOpacity>
     );
@@ -219,6 +221,10 @@ AddListing.propTypes = {
 };
 
 var styles = StyleSheet.create({
+  addImageText: {
+    color: COLOURS.GREY,
+    fontWeight: 'bold'
+  },
   container: {
     flex: 1,
     padding: 8,
@@ -234,6 +240,16 @@ var styles = StyleSheet.create({
     marginBottom: 16
   },
   image: {
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: imageSize,
+    height: imageSize,
+    margin: 8
+  },
+  addImageContainer: {
+    backgroundColor: COLOURS.LIGHT_GREY,
+    borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
     width: imageSize,
