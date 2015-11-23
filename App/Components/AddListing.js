@@ -65,7 +65,7 @@ var Listing = t.struct({
   name: t.String,
   description: t.String,
   tags: Tag,
-  phone_number: PhoneNumber,
+  phone_number: t.maybe(PhoneNumber),
   vegan_level: VeganLevel,
   categories: Category,
   online_store: OnlineStore
@@ -79,7 +79,9 @@ var formOptions = {
       placeholder: 'eg. Dessert Place'
     },
     description: {
-      placeholder: 'eg. A great place that offers dessert'
+      placeholder: 'eg. A great place that offers dessert',
+      multiline: true,
+      numberOfLines: 3
     },
     phone_number: {
       placeholder: 'eg. +61 9898 0000',
@@ -96,9 +98,6 @@ var formOptions = {
     },
     online_store: {
       label: 'Business Type',
-      nullOption: false
-    },
-    owner_is_a: {
       nullOption: false
     }
   }
