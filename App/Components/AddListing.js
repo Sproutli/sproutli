@@ -107,9 +107,22 @@ class AddListing extends React.Component {
   constructor() {
     super();
     this.state = {
-      images: []
+      images: [],
+      isOnlineStore: false,
+      formValue: defaults
     };
   }
+
+  _onFormChanged(raw) {
+    var isOnlineStore = raw.online_store === 'y';
+
+    console.log('isOnlineStore', isOnlineStore);
+    this.setState({
+      formValue: raw,
+      isOnlineStore
+    });
+  }
+
   _formPressed() {
     var valid = this.refs.form.getValue();
     if (valid) {
@@ -202,7 +215,8 @@ class AddListing extends React.Component {
           { this.imagePicker() }
         </View>
         <Form
-          value={defaults}
+          onChange={this._onFormChanged.bind(this)}
+          value={this.state.formValue}
           options={formOptions}
           ref='form'
           type={Listing}
