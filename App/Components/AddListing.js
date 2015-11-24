@@ -4,7 +4,6 @@ var React = require('react-native');
 var {
   Image,
   View,
-  Platform,
   StyleSheet,
   ScrollView,
   Text,
@@ -14,22 +13,26 @@ var {
 } = React;
 
 var Dimensions = require('Dimensions');
+var { width } = Dimensions.get('window');
+var imageSize = width / 3 - 16;
+
 var UIImagePickerManager = require('NativeModules').UIImagePickerManager;
+
 var t = require('tcomb-form-native');
-var Icon = require('react-native-vector-icons/Ionicons');
 var Form = t.form.Form;
+var categoryEnums = {};
+var veganLevelEnums = {};
+
+var Icon = require('react-native-vector-icons/Ionicons');
+
+var { GooglePlacesAutocomplete } = require('react-native-google-places-autocomplete');
+var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
 
 var Button = require('./Button');
 
 var CATEGORIES = require('../Constants/Categories');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 var COLOURS = require('../Constants/Colours');
-
-var categoryEnums = {};
-var veganLevelEnums = {};
-
-var { width } = Dimensions.get('window');
-var imageSize = width / 3 - 16;
 
 CATEGORIES.forEach((c) => { categoryEnums[c] = c; });
 VEGAN_LEVELS.forEach((l, i) => { 
@@ -44,11 +47,6 @@ var OnlineStore = t.enums({
   n: 'Physical',
   both: 'Both'
 });
-// var Owner = t.enums({
-//   vegetarian: 'Vegetarian',
-//   vegan: 'Vegan',
-//   not_sure: 'Not sure'
-// });
 var Tag = t.refinement(t.String, (s) => {
   return s.includes(' ') ? s.includes(',') : true;
 });
@@ -108,6 +106,7 @@ class AddListing extends React.Component {
   constructor() {
     super();
     this.state = {
+      location: {},
       images: [],
       isOnlineStore: false,
       formValue: defaults
@@ -175,48 +174,30 @@ class AddListing extends React.Component {
       this.setState({ images });
     });
   }
+  
+  _onLocationSelected(location, details) {
+    this.setState({ location });
+  }
 
   addressForm() {
     if (this.state.isOnlineStore) {
       return false;
     }
 
-    var that = this;
-    var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
-    var GooglePlacesAutocomplete = require('react-native-google-places-autocomplete').create({
-      placeholder: 'Start typing an address',
-      fetchDetails: true,
-      styles: { textInput: t.form.Form.stylesheet.textbox.normal },
-      onPress(place, placeDetails) {
-        if (place === null) { 
-          that.props.onLocationSelected(null); 
-          return;
-        }
-
-        var geometry = placeDetails.geometry.location;
-        geometry = {
-          latitude: geometry.lat,
-          longitude: geometry.lng
-        };
-        var location = {
-          geometry,
-          name: placeDetails.name
-        };
-
-        that.props.onLocationSelected(location);
-      },
-      minLength: 2,
-      query: {
-        key: API_KEY,
-        language: 'en',
-        types: 'geocode'
-      }
-    }).bind(this);
-
     return (
       <View>
         <Text style={t.form.Form.stylesheet.controlLabel.normal}>Address</Text>
-        <GooglePlacesAutocomplete />
+        <GooglePlacesAutocomplete 
+          placeholder='Start typing an address'
+          fetchDetails
+          onPress={this._onLocationSelected.bind(this)}
+          query={{
+            key: API_KEY,
+            language: 'en',
+            types: 'geocode'
+          }}
+          styles = {{ textInput: t.form.Form.stylesheet.textbox.normal }}
+        />
       </View>
     );
   }
