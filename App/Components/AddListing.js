@@ -4,6 +4,7 @@ var React = require('react-native');
 var {
   Image,
   View,
+  Platform,
   StyleSheet,
   ScrollView,
   Text,
@@ -175,6 +176,51 @@ class AddListing extends React.Component {
     });
   }
 
+  addressForm() {
+    if (this.state.isOnlineStore) {
+      return false;
+    }
+
+    var that = this;
+    var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
+    var GooglePlacesAutocomplete = require('react-native-google-places-autocomplete').create({
+      placeholder: 'Start typing an address',
+      fetchDetails: true,
+      styles: { textInput: t.form.Form.stylesheet.textbox.normal },
+      onPress(place, placeDetails) {
+        if (place === null) { 
+          that.props.onLocationSelected(null); 
+          return;
+        }
+
+        var geometry = placeDetails.geometry.location;
+        geometry = {
+          latitude: geometry.lat,
+          longitude: geometry.lng
+        };
+        var location = {
+          geometry,
+          name: placeDetails.name
+        };
+
+        that.props.onLocationSelected(location);
+      },
+      minLength: 2,
+      query: {
+        key: API_KEY,
+        language: 'en',
+        types: 'geocode'
+      }
+    }).bind(this);
+
+    return (
+      <View>
+        <Text style={t.form.Form.stylesheet.controlLabel.normal}>Address</Text>
+        <GooglePlacesAutocomplete />
+      </View>
+    );
+  }
+
   imagePicker() {
     if (this.state.images.length > 2) {
       return false;
@@ -221,6 +267,7 @@ class AddListing extends React.Component {
           ref='form'
           type={Listing}
         />
+        { this.addressForm() }
         <View style={styles.buttonContainer}>
           <Button onPress={this._formPressed.bind(this)}>Add listing</Button>
         </View>
@@ -270,5 +317,6 @@ var styles = StyleSheet.create({
     margin: 8
   }
 });
+
 
 module.exports = AddListing;
