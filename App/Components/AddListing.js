@@ -1,3 +1,4 @@
+/* @flow */
 'use strict';
 
 var React = require('react-native');
@@ -29,6 +30,8 @@ var { GooglePlacesAutocomplete } = require('react-native-google-places-autocompl
 var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
 
 var Button = require('./Button');
+
+var CreateListing = require('../Utils/CreateListing');
 
 var CATEGORIES = require('../Constants/Categories');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
@@ -65,6 +68,7 @@ var Listing = t.struct({
   description: t.String,
   tags: Tag,
   phone_number: t.maybe(PhoneNumber),
+  website: t.maybe(t.String),
   vegan_level: VeganLevel,
   categories: Category,
   online_store: OnlineStore
@@ -123,15 +127,27 @@ class AddListing extends React.Component {
     });
   }
 
+  _onListingCreated() {
+    AlertIOS.alert(
+      'Hooray!', 'Your listing has been added!', 
+      [{ text: 'OK', onPress: () => this.props.navigator.pop() }]
+    );
+  }
+
+  _onListingError(errorMessage: string) {
+    AlertIOS.alert(errorMessage);
+  }
+
   _formPressed() {
     var valid = this.refs.form.getValue();
     if (valid) {
       var listing = JSON.parse(JSON.stringify(valid)); // Surely this is insane.
       listing = Object.assign(listing, this.state.location);
-      console.log(listing);
-      AlertIOS.alert('Hooray!', 'Your listing has been added!', [{ text: 'OK', onPress: () => this.props.navigator.pop() }]);
+      CreateListing.create(listing)
+        .then(this._onListingCreated.bind(this))
+        .catch(this._onListingError('Sorry! There was an error creating your listing. Please let us know what happened.'));
     } else {
-      AlertIOS.alert('Uh oh!', 'Sorry, there were errors with your listing!');
+      this._onListingError('Uh oh!', 'Sorry, there were errors with your listing!');
     }
   }
 
