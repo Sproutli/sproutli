@@ -175,7 +175,23 @@ class AddListing extends React.Component {
     });
   }
   
-  _onLocationSelected(location, details) {
+  _onLocationSelected(place, details) {
+    if (!details.address_components) { return false; }
+
+    var address = details.address_components;
+    var latlng = details.geometry.location;
+
+    var location = {
+      location: `${latlng.lat}, ${latlng.lng}`,
+      address_line_1: `${address[0].long_name} ${address[1].long_name}`,
+      locality: address[2].long_name,
+      administrative_area_level_1: address[3].long_name,
+      country: address[4].long_name,
+      postcode: address[5].long_name
+    };
+
+    console.log(location);
+
     this.setState({ location });
   }
 
