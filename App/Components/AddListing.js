@@ -126,6 +126,9 @@ class AddListing extends React.Component {
   _formPressed() {
     var valid = this.refs.form.getValue();
     if (valid) {
+      var listing = JSON.parse(JSON.stringify(valid)); // Surely this is insane.
+      listing = Object.assign(listing, this.state.location);
+      console.log(listing);
       AlertIOS.alert('Hooray!', 'Your listing has been added!', [{ text: 'OK', onPress: () => this.props.navigator.pop() }]);
     } else {
       AlertIOS.alert('Uh oh!', 'Sorry, there were errors with your listing!');
