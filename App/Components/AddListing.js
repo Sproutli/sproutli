@@ -50,23 +50,21 @@ var OnlineStore = t.enums({
   n: 'Physical',
   both: 'Both'
 });
-var Tag = t.refinement(t.String, (s) => {
-  return s.includes(' ') ? s.includes(',') : true;
-});
 var PhoneNumber = t.refinement(t.String, (s) => {
   return s.startsWith('+61');
 });
 
 var defaults = {
   online_store: 'both',
-  vegan_level: '4'
+  vegan_level: '4',
+  tags: []
 };
 
 
 var Listing = t.struct({
   name: t.String,
   description: t.String,
-  tags: Tag,
+  tags: t.Array,
   phone_number: t.maybe(PhoneNumber),
   website: t.maybe(t.String),
   vegan_level: VeganLevel,
@@ -75,6 +73,36 @@ var Listing = t.struct({
 });
 
 t.form.Form.stylesheet.controlLabel.normal.color = COLOURS.GREY;
+
+var arrayTransformer = {
+  format: (value) => {
+    return Array.isArray(value) ? value[0] : value;
+  },
+
+  parse: (string: string) => {
+    return [string];
+  }
+}
+
+var tagsTransformer = {
+  format: (value) => {
+    return Array.isArray(value) ? value : value.replace(/#/g, '').split(', ');
+  },
+
+  parse: (value) => {
+    return value;
+  }
+}
+
+var veganLevelTransformer = {
+  format: (value: number) => {
+    return String(value);
+  },
+
+  parse: (value: string) => {
+    return Number(value);
+  }
+}
 
 var formOptions = {
   fields: {
@@ -93,15 +121,20 @@ var formOptions = {
     },
     tags: {
       keyboardType: 'twitter',
+      transformer: tagsTransformer,
       placeholder: 'eg. #cake, #dessert',
       error: (value) => (value && value.length === 0) ? '' : 'Separate multiple tags with commas'
     },
     vegan_level: {
-      nullOption: false
+      nullOption: false,
+      transformer: veganLevelTransformer
     },
     online_store: {
       label: 'Business Type',
       nullOption: false
+    },
+    categories: {
+      transformer: arrayTransformer
     }
   }
 };
@@ -134,8 +167,8 @@ class AddListing extends React.Component {
     );
   }
 
-  _onListingError(errorMessage: string) {
-    AlertIOS.alert(errorMessage);
+  _onListingError(title: string, errorMessage: string) {
+    AlertIOS.alert(title, errorMessage);
   }
 
   _formPressed() {
@@ -143,10 +176,16 @@ class AddListing extends React.Component {
     if (valid) {
       var listing = JSON.parse(JSON.stringify(valid)); // Surely this is insane.
       listing = Object.assign(listing, this.state.location);
-      CreateListing.create(listing)
-        .then(this._onListingCreated.bind(this))
-        .catch(this._onListingError('Sorry! There was an error creating your listing. Please let us know what happened.'));
+      console.log(listing);
+      // CreateListing.create(listing)
+      //   .then(this._onListingCreated.bind(this))
+      //   .catch((error) => {
+      //     console.warn('[CreateListing] - Error creating listing', error); 
+      //     this._onListingError('Sorry! There was an error creating your listing.',  'Please let us know what happened.')
+      //   });
     } else {
+      var error = this.refs.form.validate();
+      console.warn('[AddListing] - Error with form: ', error);
       this._onListingError('Uh oh!', 'Sorry, there were errors with your listing!');
     }
   }
