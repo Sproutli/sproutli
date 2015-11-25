@@ -1,8 +1,22 @@
 /*global fetch*/
 'use strict';
 
-var AsyncStorage = require('react-native').AsyncStorage;
+var { 
+  AsyncStorage,
+  NativeModules 
+} = require('react-native');
+var ImageUploader = NativeModules.ImageUploader;
 var JWTDecode = require('jwt-decode');
+var listingWithImages = {};
+
+function uploadImage(image, index) {
+  ImageUploader.uploadImage(image.uri, index);
+}
+
+function uploadImages(listing) {
+  listingWithImages = listing;
+  return Promise.all(listing.images.map(uploadImage));
+}
 
 function checkStatus(response) {
   console.log('[CreateListing] Response: ', response);
@@ -18,19 +32,20 @@ function checkStatus(response) {
 
 var CreateListing = {
   create(listing) {
-    return AsyncStorage.getItem('token')
-    .then((token) => {
-      fetch('http://sproutli-staging.elasticbeanstalk.com/api/v1/listing', {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(listing)
-      })
-      .then(checkStatus);
-    });
+    return uploadImages(listing)
+    // .then(AsyncStorage.getItem('token'))
+    // .then((token) => {
+    //   fetch('http://sproutli-staging.elasticbeanstalk.com/api/v1/listing', {
+    //     method: 'post',
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json',
+    //       'Authorization': `Bearer ${token}`
+    //     },
+    //     body: JSON.stringify(listingWithImages)
+    //   })
+    //   .then(checkStatus);
+    // });
   }
 };
 

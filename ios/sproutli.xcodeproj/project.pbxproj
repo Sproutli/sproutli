@@ -38,6 +38,7 @@
 		C371A30B1BCF2D4700589DFD /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A3031BCF2D4700589DFD /* MaterialIcons.ttf */; };
 		C371A30C1BCF2D4700589DFD /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A3041BCF2D4700589DFD /* Octicons.ttf */; };
 		C371A30D1BCF2D4700589DFD /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A3051BCF2D4700589DFD /* Zocial.ttf */; };
+		C3F26AF01C05182400D31B66 /* ImageUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F26AEF1C05182400D31B66 /* ImageUploader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,8 @@
 		C371A3031BCF2D4700589DFD /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		C371A3041BCF2D4700589DFD /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		C371A3051BCF2D4700589DFD /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		C3F26AEF1C05182400D31B66 /* ImageUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageUploader.m; path = sproutli/ImageUploader.m; sourceTree = "<group>"; };
+		C3F26AFE1C05185300D31B66 /* ImageUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUploader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +279,8 @@
 		13B07FAE1A68108700A75B9A /* sproutli */ = {
 			isa = PBXGroup;
 			children = (
+				C3F26AFE1C05185300D31B66 /* ImageUploader.h */,
+				C3F26AEF1C05182400D31B66 /* ImageUploader.m */,
 				C3642CA91BF95B45007FC821 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -760,6 +765,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				C35CD7911BFC3B0F002A3486 /* UIImagePickerManager.m in Sources */,
 				C34DABEA1BD7824500EB08C8 /* RNGeocoder.m in Sources */,
+				C3F26AF01C05182400D31B66 /* ImageUploader.m in Sources */,
 				C33F3AB11BDA0D2700FF4218 /* IntercomWrapper.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);

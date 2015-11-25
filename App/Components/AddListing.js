@@ -55,9 +55,12 @@ var PhoneNumber = t.refinement(t.String, (s) => {
 });
 
 var defaults = {
+  name: `Kane's Place`,
+  description: 'For Kane',
   online_store: 'both',
+  categories: ['Pets'],
   vegan_level: '4',
-  tags: []
+  tags: ['kane', 'test']
 };
 
 
@@ -86,7 +89,11 @@ var arrayTransformer = {
 
 var tagsTransformer = {
   format: (value) => {
-    return Array.isArray(value) ? value : value.replace(/#/g, '').split(', ');
+    if (Array.isArray(value)) {
+      return value.map((t) => '#' + t).join(', ');
+    } else {
+      return value.replace(/#/g, '').split(', ');
+    }
   },
 
   parse: (value) => {
@@ -144,7 +151,7 @@ class AddListing extends React.Component {
     super();
     this.state = {
       location: {},
-      images: [],
+      images: [{uri: '/Users/kanerogers/Library/Developer/CoreSimulator/Devices/54C7E480-B0E7-4BD9-95D1-232A59464682/data/Containers/Data/Application/98A5FA3E-BB27-4AC9-BFBB-DE265B0131A1/Documents/images/507DF2B3-8866-410F-8085-608B903F1E7C.jpg'}],
       isOnlineStore: false,
       formValue: defaults
     };
@@ -176,7 +183,7 @@ class AddListing extends React.Component {
     if (valid) {
       var listing = JSON.parse(JSON.stringify(valid)); // Surely this is insane.
       listing = Object.assign(listing, this.state.location);
-      listing.images = this.state.images;j
+      listing.images = this.state.images;
       CreateListing.create(listing)
         .then(this._onListingCreated.bind(this))
         .catch((error) => {
