@@ -13,7 +13,10 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(uploadImage:(nonnull NSString *)path index:(nonnull NSNumber *)index)
+RCT_EXPORT_METHOD(uploadImage:(nonnull NSString *)path
+                        index:(nonnull NSNumber *)index
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 {
   RCTLogInfo(@"Pretending to upload image %@ at index %@", path, index);
   
@@ -26,11 +29,13 @@ RCT_EXPORT_METHOD(uploadImage:(nonnull NSString *)path index:(nonnull NSNumber *
   
   [[transferManager upload:uploadRequest] continueWithBlock:^id(AWSTask *task) {
     if (task.error) {
-      RCTLogWarn(@"[ImageUploader] Failed to upload image %@!", path);
+      RCTLogWarn(@"[ImageUploader] Failed to upload image %@! Error: %@", path, task.error);
+      reject(task.error);
     }
     
     if (task.result) {
       RCTLogInfo(@"[ImageUploader] Succesfully uploaded image %@!", path)
+      resolve(nil);
     }
     
     return nil;
