@@ -13,26 +13,36 @@ var {
   AlertIOS
 } = React;
 
+// Dimensions
 var Dimensions = require('Dimensions');
 var { width } = Dimensions.get('window');
 var imageSize = width / 3 - 16;
 
+// Image Picker
 var UIImagePickerManager = require('NativeModules').UIImagePickerManager;
 
+// Form
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 var categoryEnums = {};
 var veganLevelEnums = {};
 
+// Icon
 var Icon = require('react-native-vector-icons/Ionicons');
 
+// Google Places
 var { GooglePlacesAutocomplete } = require('react-native-google-places-autocomplete');
 var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
 
+// Components
 var Button = require('./Button');
+var ListingDetail = require('./ListingDetail');
+var LoadingScreen = require('./LoadingScreen');
 
+// Utils
 var CreateListing = require('../Utils/CreateListing');
 
+// Constants
 var CATEGORIES = require('../Constants/Categories');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 var COLOURS = require('../Constants/Colours');
@@ -154,8 +164,9 @@ class AddListing extends React.Component {
   constructor() {
     super();
     this.state = {
+      loading: false,
       location: {},
-      images: [{uri: '/Users/kanerogers/Library/Developer/CoreSimulator/Devices/54C7E480-B0E7-4BD9-95D1-232A59464682/data/Containers/Data/Application/627D8759-461A-49EA-81D4-3F4C52050D36/Documents/images/DA643D23-989B-49BC-8983-E6C8F4E51E39.jpg'}],
+      images: [],
       isOnlineStore: false,
       formValue: defaults
     };
@@ -171,15 +182,27 @@ class AddListing extends React.Component {
     });
   }
 
-  _onListingCreated() {
+  _onListingCreated(listing) {
+    this.setState({ loading: false });
     AlertIOS.alert(
       'Hooray!', 'Your listing has been added!', 
-      [{ text: 'OK', onPress: () => this.props.navigator.pop() }]
+      [{ text: 'OK', onPress: this.navigateToNewListing.bind(this, listing) }]
     );
   }
 
   _onListingError(title: string, errorMessage: string) {
+    this.setState({ loading: false });
     AlertIOS.alert(title, errorMessage);
+  }
+
+  navigateToNewListing(listing) {
+    this.props.navigator.replace({
+      hasActions: true,
+      navigator: this.props.navigator,
+      component: ListingDetail,
+      title: listing.name,
+      passProps: { listing }
+    });
   }
 
   _formPressed() {
@@ -188,6 +211,8 @@ class AddListing extends React.Component {
       var listing = JSON.parse(JSON.stringify(valid)); // Surely this is insane.
       listing = Object.assign(listing, this.state.location);
       listing.images = this.state.images;
+      this.setState({ loading: true });
+
       CreateListing.create(listing)
         .then(this._onListingCreated.bind(this))
         .catch((error) => {
@@ -319,7 +344,6 @@ class AddListing extends React.Component {
   }
 
   render() {
-    console.log('Images!', this.state.images);
     return (
       <ScrollView style={styles.container} keyboardDismissMode='on-drag'>
         <View style={styles.images}>
@@ -337,6 +361,8 @@ class AddListing extends React.Component {
         <View style={styles.buttonContainer}>
           <Button onPress={this._formPressed.bind(this)}>Add listing</Button>
         </View>
+        <LoadingScreen isVisible={this.state.loading} />
+
       </ScrollView>
     );
   }
@@ -357,6 +383,7 @@ var styles = StyleSheet.create({
     marginBottom: 16
   },
   buttonContainer: {
+    margin: 32,
     alignItems: 'center'
   },
   images: {
@@ -381,6 +408,10 @@ var styles = StyleSheet.create({
     width: imageSize,
     height: imageSize,
     margin: 8
+  },
+  background: {
+    flex: 1,
+    justifyContent: 'center',
   }
 });
 
