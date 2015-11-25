@@ -46,9 +46,9 @@ VEGAN_LEVELS.forEach((l, i) => {
 var Category = t.enums(categoryEnums);
 var VeganLevel = t.enums(veganLevelEnums);
 var OnlineStore = t.enums({
-  y: 'Online',
-  n: 'Physical',
-  both: 'Both'
+  'Y': 'Online',
+  'N': 'Physical',
+  'BOTH': 'Both'
 });
 var PhoneNumber = t.refinement(t.String, (s) => {
   return s.startsWith('+61');
@@ -57,7 +57,7 @@ var PhoneNumber = t.refinement(t.String, (s) => {
 var defaults = {
   name: `Kane's Place`,
   description: 'For Kane',
-  online_store: 'both',
+  online_store: 'BOTH',
   categories: ['Pets'],
   vegan_level: '4',
   tags: ['kane', 'test']
@@ -207,7 +207,7 @@ class AddListing extends React.Component {
       cancelButtonTitle: 'Cancel',
       takePhotoButtonTitle: 'Take Photo...', // specify null or empty string to remove this button
       chooseFromLibraryButtonTitle: 'Choose from Library...', // specify null or empty string to remove this button
-      quality: 1,
+      quality: 0.5,
       allowsEditing: true, // Built in iOS functionality to resize/reposition the image
       noData: false, // Disables the base64 `data` field from being generated (greatly improves performance on large photos)
       storageOptions: { // if this key is provided, the image will get saved in the documents directory (rather than a temporary directory)

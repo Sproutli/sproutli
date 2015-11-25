@@ -13,33 +13,46 @@
 
 RCT_EXPORT_MODULE();
 
+- (NSString *)uuidString {
+  // Returns a UUID
+  
+  CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+  NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
+  CFRelease(uuid);
+  
+  return uuidString;
+}
+
 RCT_EXPORT_METHOD(uploadImage:(nonnull NSString *)path
-                        index:(nonnull NSNumber *)index
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
-  RCTLogInfo(@"Pretending to upload image %@ at index %@", path, index);
+  RCTLogInfo(@"[ImageUploader] Uploading image %@)", path);
   
   AWSS3TransferManager *transferManager = [AWSS3TransferManager defaultS3TransferManager];
   AWSS3TransferManagerUploadRequest *uploadRequest = [AWSS3TransferManagerUploadRequest new];
   
+  NSString *imageName = [NSString stringWithFormat:@"%@.jpg", [self uuidString]];
+  
   uploadRequest.bucket = @"sproutli-images";
-  uploadRequest.key = @"sajdaksljdalksjdalksjd";
+  uploadRequest.key = imageName;
   uploadRequest.body = [[NSURL alloc] initWithString:path];
   
   [[transferManager upload:uploadRequest] continueWithBlock:^id(AWSTask *task) {
     if (task.error) {
-      RCTLogWarn(@"[ImageUploader] Failed to upload image %@! Error: %@", path, task.error);
+      RCTLogWarn(@"[ImageUploader] Failed to upload image %@! Error: %@", imageName, task.error);
       reject(task.error);
     }
     
     if (task.result) {
-      RCTLogInfo(@"[ImageUploader] Succesfully uploaded image %@!", path)
-      resolve(nil);
+      RCTLogInfo(@"[ImageUploader] Succesfully uploaded image %@!", imageName)
+      resolve(imageName);
     }
     
     return nil;
   }];
 }
+
+
 
 @end
