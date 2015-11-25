@@ -97,7 +97,11 @@ var tagsTransformer = {
   },
 
   parse: (value) => {
-    return value;
+    if (Array.isArray(value)) {
+      return value;
+    } else {
+      return value.replace(/#/g, '').split(', ');
+    }
   }
 }
 
@@ -151,7 +155,7 @@ class AddListing extends React.Component {
     super();
     this.state = {
       location: {},
-      images: [{uri: '/Users/kanerogers/Library/Developer/CoreSimulator/Devices/54C7E480-B0E7-4BD9-95D1-232A59464682/data/Containers/Data/Application/98A5FA3E-BB27-4AC9-BFBB-DE265B0131A1/Documents/images/507DF2B3-8866-410F-8085-608B903F1E7C.jpg'}],
+      images: [{uri: '/Users/kanerogers/Library/Developer/CoreSimulator/Devices/54C7E480-B0E7-4BD9-95D1-232A59464682/data/Containers/Data/Application/627D8759-461A-49EA-81D4-3F4C52050D36/Documents/images/DA643D23-989B-49BC-8983-E6C8F4E51E39.jpg'}],
       isOnlineStore: false,
       formValue: defaults
     };

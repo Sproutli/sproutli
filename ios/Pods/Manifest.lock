@@ -1,10 +1,17 @@
 PODS:
+  - AWSCore (2.3.0)
+  - AWSS3 (2.3.0):
+    - AWSCore (= 2.3.0)
   - Intercom (2.3.11)
 
 DEPENDENCIES:
+  - AWSCore
+  - AWSS3
   - Intercom
 
 SPEC CHECKSUMS:
+  AWSCore: dc200c885c9799f9f5d3ab9ec38a9c4b44d680f9
+  AWSS3: 0185482a8136da9c7542a767567ee18106b38bca
   Intercom: 255c9c1d85106b567fbc73c13eff6c54182dd220
 
 COCOAPODS: 0.39.0

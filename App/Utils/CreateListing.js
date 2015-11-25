@@ -10,7 +10,7 @@ var JWTDecode = require('jwt-decode');
 var listingWithImages = {};
 
 function uploadImage(image, index) {
-  ImageUploader.uploadImage(image.uri, index);
+  ImageUploader.uploadImage(`file://${image.uri}`, index);
 }
 
 function uploadImages(listing) {

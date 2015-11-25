@@ -11,6 +11,7 @@
 
 #import "RCTRootView.h"
 #import "Intercom/intercom.h"
+#import <AWSCore/AWSCore.h>
 
 @implementation AppDelegate
 
@@ -61,6 +62,13 @@
   // Initialize Intercom
   [Intercom setApiKey:@"ios_sdk-0ded67ded471358f3ace64df38a7e82f0906fa65" forAppId:@"r18lw9fx"];
   
+  
+  // Initialise S3
+  AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc] initWithRegionType:AWSRegionAPNortheast1
+                                                                                                  identityPoolId:@"ap-northeast-1:2d493c6f-6ebf-4397-ab18-4c930ebc2850"];
+  AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionAPSoutheast2
+                                                                       credentialsProvider:credentialsProvider];
+  AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration;
   return YES;
 }
 
