@@ -66,12 +66,10 @@ var PhoneNumber = t.refinement(t.String, (s) => {
 });
 
 var defaults = {
-  name: `Kane's Place`,
-  description: 'For Kane',
   online_store: 'BOTH',
   categories: ['Pets'],
   vegan_level: '4',
-  tags: ['kane', 'test']
+  tags: []
 };
 
 
@@ -87,6 +85,7 @@ var Listing = t.struct({
 });
 
 t.form.Form.stylesheet.controlLabel.normal.color = COLOURS.GREY;
+t.form.Form.stylesheet.textbox.normal.color = COLOURS.GREY;
 
 var arrayTransformer = {
   format: (value) => {
@@ -141,10 +140,16 @@ var formOptions = {
       keyboardType: 'phone-pad',
       error: (value) => value ? '' : 'Phone numbers must start with +61'
     },
+    website: {
+      keyboardType: 'url',
+      autoCorrect: false,
+      autoCapitalize: 'none'
+    },
     tags: {
       keyboardType: 'twitter',
       transformer: tagsTransformer,
       placeholder: 'eg. #cake, #dessert',
+      autoCapitalize: 'none',
       error: (value) => (value && value.length === 0) ? '' : 'Separate multiple tags with commas'
     },
     vegan_level: {
@@ -225,21 +230,25 @@ class AddListing extends React.Component {
     AlertIOS.alert(title, errorMessage);
   }
 
+  createListing(listing) {
+    listing = Object.assign(listing, this.state.location);
+    listing.images = this.state.images;
+
+    CreateListing.create(listing)
+      .then(this._onListingCreated.bind(this))
+      .catch((error) => {
+        console.warn('[CreateListing] - Error creating listing', error); 
+        this._onListingError('Sorry! There was an error creating your listing.',  'Please let us know what happened.')
+      });
+  }
 
   _formPressed() {
     var valid = this.refs.form.getValue();
     if (valid) {
-      var listing = JSON.parse(JSON.stringify(valid)); // Surely this is insane.
-      listing = Object.assign(listing, this.state.location);
-      listing.images = this.state.images;
       this.setState({ loading: true });
 
-      CreateListing.create(listing)
-        .then(this._onListingCreated.bind(this))
-        .catch((error) => {
-          console.warn('[CreateListing] - Error creating listing', error); 
-          this._onListingError('Sorry! There was an error creating your listing.',  'Please let us know what happened.')
-        });
+      var listing = JSON.parse(JSON.stringify(valid)); // Surely this is insane.
+      this.createListing(listing);
     } else {
       var error = this.refs.form.validate();
       console.warn('[AddListing] - Error with form: ', error);
@@ -249,16 +258,16 @@ class AddListing extends React.Component {
 
   _addImagePressed() {
     var options = {
-      title: 'Select Image', // specify null or empty string to remove the title
+      title: 'Select Image',
       cancelButtonTitle: 'Cancel',
-      takePhotoButtonTitle: 'Take Photo...', // specify null or empty string to remove this button
-      chooseFromLibraryButtonTitle: 'Choose from Library...', // specify null or empty string to remove this button
+      takePhotoButtonTitle: 'Take Photo',
+      chooseFromLibraryButtonTitle: 'Choose from Library',
       quality: 0.5,
-      allowsEditing: true, // Built in iOS functionality to resize/reposition the image
-      noData: false, // Disables the base64 `data` field from being generated (greatly improves performance on large photos)
-      storageOptions: { // if this key is provided, the image will get saved in the documents directory (rather than a temporary directory)
-        skipBackup: true, // image will NOT be backed up to icloud
-        path: 'images' // will save image at /Documents/images rather than the root
+      allowsEditing: true,
+      noData: false,
+      storageOptions: {
+        skipBackup: true,
+        path: 'images'
       }
     };
 
@@ -302,7 +311,7 @@ class AddListing extends React.Component {
       locality: address[2].long_name,
       administrative_area_level_1: address[3].long_name,
       country: address[4].long_name,
-      postcode: address[5].long_name
+      postcode: (address[5] || {}).long_name
     };
 
     console.log(location);
@@ -316,7 +325,7 @@ class AddListing extends React.Component {
     }
 
     return (
-      <View>
+      <View style={{marginBottom: 5}}>
         <Text style={t.form.Form.stylesheet.controlLabel.normal}>Address</Text>
         <GooglePlacesAutocomplete 
           placeholder='Start typing an address'
@@ -371,6 +380,9 @@ class AddListing extends React.Component {
           { this.state.images.map((i, k) => this.renderImage(i, k)) }
           { this.imagePicker() }
         </View>
+
+        { this.addressForm() }
+
         <Form
           onChange={this._onFormChanged.bind(this)}
           value={this.state.formValue}
@@ -378,12 +390,11 @@ class AddListing extends React.Component {
           ref='form'
           type={Listing}
         />
-        { this.addressForm() }
         <View style={styles.buttonContainer}>
           <Button onPress={this._formPressed.bind(this)}>Add listing</Button>
         </View>
-        <LoadingScreen isVisible={this.state.loading} />
 
+        <LoadingScreen isVisible={this.state.loading} />
       </ScrollView>
     );
   }
