@@ -40,6 +40,10 @@
 		C371A30D1BCF2D4700589DFD /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A3051BCF2D4700589DFD /* Zocial.ttf */; };
 		C3986C321C056E8E002B5B3E /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C311C056C08002B5B3E /* libRNBlur.a */; };
 		C3986C331C056E8E002B5B3E /* libRNOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C291C056B1C002B5B3E /* libRNOverlay.a */; };
+		C3986C431C05BD13002B5B3E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C401C05BD13002B5B3E /* FBSDKCoreKit.framework */; };
+		C3986C441C05BD13002B5B3E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C411C05BD13002B5B3E /* FBSDKLoginKit.framework */; };
+		C3986C451C05BD13002B5B3E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C421C05BD13002B5B3E /* FBSDKShareKit.framework */; };
+		C3986C4C1C05C42C002B5B3E /* libRCTFBSDKShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C4B1C05C219002B5B3E /* libRCTFBSDKShare.a */; };
 		C3F26AF01C05182400D31B66 /* ImageUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F26AEF1C05182400D31B66 /* ImageUploader.m */; };
 /* End PBXBuildFile section */
 
@@ -156,6 +160,13 @@
 			remoteGlobalIDString = A68BD7BC1BC31318005F02DF;
 			remoteInfo = RNBlur;
 		};
+		C3986C4A1C05C219002B5B3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTFBSDKShare;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -202,6 +213,10 @@
 		C371A3051BCF2D4700589DFD /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
 		C3986C191C056B1C002B5B3E /* RNOverlay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNOverlay.xcodeproj; path = "../node_modules/react-native-overlay/RNOverlay.xcodeproj"; sourceTree = "<group>"; };
 		C3986C2C1C056C08002B5B3E /* RNBlur.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBlur.xcodeproj; path = "../node_modules/react-native-blur/ios/RNBlur.xcodeproj"; sourceTree = "<group>"; };
+		C3986C401C05BD13002B5B3E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		C3986C411C05BD13002B5B3E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		C3986C421C05BD13002B5B3E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKShare.xcodeproj; path = "../node_modules/react-native-fbsdkshare/RCTFBSDKShare.xcodeproj"; sourceTree = "<group>"; };
 		C3F26AEF1C05182400D31B66 /* ImageUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageUploader.m; path = sproutli/ImageUploader.m; sourceTree = "<group>"; };
 		C3F26AFE1C05185300D31B66 /* ImageUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUploader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -211,8 +226,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3986C4C1C05C42C002B5B3E /* libRCTFBSDKShare.a in Frameworks */,
+				C3986C431C05BD13002B5B3E /* FBSDKCoreKit.framework in Frameworks */,
 				C3986C321C056E8E002B5B3E /* libRNBlur.a in Frameworks */,
 				C3986C331C056E8E002B5B3E /* libRNOverlay.a in Frameworks */,
+				C3986C441C05BD13002B5B3E /* FBSDKLoginKit.framework in Frameworks */,
 				C34DABE21BD751B100EB08C8 /* libRNSearchBar.a in Frameworks */,
 				C34DABDB1BD7341900EB08C8 /* libBVLinearGradient.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -221,6 +239,7 @@
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
+				C3986C451C05BD13002B5B3E /* FBSDKShareKit.framework in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				C371A2FC1BCF0D4C00589DFD /* libRNVectorIcons.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
@@ -331,6 +350,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */,
 				C3986C2C1C056C08002B5B3E /* RNBlur.xcodeproj */,
 				C3986C191C056B1C002B5B3E /* RNOverlay.xcodeproj */,
 				C35CD78E1BFC3B0F002A3486 /* UIImagePickerManager */,
@@ -389,6 +409,9 @@
 		B1E558C659135EF5326A410B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C3986C401C05BD13002B5B3E /* FBSDKCoreKit.framework */,
+				C3986C411C05BD13002B5B3E /* FBSDKLoginKit.framework */,
+				C3986C421C05BD13002B5B3E /* FBSDKShareKit.framework */,
 				29C1FF3F60BE1503FE8C33A9 /* libPods-sproutli.a */,
 			);
 			name = Frameworks;
@@ -475,6 +498,14 @@
 			isa = PBXGroup;
 			children = (
 				C3986C311C056C08002B5B3E /* libRNBlur.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C3986C471C05C219002B5B3E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C3986C4B1C05C219002B5B3E /* libRCTFBSDKShare.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -571,6 +602,10 @@
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
+				},
+				{
+					ProductGroup = C3986C471C05C219002B5B3E /* Products */;
+					ProjectRef = C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -739,6 +774,13 @@
 			remoteRef = C3986C301C056C08002B5B3E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		C3986C4B1C05C219002B5B3E /* libRCTFBSDKShare.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTFBSDKShare.a;
+			remoteRef = C3986C4A1C05C219002B5B3E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -870,10 +912,16 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Intercom\"",
+					"\"~/Documents/FacebookSDK\"",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS/**",
 				);
 				INFOPLIST_FILE = sproutli/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -895,10 +943,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Sproutli PTY LTD (T2TG9M3MRR)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Intercom\"",
+					"\"~/Documents/FacebookSDK\"",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS/**",
 				);
 				INFOPLIST_FILE = sproutli/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

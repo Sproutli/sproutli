@@ -4,6 +4,7 @@ var React = require('react-native');
 var {
   StyleSheet,
   NavigatorIOS,
+  LinkingIOS,
   TabBarIOS
 } = React;
 
@@ -12,7 +13,9 @@ var Icon = require('react-native-vector-icons/Ionicons');
 var AddListing = require('./AddListing');
 var Search = require('./Search');
 var Intercom = require('../Utils/Intercom');
+var ListingFetcher = require('../Utils/ListingFetcher');
 var KindnessCard = require('./KindnessCard');
+var ListingDetail = require('./ListingDetail');
 var SUGGESTIONS = require('../Constants/Suggestions');
 var COLOURS = require('../Constants/Colours');
 
@@ -25,8 +28,42 @@ class App extends React.Component {
     };
 
     Icon.getImageSource('plus', 24, COLOURS.GREEN).then((source) => {
-      console.log('Hell yeah:', source);
       this.setState({ addIcon: source });
+    });
+
+    LinkingIOS.addEventListener('url', this._handleOpenURL.bind(this));
+
+    var url = LinkingIOS.popInitialURL();
+
+    if (url) {
+      this._handleOpenURL({url});
+    }
+
+  }
+
+  componentWillUnmount() {
+    LinkingIOS.removeEventListener('url', this._handleOpenURL.bind(this));
+  }
+
+  _handleOpenURL(event) {
+    console.log('Got incoming eventURL:', event.url);
+    var URI = decodeURIComponent(event.url);
+    var appLinkData = JSON.parse(URI.split('al_applink_data=')[1]);
+
+    var targetURL = appLinkData.target_url;
+    var listingID = targetURL.split('listingID=')[1];
+
+    ListingFetcher.fetch(listingID)
+    .then((listing) => {
+      console.log('Got listing!', listing);
+      this.refs.navigator.push({
+        component: ListingDetail,
+        passProps: { listing },
+        title: listing.name
+      });
+    })
+    .catch((error) => {
+      console.warn('Error fetching listing:', error);
     });
   }
 

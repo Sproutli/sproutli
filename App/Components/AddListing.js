@@ -34,6 +34,13 @@ var Icon = require('react-native-vector-icons/Ionicons');
 var { GooglePlacesAutocomplete } = require('react-native-google-places-autocomplete');
 var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
 
+// Facebook
+var FBSDKShare = require('react-native-fbsdkshare');
+var {
+  FBSDKShareDialog,
+  FBSDKShareLinkContent,
+} = FBSDKShare;
+
 // Components
 var Button = require('./Button');
 var ListingDetail = require('./ListingDetail');
@@ -185,14 +192,28 @@ class AddListing extends React.Component {
   _onListingCreated(listing) {
     this.setState({ loading: false });
     AlertIOS.alert(
-      'Hooray!', 'Your listing has been added!', 
-      [{ text: 'OK', onPress: this.navigateToNewListing.bind(this, listing) }]
+      'Listing Added', 
+      `${this.state.formValue.name} has been added! Would you like to share it on Facebook?`, 
+      [
+        { text: 'Yes', onPress: this.shareOnFacebook.bind(this, listing) },
+        { text: 'No', onPress: this.navigateToNewListing.bind(this, listing) }
+      ]
     );
   }
 
-  _onListingError(title: string, errorMessage: string) {
-    this.setState({ loading: false });
-    AlertIOS.alert(title, errorMessage);
+  shareOnFacebook(listing) {
+    var linkContent = new FBSDKShareLinkContent('http://www.sproutli.com', `I just added ${listing.name} on Sproutli!`, 'Sproutli', 'http://assets.rollingstone.com/assets/2014/article/aphex-twins-new-album-syro-will-be-out-next-month-20140821/165337/medium_rect/720x405-aphex_foldface2_credit_Anastasia-Rybina-2014.jpg');
+    FBSDKShareDialog.show(linkContent, (error, result) => {
+      if (!error) {
+        if (result.isCancelled) {
+          alert('Share cancelled.');
+        } else {
+          alert('Thanks for sharing!');
+        }
+      } else {
+        alert('Error sharing.');
+      }
+    });
   }
 
   navigateToNewListing(listing) {
@@ -204,6 +225,12 @@ class AddListing extends React.Component {
       passProps: { listing }
     });
   }
+
+  _onListingError(title: string, errorMessage: string) {
+    this.setState({ loading: false });
+    AlertIOS.alert(title, errorMessage);
+  }
+
 
   _formPressed() {
     var valid = this.refs.form.getValue();
