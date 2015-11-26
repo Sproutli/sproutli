@@ -5,6 +5,8 @@
 
 target 'sproutli' do
   pod 'Intercom'
+  pod 'AWSCore'
+  pod 'AWSS3'
 end
 
 target 'sproutliUITests' do

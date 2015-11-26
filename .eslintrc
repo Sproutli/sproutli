@@ -30,6 +30,7 @@
         "experimentalObjectRestSpread": true
     },
     "plugins": [
-        "react"
+        "react",
+        "flow-vars"
     ]
 }
