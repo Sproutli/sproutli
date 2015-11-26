@@ -45,6 +45,7 @@
 		C3986C451C05BD13002B5B3E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C421C05BD13002B5B3E /* FBSDKShareKit.framework */; };
 		C3986C4C1C05C42C002B5B3E /* libRCTFBSDKShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C4B1C05C219002B5B3E /* libRCTFBSDKShare.a */; };
 		C3986CC01C068A87002B5B3E /* libRCTFBSDKLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986CBF1C068A7A002B5B3E /* libRCTFBSDKLogin.a */; };
+		C3986CC71C06B8E8002B5B3E /* libRCTFBSDKCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986CC61C06B8DB002B5B3E /* libRCTFBSDKCore.a */; };
 		C3F26AF01C05182400D31B66 /* ImageUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F26AEF1C05182400D31B66 /* ImageUploader.m */; };
 /* End PBXBuildFile section */
 
@@ -175,6 +176,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RCTFBSDKLogin;
 		};
+		C3986CC51C06B8DB002B5B3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C3986CC11C06B8DA002B5B3E /* RCTFBSDKCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTFBSDKCore;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -226,6 +234,7 @@
 		C3986C421C05BD13002B5B3E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKShare.xcodeproj; path = "../node_modules/react-native-fbsdkshare/RCTFBSDKShare.xcodeproj"; sourceTree = "<group>"; };
 		C3986CBA1C068A7A002B5B3E /* RCTFBSDKLogin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKLogin.xcodeproj; path = "../node_modules/react-native-fbsdklogin/RCTFBSDKLogin.xcodeproj"; sourceTree = "<group>"; };
+		C3986CC11C06B8DA002B5B3E /* RCTFBSDKCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKCore.xcodeproj; path = "../node_modules/react-native-fbsdkcore/RCTFBSDKCore.xcodeproj"; sourceTree = "<group>"; };
 		C3F26AEF1C05182400D31B66 /* ImageUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageUploader.m; path = sproutli/ImageUploader.m; sourceTree = "<group>"; };
 		C3F26AFE1C05185300D31B66 /* ImageUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUploader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -235,6 +244,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3986CC71C06B8E8002B5B3E /* libRCTFBSDKCore.a in Frameworks */,
 				C3986CC01C068A87002B5B3E /* libRCTFBSDKLogin.a in Frameworks */,
 				C3986C4C1C05C42C002B5B3E /* libRCTFBSDKShare.a in Frameworks */,
 				C3986C431C05BD13002B5B3E /* FBSDKCoreKit.framework in Frameworks */,
@@ -360,6 +370,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				C3986CC11C06B8DA002B5B3E /* RCTFBSDKCore.xcodeproj */,
 				C3986CBA1C068A7A002B5B3E /* RCTFBSDKLogin.xcodeproj */,
 				C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */,
 				C3986C2C1C056C08002B5B3E /* RNBlur.xcodeproj */,
@@ -529,6 +540,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		C3986CC21C06B8DA002B5B3E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C3986CC61C06B8DB002B5B3E /* libRCTFBSDKCore.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E7A46FC703A4F412ADA2E1F3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -621,6 +640,10 @@
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
+				},
+				{
+					ProductGroup = C3986CC21C06B8DA002B5B3E /* Products */;
+					ProjectRef = C3986CC11C06B8DA002B5B3E /* RCTFBSDKCore.xcodeproj */;
 				},
 				{
 					ProductGroup = C3986CBB1C068A7A002B5B3E /* Products */;
@@ -809,6 +832,13 @@
 			fileType = archive.ar;
 			path = libRCTFBSDKLogin.a;
 			remoteRef = C3986CBE1C068A7A002B5B3E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C3986CC61C06B8DB002B5B3E /* libRCTFBSDKCore.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTFBSDKCore.a;
+			remoteRef = C3986CC51C06B8DB002B5B3E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

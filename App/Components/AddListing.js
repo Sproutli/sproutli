@@ -41,6 +41,7 @@ var LoadingScreen = require('./LoadingScreen');
 
 // Utils
 var CreateListing = require('../Utils/CreateListing');
+var Facebook = require('../Utils/Facebook');
 
 // Constants
 var CATEGORIES = require('../Constants/Categories');
@@ -230,20 +231,15 @@ class AddListing extends React.Component {
     if (valid) {
       var listing = JSON.parse(JSON.stringify(valid)); // Surely this is insane.
       listing = Object.assign(listing, this.state.location);
-      // listing.images = this.state.images;
-      // this.setState({ loading: true });
+      listing.images = this.state.images;
+      this.setState({ loading: true });
 
-      listing.id = 'abc123';
-      listing.images = ['http://media.lessthan3.com/wp-content/uploads/2014/09/aphexSyro.jpg'];
-
-      this.shareOnFacebook(listing);
-
-      // CreateListing.create(listing)
-      //   .then(this._onListingCreated.bind(this))
-      //   .catch((error) => {
-      //     console.warn('[CreateListing] - Error creating listing', error); 
-      //     this._onListingError('Sorry! There was an error creating your listing.',  'Please let us know what happened.')
-      //   });
+      CreateListing.create(listing)
+        .then(this._onListingCreated.bind(this))
+        .catch((error) => {
+          console.warn('[CreateListing] - Error creating listing', error); 
+          this._onListingError('Sorry! There was an error creating your listing.',  'Please let us know what happened.')
+        });
     } else {
       var error = this.refs.form.validate();
       console.warn('[AddListing] - Error with form: ', error);

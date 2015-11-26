@@ -41,9 +41,18 @@ function postListing(listing) {
   });
 }
 
+function checkToken() {
+  return new Promise((resolve) => {
+    FBSDKAccessToken.getCurrentAccessToken((token) => {
+      resolve(token);
+    });
+  });
+}
+
 var Facebook = {
   shareListing(listing) {
-    FBSDKAccessToken.getCurrentAccessToken((token) => {
+    return checkToken()
+    .then((token) => {
       if (token) {
         postListing(listing);
       } else {

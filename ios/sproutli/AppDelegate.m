@@ -78,7 +78,8 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-  if([url.host isEqual: @"sproutli"]) {
+  NSLog(@"Received URL. Scheme is %@", url.scheme);
+  if([url.scheme isEqual: @"sproutli"]) {
     return [RCTLinkingManager application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
   }
   
