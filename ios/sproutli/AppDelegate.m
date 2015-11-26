@@ -78,7 +78,15 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-  return [RCTLinkingManager application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+  if([url.host isEqual: @"sproutli"]) {
+    return [RCTLinkingManager application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+  }
+  
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                        openURL:url
+                                              sourceApplication:sourceApplication
+                                                     annotation:annotation
+          ];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
