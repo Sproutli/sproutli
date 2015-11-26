@@ -67,7 +67,7 @@ var PhoneNumber = t.refinement(t.String, (s) => {
 
 var defaults = {
   online_store: 'BOTH',
-  categories: ['Pets'],
+  categories: [],
   vegan_level: '4',
   tags: []
 };

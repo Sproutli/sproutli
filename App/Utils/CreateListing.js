@@ -8,7 +8,8 @@ var {
 var ImageUploader = NativeModules.ImageUploader;
 var JWTDecode = require('jwt-decode');
 var listingWithImages = {};
-
+var Slack = require('../Utils/Slack');
+var Users = require('../Utils/Users');
 
 function uploadImages(listing) {
   listingWithImages = listing;
@@ -23,18 +24,13 @@ function uploadImage(image, index) {
   });
 }
 
-function createListing(token) {
-  return fetch('http://sproutli-staging.elasticbeanstalk.com/api/v1/listing', {
-    method: 'post',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    },
-    body: JSON.stringify(listingWithImages)
+function postToSlack(listing) {
+  return Users.fetchUser()
+  .then((user) => {
+    var message = `Hey @kane.rogers and @brian: ${user.name} (${user.email}) just created the listing *${listing.name}* using the app. Check it out: http://listingmanager.sproutli.com/#listing/${listing.id}`;
+    return Slack.postMessage(message);
   })
-  .then(checkStatus)
-  .then(parseJSON);
+  .then(() => listing);
 }
 
 function checkStatus(response) {
@@ -51,6 +47,21 @@ function checkStatus(response) {
 
 function parseJSON(response) {
   return response.json();
+}
+
+function createListing(token) {
+  return fetch('http://sproutli-staging.elasticbeanstalk.com/api/v1/listing', {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(listingWithImages)
+  })
+  .then(checkStatus)
+  .then(parseJSON)
+  .then(postToSlack);
 }
 
 var CreateListing = {
