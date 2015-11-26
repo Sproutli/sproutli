@@ -10,6 +10,8 @@ var JWTDecode = require('jwt-decode');
 var listingWithImages = {};
 var Slack = require('../Utils/Slack');
 var Users = require('../Utils/Users');
+var Intercom = require('../Utils/Intercom');
+var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 
 function uploadImages(listing) {
   listingWithImages = listing;
@@ -31,6 +33,13 @@ function postToSlack(listing) {
     return Slack.postMessage(message);
   })
   .then(() => listing);
+}
+
+function addAnalytics(listing) {
+  Intercom.logEvent('created_listing', { listingID: listing.id, listingName: listing.name });
+  GoogleAnalytics.trackEvent('Listing', 'Create', listing.id);
+
+  return listing;
 }
 
 function checkStatus(response) {
@@ -61,7 +70,8 @@ function createListing(token) {
   })
   .then(checkStatus)
   .then(parseJSON)
-  .then(postToSlack);
+  .then(postToSlack)
+  .then(addAnalytics);
 }
 
 var CreateListing = {

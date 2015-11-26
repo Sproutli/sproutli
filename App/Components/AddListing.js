@@ -33,6 +33,7 @@ var Icon = require('react-native-vector-icons/Ionicons');
 // Google Places
 var { GooglePlacesAutocomplete } = require('react-native-google-places-autocomplete');
 var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
+var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 
 // Components
 var Button = require('./Button');
@@ -176,6 +177,8 @@ class AddListing extends React.Component {
       isOnlineStore: false,
       formValue: defaults
     };
+    
+    GoogleAnalytics.viewedScreen('Add Listing');
   }
 
   _onFormChanged(raw) {
