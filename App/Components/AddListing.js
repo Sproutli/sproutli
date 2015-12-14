@@ -67,12 +67,12 @@ var PhoneNumber = t.refinement(t.String, (s) => {
 });
 
 var defaults = {
-  name: 'Test Listing',
+  name: '',
   online_store: 'BOTH',
-  categories: ['Food Stores'],
-  description: 'Testing',
+  categories: [],
+  description: '',
   vegan_level: '4',
-  tags: ['test']
+  tags: []
 };
 
 
@@ -195,6 +195,7 @@ class AddListing extends React.Component {
   }
 
   _onListingCreated(listing) {
+    console.log(`[AddListing] - Created listing with id ${listing.id}`);
     this.setState({ 
       loading: false,
       listing
