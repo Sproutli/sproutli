@@ -67,10 +67,12 @@ var PhoneNumber = t.refinement(t.String, (s) => {
 });
 
 var defaults = {
+  name: 'Test Listing',
   online_store: 'BOTH',
-  categories: [],
+  categories: ['Food Stores'],
+  description: 'Testing',
   vegan_level: '4',
-  tags: []
+  tags: ['test']
 };
 
 
@@ -172,6 +174,7 @@ class AddListing extends React.Component {
     super();
     this.state = {
       loading: false,
+      loadingText: '',
       location: {},
       images: [],
       isOnlineStore: false,
@@ -192,7 +195,10 @@ class AddListing extends React.Component {
   }
 
   _onListingCreated(listing) {
-    this.setState({ loading: false });
+    this.setState({ 
+      loading: false,
+      listing
+    });
     AlertIOS.alert(
       'Listing Added', 
       `${this.state.formValue.name} has been added! Would you like to share it on Facebook?`, 
@@ -204,8 +210,9 @@ class AddListing extends React.Component {
   }
 
   shareOnFacebook(listing) {
-    Facebook.shareListing(listing)
+    Facebook.shareListing(listing, (this.state.images[0] || {}).uri)
     .then(() => {
+      this.setState({ loading: false });
       AlertIOS.alert(
         'Sharing Complete',
         `Thanks for sharing ${listing.name}!`,
@@ -235,7 +242,7 @@ class AddListing extends React.Component {
 
   createListing(listing) {
     listing = Object.assign(listing, this.state.location);
-    listing.images = this.state.images;
+    listing.images = this.state.images.slice(0);
 
     CreateListing.create(listing)
       .then(this._onListingCreated.bind(this))
@@ -248,7 +255,7 @@ class AddListing extends React.Component {
   _formPressed() {
     var valid = this.refs.form.getValue();
     if (valid) {
-      this.setState({ loading: true });
+      this.setState({ loading: true, loadingText: `Creating your listing - hold on just a moment..` });
 
       var listing = JSON.parse(JSON.stringify(valid)); // Surely this is insane.
       this.createListing(listing);
@@ -397,7 +404,7 @@ class AddListing extends React.Component {
           <Button onPress={this._formPressed.bind(this)}>Add listing</Button>
         </View>
 
-        <LoadingScreen isVisible={this.state.loading} />
+        <LoadingScreen isVisible={this.state.loading} loadingText={this.state.loadingText} />
       </ScrollView>
     );
   }
