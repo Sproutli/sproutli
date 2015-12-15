@@ -29,7 +29,7 @@ var LoadingScreen = React.createClass({
             size="large"
             animating={true}
             style={styles.spinner} />
-          <Text style={{marginTop: 16}}>Creating your listing..</Text>  
+          <Text style={{marginTop: 16}}>{this.props.loadingText}</Text>  
         </BlurView>
       </Overlay>
     );

@@ -51,7 +51,7 @@ class App extends React.Component {
     var appLinkData = JSON.parse(URI.split('al_applink_data=')[1]);
 
     var targetURL = appLinkData.target_url;
-    var listingID = targetURL.split('listingID=')[1];
+    var listingID = targetURL.split('listingID=')[1].split('&')[0];
 
     ListingFetcher.fetch(listingID)
     .then((listing) => {
