@@ -64,6 +64,11 @@ var OnlineStore = t.enums({
   'N': 'Physical',
   'BOTH': 'Both'
 });
+var OwnerIs = t.enums({
+  'not_sure': 'Not Sure',
+  'vegetarian': 'Vegetarian',
+  'vegan': 'Vegan',
+});
 var PhoneNumber = t.refinement(t.String, (s) => {
   return s.startsWith('+61');
 });
@@ -74,7 +79,8 @@ var defaults = {
   categories: [],
   description: '',
   vegan_level: '4',
-  tags: []
+  tags: [],
+  owner_is: 'not_sure'
 };
 
 
@@ -86,7 +92,8 @@ var Listing = t.struct({
   website: t.maybe(t.String),
   vegan_level: VeganLevel,
   categories: Category,
-  online_store: OnlineStore
+  online_store: OnlineStore,
+  owner_is: OwnerIs,
 });
 
 t.form.Form.stylesheet.controlLabel.normal.color = COLOURS.GREY;
@@ -167,6 +174,9 @@ var formOptions = {
     },
     categories: {
       transformer: arrayTransformer
+    },
+    owner_is: {
+      nullOption: false
     }
   }
 };
