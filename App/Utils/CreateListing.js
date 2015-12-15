@@ -12,6 +12,7 @@ var Slack = require('../Utils/Slack');
 var Users = require('../Utils/Users');
 var Intercom = require('../Utils/Intercom');
 var GoogleAnalytics = require('../Utils/GoogleAnalytics');
+var Moment = require('moment');
 
 function uploadImages(listing) {
   listingWithImages = listing;
@@ -59,14 +60,23 @@ function parseJSON(response) {
 }
 
 function createListing(token) {
-  return fetch('http://sproutli-staging.elasticbeanstalk.com/api/v1/listing', {
-    method: 'post',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    },
-    body: JSON.stringify(listingWithImages)
+  return Users.fetchUser()
+  .then((user) => {
+    listingWithImages.created_by = user.id;
+    listingWithImages.created_at = Moment().toISOString(); 
+
+    return listingWithImages;
+  })
+  .then((listing) => {
+    return fetch('http://sproutli-staging.elasticbeanstalk.com/api/v1/listing', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(listing)
+    });
   })
   .then(checkStatus)
   .then(parseJSON)

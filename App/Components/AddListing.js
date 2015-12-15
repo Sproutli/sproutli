@@ -43,6 +43,8 @@ var LoadingScreen = require('./LoadingScreen');
 // Utils
 var CreateListing = require('../Utils/CreateListing');
 var Facebook = require('../Utils/Facebook');
+var Slack = require('../Utils/Slack');
+var Users = require('../Utils/Users');
 
 // Constants
 var CATEGORIES = require('../Constants/Categories');
@@ -221,9 +223,19 @@ class AddListing extends React.Component {
       );
     })
     .catch((error) => {
-      alert('Sorry, there was an error talking to Facebook!');
+      AlertIOS.alert('Error sharing listing', 'Sorry, there was an error talking to Facebook!');
       console.warn('[AddListing] - Error sharing - ', error);
+      this.postErrorToSlack(error);
     });
+  }
+
+  postErrorToSlack(error) {
+    Users.fetchUser()
+   .then((user) => {
+      var message = `@kane.rogers - ${user.name} (${user.email}) encountered an error sharing with Facebook. Error code: \`${error.code}\` Error message: \`${error.message}\``;
+      console.log('Posting message', message);
+      Slack.postMessage(message);
+    })
   }
 
   navigateToNewListing(listing) {
