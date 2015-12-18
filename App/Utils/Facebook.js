@@ -16,7 +16,7 @@ var { FBSDKAccessToken } = require('react-native-fbsdkcore');
 
 function login() {
   return new Promise((resolve, reject) => {
-    FBSDKLoginManager.logInWithPublishPermissions(['publish_actions'], (error, result) => {
+    FBSDKLoginManager.logInWithReadPermissions([], (error, result) => {
       if (error || result.isCancelled) {
         reject(error || new Error('Login was cancelled'));
       } else {
@@ -27,7 +27,6 @@ function login() {
 }
 
 function postListing(listing, image) {
-  var photo = new FBSDKSharePhoto(image, false);
   var openGraphObject = new FBSDKShareOpenGraphObject({
     "og:type": {type: "string", value: "sproutli_app:listing"},
     "og:url": {type: "url", value: `https://fb.me/1217622468253450?listingID=${listing.id}`}, 
@@ -38,7 +37,10 @@ function postListing(listing, image) {
     "sproutli_app:state": {type: "string", value: listing.administrative_area_level_1}
   });
 
-  openGraphObject.setPhoto(photo, 'og:image');
+  if (image) {
+    var photo = new FBSDKSharePhoto(image, false);
+    openGraphObject.setPhoto(photo, 'og:image');
+  }
 
 
   var openGraphAction = new FBSDKShareOpenGraphAction("sproutli_app:create");
@@ -46,7 +48,6 @@ function postListing(listing, image) {
 
   var openGraphContent = new FBSDKShareOpenGraphContent(openGraphAction, "sproutli_app:listing");
 
-  FBSDKShareDialog.setMode('native');
   FBSDKShareDialog.setShouldFailOnDataError(true);
 
   return new Promise((resolve, reject) => {
@@ -72,15 +73,8 @@ function checkToken() {
 
 var Facebook = {
   shareListing(listing, image) {
-    return checkToken()
-    .then((token) => {
-      if (token) {
-        return postListing(listing, image);
-      } else {
-        return login()
-        .then(() => postListing(listing, image));
-      }
-    });
+    FBSDKLoginManager.logOut();
+    return postListing(listing, image);
   }
 }
 

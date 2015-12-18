@@ -43,6 +43,8 @@ var LoadingScreen = require('./LoadingScreen');
 // Utils
 var CreateListing = require('../Utils/CreateListing');
 var Facebook = require('../Utils/Facebook');
+var Slack = require('../Utils/Slack');
+var Users = require('../Utils/Users');
 
 // Constants
 var CATEGORIES = require('../Constants/Categories');
@@ -62,6 +64,11 @@ var OnlineStore = t.enums({
   'N': 'Physical',
   'BOTH': 'Both'
 });
+var OwnerIs = t.enums({
+  'not_sure': 'Not Sure',
+  'vegetarian': 'Vegetarian',
+  'vegan': 'Vegan',
+});
 var PhoneNumber = t.refinement(t.String, (s) => {
   return s.startsWith('+61');
 });
@@ -72,7 +79,8 @@ var defaults = {
   categories: [],
   description: '',
   vegan_level: '4',
-  tags: []
+  tags: [],
+  owner_is: 'not_sure'
 };
 
 
@@ -84,7 +92,8 @@ var Listing = t.struct({
   website: t.maybe(t.String),
   vegan_level: VeganLevel,
   categories: Category,
-  online_store: OnlineStore
+  online_store: OnlineStore,
+  owner_is: OwnerIs,
 });
 
 t.form.Form.stylesheet.controlLabel.normal.color = COLOURS.GREY;
@@ -165,6 +174,9 @@ var formOptions = {
     },
     categories: {
       transformer: arrayTransformer
+    },
+    owner_is: {
+      nullOption: false
     }
   }
 };
@@ -221,9 +233,19 @@ class AddListing extends React.Component {
       );
     })
     .catch((error) => {
-      alert('Sorry, there was an error talking to Facebook!');
+      AlertIOS.alert('Error sharing listing', 'Sorry, there was an error talking to Facebook!');
       console.warn('[AddListing] - Error sharing - ', error);
+      this.postErrorToSlack(error);
     });
+  }
+
+  postErrorToSlack(error) {
+    Users.fetchUser()
+   .then((user) => {
+      var message = `@kane.rogers - ${user.name} (${user.email}) encountered an error sharing with Facebook. Error code: \`${error.code}\` Error message: \`${error.message}\``;
+      console.log('Posting message', message);
+      Slack.postMessage(message);
+    })
   }
 
   navigateToNewListing(listing) {
