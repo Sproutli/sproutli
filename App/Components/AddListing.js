@@ -304,8 +304,8 @@ class AddListing extends React.Component {
       }
     };
 
-    UIImagePickerManager.showImagePicker(options, (didCancel, response) => {
-      if (didCancel) { return ; }
+    UIImagePickerManager.showImagePicker(options, (response) => {
+      if (response.didCancel) { return ; }
       var source = {uri: response.uri.replace('file://', ''), isStatic: true};
       var images = this.state.images;
       images.push(source);
