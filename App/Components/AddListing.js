@@ -357,20 +357,44 @@ class AddListing extends React.Component {
       return false;
     }
 
+    var currentLocation = this.state.location;
+    const currentLocationString = currentLocation.address_line_1 ? `${currentLocation.address_line_1}, ${currentLocation.locality}` : null;
+    var that = this;
+    var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
+    var GooglePlacesAutocomplete = require('react-native-google-places-autocomplete').create({
+      placeholder: 'Start typing an address',
+      fetchDetails: true,
+      styles: { textInput: t.form.Form.stylesheet.textbox.normal },
+      getDefaultValue: () => currentLocationString,
+      onPress(place, placeDetails) {
+        if (place === null) { 
+          return;
+        }
+
+        var geometry = placeDetails.geometry.location;
+        geometry = {
+          latitude: geometry.lat,
+          longitude: geometry.lng
+        };
+        var location = {
+          geometry,
+          name: placeDetails.name
+        };
+
+        that._onLocationSelected(location, placeDetails);
+      },
+      minLength: 2,
+      query: {
+        key: API_KEY,
+        language: 'en',
+        types: 'geocode'
+      }
+    });
+
     return (
       <View style={{marginBottom: 5}}>
         <Text style={t.form.Form.stylesheet.controlLabel.normal}>Address</Text>
-        <GooglePlacesAutocomplete 
-          placeholder='Start typing an address'
-          fetchDetails
-          onPress={this._onLocationSelected.bind(this)}
-          query={{
-            key: API_KEY,
-            language: 'en',
-            types: 'geocode'
-          }}
-          styles = {{ textInput: t.form.Form.stylesheet.textbox.normal }}
-        />
+        <GooglePlacesAutocomplete />
       </View>
     );
   }
