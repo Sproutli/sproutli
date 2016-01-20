@@ -27,7 +27,6 @@
 		C34DABE21BD751B100EB08C8 /* libRNSearchBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C34DABE11BD751AC00EB08C8 /* libRNSearchBar.a */; };
 		C34DABEA1BD7824500EB08C8 /* RNGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = C34DABE91BD7824500EB08C8 /* RNGeocoder.m */; };
 		C35B3EAC1BCC904E005AB832 /* sproutliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B3EAB1BCC904E005AB832 /* sproutliUITests.swift */; };
-		C35CD7911BFC3B0F002A3486 /* UIImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C35CD7901BFC3B0F002A3486 /* UIImagePickerManager.m */; };
 		C3642CAA1BF95B45007FC821 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = C3642CA91BF95B45007FC821 /* main.jsbundle */; };
 		C371A2FC1BCF0D4C00589DFD /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C371A2FB1BCF0D4000589DFD /* libRNVectorIcons.a */; };
 		C371A3061BCF2D4700589DFD /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A2FE1BCF2D4700589DFD /* Entypo.ttf */; };
@@ -40,13 +39,15 @@
 		C371A30D1BCF2D4700589DFD /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A3051BCF2D4700589DFD /* Zocial.ttf */; };
 		C3986C321C056E8E002B5B3E /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C311C056C08002B5B3E /* libRNBlur.a */; };
 		C3986C331C056E8E002B5B3E /* libRNOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C291C056B1C002B5B3E /* libRNOverlay.a */; };
-		C3986C431C05BD13002B5B3E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C401C05BD13002B5B3E /* FBSDKCoreKit.framework */; };
-		C3986C441C05BD13002B5B3E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C411C05BD13002B5B3E /* FBSDKLoginKit.framework */; };
-		C3986C451C05BD13002B5B3E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C421C05BD13002B5B3E /* FBSDKShareKit.framework */; };
 		C3986C4C1C05C42C002B5B3E /* libRCTFBSDKShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C4B1C05C219002B5B3E /* libRCTFBSDKShare.a */; };
 		C3986CC01C068A87002B5B3E /* libRCTFBSDKLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986CBF1C068A7A002B5B3E /* libRCTFBSDKLogin.a */; };
 		C3986CC71C06B8E8002B5B3E /* libRCTFBSDKCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986CC61C06B8DB002B5B3E /* libRCTFBSDKCore.a */; };
+		C39D2B841C4F43D6008EB34C /* UIImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C39D2B821C4F43D6008EB34C /* UIImagePickerManager.m */; };
+		C39D2B851C4F43D6008EB34C /* UIImagePickerManager.h in Sources */ = {isa = PBXBuildFile; fileRef = C39D2B831C4F43D6008EB34C /* UIImagePickerManager.h */; };
 		C3F26AF01C05182400D31B66 /* ImageUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F26AEF1C05182400D31B66 /* ImageUploader.m */; };
+		C3F5019D1C4F42E30064699A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F5019A1C4F42E30064699A /* FBSDKCoreKit.framework */; };
+		C3F5019E1C4F42E30064699A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F5019B1C4F42E30064699A /* FBSDKLoginKit.framework */; };
+		C3F5019F1C4F42E30064699A /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F5019C1C4F42E30064699A /* FBSDKShareKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -229,14 +230,16 @@
 		C371A3051BCF2D4700589DFD /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
 		C3986C191C056B1C002B5B3E /* RNOverlay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNOverlay.xcodeproj; path = "../node_modules/react-native-overlay/RNOverlay.xcodeproj"; sourceTree = "<group>"; };
 		C3986C2C1C056C08002B5B3E /* RNBlur.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBlur.xcodeproj; path = "../node_modules/react-native-blur/ios/RNBlur.xcodeproj"; sourceTree = "<group>"; };
-		C3986C401C05BD13002B5B3E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		C3986C411C05BD13002B5B3E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		C3986C421C05BD13002B5B3E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKShare.xcodeproj; path = "../node_modules/react-native-fbsdkshare/RCTFBSDKShare.xcodeproj"; sourceTree = "<group>"; };
 		C3986CBA1C068A7A002B5B3E /* RCTFBSDKLogin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKLogin.xcodeproj; path = "../node_modules/react-native-fbsdklogin/RCTFBSDKLogin.xcodeproj"; sourceTree = "<group>"; };
 		C3986CC11C06B8DA002B5B3E /* RCTFBSDKCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKCore.xcodeproj; path = "../node_modules/react-native-fbsdkcore/RCTFBSDKCore.xcodeproj"; sourceTree = "<group>"; };
+		C39D2B821C4F43D6008EB34C /* UIImagePickerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UIImagePickerManager.m; path = "../node_modules/react-native-image-picker/ios/UIImagePickerManager.m"; sourceTree = "<group>"; };
+		C39D2B831C4F43D6008EB34C /* UIImagePickerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UIImagePickerManager.h; path = "../node_modules/react-native-image-picker/ios/UIImagePickerManager.h"; sourceTree = "<group>"; };
 		C3F26AEF1C05182400D31B66 /* ImageUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageUploader.m; path = sproutli/ImageUploader.m; sourceTree = "<group>"; };
 		C3F26AFE1C05185300D31B66 /* ImageUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUploader.h; sourceTree = "<group>"; };
+		C3F5019A1C4F42E30064699A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		C3F5019B1C4F42E30064699A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		C3F5019C1C4F42E30064699A /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,13 +247,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3F5019D1C4F42E30064699A /* FBSDKCoreKit.framework in Frameworks */,
+				C3F5019F1C4F42E30064699A /* FBSDKShareKit.framework in Frameworks */,
+				C3F5019E1C4F42E30064699A /* FBSDKLoginKit.framework in Frameworks */,
 				C3986CC71C06B8E8002B5B3E /* libRCTFBSDKCore.a in Frameworks */,
 				C3986CC01C068A87002B5B3E /* libRCTFBSDKLogin.a in Frameworks */,
 				C3986C4C1C05C42C002B5B3E /* libRCTFBSDKShare.a in Frameworks */,
-				C3986C431C05BD13002B5B3E /* FBSDKCoreKit.framework in Frameworks */,
 				C3986C321C056E8E002B5B3E /* libRNBlur.a in Frameworks */,
 				C3986C331C056E8E002B5B3E /* libRNOverlay.a in Frameworks */,
-				C3986C441C05BD13002B5B3E /* FBSDKLoginKit.framework in Frameworks */,
 				C34DABE21BD751B100EB08C8 /* libRNSearchBar.a in Frameworks */,
 				C34DABDB1BD7341900EB08C8 /* libBVLinearGradient.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -259,7 +263,6 @@
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
-				C3986C451C05BD13002B5B3E /* FBSDKShareKit.framework in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				C371A2FC1BCF0D4C00589DFD /* libRNVectorIcons.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
@@ -370,6 +373,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				C39D2B821C4F43D6008EB34C /* UIImagePickerManager.m */,
+				C39D2B831C4F43D6008EB34C /* UIImagePickerManager.h */,
 				C3986CC11C06B8DA002B5B3E /* RCTFBSDKCore.xcodeproj */,
 				C3986CBA1C068A7A002B5B3E /* RCTFBSDKLogin.xcodeproj */,
 				C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */,
@@ -431,9 +436,9 @@
 		B1E558C659135EF5326A410B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C3986C401C05BD13002B5B3E /* FBSDKCoreKit.framework */,
-				C3986C411C05BD13002B5B3E /* FBSDKLoginKit.framework */,
-				C3986C421C05BD13002B5B3E /* FBSDKShareKit.framework */,
+				C3F5019A1C4F42E30064699A /* FBSDKCoreKit.framework */,
+				C3F5019B1C4F42E30064699A /* FBSDKLoginKit.framework */,
+				C3F5019C1C4F42E30064699A /* FBSDKShareKit.framework */,
 				29C1FF3F60BE1503FE8C33A9 /* libPods-sproutli.a */,
 			);
 			name = Frameworks;
@@ -924,8 +929,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C39D2B841C4F43D6008EB34C /* UIImagePickerManager.m in Sources */,
+				C39D2B851C4F43D6008EB34C /* UIImagePickerManager.h in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				C35CD7911BFC3B0F002A3486 /* UIImagePickerManager.m in Sources */,
 				C34DABEA1BD7824500EB08C8 /* RNGeocoder.m in Sources */,
 				C3F26AF01C05182400D31B66 /* ImageUploader.m in Sources */,
 				C33F3AB11BDA0D2700FF4218 /* IntercomWrapper.m in Sources */,
@@ -971,17 +977,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"~/Development/FacebookSDK\"",
 					"\"${PODS_ROOT}/Intercom\"",
-					"\"~/Documents/FacebookSDK\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS/**",
+					"\"~/Development/FacebookSDK\"/**",
 				);
 				INFOPLIST_FILE = sproutli/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1002,17 +1010,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Sproutli PTY LTD (T2TG9M3MRR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"~/Development/FacebookSDK\"",
 					"\"${PODS_ROOT}/Intercom\"",
-					"\"~/Documents/FacebookSDK\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS/**",
+					"\"~/Development/FacebookSDK\"/**",
 				);
 				INFOPLIST_FILE = sproutli/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1022,7 +1032,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.app;
 				PRODUCT_NAME = Sproutli;
-				PROVISIONING_PROFILE = "9bf4216b-7b3d-435f-b9a3-8bf14938c5f2";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

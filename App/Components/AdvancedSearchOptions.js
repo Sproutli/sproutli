@@ -41,10 +41,11 @@ class AdvancedSearchOptions extends React.Component {
         language: 'en',
         types: 'geocode'
       }
-    }).bind(this);
+    });
 
     return (
       <View>
+        
         { this.props.showLocationBar ? <GooglePlacesAutocomplete /> : <View /> }
 
         <VeganLevelSlider 
