@@ -114,11 +114,12 @@ var tagsTransformer = {
     if (Array.isArray(value)) {
       return value.map((t) => '#' + t).join(', ');
     } else {
-      return value.replace(/#/g, '').split(', ');
+      return value;
     }
   },
 
   parse: (value) => {
+    console.log('Parse:', value);
     if (Array.isArray(value)) {
       return value;
     } else {
