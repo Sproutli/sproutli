@@ -336,8 +336,10 @@ class AddListing extends React.Component {
   _onLocationSelected(place, details) {
     if (!details.address_components) { return false; }
 
+
     var address = details.address_components;
     var latlng = details.geometry.location;
+    console.log(address);
 
     var location = {
       location: `${latlng.lat}, ${latlng.lng}`,

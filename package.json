@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh"
+    "start": "node_modules/react-native/packager/packager.sh",
+    "test": "mocha 'Spec/**/*.spec.js' --compilers js:babel-core/register",
+    "watch": "mocha Spec/**/*.js --compilers js:babel-core/register --watch --reporter min"
   },
   "dependencies": {
     "debounce": "^1.0.0",
@@ -38,6 +40,8 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "eslint": "^1.7.0",
-    "eslint-plugin-react": "^3.5.1"
+    "eslint-plugin-react": "^3.5.1",
+    "expect": "^1.13.4",
+    "mocha": "^2.3.4"
   }
 }
