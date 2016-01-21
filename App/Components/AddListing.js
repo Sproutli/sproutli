@@ -48,7 +48,17 @@ var Users = require('../Utils/Users');
 import AddressParser from '../Utils/AddressParser';
 
 // Constants
-var CATEGORIES = require('../Constants/Categories');
+var CATEGORIES = [
+  'Beer & Wine',
+  'Cafes & Restaurants',
+  'Causes',
+  'Clothing, Shoes & Accessories',
+  'Food Stores',
+  'Health, Wellness & Lifestyle',
+  'Home & Living',
+  'Pets',
+  'Professional Services & Trades',
+];
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 var COLOURS = require('../Constants/Colours');
 
@@ -76,10 +86,10 @@ var PhoneNumber = t.refinement(t.String, (s) => {
 
 var defaults = {
   name: '',
-  online_store: 'BOTH',
+  online_store: 'N',
   categories: [],
   description: '',
-  vegan_level: '4',
+  vegan_level: '',
   tags: null,
   owner_is: 'not_sure'
 };
@@ -165,7 +175,6 @@ var formOptions = {
       autoCapitalize: 'none',
     },
     vegan_level: {
-      nullOption: false,
       transformer: veganLevelTransformer
     },
     online_store: {
@@ -216,8 +225,8 @@ class AddListing extends React.Component {
       'Listing Added', 
       `${this.state.formValue.name} has been added! Would you like to share it on Facebook?`, 
       [
-        { text: 'Yes', onPress: this.shareOnFacebook.bind(this, listing) },
-        { text: 'No', onPress: this.navigateToNewListing.bind(this, listing) }
+        { text: 'Share', onPress: this.shareOnFacebook.bind(this, listing) },
+        { text: 'Not Now', onPress: this.navigateToNewListing.bind(this, listing) }
       ]
     );
   }
