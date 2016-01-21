@@ -52,10 +52,11 @@ function postListing(listing, image) {
 
   return new Promise((resolve, reject) => {
     console.log('[Facebook] - About to share content.', openGraphContent);
-    FBSDKShareDialog.show(openGraphContent, (error, result) => {
+    FBSDKShareDialog.setContent(openGraphContent);
+    FBSDKShareDialog.show((error, result) => {
       console.log('[Facebook] - Showed dialog (apparently)', result);
       if (error || result.isCancelled) {
-        reject(error || new Error('Login was cancelled'));
+        reject(error || new Error('Share dialog was cancelled.'));
       } else {
         resolve(result);
       }
