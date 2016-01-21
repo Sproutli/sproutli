@@ -80,7 +80,7 @@ var defaults = {
   categories: [],
   description: '',
   vegan_level: '4',
-  tags: [],
+  tags: null,
   owner_is: 'not_sure'
 };
 
@@ -120,11 +120,10 @@ var tagsTransformer = {
   },
 
   parse: (value) => {
-    console.log('Parse:', value);
-    if (Array.isArray(value)) {
-      return value;
+    if (typeof value === 'string') { 
+      return value.replace(/#/g, '').split(' ');
     } else {
-      return value.replace(/#/g, '').split(', ');
+      return value;
     }
   }
 }
@@ -162,9 +161,8 @@ var formOptions = {
     tags: {
       keyboardType: 'twitter',
       transformer: tagsTransformer,
-      placeholder: 'eg. #cake, #dessert',
+      placeholder: 'eg. #cake #dessert',
       autoCapitalize: 'none',
-      error: (value) => (value && value.length === 0) ? '' : 'Separate multiple tags with commas'
     },
     vegan_level: {
       nullOption: false,
@@ -192,6 +190,7 @@ class AddListing extends React.Component {
       location: {},
       images: [],
       isOnlineStore: false,
+      addressIsIncorrect: false,
       formValue: defaults
     };
     
@@ -201,7 +200,6 @@ class AddListing extends React.Component {
   _onFormChanged(raw) {
     var isOnlineStore = raw.online_store === 'y';
 
-    console.log('isOnlineStore', isOnlineStore);
     this.setState({
       formValue: raw,
       isOnlineStore
@@ -266,6 +264,7 @@ class AddListing extends React.Component {
   }
 
   createListing(listing) {
+    debugger;
     listing = Object.assign(listing, this.state.location);
     listing.images = this.state.images.slice(0);
 
@@ -277,17 +276,33 @@ class AddListing extends React.Component {
       });
   }
 
+  hasCorrectAddress() {
+    if (this.state.isOnlineStore) { return true; }  // If this is an online listing, we don't care about the address.
+
+    // If we have a location, our address is correct.
+    if (this.state.location.locality) { 
+      this.setState({ addressIsIncorrect: false });
+      return true; 
+    }
+
+    // This is a phyiscal, but we have no location - the address is incorrect.
+    this.setState({ addressIsIncorrect: true });
+    return false;
+  }
+
   _formPressed() {
-    var valid = this.refs.form.getValue();
-    if (valid) {
+    const formValue = this.refs.form.getValue();
+    var listingIsValid = formValue && this.hasCorrectAddress();
+    if (listingIsValid) {
       this.setState({ loading: true, loadingText: `Creating your listing - hold on just a moment..` });
 
-      var listing = JSON.parse(JSON.stringify(valid)); // Surely this is insane.
+      var listing = JSON.parse(JSON.stringify(formValue)); // Surely this is insane.
       this.createListing(listing);
     } else {
       var error = this.refs.form.validate();
-      console.warn('[AddListing] - Error with form: ', error);
-      this._onListingError('Uh oh!', 'Sorry, there were errors with your listing!');
+      this.hasCorrectAddress();
+      console.warn('[AddListing] - Error with form: ', error, this.state.location);
+      this._onListingError('Could not create listing', 'Sorry, there was an error with your listing. Scroll up and look for areas marked in red.');
     }
   }
 
@@ -352,6 +367,10 @@ class AddListing extends React.Component {
       return false;
     }
 
+    const stylesheet = t.form.Form.stylesheet;
+    const labelStyle = this.state.addressIsIncorrect ? stylesheet.controlLabel.error : stylesheet.controlLabel.normal;
+    const textInputStyle = this.state.addressIsIncorrect ? stylesheet.textbox.error : stylesheet.textbox.normal;
+
     var currentLocation = this.state.location;
     const currentLocationString = currentLocation.address_line_1 ? `${currentLocation.address_line_1}, ${currentLocation.locality}` : currentLocation.locality;
     var that = this;
@@ -359,7 +378,7 @@ class AddListing extends React.Component {
     var GooglePlacesAutocomplete = require('react-native-google-places-autocomplete').create({
       placeholder: 'Start typing an address or location',
       fetchDetails: true,
-      styles: { textInput: t.form.Form.stylesheet.textbox.normal },
+      styles: { textInput: textInputStyle },
       getDefaultValue: () => currentLocationString,
       onPress(place, placeDetails) {
         if (place === null) { 
@@ -386,9 +405,10 @@ class AddListing extends React.Component {
       }
     });
 
+
     return (
       <View style={{marginBottom: 5}}>
-        <Text style={t.form.Form.stylesheet.controlLabel.normal}>Location</Text>
+        <Text style={labelStyle}>Location</Text>
         <GooglePlacesAutocomplete />
       </View>
     );
@@ -442,6 +462,7 @@ class AddListing extends React.Component {
           ref='form'
           type={Listing}
         />
+
         <View style={styles.buttonContainer}>
           <Button onPress={this._formPressed.bind(this)}>Add listing</Button>
         </View>
