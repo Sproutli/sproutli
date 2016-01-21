@@ -45,6 +45,7 @@ var CreateListing = require('../Utils/CreateListing');
 var Facebook = require('../Utils/Facebook');
 var Slack = require('../Utils/Slack');
 var Users = require('../Utils/Users');
+import AddressParser from '../Utils/AddressParser';
 
 // Constants
 var CATEGORIES = require('../Constants/Categories');
@@ -339,18 +340,9 @@ class AddListing extends React.Component {
 
     var address = details.address_components;
     var latlng = details.geometry.location;
-    console.log(address);
 
-    var location = {
-      location: `${latlng.lat}, ${latlng.lng}`,
-      address_line_1: `${address[0].long_name} ${address[1].long_name}`,
-      locality: address[2].long_name,
-      administrative_area_level_1: address[3].long_name,
-      country: address[4].long_name,
-      postcode: (address[5] || {}).long_name
-    };
-
-    console.log(location);
+    const location = AddressParser.parse(address, latlng);
+    console.log('Got location:', location);
 
     this.setState({ location });
   }
@@ -361,11 +353,11 @@ class AddListing extends React.Component {
     }
 
     var currentLocation = this.state.location;
-    const currentLocationString = currentLocation.address_line_1 ? `${currentLocation.address_line_1}, ${currentLocation.locality}` : null;
+    const currentLocationString = currentLocation.address_line_1 ? `${currentLocation.address_line_1}, ${currentLocation.locality}` : currentLocation.locality;
     var that = this;
     var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
     var GooglePlacesAutocomplete = require('react-native-google-places-autocomplete').create({
-      placeholder: 'Start typing an address',
+      placeholder: 'Start typing an address or location',
       fetchDetails: true,
       styles: { textInput: t.form.Form.stylesheet.textbox.normal },
       getDefaultValue: () => currentLocationString,
@@ -396,7 +388,7 @@ class AddListing extends React.Component {
 
     return (
       <View style={{marginBottom: 5}}>
-        <Text style={t.form.Form.stylesheet.controlLabel.normal}>Address</Text>
+        <Text style={t.form.Form.stylesheet.controlLabel.normal}>Location</Text>
         <GooglePlacesAutocomplete />
       </View>
     );
