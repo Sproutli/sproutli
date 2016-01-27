@@ -25,7 +25,7 @@ class Login extends React.Component {
     this.state = {
       email: props.email,
       password: props.password,
-      loading: true,
+      loading: false,
       name: ''
     };
   }
@@ -43,6 +43,7 @@ class Login extends React.Component {
   }
 
   _loginPressed() {
+    this.setState({ loading: true });
     var credentials = {
       email: this.state.email,
       password: this.state.password
@@ -59,7 +60,6 @@ class Login extends React.Component {
   _signupPressed() {
     console.log('Signup pressed');
     if (!this.props.signingUp) {
-      // TODO: Copy details to sign up screen.
       this.props.navigator.push({
         name: 'login',
         index: 1,
