@@ -188,7 +188,7 @@ class ListingDetail extends React.Component {
         <Text style={styles.bold}>Rating</Text>
         <Text style={styles.text}>{this.props.listing.rating ? `${this.props.listing.rating}/5.0` : 'No rating yet' }</Text>
 
-        <Text style={styles.bold}>Address</Text>
+        <Text style={styles.bold}>Location</Text>
         <Text style={[styles.text, {paddingBottom: 0}]}>{this.props.listing.address_line_1}</Text>
         <Text style={[styles.text, {paddingBottom: 0}]}>{this.props.listing.locality}</Text>
         <Text style={[styles.text, {paddingBottom: 0}]}>{this.props.listing.administrative_area_level_1}</Text>

@@ -6,6 +6,7 @@ var {
   StyleSheet,
   ListView,
   ProgressBarAndroid,
+  ActivityIndicatorIOS,
   Text,
   ScrollView,
   Platform,
@@ -255,7 +256,7 @@ class Search extends React.Component {
     if (this.state.loading) { 
       return (
         <View style={styles.loadingContainer}>
-          <ProgressBarAndroid styleAttr='Large' />
+          <ActivityIndicatorIOS size='large' />
           <Text style={styles.loadingText}>Just a moment..</Text>
         </View>
       );
