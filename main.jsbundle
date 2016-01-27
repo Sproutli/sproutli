@@ -1,5 +1,5 @@
 __DEV__=
-true;
+false;
 
 
 __BUNDLE_START_TIME__=Date.now();
@@ -64108,6 +64108,7 @@ if(this.state.text!==''&&this.state.listViewDisplayed===true){
 
 return (
 React.createElement(ListView,{
+keyboardShouldPersistTaps:true,
 style:styles.listView,
 dataSource:this.state.dataSource,
 renderRow:this._renderRow,
@@ -64128,6 +64129,7 @@ React.createElement(View,{style:styles.container},
 React.createElement(View,{style:styles.textInputContainer},
 React.createElement(TextInput,{
 ref:'textInput',
+autoCorrect:false,
 autoFocus:options.autoFocus,
 style:styles.textInput,
 onChangeText:this._onChangeText,
@@ -73042,7 +73044,8 @@ StyleSheet=
 
 
 
-React.StyleSheet;var ListView=React.ListView;var ProgressBarAndroid=React.ProgressBarAndroid;var Text=React.Text;var ScrollView=React.ScrollView;var Platform=React.Platform;var PixelRatio=React.PixelRatio;var View=React.View;
+
+React.StyleSheet;var ListView=React.ListView;var ProgressBarAndroid=React.ProgressBarAndroid;var ActivityIndicatorIOS=React.ActivityIndicatorIOS;var Text=React.Text;var ScrollView=React.ScrollView;var Platform=React.Platform;var PixelRatio=React.PixelRatio;var View=React.View;
 
 var RNGeocoder=require('react-native-geocoder/index.js');
 var Icon=require('react-native-vector-icons/Ionicons.js');
@@ -73286,7 +73289,7 @@ React.createElement(Text,{style:styles.loadingText},'There was an error searchin
 if(this.state.loading){
 return (
 React.createElement(View,{style:styles.loadingContainer},
-React.createElement(ProgressBarAndroid,{styleAttr:'Large'}),
+React.createElement(ActivityIndicatorIOS,{size:'large'}),
 React.createElement(Text,{style:styles.loadingText},'Just a moment..')));}
 
 
@@ -73294,7 +73297,12 @@ React.createElement(Text,{style:styles.loadingText},'Just a moment..')));}
 
 if(this.state.numberOfListings<1){
 return (
-React.createElement(ScrollView,{contentContainerStyle:styles.loadingContainer,keyboardShouldPersistTaps:false,keyboardDismissMode:'on-drag'},
+React.createElement(ScrollView,{
+contentContainerStyle:styles.loadingContainer,
+showsVerticalScrollIndicator:true,
+keyboardShouldPersistTaps:true,
+automaticallyAdjustContentInsets:false,
+keyboardDismissMode:'on-drag'},
 React.createElement(Icon,{name:'sad-outline',size:100,color:COLOURS.GREY}),
 React.createElement(Text,{style:styles.loadingText},'Sorry! No listings found.')));}
 
@@ -74856,7 +74864,7 @@ function Login(props){babelHelpers.classCallCheck(this,Login);var _this=babelHel
 _this.state={
 email:props.email,
 password:props.password,
-loading:true,
+loading:false,
 name:''};return _this;}babelHelpers.createClass(Login,[{key:'_onEmailChanged',value:function _onEmailChanged(
 
 
@@ -74874,6 +74882,7 @@ this.setState({name:name});}},{key:'_loginPressed',value:function _loginPressed(
 
 
 {var _this2=this;
+this.setState({loading:true});
 var credentials={
 email:this.state.email,
 password:this.state.password};
@@ -74890,7 +74899,6 @@ AlertIOS.alert('Error','Sorry, there was an error with your email and password.'
 {var _this3=this;
 console.log('Signup pressed');
 if(!this.props.signingUp){
-
 this.props.navigator.push({
 name:'login',
 index:1,
@@ -75112,4 +75120,4 @@ module.exports=Authentication;
 });
 ;require("InitializeJavaScriptAppEngine");
 ;require("sproutli/index.ios.js");
-//# sourceMappingURL=/index.ios.map?platform=ios&dev=true
+//# sourceMappingURL=/index.ios.map?platform=ios&dev=false
