@@ -264,7 +264,12 @@ class Search extends React.Component {
 
     if (this.state.numberOfListings < 1) {
       return (
-        <ScrollView contentContainerStyle={styles.loadingContainer} keyboardShouldPersistTaps={false} keyboardDismissMode='on-drag'>
+        <ScrollView 
+          contentContainerStyle={styles.loadingContainer} 
+          showsVerticalScrollIndicator
+          keyboardShouldPersistTaps={true}
+          automaticallyAdjustContentInsets={false}
+          keyboardDismissMode='on-drag'>
           <Icon name='sad-outline' size={100} color={COLOURS.GREY} />
           <Text style={styles.loadingText}>Sorry! No listings found.</Text>
         </ScrollView>
