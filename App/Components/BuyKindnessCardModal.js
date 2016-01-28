@@ -6,6 +6,8 @@ var {
   StyleSheet,
   PixelRatio,
   Animated,
+  LinkingIOS,
+  Platform,
   View
 } = React;
 
@@ -31,7 +33,13 @@ class BuyKindnessCardModal extends React.Component {
   _onGetKindnessCard() {
     GoogleAnalytics.trackEvent('Kindness Card', 'openLink');
     Intercom.logEvent('viewed_buy_kindness_card');
-    WebIntent.open('http://www.sproutli.com/kindness-card.html');
+    const buyKindnessCardURL = 'http://www.sproutli.com/kindness-card.html';
+
+    if (Platform.OS == 'ios') {
+      LinkingIOS.openURL(buyKindnessCardURL);
+    } else {
+      WebIntent.open(buyKindnessCardURL);
+    }
   }
 
   componentDidMount() {
