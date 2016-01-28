@@ -70064,7 +70064,9 @@ Text=
 
 
 
-React.Text;var StyleSheet=React.StyleSheet;var PixelRatio=React.PixelRatio;var Animated=React.Animated;var View=React.View;
+
+
+React.Text;var StyleSheet=React.StyleSheet;var PixelRatio=React.PixelRatio;var Animated=React.Animated;var LinkingIOS=React.LinkingIOS;var Platform=React.Platform;var View=React.View;
 
 var WebIntent=require('react-native-webintent/index.js');
 var Button=require('sproutli/App/Components/Button.ios.js');
@@ -70088,7 +70090,13 @@ GoogleAnalytics.viewedScreen('Buy Kindness Card');return _this;}babelHelpers.cre
 {
 GoogleAnalytics.trackEvent('Kindness Card','openLink');
 Intercom.logEvent('viewed_buy_kindness_card');
-WebIntent.open('http://www.sproutli.com/kindness-card.html');}},{key:'componentDidMount',value:function componentDidMount()
+var buyKindnessCardURL='http://www.sproutli.com/kindness-card.html';
+
+if(Platform.OS=='ios'){
+LinkingIOS.openURL(buyKindnessCardURL);}else 
+{
+WebIntent.open(buyKindnessCardURL);}}},{key:'componentDidMount',value:function componentDidMount()
+
 
 
 {
