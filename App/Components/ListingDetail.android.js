@@ -10,11 +10,9 @@ var {
   ProgressBarAndroid,
   ScrollView,
   ViewPagerAndroid,
+  IntentAndroid,
   PixelRatio
 } = React;
-var WebIntent = require('react-native-webintent');
-var CallIntent = require('react-native-callintent');
-var MapIntent = require('react-native-mapintent');
 
 var Dimensions = require('Dimensions');
 var {width} = Dimensions.get('window');
@@ -208,12 +206,12 @@ class ListingDetail extends React.Component {
   }
 
   _onCallListing() {
-    CallIntent.open(this.props.listing.phone_number);
+    IntentAndroid.open(`tel://${this.props.listing.phone_number}`);
   }
 
   _onShowMap() {
     var location = this.props.listing.location.split(',');
-    MapIntent.open(location[0], location[1], this.props.listing.name);
+    Intent.open(`geo://${location[0]},${location[1]}`);
   }
 
   _onShowImages() {
@@ -226,7 +224,7 @@ class ListingDetail extends React.Component {
       url = 'http://' + url;
     }
 
-    WebIntent.open(url);
+    Intent.open(url);
   }
 
   _onViewOffer() {

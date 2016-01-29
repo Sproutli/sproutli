@@ -16,7 +16,7 @@ var {
 
 var RNGeocoder = require('react-native-geocoder');
 var Icon = require('react-native-vector-icons/Ionicons');
-var ActionButton = require('react-native-action-button');
+import ActionButton from 'react-native-action-button';
 var Moment = require('moment');
 var Debounce = require('debounce');
 
@@ -256,7 +256,7 @@ class Search extends React.Component {
     if (this.state.loading) { 
       return (
         <View style={styles.loadingContainer}>
-          <ActivityIndicatorIOS size='large' />
+          { Platform.OS === 'ios' ? <ActivityIndicatorIOS size='large' /> : <ProgressBarAndroid style='large' /> }
           <Text style={styles.loadingText}>Just a moment..</Text>
         </View>
       );
@@ -299,11 +299,8 @@ class Search extends React.Component {
   renderFab() {
     if (Platform.OS === 'ios') { return; }
 
-
     return (
-      <ActionButton buttonColor={COLOURS.GREY} onPress={this.showAddListingScreen.bind(this)}>
-        <Icon name='android-create' style={styles.actionButtonIcon} />
-      </ActionButton>
+      <ActionButton buttonColor={COLOURS.GREY} onPress={this.showAddListingScreen.bind(this)} />
     );
   }
 

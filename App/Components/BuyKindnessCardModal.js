@@ -7,11 +7,11 @@ var {
   PixelRatio,
   Animated,
   LinkingIOS,
+  IntentAndroid,
   Platform,
   View
 } = React;
 
-var WebIntent = require('react-native-webintent');
 var Button = require('./Button');
 var COLOURS = require('../Constants/Colours');
 var GoogleAnalytics = require('../Utils/GoogleAnalytics');
@@ -38,7 +38,7 @@ class BuyKindnessCardModal extends React.Component {
     if (Platform.OS == 'ios') {
       LinkingIOS.openURL(buyKindnessCardURL);
     } else {
-      WebIntent.open(buyKindnessCardURL);
+      IntentAndroid.openURL(buyKindnessCardURL);
     }
   }
 

@@ -27,10 +27,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.common.ConnectionResult;
 
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
-import com.ivanph.webintent.RNWebIntentPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-import com.syarul.callintent.RNCallIntentPackage;
-import com.syarul.mapintent.RNMapIntentPackage;
 
 import io.fabric.sdk.android.Fabric;
 import io.intercom.android.sdk.Intercom;
@@ -55,13 +52,10 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
-                .addPackage(new LocationPackage(this))
+//                .addPackage(new LocationPackage(this))
                 .addPackage(new IntercomPackage())
                 .addPackage(new VectorIconsPackage())
                 .addPackage(new ReactMaterialKitPackage())
-                .addPackage(new RNCallIntentPackage())
-                .addPackage(new RNWebIntentPackage())
-                .addPackage(new RNMapIntentPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
