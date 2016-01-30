@@ -206,12 +206,12 @@ class ListingDetail extends React.Component {
   }
 
   _onCallListing() {
-    IntentAndroid.open(`tel://${this.props.listing.phone_number}`);
+    IntentAndroid.openURL(`tel://${this.props.listing.phone_number}`);
   }
 
   _onShowMap() {
     var location = this.props.listing.location.split(',');
-    Intent.open(`geo://${location[0]},${location[1]}`);
+    IntentAndroid.openURL(`geo://${location[0]},${location[1]}`);
   }
 
   _onShowImages() {
@@ -224,7 +224,7 @@ class ListingDetail extends React.Component {
       url = 'http://' + url;
     }
 
-    Intent.open(url);
+    IntentAndroid.openURL(url);
   }
 
   _onViewOffer() {

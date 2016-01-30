@@ -1,14 +1,43 @@
 'use strict';
 
-import React, { StyleSheet, TextInput, View} from 'react-native';
+import React, { StyleSheet, TextInput, Animated } from 'react-native';
 import AdvancedSearchOptions from './AdvancedSearchOptions';
 
 var COLOURS = require('../Constants/Colours');
 
 class SearchBox extends React.Component {
+  constructor() {
+    super();
+    this.state = { 
+      searchBoxHeight:  new Animated.Value(-500)
+    };
+  }
+
+  componentDidMount() {
+    console.log('Hello!');
+    Animated.spring(
+      this.state.searchBoxHeight,
+      { 
+        toValue: 0
+      }
+    ).start();
+  }
+
+  componentWillUnmount() {
+    console.log('Bye!');
+    Animated.spring(
+      this.state.searchBoxHeight,
+      { 
+        toValue: -500 
+      }
+    ).start();
+  }
+
+
   render() {
+    console.log(this.state.searchBoxHeight._value);
     return (
-      <View>
+      <Animated.View style={{ transform: [{ translateY: this.state.searchBoxHeight }]}}>
         <TextInput
           style={styles.search}
           text={this.props.query}
@@ -25,7 +54,7 @@ class SearchBox extends React.Component {
           locationName={this.props.locationName}
           showLocationBar={this.props.showLocationBar}
         />
-      </View>
+      </Animated.View>
     );
   }
 }
