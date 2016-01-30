@@ -1,18 +1,19 @@
 'use strict';
 
-var React = require('react-native');
 var Dimensions = require('Dimensions');
 var { width, height } = Dimensions.get('window');
-var {
+import React, {
   StyleSheet,
   Text,
   View,
   ScrollView,
   PixelRatio,
   ActivityIndicatorIOS,
+  ProgressBarAndroid,
   AlertIOS,
-  TextInput
-} = React;
+  TextInput,
+  Platform,
+} from 'react-native';
 
 var Authentication = require('../Utils/Authentication');
 var Button = require('./Button');
@@ -97,6 +98,7 @@ class Login extends React.Component {
     return (
       <TextInput 
         keyboardType='email-address' 
+        underlineColorAndroid={COLOURS.GREEN}
         style={styles.loginInput} 
         placeholder='Email' 
         autoCorrect={false}
@@ -113,6 +115,7 @@ class Login extends React.Component {
       <TextInput 
         secureTextEntry
         style={styles.loginInput} 
+        underlineColorAndroid={COLOURS.GREEN}
         placeholder='Password' 
         value={this.state.password}
         onChangeText={this._onPasswordChanged.bind(this)}
@@ -125,6 +128,7 @@ class Login extends React.Component {
     return ( 
       <TextInput 
         style={styles.loginInput} 
+        underlineColorAndroid={COLOURS.GREEN}
         returnKeyType='done'
         onSubmitEditing={this._signupPressed.bind(this)}
         onChangeText={this._onNameChanged.bind(this)} 
@@ -142,9 +146,19 @@ class Login extends React.Component {
     );
   }
 
+  renderLoading() {
+    if (!this.state.loading) { return <View /> }
+
+    if (Platform.OS === 'ios') {
+      return <ActivityIndicatorIOS style={{paddingTop: 10}} />
+    } else {
+      return <ProgressBarAndroid style={{paddingTop: 10}} />
+    }
+  }
+
   render() {
     return (
-      <ScrollView containerStyle={styles.container} keyboardShouldPersistTaps={false} keyboardDismissMode='on-drag'>
+      <ScrollView containerStyle={styles.container} keyboardShouldPersistTaps={true} keyboardDismissMode='on-drag'>
         <View style={styles.loginContainer}>
           <View style={styles.header}>
             <Text style={styles.headerText}>Welcome to Sproutli!</Text>
@@ -156,7 +170,7 @@ class Login extends React.Component {
           <View style={styles.loginButtonsContainer}>
             {this.loginButton()}
             <Button onPress={this._signupPressed.bind(this)}>Sign Up</Button>
-            { this.state.loading ? <ActivityIndicatorIOS style={{paddingTop: 10}} /> : <View /> }
+            {this.renderLoading()}
           </View>
         </View>
         <View style={{flex: 0.33}}/>
