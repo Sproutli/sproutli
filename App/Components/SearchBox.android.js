@@ -18,7 +18,7 @@ class SearchBox extends React.Component {
         underlineColorAndroid={COLOURS.GREEN}
         onChangeText={this.props.onChangeText}
         onSubmitEditing={this.props.onSubmitEditing}
-        onFocus={this.props.onFocus}
+        autoFocus={true}
        /> 
     );
   }
@@ -32,7 +32,6 @@ SearchBox.propTypes = {
   veganLevelText: React.PropTypes.string,
   numberOfListings: React.PropTypes.number,
   onBlur: React.PropTypes.func,
-  onFocus: React.PropTypes.func,
   query: React.PropTypes.string
 };
 
