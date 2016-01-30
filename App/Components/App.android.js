@@ -26,12 +26,7 @@ class App extends React.Component {
       searchListeners: [],
       title: 'Search',
       page: 0,
-      actions: [{
-        title: 'Search',
-        icon: require('../Images/ic_search_white.png'),
-        show: 'always',
-        func: () => this.state.searchListeners.forEach( l => { l(); })
-      }]
+      actions: []
     },
     this.navigators = [];
     this.actionsCache = [];
@@ -98,7 +93,12 @@ class App extends React.Component {
   }
 
   _onActionSelected(actionIndex) {
-    this.state.actions[actionIndex].func();
+    // Search is a special case, sadly..
+    if (this.state.title === 'Search') {
+      this.state.searchListeners.forEach((l) => l());
+    } else {
+      this.state.actions[actionIndex].func();
+    }
   }
 
   makeNavigatorOperations(index) {
@@ -155,13 +155,23 @@ class App extends React.Component {
     var image = require('../Images/ic_arrow_back_white.png');
     if (this.state.title !== 'Search') return image;
   }
+
   
   render() {
+    const searchActions = [{
+      title: 'Search',
+      icon: require('../Images/ic_search_white.png'),
+      show: 'always',
+      func: () => this.state.searchListeners.forEach( l => { l(); })
+    }]
+
+    const toolbarActions = this.state.title === 'Search' ? searchActions : this.state.actions;
+
     return (
       <View style={{flex: 1}}>
         <ToolbarAndroid
           overflowIcon={require('../Images/ic_more_vert_white.png')}
-          actions={this.state.actions}
+          actions={toolbarActions}
           onActionSelected={this._onActionSelected.bind(this)}
           navIcon={this.needsNavIcon()}
           titleColor='white'
