@@ -161,10 +161,6 @@ class Search extends React.Component {
     });
   }
 
-  _onFocus() {
-    this.setState({ showAdvancedSearchOptions: true });
-  }
-
   _onLocationSelected(location) {
     // TODO: Horrible, refactor.
     if (location === null) {
@@ -221,7 +217,6 @@ class Search extends React.Component {
         query={this.state.query}
         onChangeText={this._onChangeText.bind(this)} 
         onSubmitEditing={this._onSearch.bind(this)} 
-        onFocus={this._onFocus.bind(this)} 
         location={this.state.locationName}
         searchLabel={this.props.searchLabel}
         numberOfListings={this.state.numberOfListings}
