@@ -23,7 +23,6 @@ var Debounce = require('debounce');
 var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
 var ListingDetail = require('./ListingDetail');
-var AdvancedSearchOptions = require('./AdvancedSearchOptions');
 var AddListing = require('./AddListing');
 
 var SearchEngine = require('../Utils/SearchEngine');
@@ -220,24 +219,13 @@ class Search extends React.Component {
         location={this.state.locationName}
         searchLabel={this.props.searchLabel}
         numberOfListings={this.state.numberOfListings}
+        veganLevel={this.state.veganLevel}
+        onLocationSelected={this._onLocationSelected.bind(this)} 
+        onVeganLevelChanged={this._onVeganSliderChanged.bind(this)}
+        locationName={this.state.locationName}
+        showLocationBar={this.state.searchConfig.online_store !== 'Y'}
       /> 
     );
-  }
-
-  renderAdvancedSearch() {
-    if (!this.state.showSearch) { return <View />; }
-
-    try {
-      return (
-        <AdvancedSearchOptions 
-          veganLevel={this.state.veganLevel}
-          onLocationSelected={this._onLocationSelected.bind(this)} 
-          onVeganLevelChanged={this._onVeganSliderChanged.bind(this)}
-          locationName={this.state.locationName}
-          showLocationBar={this.state.searchConfig.online_store !== 'Y'}
-        />
-      );
-    } catch (error) { console.warn('GOT SOME BAD ERROR', error); }
   }
 
   renderListings() {
@@ -306,8 +294,6 @@ class Search extends React.Component {
     return (
       <View style={styles.bigContainer}>
         { this.renderSearch() }
-
-        { this.renderAdvancedSearch() }
 
         { this.renderListings() }
 
