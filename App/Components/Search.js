@@ -45,12 +45,14 @@ class Search extends React.Component {
       listings: [],
       numberOfListings: null,
       loading: true,
-      showSearch: true,
+      showSearch: props.showSearch,
       locationName: '',
       veganLevel: VeganLevelManager.veganLevel,
       searchConfig: props.searchConfig,
       showAdvancedSearchOptions: true
     };
+
+    props.searchListeners.push(() => { this.setState({ showSearch: !this.state.showSearch })});
 
     this.state.searchConfig.vegan_level = VeganLevelManager.veganLevel;
     var debouncedVeganLevel = Debounce(this._onVeganLevelChanged.bind(this), 500);
@@ -278,7 +280,6 @@ class Search extends React.Component {
 
     return ( 
       <ListView
-        onScroll={this._onScroll.bind(this)}
         dataSource={this.state.dataSource}
         keyboardShouldPersistTaps={false}
         keyboardDismissMode='on-drag'

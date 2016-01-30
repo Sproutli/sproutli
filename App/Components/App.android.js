@@ -23,8 +23,15 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      searchListeners: [],
       title: 'Search',
-      page: 0
+      page: 0,
+      actions: [{
+        title: 'Search',
+        icon: require('../Images/ic_search_white.png'),
+        show: 'always',
+        func: () => this.state.searchListeners.forEach( l => { l(); })
+      }]
     },
     this.navigators = [];
     this.actionsCache = [];
@@ -132,6 +139,8 @@ class App extends React.Component {
             title: 'Search',
             component: Search,
             passProps: { 
+              searchListeners: this.state.searchListeners,
+              showSearch: this.state.showSearch,
               searchLabel: name,
               navigator: navigationOperations,
               searchConfig: SUGGESTIONS[name].searchConfig
@@ -148,7 +157,6 @@ class App extends React.Component {
   }
   
   render() {
-    console.log('Nav Icon?', this.needsNavIcon());
     return (
       <View style={{flex: 1}}>
         <ToolbarAndroid
