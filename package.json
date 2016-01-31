@@ -20,7 +20,7 @@
     "react-native-fbsdkcore": "0.0.8",
     "react-native-fbsdklogin": "0.0.8",
     "react-native-fbsdkshare": "0.0.8",
-    "react-native-geocoder": "^0.1.4",
+    "react-native-geocoder": "^0.2.0",
     "react-native-google-analytics": "0.0.3",
     "react-native-google-places-autocomplete": "git+https://github.com/kanerogers/react-native-google-places-autocomplete.git",
     "react-native-image-picker": "^0.13.1",

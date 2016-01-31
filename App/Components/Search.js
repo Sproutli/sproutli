@@ -70,9 +70,13 @@ class Search extends React.Component {
       var location = position.coords;
       this.setState({ location });
       this.search(location);
+      console.log('[ReverseGeocode] - Reverse geocoding ', location);
       RNGeocoder.reverseGeocodeLocation(location)
-        .then((geocodedLocation) => this.setState({ locationName: geocodedLocation[0].locality }))
-        .catch((error) => this.warn('[Search] - Error getting reverse geocode', error));
+        .then((geocodedLocation) => {
+          console.log('[ReverseGeocode] - Got location. ', geocodedLocation);
+          this.setState({ locationName: geocodedLocation[0].locality })
+        })
+        .catch((error) => console.warn('[Search] - Error getting reverse geocode', error.message));
     },
       (error) => {
       console.warn('[Search] - Error getting location', error);

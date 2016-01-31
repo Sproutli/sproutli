@@ -28,6 +28,7 @@ import com.google.android.gms.common.ConnectionResult;
 
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.devfd.RNGeocoder.RNGeocoderPackage;
 
 import io.fabric.sdk.android.Fabric;
 import io.intercom.android.sdk.Intercom;
@@ -53,6 +54,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
 //                .addPackage(new LocationPackage(this))
+                .addPackage(new RNGeocoderPackage())
                 .addPackage(new IntercomPackage())
                 .addPackage(new VectorIconsPackage())
                 .addPackage(new ReactMaterialKitPackage())

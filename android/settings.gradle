@@ -10,3 +10,6 @@ project(':react-native-vector-icons').projectDir = new File(rootProject.projectD
 
 include ':RNMaterialKit'
 project(':RNMaterialKit').projectDir = file('../node_modules/react-native-material-kit/android')
+
+include ':RNGeocoder', ':app'
+project(':RNGeocoder').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-geocoder/android')
