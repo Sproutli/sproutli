@@ -14,7 +14,6 @@ class SearchBox extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Hello!');
     Animated.spring(
       this.state.searchBoxHeight,
       { 
@@ -24,7 +23,6 @@ class SearchBox extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log('Bye!');
     Animated.spring(
       this.state.searchBoxHeight,
       { 
@@ -35,11 +33,12 @@ class SearchBox extends React.Component {
 
 
   render() {
-    console.log(this.state.searchBoxHeight._value);
+    console.log('[SearchBox]', this.props.query);
     return (
       <Animated.View style={{ transform: [{ translateY: this.state.searchBoxHeight }]}}>
         <TextInput
           style={styles.search}
+          defaultValue={this.props.query}
           text={this.props.query}
           placeholder='Search'
           underlineColorAndroid={COLOURS.GREEN}
