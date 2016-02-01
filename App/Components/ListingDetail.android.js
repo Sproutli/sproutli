@@ -210,8 +210,8 @@ class ListingDetail extends React.Component {
   }
 
   _onShowMap() {
-    var location = this.props.listing.location.split(',');
-    IntentAndroid.openURL(`geo://${location[0]},${location[1]}`);
+    const locationURL = encodeURI(`geo:0:0?q=${this.props.listing.location}(${this.props.listing.name})`);
+    IntentAndroid.openURL(locationURL);
   }
 
   _onShowImages() {
