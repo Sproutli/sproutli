@@ -53,7 +53,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
-//                .addPackage(new LocationPackage(this))
+                .addPackage(new LocationPackage(this))
                 .addPackage(new RNGeocoderPackage())
                 .addPackage(new IntercomPackage())
                 .addPackage(new VectorIconsPackage())

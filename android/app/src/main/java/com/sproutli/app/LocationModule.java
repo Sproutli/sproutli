@@ -265,6 +265,11 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
       pendingRequests.clear();
     }
   }
+
+  @Override
+  public boolean canOverrideExistingModule() {
+    return true;
+  }
 }
 
 class RCTLocationRequest {
