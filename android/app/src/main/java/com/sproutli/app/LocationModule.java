@@ -163,6 +163,11 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
 
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    // Defensive programming.
+    if (data == null) {
+      return;
+    }
+    
     final LocationSettingsStates states = LocationSettingsStates.fromIntent(data);
     Log.d(TAG, "onActivityResult returned with " + data);
     switch (requestCode) {
