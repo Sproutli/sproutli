@@ -10,7 +10,8 @@ var {
   Text,
   TouchableOpacity,
   ActionSheetIOS,
-  AlertIOS
+  AlertIOS,
+  Platform,
 } = React;
 
 // Dimensions
@@ -331,8 +332,17 @@ class AddListing extends React.Component {
     };
 
     UIImagePickerManager.showImagePicker(options, (response) => {
+      console.log('[UIImagePicker] - Got response', response);
       if (response.didCancel) { return ; }
-      var source = {uri: response.uri.replace('file://', ''), isStatic: true};
+      var source;
+      if (Platform.OS === 'ios') {
+        source = {uri: response.uri.replace('file://', ''), isStatic: true};
+      } else {
+        source = {uri: `file://${response.path}`, isStatic: true};
+      };
+
+      console.log('[AddListing] - Image source:', source);
+
       var images = this.state.images;
       images.push(source);
 

@@ -41,7 +41,8 @@ RCT_EXPORT_METHOD(uploadImage:(nonnull NSString *)path
   [[transferManager upload:uploadRequest] continueWithBlock:^id(AWSTask *task) {
     if (task.error) {
       RCTLogWarn(@"[ImageUploader] Failed to upload image %@! Error: %@", imageName, task.error);
-      reject(task.error);
+      
+      reject(@"1", @"[ImageUploader] Failed to upload the image.", task.error);
     }
     
     if (task.result) {

@@ -29,6 +29,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.devfd.RNGeocoder.RNGeocoderPackage;
+import com.imagepicker.ImagePickerPackage;
 
 import io.fabric.sdk.android.Fabric;
 import io.intercom.android.sdk.Intercom;
@@ -39,6 +40,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
     private final String SENDER_ID = "1034144542573";
     private String regId; 
     private GoogleCloudMessaging gcm;
+    private ImagePickerPackage mImagePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +48,17 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
         Fabric.with(this, new Crashlytics());
         Intercom.initialize(getApplication(), "android_sdk-aba6524a84e6953392e1a8583c15970a6dbe851c", "r18lw9fx");
         mReactRootView = new ReactRootView(this);
+        mImagePicker = new ImagePickerPackage(this);
         setUpGCM();
 
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
+
                 .addPackage(new MainReactPackage())
+
+                .addPackage(mImagePicker)
                 .addPackage(new LocationPackage(this))
                 .addPackage(new RNGeocoderPackage())
                 .addPackage(new IntercomPackage())

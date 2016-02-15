@@ -150,4 +150,5 @@ dependencies {
   compile project(':RNMaterialKit')
   compile project(':RNGeocoder')
   compile project(':react-native-vector-icons')
+  compile project(':react-native-image-picker')
 }
