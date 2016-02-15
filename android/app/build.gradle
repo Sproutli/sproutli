@@ -140,6 +140,11 @@ dependencies {
   compile 'com.google.android.gms:play-services-location:8.+'
   compile "com.android.support:appcompat-v7:+"
 
+  // AWS
+  compile 'com.amazonaws:aws-android-sdk-core:2.+'
+  compile 'com.amazonaws:aws-android-sdk-cognito:2.+'
+  compile 'com.amazonaws:aws-android-sdk-s3:2.+'
+
   compile ('io.intercom.android:intercom-sdk:1.+@aar') {
     transitive = true
   }

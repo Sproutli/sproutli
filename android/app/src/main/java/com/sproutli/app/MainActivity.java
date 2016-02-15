@@ -62,6 +62,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .addPackage(new LocationPackage(this))
                 .addPackage(new RNGeocoderPackage())
                 .addPackage(new IntercomPackage())
+                .addPackage(new ImageUploaderPackage())
                 .addPackage(new VectorIconsPackage())
                 .addPackage(new ReactMaterialKitPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)

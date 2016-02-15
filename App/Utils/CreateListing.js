@@ -3,7 +3,8 @@
 
 var { 
   AsyncStorage,
-  NativeModules 
+  NativeModules, 
+  Platform,
 } = require('react-native');
 var ImageUploader = NativeModules.ImageUploader;
 var JWTDecode = require('jwt-decode');
@@ -21,7 +22,9 @@ function uploadImages(listing) {
 }
 
 function uploadImage(image, index) {
-  return ImageUploader.uploadImage(`file://${image.uri}`)
+  var imagePath = (Platform.OS === 'ios') ? `file://${image.uri}` : image.uri.replace('file://', '');
+  console.log('[CreateListing] - Uploading image: ', imagePath);
+  return ImageUploader.uploadImage(imagePath)
   .then((imageName) => {
     listingWithImages.images[index] = `https://s3-ap-southeast-2.amazonaws.com/sproutli-images/${imageName}`; 
   });

@@ -216,8 +216,6 @@
 		C35B3EA91BCC904E005AB832 /* Sproutli.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sproutli.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35B3EAB1BCC904E005AB832 /* sproutliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sproutliUITests.swift; sourceTree = "<group>"; };
 		C35B3EAD1BCC904E005AB832 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C35CD78F1BFC3B0F002A3486 /* UIImagePickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImagePickerManager.h; sourceTree = "<group>"; };
-		C35CD7901BFC3B0F002A3486 /* UIImagePickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImagePickerManager.m; sourceTree = "<group>"; };
 		C3642CA91BF95B45007FC821 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = ../main.jsbundle; sourceTree = "<group>"; };
 		C371A2F61BCF0D4000589DFD /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		C371A2FE1BCF2D4700589DFD /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
@@ -380,7 +378,6 @@
 				C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */,
 				C3986C2C1C056C08002B5B3E /* RNBlur.xcodeproj */,
 				C3986C191C056B1C002B5B3E /* RNOverlay.xcodeproj */,
-				C35CD78E1BFC3B0F002A3486 /* UIImagePickerManager */,
 				C33F3AAF1BDA0D2700FF4218 /* IntercomWrapper.h */,
 				C33F3AB01BDA0D2700FF4218 /* IntercomWrapper.m */,
 				C34DABE71BD7824500EB08C8 /* RNGeocoder */,
@@ -477,16 +474,6 @@
 				C35B3EAD1BCC904E005AB832 /* Info.plist */,
 			);
 			path = sproutliUITests;
-			sourceTree = "<group>";
-		};
-		C35CD78E1BFC3B0F002A3486 /* UIImagePickerManager */ = {
-			isa = PBXGroup;
-			children = (
-				C35CD78F1BFC3B0F002A3486 /* UIImagePickerManager.h */,
-				C35CD7901BFC3B0F002A3486 /* UIImagePickerManager.m */,
-			);
-			name = UIImagePickerManager;
-			path = "../node_modules/react-native-image-picker/UIImagePickerManager";
 			sourceTree = "<group>";
 		};
 		C371A2F71BCF0D4000589DFD /* Products */ = {
