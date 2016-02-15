@@ -284,8 +284,6 @@ class Search extends React.Component {
   }
 
   renderFab() {
-    // TODO: Add this back.
-    return; 
     if (Platform.OS === 'ios') { return; }
 
     return (
