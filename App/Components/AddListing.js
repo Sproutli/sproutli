@@ -332,7 +332,6 @@ class AddListing extends React.Component {
     };
 
     UIImagePickerManager.showImagePicker(options, (response) => {
-      console.log('[UIImagePicker] - Got response', response);
       if (response.didCancel) { return ; }
       var source;
       if (Platform.OS === 'ios') {
@@ -340,8 +339,6 @@ class AddListing extends React.Component {
       } else {
         source = {uri: `file://${response.path}`, isStatic: true};
       };
-
-      console.log('[AddListing] - Image source:', source);
 
       var images = this.state.images;
       images.push(source);
