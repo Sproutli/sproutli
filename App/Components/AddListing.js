@@ -222,14 +222,21 @@ class AddListing extends React.Component {
       loading: false,
       listing
     });
-    Alert.alert(
-      'Listing Added', 
-      `${this.state.formValue.name} has been added! Would you like to share it on Facebook?`, 
+
+    const IS_ANDROID = Platform.OS === 'android'
+    const ALERT_TITLE = 'Listing Added';
+    const ALERT_MESSAGE = (IS_ANDROID ? 
+      `Thanks for adding ${this.state.formValue.name}!` :
+      `${this.state.formValue.name} has been added! Would you like to share it on Facebook?`); 
+    const ALERT_OPTIONS = (IS_ANDROID ?
+      [{ text: 'OK', onPress: this.navigateToNewListing.bind(this, listing) }] :
       [
         { text: 'Share', onPress: this.shareOnFacebook.bind(this, listing) },
         { text: 'Not Now', onPress: this.navigateToNewListing.bind(this, listing) }
-      ]
-    );
+      ]);
+
+
+    Alert.alert(ALERT_TITLE, ALERT_MESSAGE, ALERT_OPTIONS);
   }
 
   shareOnFacebook(listing) {
@@ -462,6 +469,7 @@ class AddListing extends React.Component {
   }
 
   render() {
+    console.log('[AddListing] - Navigator:', this.props.navigator);
     return (
       <ScrollView style={styles.container} keyboardDismissMode='on-drag'>
         <View style={styles.images}>

@@ -123,6 +123,11 @@ class App extends React.Component {
 
         this.setState({ title: previousRoute.title, actions});
         navigator.pop();
+      },
+
+      replace: (route) => {
+        this.setState({ actions: [], title: route.title });
+        this.navigators[index].replace(route);
       }
     };
   }
