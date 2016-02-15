@@ -10,7 +10,7 @@ var {
   Text,
   TouchableOpacity,
   ActionSheetIOS,
-  AlertIOS,
+  Alert,
   Platform,
 } = React;
 
@@ -222,7 +222,7 @@ class AddListing extends React.Component {
       loading: false,
       listing
     });
-    AlertIOS.alert(
+    Alert.alert(
       'Listing Added', 
       `${this.state.formValue.name} has been added! Would you like to share it on Facebook?`, 
       [
@@ -236,14 +236,14 @@ class AddListing extends React.Component {
     Facebook.shareListing(listing, (this.state.images[0] || {}).uri)
     .then(() => {
       this.setState({ loading: false });
-      AlertIOS.alert(
+      Alert.alert(
         'Sharing Complete',
         `Thanks for sharing ${listing.name}!`,
         [{ text: 'OK', onPress: this.navigateToNewListing.bind(this, listing) }]
       );
     })
     .catch((error) => {
-      AlertIOS.alert('Error sharing listing', 'Sorry, there was an error talking to Facebook!');
+      Alert.alert('Error sharing listing', 'Sorry, there was an error talking to Facebook!');
       console.warn('[AddListing] - Error sharing - ', error);
       this.postErrorToSlack(error);
     });
@@ -270,7 +270,7 @@ class AddListing extends React.Component {
 
   _onListingError(title: string, errorMessage: string) {
     this.setState({ loading: false });
-    AlertIOS.alert(title, errorMessage);
+    Alert.alert(title, errorMessage);
   }
 
   createListing(listing) {
