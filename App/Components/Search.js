@@ -244,7 +244,7 @@ class Search extends React.Component {
     if (this.state.loading) { 
       return (
         <View style={styles.loadingContainer}>
-          { Platform.OS === 'ios' ? <ActivityIndicatorIOS size='large' /> : <ProgressBarAndroid style='large' /> }
+          { Platform.OS === 'ios' ? <ActivityIndicatorIOS size='large' /> : <ProgressBarAndroid styleAttr='Large' /> }
           <Text style={styles.loadingText}>Just a moment..</Text>
         </View>
       );
