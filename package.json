@@ -13,7 +13,7 @@
     "jwt-decode": "^1.4.0",
     "moment": "^2.11.1",
     "query-string": "^3.0.0",
-    "react-native": "^0.18.0",
+    "react-native": "^0.20.0-rc1",
     "react-native-action-button": "^1.1.1",
     "react-native-blur": "^0.7.9",
     "react-native-communications": "0.0.6",

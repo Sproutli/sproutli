@@ -120,7 +120,7 @@ var styles = StyleSheet.create({
   reviewForm: {
     height: 50,
     fontSize: 16,
-    backgroundColor: 'f8f8f8',
+    backgroundColor: '#f8f8f8',
     marginTop: 10,
     marginBottom: 10,
     padding: 2
