@@ -24,6 +24,7 @@ var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
 var ListingDetail = require('./ListingDetail');
 var AddListing = require('./AddListing');
+import LoadingScreen from './LoadingScreen';
 
 var SearchEngine = require('../Utils/SearchEngine');
 var ListingsFilter = require('../Utils/ListingsFilter');
@@ -246,10 +247,7 @@ class Search extends React.Component {
 
     if (this.state.loading) { 
       return (
-        <View style={styles.loadingContainer}>
-          { Platform.OS === 'ios' ? <ActivityIndicatorIOS size='large' /> : <ProgressBarAndroid styleAttr='Large' /> }
-          <Text style={styles.loadingText}>Just a moment..</Text>
-        </View>
+        <LoadingScreen>Just a moment..</LoadingScreen>
       );
     }
 
