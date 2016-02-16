@@ -1,45 +1,28 @@
 'use strict';
 /* @flow */
 
-var React = require('react-native');
-var Overlay = require('react-native-overlay');
-var BlurView = require('react-native-blur').BlurView;
+import React, { Text, View, ProgressBarAndroid, StyleSheet, ActivityIndicatorIOS, Platform } from 'react-native';
 
-var {
-  Text,
-  View,
-  ActivityIndicatorIOS,
-  StyleSheet,
-} = React;
-
-var { width, height } = require('Dimensions').get('window');
-
-var LoadingScreen = React.createClass({
-  getDefaultProps(): StateObject {
-    return {
-      isVisible: false
-    }
-  },
-
-  render(): ReactElement {
-    return (
-      <Overlay isVisible={this.props.isVisible}>
-        <BlurView style={styles.background} blurType="light">
-          <ActivityIndicatorIOS
-            size="large"
-            animating={true}
-            style={styles.spinner} />
-          <Text style={{marginTop: 16}}>{this.props.loadingText}</Text>  
-        </BlurView>
-      </Overlay>
-    );
+let spinner = () => { 
+  if (Platform.OS === 'android') {
+    return <ProgressBarAndroid styleAttr='Large' />;
+  } else {
+    return <ActivityIndicatorIOS size='large' />;
   }
-});
+}
+
+let LoadingScreen = (props) => {
+  return (
+    <View style={styles.background}>
+      { spinner() }
+      <Text style={{marginTop: 16}}>{props.loadingText}</Text>  
+    </View>
+  );
+};
 
 var styles = StyleSheet.create({
   background: {
-    width,
-    height,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
