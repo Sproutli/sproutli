@@ -51,7 +51,9 @@ class Search extends React.Component {
       showAdvancedSearchOptions: true
     };
 
-    props.searchListeners.push(() => { this.setState({ showSearch: !this.state.showSearch })});
+    if (Platform.OS === 'android') {
+      props.searchListeners.push(() => { this.setState({ showSearch: !this.state.showSearch })});
+    }
 
     this.state.searchConfig.vegan_level = VeganLevelManager.veganLevel;
     var debouncedVeganLevel = Debounce(this._onVeganLevelChanged.bind(this), 500);
