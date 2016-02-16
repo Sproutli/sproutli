@@ -355,7 +355,13 @@ class AddListing extends React.Component {
   }
 
   _imagePressed(imageIndex) {
+    // TODO: Support Android.
+    if (Platform.OS === 'android') {
+      return;
+    }
+
     var BUTTONS = ['Delete', 'Cancel']; 
+
 
     ActionSheetIOS.showActionSheetWithOptions({
       options: BUTTONS,
