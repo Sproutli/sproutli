@@ -311,7 +311,7 @@ class AddListing extends React.Component {
     const formValue = this.refs.form.getValue();
     var listingIsValid = formValue && this.hasCorrectAddress();
     if (listingIsValid) {
-      this.setState({ loading: true, loadingText: `Creating your listing - hold on just a moment..` });
+      this.setState({ loading: true, loadingText: 'Creating your listing..' });
 
       var listing = JSON.parse(JSON.stringify(formValue)); // Surely this is insane.
       this.createListing(listing);
@@ -469,7 +469,11 @@ class AddListing extends React.Component {
   }
 
   render() {
-    console.log('[AddListing] - Navigator:', this.props.navigator);
+    var { loading } = this.state;
+    if (loading) {
+      return <LoadingScreen>{this.state.loadingText}</LoadingScreen>
+    }
+
     return (
       <ScrollView style={styles.container} keyboardDismissMode='on-drag'>
         <View style={styles.images}>
@@ -491,7 +495,6 @@ class AddListing extends React.Component {
           <Button onPress={this._formPressed.bind(this)}>Add listing</Button>
         </View>
 
-        <LoadingScreen isVisible={this.state.loading} loadingText={this.state.loadingText} />
       </ScrollView>
     );
   }

@@ -26,6 +26,7 @@ function uploadImage(image, index) {
   console.log('[CreateListing] - Uploading image: ', imagePath);
   return ImageUploader.uploadImage(imagePath)
   .then((imageName) => {
+    console.log('[CreateListing] - Image uploaded: ', imageName);
     listingWithImages.images[index] = `https://s3-ap-southeast-2.amazonaws.com/sproutli-images/${imageName}`; 
   });
 }

@@ -15,7 +15,7 @@ let LoadingScreen = (props) => {
   return (
     <View style={styles.background}>
       { spinner() }
-      <Text style={{marginTop: 16}}>{props.loadingText}</Text>  
+      <Text style={{marginTop: 16}}>{props.children}</Text>  
     </View>
   );
 };
