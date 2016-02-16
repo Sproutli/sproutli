@@ -4,7 +4,7 @@ var React = require('react-native');
 var {
   StyleSheet,
   NavigatorIOS,
-  LinkingIOS,
+  Linking,
   TabBarIOS
 } = React;
 
@@ -31,22 +31,21 @@ class App extends React.Component {
       this.setState({ addIcon: source });
     });
 
-    LinkingIOS.addEventListener('url', this._handleOpenURL.bind(this));
+    Linking.addEventListener('url', this._handleOpenURL.bind(this));
 
-    var url = LinkingIOS.popInitialURL();
-
-    if (url) {
-      this._handleOpenURL({url});
-    }
-
+    Linking.getInitialURL().then(u => this._handleOpenURL({url: u}));
   }
 
   componentWillUnmount() {
-    LinkingIOS.removeEventListener('url', this._handleOpenURL.bind(this));
+    Linking.removeEventListener('url', this._handleOpenURL.bind(this));
   }
 
   _handleOpenURL(event) {
     console.log('Got incoming eventURL:', event.url);
+    if (typeof(event.url) !== 'string') {
+      return;
+    }
+
     var URI = decodeURIComponent(event.url);
     var appLinkData = JSON.parse(URI.split('al_applink_data=')[1]);
 
@@ -80,7 +79,7 @@ class App extends React.Component {
           rightButtonIcon: this.state.addIcon,
           component: Search,
           title: name,
-          passProps: {searchConfig: SUGGESTIONS[name].searchConfig, searchLabel:name, veganLevel: this.veganLevel},
+          passProps: {searchConfig: SUGGESTIONS[name].searchConfig, searchLabel:name, veganLevel: this.veganLevel, showSearch: true},
           onRightButtonPress: () => { this.refs.navigator.push({
             component: AddListing,
             title: 'Add a Listing'

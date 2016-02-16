@@ -33,7 +33,6 @@ class SearchBox extends React.Component {
 
 
   render() {
-    console.log('[SearchBox]', this.props.query);
     return (
       <Animated.View style={{ transform: [{ translateY: this.state.searchBoxHeight }]}}>
         <TextInput

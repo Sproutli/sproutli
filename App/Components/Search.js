@@ -185,6 +185,7 @@ class Search extends React.Component {
   }
 
   _onScroll(scrollEvent) {
+    console.log('On Scroll called');
     var offset = scrollEvent.nativeEvent.contentOffset.y,
       delta = offset - this.lastOffset;
 
@@ -271,6 +272,7 @@ class Search extends React.Component {
         dataSource={this.state.dataSource}
         keyboardShouldPersistTaps={false}
         keyboardDismissMode='on-drag'
+        onScroll={this._onScroll.bind(this)}
         renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this._onListingPressed.bind(this, listing)} />}
       />
    );
