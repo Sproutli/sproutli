@@ -160,7 +160,7 @@ var formOptions = {
       numberOfLines: 3
     },
     phone_number: {
-      placeholder: 'eg. +61 9898 0000',
+      placeholder: 'eg. +61 3 9898 0000',
       keyboardType: 'phone-pad',
       error: (value) => value ? '' : 'Phone numbers must start with +61'
     },
