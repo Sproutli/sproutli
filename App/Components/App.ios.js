@@ -5,7 +5,8 @@ var {
   StyleSheet,
   NavigatorIOS,
   Linking,
-  TabBarIOS
+  View,
+  TabBarIOS,
 } = React;
 
 var Icon = require('react-native-vector-icons/Ionicons');
@@ -126,11 +127,11 @@ class App extends React.Component {
         </Icon.TabBarItem>
 
         <Icon.TabBarItem
-          onPress={() => this.setState({currentTab: 'kindness_card'})}
-          selected={this.state.currentTab === 'kindness_card'}
-          iconName='card'
-          title='Kindness Card'>
-            <KindnessCard />
+          onPress={this.showIntercomMessenger}
+          selected={this.state.currentTab === 'help'}
+          iconName='help-circled'
+          title='Help'>
+            <View />
         </Icon.TabBarItem>
       </TabBarIOS>
     );
