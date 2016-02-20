@@ -65,6 +65,15 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     }
   }
 
+  @ReactMethod
+  public void displayMessageComposer(Callback callback) {
+    try {
+      Intercom.client().displayMessageComposer();
+    } catch(Exception e) {
+      Log.e("Intercom","Error displaying Intercom composer"); 
+    }
+  }
+
   private Map getMapFromOptions(ReadableMap options) {
     ReadableMapKeySetIterator iterator = options.keySetIterator();
     Map optionsMap = new HashMap<>();

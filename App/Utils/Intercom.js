@@ -28,7 +28,7 @@ var Intercom = {
   },
 
   displayMessageComposer() {
-    return IntercomAPI.displayMessageComposer();
+    IntercomAPI.displayMessageComposer();
   }
 };
 

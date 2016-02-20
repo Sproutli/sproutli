@@ -291,7 +291,14 @@ class Search extends React.Component {
     if (Platform.OS === 'ios') { return; }
 
     return (
-      <ActionButton buttonColor={COLOURS.GREY} onPress={this.showAddListingScreen.bind(this)} />
+      <ActionButton buttonColor={COLOURS.GREY}>
+        <ActionButton.Item title='Add a Listing' buttonColor={COLOURS.GREY} onPress={this.showAddListingScreen.bind(this)}>
+          <Icon name="android-add" style={styles.actionButtonIcon} />
+        </ActionButton.Item>
+        <ActionButton.Item title='Ask a Question' buttonColor={COLOURS.GREY} onPress={() => Intercom.displayMessageComposer()}>
+          <Icon name="ion-help" style={styles.actionButtonIcon} />
+        </ActionButton.Item>
+      </ActionButton> 
     );
   }
 
