@@ -67,6 +67,10 @@ class App extends React.Component {
     });
   }
 
+  showIntercomMessenger() {
+    Intercom.displayMessageComposer();
+  }
+
   makeNavigator(name) {
     if (!this.state.addIcon) { return false; }
 

@@ -25,6 +25,10 @@ var Intercom = {
 
   logEvent(name, metadata) {
     return IntercomAPI.logEvent(name, metadata);
+  },
+
+  displayMessageComposer() {
+    return IntercomAPI.displayMessageComposer();
   }
 };
 
