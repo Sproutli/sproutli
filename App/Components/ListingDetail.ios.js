@@ -25,12 +25,9 @@ var pixelRatio = PixelRatio.get();
 var Intercom = require('../Utils/Intercom');
 var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 var Reviews = require('../Utils/Reviews');
-var KindnessCards = require('../Utils/KindnessCards');
 
 var Review = require('./Review');
 var ReviewModal = require('./ReviewModal');
-var BuyKindnessCardModal = require('./BuyKindnessCardModal');
-var OfferModal = require('./OfferModal');
 var Button = require('./Button');
 
 var COLOURS = require('../Constants/Colours');
@@ -104,8 +101,6 @@ class ListingDetail extends React.Component {
   renderedDetails() {
     return (
       <View>
-        { this.renderedOffer() }
-
         <Text style={styles.description}>{this.props.listing.description}</Text>
 
         <Text style={styles.bold}>Categories</Text>
@@ -150,16 +145,6 @@ class ListingDetail extends React.Component {
           renderRow={(review, index) => <Review style={styles.text} key={index} {...review} />}
           dataSource={this.state.dataSource}
         />
-      </View>
-    );
-  }
-
-  renderedOffer() {
-    if (!this.props.listing.offer_details) { return <View />; }
-
-    return(
-      <View style={styles.buttonContainer}>
-        <Button onPress={this._onViewOffer.bind(this)}>View Kindness Card offer</Button>
       </View>
     );
   }
@@ -245,34 +230,6 @@ class ListingDetail extends React.Component {
       component: ReviewModal,
       passProps: { listingID: this.props.listing.id, name: this.props.listing.name, getReviews: this.getReviews.bind(this) }
     });
-  }
-
-  _onViewOffer() {
-    var askToBuy = () => {
-      this.props.navigator.push({
-        title: 'Get a Kindness Card',
-        component: BuyKindnessCardModal,
-        passProps: { listingName: this.props.listing }
-      });
-    };
-    KindnessCards.fetchCard()
-      .then((card) => {
-        if (card.length < 1) { 
-          askToBuy();
-          return;
-        }
-
-        this.props.navigator.push({
-          title: 'View Offer',
-          component: OfferModal,
-          passProps: { 
-            offerDetails: this.props.listing.offer_details, 
-            offerConditions: this.props.listing.offer_conditions, 
-            offerInstructions: this.props.listing.offer_instructions 
-          }
-        });
-      })
-      .catch(askToBuy);
   }
 
   render() {
