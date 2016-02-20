@@ -77,6 +77,7 @@ var prepareReturnFields = (location) => {
 };
 
 var parse = (listings, location) => { 
+  console.log(listings);
   var response = listings.hits.hit
     .map((l) => {
       return({...l.fields, distance: l.exprs ? l.exprs.distance : null});
@@ -101,12 +102,15 @@ var runSearch = (searchParams) => {
   var { query, parser, returnFields, sort, expr, size, fq } = searchParams;
   var url;
 
+
+
   if (expr && fq) {
     url = `http://search-sproutli-bhzq3vdfhs5jhshdoqqt67ru5a.ap-southeast-2.cloudsearch.amazonaws.com/2013-01-01/search?q=${query}&size=${size}&expr.distance=${expr}&return=${returnFields}&sort=${sort}&q.parser=${parser}&fq=${fq}`;
   } else {
     url = `http://search-sproutli-bhzq3vdfhs5jhshdoqqt67ru5a.ap-southeast-2.cloudsearch.amazonaws.com/2013-01-01/search?q=${query}&size=${size}&q.parser=${parser}`;
   }
 
+  console.log('Search URL:', url);
   return fetch(url);
 };
 
@@ -116,7 +120,7 @@ var SearchEngine = {
   search(query, location) {
     console.log('[SearchEngine] - Searching', query, location);
     const SEARCH_PARAMS = {
-      query: query || 'matchall',
+      query: query ? `(and '${query}')` : 'matchall',
       parser: 'structured',
       returnFields: prepareReturnFields(location),
       sort: 'distance asc',
