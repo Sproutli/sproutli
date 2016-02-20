@@ -144,7 +144,9 @@ class Search extends React.Component {
   }
 
   _onSearch() {
-    this.setState({ showSearch: false });
+    if (Platform.OS === 'android') {
+      this.setState({ showSearch: false });
+    }
     this.search(this.state.location);
   }
 
