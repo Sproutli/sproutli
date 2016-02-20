@@ -120,7 +120,7 @@ var SearchEngine = {
   search(query, location) {
     console.log('[SearchEngine] - Searching', query, location);
     const SEARCH_PARAMS = {
-      query: query ? `(and '${query}')` : 'matchall',
+      query: query ? `'${query.replace("'", "\\'")}'` : 'matchall',
       parser: 'structured',
       returnFields: prepareReturnFields(location),
       sort: 'distance asc',
