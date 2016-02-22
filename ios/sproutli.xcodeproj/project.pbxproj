@@ -562,6 +562,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				002310C001DC78298EBED17D /* Embed Pods Frameworks */,
 				92AA8476126EDC17CEC624E4 /* Copy Pods Resources */,
+				C3FF43C31C7BCE5C0071F3DD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -613,7 +614,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Sproutli" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sproutli" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -909,6 +910,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sproutli/Pods-sproutli-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C3FF43C31C7BCE5C0071F3DD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 57cb97ac2092a89c88b4d38d158356fcbf2d5dbf fdd652a4dbe29a72ff0747c41e222fcbf0e427a130aedeb6c375293af073e327";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1156,7 +1170,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Sproutli" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sproutli" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

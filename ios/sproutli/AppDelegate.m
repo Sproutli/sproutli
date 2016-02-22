@@ -13,6 +13,8 @@
 #import "RCTLinkingManager.h"
 #import "Intercom/intercom.h"
 #import <AWSCore/AWSCore.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation AppDelegate
@@ -54,6 +56,10 @@
   // Initialise Facebook SDK
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
+  
+  
+  // Initialise Crashlytics
+  [Fabric with:@[[Crashlytics class]]];
   
   return YES;
 }
