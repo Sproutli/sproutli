@@ -1,0 +1,6 @@
+This is 1.4, dear friends!
+
+This version brings us some general fixes, plus:
+
+- The search input bars no longer have a strange margin around them on iOS. Rejoice! Rejoice!
+- Clearing the text on a search input now lets you type straight away. Think of the time savings!

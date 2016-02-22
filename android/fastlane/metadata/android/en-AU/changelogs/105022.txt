@@ -1,0 +1,7 @@
+This is 1.5, brothers and sisters!
+
+This version brings us the usual general fixes, plus:
+
+- The search input fields no longer pester you with their auto-correct suggestions. Mortals!
+- Clicking to call actually works now, instead of before! Where it didn't!
+- Kindness Card Stuff! Hooray! Hooray!

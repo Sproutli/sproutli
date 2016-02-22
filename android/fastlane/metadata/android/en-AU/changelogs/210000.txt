@@ -1,0 +1,3 @@
+Welcome to Version 2.1! We've basically rewritten the app from scratch, and we need your feedback!
+
+At the moment, the app feels a little slow and the Vegan Slider is weird, but we'll fix it.

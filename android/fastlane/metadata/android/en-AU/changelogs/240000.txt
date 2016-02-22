@@ -1,0 +1,1 @@
+In addition to some small fixes, we've added a really cool feature that allows us to talk to you from inside the app! We'd love to hear what you think.

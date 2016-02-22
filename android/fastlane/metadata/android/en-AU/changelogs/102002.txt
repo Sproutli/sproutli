@@ -1,0 +1,10 @@
+This is 1.2, everybody!
+
+This version brings us:
+
+- The ability to make and view reviews.
+- The ability to do a search straight from the home screen.
+- Seeing the Vegan Level from the Search screen.
+- Seeing the Vegan Level and Categories from the Listing screen
+
+Check it out, and as always, provide that juicy, juicy feedback! :D

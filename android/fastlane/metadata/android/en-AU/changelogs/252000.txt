@@ -1,0 +1,1 @@
+We fixed scrolling (we hope!) After lots of feedback, we changed the way the search box works. We hope you like it - tell us what you think. :)

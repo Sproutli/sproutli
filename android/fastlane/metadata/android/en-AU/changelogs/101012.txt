@@ -1,0 +1,6 @@
+- We’ve put the “Location” bar up on the “Search” Screen.
+- We’ve added the “compass” icon next to the location bar so you can now reset your location.
+- We’ve put the “search” bar into the “Advanced Search” section as well.
+- We’ve changed the Search icon to a House
+- If you entered your email and password incorrectly on the login screen, we used to display a silly message like “Error talking to Sproutli”. 
+- We now hide the keyboard after you’ve typed in a search query .

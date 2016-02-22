@@ -1,0 +1,5 @@
+Welcome to Sproutli!
+
+This is our very first release of the app, so please, test everything and give us your feedback!
+
+We're always available at hello@sproutli.com or Facebook if you find anything that needs fixing. :- )

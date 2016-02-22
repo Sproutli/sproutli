@@ -1,0 +1,2 @@
+- We've added a bit of extra analytics to help us understand how you use the app a little better.
+- Added some extra stuff under the covers to prepare for a new feature. But that's a secret for now..
