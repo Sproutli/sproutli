@@ -1,0 +1,7 @@
+app_identifier "com.sproutli.app" # The bundle identifier of your app
+apple_id "kane.m.rogers@gmail.com" # Your Apple email address
+
+team_id "T2TG9M3MRR"  # Developer Portal Team ID
+
+# you can even provide different app identifiers, Apple IDs and team names per lane:
+# More information: https://github.com/fastlane/fastlane/blob/master/docs/Appfile.md
