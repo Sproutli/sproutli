@@ -296,7 +296,7 @@ class Search extends React.Component {
           <Icon name="android-add" style={styles.actionButtonIcon} />
         </ActionButton.Item>
         <ActionButton.Item title='Ask a Question' buttonColor={COLOURS.GREY} onPress={() => Intercom.displayMessageComposer()}>
-          <Icon name="ion-help" style={styles.actionButtonIcon} />
+          <Icon name="help" style={styles.actionButtonIcon} />
         </ActionButton.Item>
       </ActionButton> 
     );
