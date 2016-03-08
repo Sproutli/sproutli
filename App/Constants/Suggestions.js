@@ -1,7 +1,6 @@
 'use strict';
 
 var CATEGORIES = require('./Categories');
-var Extend = require('extend');
 
 var categories = () => {
   return CATEGORIES.map((c) => { 
@@ -29,7 +28,7 @@ var makeSearchConfig = (config) => {
     categories: categories()
   }; 
 
-  var newConfig = Extend(true, baseSearchConfig, config);
+  var newConfig = {...config, baseSearchConfig};
   return newConfig;
 };
 

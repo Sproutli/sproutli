@@ -13,6 +13,8 @@
 #import "RCTLinkingManager.h"
 #import "Intercom/intercom.h"
 #import <AWSCore/AWSCore.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation AppDelegate
@@ -24,9 +26,9 @@
   // Define JS Code Location
   //jsCodeLocation = [NSURL URLWithString:@"http://172.20.10.3:8081/index.ios.bundle?platform=ios&dev=true"];
   //jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.112:8081/index.ios.bundle?platform=ios&dev=true"];
-  //jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
   //jsCodeLocation = [NSURL URLWithString:@"http://sproutli-admin.s3-website-ap-southeast-2.amazonaws.com/beta.jsbundle"];
-  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  //jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"sproutli"
@@ -54,6 +56,10 @@
   // Initialise Facebook SDK
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
+  
+  
+  // Initialise Crashlytics
+  [Fabric with:@[[Crashlytics class]]];
   
   return YES;
 }

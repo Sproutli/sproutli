@@ -11,4 +11,6 @@
 #import "RCTLog.h"
 
 @interface ImageUploader : NSObject <RCTBridgeModule>
+- (NSString *) uuidString;
 @end
+ 
