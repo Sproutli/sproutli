@@ -1280,6 +1280,7 @@
 				C30968111C8E76960053122A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C35B3EBC1BCC904E005AB832 /* Build configuration list for PBXNativeTarget "sproutliUITests" */ = {
 			isa = XCConfigurationList;
