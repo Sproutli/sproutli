@@ -52,6 +52,16 @@
                ReferencedContainer = "container:Sproutli.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C331A7361C8EE17600C68AA9"
+               BuildableName = "SproutliUITests.xctest"
+               BlueprintName = "SproutliUITests"
+               ReferencedContainer = "container:Sproutli.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
