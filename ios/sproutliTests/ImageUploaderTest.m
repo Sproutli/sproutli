@@ -1,18 +1,19 @@
 //
-//  SproutliTests.m
-//  SproutliTests
+//  ImageUploaderTest.m
+//  Sproutli
 //
 //  Created by Kane Rogers on 8/03/2016.
 //  Copyright © 2016 Sproutli. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
+#import "ImageUploader.h"
 
-@interface SproutliTests : XCTestCase
+@interface ImageUploaderTest : XCTestCase
 
 @end
 
-@implementation SproutliTests
+@implementation ImageUploaderTest
 
 - (void)setUp {
     [super setUp];
@@ -25,8 +26,9 @@
 }
 
 - (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+  ImageUploader *imgUploader = [[ImageUploader alloc] init];
+  NSString *uuid = [imgUploader uuidString];
+  assert(uuid.length > 2);
 }
 
 - (void)testPerformanceExample {

@@ -46,19 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "sproutliTests.xctest"
-               BlueprintName = "sproutliTests"
-               ReferencedContainer = "container:Sproutli.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C35B3EA81BCC904E005AB832"
-               BuildableName = "Sproutli.xctest"
-               BlueprintName = "sproutliUITests"
+               BlueprintIdentifier = "C30968071C8E76960053122A"
+               BuildableName = "SproutliTests.xctest"
+               BlueprintName = "SproutliTests"
                ReferencedContainer = "container:Sproutli.xcodeproj">
             </BuildableReference>
          </TestableReference>
