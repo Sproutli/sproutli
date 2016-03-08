@@ -50,14 +50,10 @@ import AddressParser from '../Utils/AddressParser';
 
 // Constants
 var CATEGORIES = [
-  'Beer & Wine',
   'Cafes & Restaurants',
-  'Causes',
+  'Hair & Beauty',
   'Clothing, Shoes & Accessories',
   'Food Stores',
-  'Health, Wellness & Lifestyle',
-  'Home & Living',
-  'Pets',
   'Professional Services & Trades',
 ];
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
