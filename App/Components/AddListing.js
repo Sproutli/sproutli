@@ -12,6 +12,7 @@ var {
   ActionSheetIOS,
   Alert,
   Platform,
+  NativeModules,
 } = React;
 
 // Dimensions
@@ -47,6 +48,7 @@ var Facebook = require('../Utils/Facebook');
 var Slack = require('../Utils/Slack');
 var Users = require('../Utils/Users');
 import AddressParser from '../Utils/AddressParser';
+var CrashlyticsReporter = NativeModules.CrashlyticsReporter;
 
 // Constants
 var CATEGORIES = [
@@ -248,15 +250,16 @@ class AddListing extends React.Component {
     .catch((error) => {
       Alert.alert('Error sharing listing', 'Sorry, there was an error talking to Facebook!');
       console.warn('[AddListing] - Error sharing - ', error);
-      this.postErrorToSlack(error);
+      this.reportError(error);
     });
   }
 
-  postErrorToSlack(error) {
+  reportError(error) {
     Users.fetchUser()
    .then((user) => {
-      var message = `@kane.rogers - ${user.name} (${user.email}) encountered an error sharing with Facebook. Error code: \`${error.code}\` Error message: \`${error.message}\``;
-      console.log('Posting message', message);
+      console.log('Reporting error to crashlytics:', error);
+      var message = `@kane.rogers - ${user.name} (${user.email}) encountered an error creating a listing. Error code: \`${error.code}\` Error message: \`${error.message}\``;
+      CrashlyticsReporter.reportError(error.message);
       Slack.postMessage(message);
     })
   }
@@ -285,6 +288,7 @@ class AddListing extends React.Component {
       .then(this._onListingCreated.bind(this))
       .catch((error) => {
         console.warn('[CreateListing] - Error creating listing', error); 
+        this.reportError(error);
         this._onListingError('Sorry! There was an error creating your listing.',  'Please let us know what happened.')
       });
   }
