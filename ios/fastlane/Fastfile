@@ -28,7 +28,7 @@ end
 platform :ios do
   before_all do
     ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
-    # build_js_bundle
+    build_js_bundle
   end
 
   desc "Runs all the tests"

@@ -13,7 +13,7 @@ var Intercom = {
     return Users.fetchUser()
       .then((fetchedUser) => {
         user = fetchedUser;
-        CrashlyticsReporter.identifyUser(user.name, user.id, user.email);
+        CrashlyticsReporter.identifyUser(user.name || '', user.id, user.email || '');
         return IntercomAPI.registerIdentifiedUser({ userId: user.id });
       })
       .then(() => {
