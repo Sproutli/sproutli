@@ -195,7 +195,6 @@ class Search extends React.Component {
   }
 
   _onScroll(scrollEvent) {
-    console.log('On Scroll called');
     var offset = scrollEvent.nativeEvent.contentOffset.y,
       delta = offset - this.lastOffset;
 

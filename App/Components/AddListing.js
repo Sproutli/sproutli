@@ -386,7 +386,6 @@ class AddListing extends React.Component {
     var latlng = details.geometry.location;
 
     const location = AddressParser.parse(address, latlng);
-    console.log('Got location:', location);
 
     this.setState({ location });
   }
