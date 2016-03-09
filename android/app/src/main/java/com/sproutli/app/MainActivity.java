@@ -15,6 +15,7 @@ import android.view.KeyEvent;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
 
 import com.facebook.react.LifecycleState;
 import com.facebook.react.ReactInstanceManager;
@@ -45,7 +46,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
+        Fabric.with(this, new Crashlytics(), new Answers());
         Intercom.initialize(getApplication(), "android_sdk-aba6524a84e6953392e1a8583c15970a6dbe851c", "r18lw9fx");
         mReactRootView = new ReactRootView(this);
         mImagePicker = new ImagePickerPackage(this);
@@ -57,9 +58,10 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setJSMainModuleName("index.android")
 
                 .addPackage(new MainReactPackage())
-
                 .addPackage(mImagePicker)
                 .addPackage(new LocationPackage(this))
+                // .addPackage(new AnswersReporterPackage())
+                .addPackage(new CrashlyticsReporterPackage())
                 .addPackage(new RNGeocoderPackage())
                 .addPackage(new IntercomPackage())
                 .addPackage(new ImageUploaderPackage())

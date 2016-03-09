@@ -1,19 +1,19 @@
 /*global fetch*/
 'use strict';
 
-var { 
+import { 
   AsyncStorage,
   NativeModules, 
   Platform,
-} = require('react-native');
-var ImageUploader = NativeModules.ImageUploader;
-var JWTDecode = require('jwt-decode');
-var listingWithImages = {};
-var Slack = require('../Utils/Slack');
-var Users = require('../Utils/Users');
-var Intercom = require('../Utils/Intercom');
-var GoogleAnalytics = require('../Utils/GoogleAnalytics');
-var Moment = require('moment');
+} from 'react-native';
+let { AnswersReporter, ImageUploader } = NativeModules;
+let JWTDecode = require('jwt-decode');
+let listingWithImages = {};
+let Slack = require('../Utils/Slack');
+let Users = require('../Utils/Users');
+let Intercom = require('../Utils/Intercom');
+let GoogleAnalytics = require('../Utils/GoogleAnalytics');
+let Moment = require('moment');
 
 function uploadImages(listing) {
   listingWithImages = listing;
@@ -43,6 +43,7 @@ function postToSlack(listing) {
 function addAnalytics(listing) {
   Intercom.logEvent('created_listing', { listingID: listing.id, listingName: listing.name });
   GoogleAnalytics.trackEvent('Listing', 'Create', listing.id);
+  AnswersReporter.reportCreateListing(listing.name, listing.categories[0]);
 
   return listing;
 }
@@ -66,6 +67,7 @@ function parseJSON(response) {
 function createListing(token) {
   return Users.fetchUser()
   .then((user) => {
+    throw new Error('Everything is truly fucked');
     listingWithImages.created_by = user.id;
     listingWithImages.created_at = Moment().toISOString(); 
 

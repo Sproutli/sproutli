@@ -28,6 +28,16 @@ RCT_EXPORT_METHOD(reportViewListing:(nonnull NSString*)listingId
   [Answers logContentViewWithName:listingName contentType:listingCategory contentId:listingId customAttributes:nil];
 }
 
+RCT_EXPORT_METHOD(reportCreateListing:(nonnull NSString*)listingName
+                  listingCategory:(nonnull NSString *)listingCategory)
+{
+  NSDictionary *customAttributes = @{
+                                     @"Name": listingName,
+                                     @"Category": listingCategory
+                                     };
+  [Answers logCustomEventWithName:@"Create Listing" customAttributes: customAttributes];
+}
+
 RCT_EXPORT_METHOD(reportReview:(nonnull NSString*)listingId
                   listingName:(nonnull NSString*) listingName
                   listingCategory:(nonnull NSString*) listingCategory

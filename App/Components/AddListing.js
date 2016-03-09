@@ -202,6 +202,7 @@ class AddListing extends React.Component {
       formValue: defaults
     };
     
+    this.createListing({name: 'wat'});
     GoogleAnalytics.viewedScreen('Add Listing');
   }
 
