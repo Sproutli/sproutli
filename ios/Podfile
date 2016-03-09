@@ -9,9 +9,5 @@ target 'sproutli' do
   pod 'AWSS3'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'Answers'
 end
-
-target 'sproutliUITests' do
-
-end
-

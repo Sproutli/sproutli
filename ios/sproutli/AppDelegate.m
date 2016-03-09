@@ -15,6 +15,7 @@
 #import <AWSCore/AWSCore.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <Answers/Answers.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation AppDelegate
@@ -62,7 +63,7 @@
   
   
   // Initialise Crashlytics
-  [Fabric with:@[[Crashlytics class]]];
+  [Fabric with:@[[Crashlytics class], [Answers class]]];
   
   return YES;
 }

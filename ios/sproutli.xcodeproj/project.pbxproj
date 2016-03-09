@@ -25,6 +25,7 @@
 		C30968131C8E76B00053122A /* ImageUploaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C30968121C8E76B00053122A /* ImageUploaderTest.m */; };
 		C331A73A1C8EE17600C68AA9 /* SproutliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C331A7391C8EE17600C68AA9 /* SproutliUITests.swift */; };
 		C331A7671C8FBB9E00C68AA9 /* CrashlyticsReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = C331A7661C8FBB9E00C68AA9 /* CrashlyticsReporter.m */; };
+		C331A7C41C8FF68200C68AA9 /* AnswersReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = C331A7C31C8FF68200C68AA9 /* AnswersReporter.m */; };
 		C33F3AB11BDA0D2700FF4218 /* IntercomWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F3AB01BDA0D2700FF4218 /* IntercomWrapper.m */; };
 		C34DABDB1BD7341900EB08C8 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C34DABDA1BD7341000EB08C8 /* libBVLinearGradient.a */; };
 		C34DABE21BD751B100EB08C8 /* libRNSearchBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C34DABE11BD751AC00EB08C8 /* libRNSearchBar.a */; };
@@ -231,6 +232,8 @@
 		C331A73B1C8EE17600C68AA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C331A7651C8FBB7700C68AA9 /* CrashlyticsReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashlyticsReporter.h; sourceTree = "<group>"; };
 		C331A7661C8FBB9E00C68AA9 /* CrashlyticsReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashlyticsReporter.m; sourceTree = "<group>"; };
+		C331A7B01C8FF66900C68AA9 /* AnswersReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswersReporter.h; sourceTree = "<group>"; };
+		C331A7C31C8FF68200C68AA9 /* AnswersReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswersReporter.m; sourceTree = "<group>"; };
 		C33F3AAF1BDA0D2700FF4218 /* IntercomWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntercomWrapper.h; path = "../node_modules/react-native-intercom/iOS/IntercomWrapper.h"; sourceTree = "<group>"; };
 		C33F3AB01BDA0D2700FF4218 /* IntercomWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntercomWrapper.m; path = "../node_modules/react-native-intercom/iOS/IntercomWrapper.m"; sourceTree = "<group>"; };
 		C34DABD51BD7341000EB08C8 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
@@ -379,6 +382,8 @@
 				C3F26AEF1C05182400D31B66 /* ImageUploader.m */,
 				C331A7651C8FBB7700C68AA9 /* CrashlyticsReporter.h */,
 				C331A7661C8FBB9E00C68AA9 /* CrashlyticsReporter.m */,
+				C331A7B01C8FF66900C68AA9 /* AnswersReporter.h */,
+				C331A7C31C8FF68200C68AA9 /* AnswersReporter.m */,
 				C3642CA91BF95B45007FC821 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -612,7 +617,6 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				002310C001DC78298EBED17D /* Embed Pods Frameworks */,
 				92AA8476126EDC17CEC624E4 /* Copy Pods Resources */,
-				C3FF43C31C7BCE5C0071F3DD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1021,19 +1025,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sproutli/Pods-sproutli-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C3FF43C31C7BCE5C0071F3DD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 57cb97ac2092a89c88b4d38d158356fcbf2d5dbf fdd652a4dbe29a72ff0747c41e222fcbf0e427a130aedeb6c375293af073e327";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1044,6 +1035,7 @@
 				C39D2B841C4F43D6008EB34C /* UIImagePickerManager.m in Sources */,
 				C39D2B851C4F43D6008EB34C /* UIImagePickerManager.h in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				C331A7C41C8FF68200C68AA9 /* AnswersReporter.m in Sources */,
 				C34DABEA1BD7824500EB08C8 /* RNGeocoder.m in Sources */,
 				C331A7671C8FBB9E00C68AA9 /* CrashlyticsReporter.m in Sources */,
 				C3F26AF01C05182400D31B66 /* ImageUploader.m in Sources */,
@@ -1117,6 +1109,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1141,6 +1134,8 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				k = "";
 			};
 			name = Debug;
 		};
@@ -1153,6 +1148,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"~/Development/FacebookSDK\"",
@@ -1175,6 +1171,8 @@
 				PRODUCT_NAME = Sproutli;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				k = "";
 			};
 			name = Release;
 		};
