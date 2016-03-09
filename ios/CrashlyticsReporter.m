@@ -23,4 +23,13 @@ RCT_EXPORT_METHOD(reportError:(nonnull NSString *)message)
   [CrashlyticsKit recordError: error];
 }
 
+RCT_EXPORT_METHOD(identifyUser:(nonnull NSString *)userName
+                  userId:(nonnull NSString*)userId
+                  email:(nonnull NSString*)email)
+{
+  [CrashlyticsKit setUserIdentifier:userId];
+  [CrashlyticsKit setUserEmail:email];
+  [CrashlyticsKit setUserName:userName];
+}
+
 @end
