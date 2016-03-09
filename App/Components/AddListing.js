@@ -130,7 +130,7 @@ var tagsTransformer = {
 
   parse: (value) => {
     if (typeof value === 'string') { 
-      return value.replace(/#/g, '').split(' ');
+      return value.trim().replace(/#/g, '').split(' ');
     } else {
       return value;
     }

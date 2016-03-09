@@ -52,7 +52,7 @@ function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response
   } else {
-    var error = new Error(response.statusText)
+    var error = new Error(`Error creating listing. We received a ${response.status} from the server. The user's listing was ${JSON.stringify(listingWithImages)}.`);
     console.warn('[CreateListing] - Error creating listing', error);
     error.response = response
     throw error
