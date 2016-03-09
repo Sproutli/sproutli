@@ -1,8 +1,7 @@
 /*global navigator */
 'use strict';
 
-var React = require('react-native');
-var {
+import React, {
   StyleSheet,
   ListView,
   ProgressBarAndroid,
@@ -10,9 +9,10 @@ var {
   Text,
   ScrollView,
   Platform,
+  NativeModules,
   PixelRatio,
   View
-} = React;
+} from 'react-native';
 
 var RNGeocoder = require('react-native-geocoder');
 var Icon = require('react-native-vector-icons/Ionicons');
@@ -31,6 +31,7 @@ var ListingsFilter = require('../Utils/ListingsFilter');
 var Intercom = require('../Utils/Intercom');
 var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 var VeganLevelManager = require('../Utils/VeganLevelManager');
+var AnswersReporter = NativeModules.AnswersReporter;
 
 var COLOURS = require('../Constants/Colours');
 
@@ -101,6 +102,12 @@ class Search extends React.Component {
     GoogleAnalytics.trackEvent('Search', 'has_location', location !== null);
     GoogleAnalytics.trackEvent('Search', 'vegan_level', this.state.searchConfig.vegan_level);
     GoogleAnalytics.trackEvent('Search', 'pre_canned', this.props.searchLabel);
+
+    AnswersReporter.reportSearch(query || '', { 
+      'Has Location': location ? 'Yes' : 'No',
+      'Vegan Level': this.state.searchConfig.vegan_level,
+      'Category': this.props.searchLabel,
+    });
 
     this.setState({ loading: true });
 
