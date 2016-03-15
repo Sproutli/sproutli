@@ -2,7 +2,7 @@
 'use strict';
 
 var React = require('react-native');
-var {
+const {
   Image,
   View,
   StyleSheet,
@@ -12,7 +12,10 @@ var {
   ActionSheetIOS,
   Alert,
   Platform,
-  NativeModules,
+  NativeModules: {
+    ImagePickerManager,
+    CrashlyticsReporter
+  },
 } = React;
 
 // Dimensions
@@ -20,8 +23,6 @@ var Dimensions = require('Dimensions');
 var { width } = Dimensions.get('window');
 var imageSize = width / 3 - 16;
 
-// Image Picker
-var UIImagePickerManager = require('NativeModules').UIImagePickerManager;
 
 // Form
 var t = require('tcomb-form-native');
@@ -48,7 +49,6 @@ var Facebook = require('../Utils/Facebook');
 var Slack = require('../Utils/Slack');
 var Users = require('../Utils/Users');
 import AddressParser from '../Utils/AddressParser';
-var CrashlyticsReporter = NativeModules.CrashlyticsReporter;
 
 // Constants
 var CATEGORIES = [
@@ -202,7 +202,6 @@ class AddListing extends React.Component {
       formValue: defaults
     };
     
-    this.createListing({name: 'wat'});
     GoogleAnalytics.viewedScreen('Add Listing');
   }
 
@@ -222,18 +221,9 @@ class AddListing extends React.Component {
       listing
     });
 
-    const IS_ANDROID = Platform.OS === 'android'
     const ALERT_TITLE = 'Listing Added';
-    const ALERT_MESSAGE = (IS_ANDROID ? 
-      `Thanks for adding ${this.state.formValue.name}!` :
-      `${this.state.formValue.name} has been added! Would you like to share it on Facebook?`); 
-    const ALERT_OPTIONS = (IS_ANDROID ?
-      [{ text: 'OK', onPress: this.navigateToNewListing.bind(this, listing) }] :
-      [
-        { text: 'Share', onPress: this.shareOnFacebook.bind(this, listing) },
-        { text: 'Not Now', onPress: this.navigateToNewListing.bind(this, listing) }
-      ]);
-
+    const ALERT_MESSAGE = `Thanks for adding ${this.state.formValue.name}!`;
+    const ALERT_OPTIONS = [{ text: 'OK', onPress: this.navigateToNewListing.bind(this, listing) }];
 
     Alert.alert(ALERT_TITLE, ALERT_MESSAGE, ALERT_OPTIONS);
   }
@@ -331,19 +321,21 @@ class AddListing extends React.Component {
       takePhotoButtonTitle: 'Take Photo',
       chooseFromLibraryButtonTitle: 'Choose from Library',
       quality: 0.5,
-      allowsEditing: true,
-      noData: false,
+      hasData: false,
       storageOptions: {
         skipBackup: true,
-        path: 'images'
       }
     };
 
-    UIImagePickerManager.showImagePicker(options, (response) => {
+    console.log('ImagePicker:', ImagePickerManager);
+
+    ImagePickerManager.showImagePicker(options, (response) => {
       if (response.didCancel) { return ; }
       var source;
+
+      console.log('***RESPONSE FROM IMAGEPICKER', response);
       if (Platform.OS === 'ios') {
-        source = {uri: response.uri.replace('file://', ''), isStatic: true};
+        source = {uri: response.uri.replace('file://', ''), isStatic: false};
       } else {
         source = {uri: `file://${response.path}`, isStatic: true};
       };

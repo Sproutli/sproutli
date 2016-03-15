@@ -67,7 +67,6 @@ function parseJSON(response) {
 function createListing(token) {
   return Users.fetchUser()
   .then((user) => {
-    throw new Error('Everything is truly fucked');
     listingWithImages.created_by = user.id;
     listingWithImages.created_at = Moment().toISOString(); 
 

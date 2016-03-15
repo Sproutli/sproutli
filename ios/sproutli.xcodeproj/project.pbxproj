@@ -40,13 +40,12 @@
 		C371A30B1BCF2D4700589DFD /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A3031BCF2D4700589DFD /* MaterialIcons.ttf */; };
 		C371A30C1BCF2D4700589DFD /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A3041BCF2D4700589DFD /* Octicons.ttf */; };
 		C371A30D1BCF2D4700589DFD /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A3051BCF2D4700589DFD /* Zocial.ttf */; };
+		C395293D1C91AB3400EE1AD6 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C395293C1C91A9F000EE1AD6 /* libRNImagePicker.a */; };
 		C3986C321C056E8E002B5B3E /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C311C056C08002B5B3E /* libRNBlur.a */; };
 		C3986C331C056E8E002B5B3E /* libRNOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C291C056B1C002B5B3E /* libRNOverlay.a */; };
 		C3986C4C1C05C42C002B5B3E /* libRCTFBSDKShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C4B1C05C219002B5B3E /* libRCTFBSDKShare.a */; };
 		C3986CC01C068A87002B5B3E /* libRCTFBSDKLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986CBF1C068A7A002B5B3E /* libRCTFBSDKLogin.a */; };
 		C3986CC71C06B8E8002B5B3E /* libRCTFBSDKCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986CC61C06B8DB002B5B3E /* libRCTFBSDKCore.a */; };
-		C39D2B841C4F43D6008EB34C /* UIImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C39D2B821C4F43D6008EB34C /* UIImagePickerManager.m */; };
-		C39D2B851C4F43D6008EB34C /* UIImagePickerManager.h in Sources */ = {isa = PBXBuildFile; fileRef = C39D2B831C4F43D6008EB34C /* UIImagePickerManager.h */; };
 		C3F26AF01C05182400D31B66 /* ImageUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F26AEF1C05182400D31B66 /* ImageUploader.m */; };
 		C3F5019D1C4F42E30064699A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F5019A1C4F42E30064699A /* FBSDKCoreKit.framework */; };
 		C3F5019E1C4F42E30064699A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F5019B1C4F42E30064699A /* FBSDKLoginKit.framework */; };
@@ -166,6 +165,13 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		C395293B1C91A9F000EE1AD6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C39529371C91A9F000EE1AD6 /* RNImagePicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
+			remoteInfo = RNImagePicker;
+		};
 		C3986C281C056B1C002B5B3E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C3986C191C056B1C002B5B3E /* RNOverlay.xcodeproj */;
@@ -251,13 +257,12 @@
 		C371A3031BCF2D4700589DFD /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		C371A3041BCF2D4700589DFD /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		C371A3051BCF2D4700589DFD /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		C39529371C91A9F000EE1AD6 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		C3986C191C056B1C002B5B3E /* RNOverlay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNOverlay.xcodeproj; path = "../node_modules/react-native-overlay/RNOverlay.xcodeproj"; sourceTree = "<group>"; };
 		C3986C2C1C056C08002B5B3E /* RNBlur.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBlur.xcodeproj; path = "../node_modules/react-native-blur/ios/RNBlur.xcodeproj"; sourceTree = "<group>"; };
 		C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKShare.xcodeproj; path = "../node_modules/react-native-fbsdkshare/RCTFBSDKShare.xcodeproj"; sourceTree = "<group>"; };
 		C3986CBA1C068A7A002B5B3E /* RCTFBSDKLogin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKLogin.xcodeproj; path = "../node_modules/react-native-fbsdklogin/RCTFBSDKLogin.xcodeproj"; sourceTree = "<group>"; };
 		C3986CC11C06B8DA002B5B3E /* RCTFBSDKCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKCore.xcodeproj; path = "../node_modules/react-native-fbsdkcore/RCTFBSDKCore.xcodeproj"; sourceTree = "<group>"; };
-		C39D2B821C4F43D6008EB34C /* UIImagePickerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UIImagePickerManager.m; path = "../node_modules/react-native-image-picker/ios/UIImagePickerManager.m"; sourceTree = "<group>"; };
-		C39D2B831C4F43D6008EB34C /* UIImagePickerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UIImagePickerManager.h; path = "../node_modules/react-native-image-picker/ios/UIImagePickerManager.h"; sourceTree = "<group>"; };
 		C3F26AEF1C05182400D31B66 /* ImageUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageUploader.m; path = sproutli/ImageUploader.m; sourceTree = "<group>"; };
 		C3F26AFE1C05185300D31B66 /* ImageUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUploader.h; sourceTree = "<group>"; };
 		C3F5019A1C4F42E30064699A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -270,6 +275,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C395293D1C91AB3400EE1AD6 /* libRNImagePicker.a in Frameworks */,
 				C3F5019D1C4F42E30064699A /* FBSDKCoreKit.framework in Frameworks */,
 				C3F5019F1C4F42E30064699A /* FBSDKShareKit.framework in Frameworks */,
 				C3F5019E1C4F42E30064699A /* FBSDKLoginKit.framework in Frameworks */,
@@ -414,8 +420,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				C39D2B821C4F43D6008EB34C /* UIImagePickerManager.m */,
-				C39D2B831C4F43D6008EB34C /* UIImagePickerManager.h */,
+				C39529371C91A9F000EE1AD6 /* RNImagePicker.xcodeproj */,
 				C3986CC11C06B8DA002B5B3E /* RCTFBSDKCore.xcodeproj */,
 				C3986CBA1C068A7A002B5B3E /* RCTFBSDKLogin.xcodeproj */,
 				C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */,
@@ -553,6 +558,14 @@
 			);
 			name = Fonts;
 			path = "../node_modules/react-native-vector-icons/Fonts";
+			sourceTree = "<group>";
+		};
+		C39529381C91A9F000EE1AD6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C395293C1C91A9F000EE1AD6 /* libRNImagePicker.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		C3986C1A1C056B1C002B5B3E /* Products */ = {
@@ -713,7 +726,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sproutli" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Sproutli" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -784,6 +797,10 @@
 				{
 					ProductGroup = C3986C2D1C056C08002B5B3E /* Products */;
 					ProjectRef = C3986C2C1C056C08002B5B3E /* RNBlur.xcodeproj */;
+				},
+				{
+					ProductGroup = C39529381C91A9F000EE1AD6 /* Products */;
+					ProjectRef = C39529371C91A9F000EE1AD6 /* RNImagePicker.xcodeproj */;
 				},
 				{
 					ProductGroup = C3986C1A1C056B1C002B5B3E /* Products */;
@@ -898,6 +915,13 @@
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = C371A2FA1BCF0D4000589DFD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C395293C1C91A9F000EE1AD6 /* libRNImagePicker.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNImagePicker.a;
+			remoteRef = C395293B1C91A9F000EE1AD6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C3986C291C056B1C002B5B3E /* libRNOverlay.a */ = {
@@ -1032,8 +1056,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C39D2B841C4F43D6008EB34C /* UIImagePickerManager.m in Sources */,
-				C39D2B851C4F43D6008EB34C /* UIImagePickerManager.h in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				C331A7C41C8FF68200C68AA9 /* AnswersReporter.m in Sources */,
 				C34DABEA1BD7824500EB08C8 /* RNGeocoder.m in Sources */,
@@ -1109,7 +1131,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1148,7 +1170,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"~/Development/FacebookSDK\"",
@@ -1375,7 +1397,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sproutli" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Sproutli" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

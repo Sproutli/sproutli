@@ -41,7 +41,6 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
     private final String SENDER_ID = "1034144542573";
     private String regId; 
     private GoogleCloudMessaging gcm;
-    private ImagePickerPackage mImagePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,6 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
         Fabric.with(this, new Crashlytics(), new Answers());
         Intercom.initialize(getApplication(), "android_sdk-aba6524a84e6953392e1a8583c15970a6dbe851c", "r18lw9fx");
         mReactRootView = new ReactRootView(this);
-        mImagePicker = new ImagePickerPackage(this);
         setUpGCM();
 
         mReactInstanceManager = ReactInstanceManager.builder()
@@ -58,13 +56,13 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setJSMainModuleName("index.android")
 
                 .addPackage(new MainReactPackage())
-                .addPackage(mImagePicker)
                 .addPackage(new LocationPackage(this))
-                // .addPackage(new AnswersReporterPackage())
+                .addPackage(new AnswersReporterPackage())
                 .addPackage(new CrashlyticsReporterPackage())
                 .addPackage(new RNGeocoderPackage())
                 .addPackage(new IntercomPackage())
                 .addPackage(new ImageUploaderPackage())
+                .addPackage(new ImagePickerPackage())
                 .addPackage(new VectorIconsPackage())
                 .addPackage(new ReactMaterialKitPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)

@@ -7,24 +7,57 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableType;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
 
-import com.crashlytics.android.Crashlytics;
+import java.util.HashMap;
 
-public class CrashlyticsReporterModule extends ReactContextBaseJavaModule {
-  private static String TAG = "Crashlytics";
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.SearchEvent;
 
-  public CrashlyticsReporterModule(ReactApplicationContext reactContext) {
+public class AnswersReporterModule extends ReactContextBaseJavaModule {
+  private static String TAG = "Answers";
+
+  public AnswersReporterModule(ReactApplicationContext reactContext) {
     super(reactContext);
   }
 
   @Override
   public String getName() {
-    return "CrashlyticsReporter";
+    Log.d(TAG, "GetName called");
+    return "AnswersReporter";
   }
 
   @ReactMethod
-  public void reportError(String errorMessage, Promise promise) {
-    Crashlytics.logException(new Exception(errorMessage));
-    promise.resolve(null);
+  public void reportSearch(String query, ReadableMap searchAttributes) {
+    SearchEvent searchEvent = new SearchEvent()
+        .putQuery(query);
+
+
+    ReadableMapKeySetIterator iterator = searchAttributes.keySetIterator();
+    while (iterator.hasNextKey()) {
+      String key = iterator.nextKey();
+      ReadableType type = searchAttributes.getType(key);
+
+      switch (type) {
+        case Null:
+          break;
+
+        case String:
+          searchEvent.putCustomAttribute(key, searchAttributes.getString(key));
+          break;
+
+        case Number:
+          searchEvent.putCustomAttribute(key, searchAttributes.getDouble(key));
+          break;
+
+        default:
+          break;
+      }
+    }
+
+    Log.d(TAG, "Reporting SearchEvent: " + searchEvent);
   }
+
 }

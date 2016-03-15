@@ -103,6 +103,8 @@ class Search extends React.Component {
     GoogleAnalytics.trackEvent('Search', 'vegan_level', this.state.searchConfig.vegan_level);
     GoogleAnalytics.trackEvent('Search', 'pre_canned', this.props.searchLabel);
 
+    console.log('Yo answers', AnswersReporter);
+
     AnswersReporter.reportSearch(query || '', { 
       'Has Location': location ? 'Yes' : 'No',
       'Vegan Level': this.state.searchConfig.vegan_level,
