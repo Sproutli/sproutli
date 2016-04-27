@@ -1,7 +1,6 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React, {
   StyleSheet,
   Text,
   Image,
@@ -12,8 +11,9 @@ var {
   ActivityIndicatorIOS,
   ScrollView,
   PixelRatio,
-  MapView
-} = React;
+  NativeModules,
+  MapView,
+} from 'react-native';
 
 var Carousel = require('react-native-looped-carousel');
 var Communications = require('react-native-communications');
@@ -25,6 +25,7 @@ var pixelRatio = PixelRatio.get();
 var Intercom = require('../Utils/Intercom');
 var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 var Reviews = require('../Utils/Reviews');
+var AnswersReporter = NativeModules.AnswersReporter;
 
 var Review = require('./Review');
 var ReviewModal = require('./ReviewModal');
@@ -44,9 +45,12 @@ class ListingDetail extends React.Component {
       showMap: false
     };
 
-    Intercom.logEvent('viewed_listing', { listingID: props.listing.id, listingName: props.listing.name });
+    let { name, id, categories } = props.listing;
+
+    Intercom.logEvent('viewed_listing', { listingID: id, listingName: name });
     GoogleAnalytics.viewedScreen('View Listing Detail');
-    GoogleAnalytics.trackEvent('Listing', 'View', props.listing.id);
+    GoogleAnalytics.trackEvent('Listing', 'View', id);
+    AnswersReporter.reportViewListing(id, name, categories[0]);
   }
 
   componentDidMount() {

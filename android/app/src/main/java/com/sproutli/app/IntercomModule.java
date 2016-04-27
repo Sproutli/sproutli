@@ -45,7 +45,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
   public void updateUser(ReadableMap options, Callback callback) {
     try {
       Log.d("Intercom", "updateUser called with " + options);
-      Map userMap = getMapFromOptions(options);
+      Map userMap = Utils.getMapFromOptions(options);
       Intercom.client().updateUser(userMap);
       callback.invoke();
     } catch(Exception e) {
@@ -57,7 +57,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
   public void logEvent(String name, ReadableMap options, Callback callback) {
     try {
       Log.d("Intercom", "logEvent called with " + name);
-      Map optionsMap = getMapFromOptions(options);
+      Map optionsMap = Utils.getMapFromOptions(options);
       Intercom.client().logEvent(name, optionsMap);
       callback.invoke();
     } catch(Exception e) {
@@ -72,40 +72,5 @@ public class IntercomModule extends ReactContextBaseJavaModule {
     } catch(Exception e) {
       Log.e("Intercom","Error displaying Intercom composer"); 
     }
-  }
-
-  private Map getMapFromOptions(ReadableMap options) {
-    ReadableMapKeySetIterator iterator = options.keySetIterator();
-    Map optionsMap = new HashMap<>();
-    while (iterator.hasNextKey()) {
-      String key = iterator.nextKey();
-      ReadableType type = options.getType(key);
-
-      switch (type) {
-        case Null:
-          break;
-
-        case Boolean:
-          Boolean bValue = options.getBoolean(key);
-          optionsMap.put(key, bValue);
-          break;
-
-        case String:
-          String sValue = options.getString(key);
-          optionsMap.put(key, sValue);
-          break;
-
-        case Number:
-          Double dValue = options.getDouble(key);
-          optionsMap.put(key, dValue);
-          break;
-
-        default:
-          break;
-      }
-    }
-
-    Log.d("Intercom", "Options map is: " + optionsMap);
-    return optionsMap;
   }
 }

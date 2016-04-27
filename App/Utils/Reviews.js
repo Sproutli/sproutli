@@ -4,8 +4,10 @@
 var AsyncStorage = require('react-native').AsyncStorage;
 var Moment = require('moment');
 var JWTDecode = require('jwt-decode');
-
 var Intercom = require('../Utils/Intercom');
+
+import { NativeModules } from 'react-native';
+let AnswersReporter = NativeModules.AnswersReporter;
 
 var jwtToken;
 
@@ -58,13 +60,15 @@ var Reviews = {
     return AsyncStorage.getItem('token')
       .then((token) => {
         jwtToken = token;
-
         review = setFields(review);
+
         var config = makeConfig();
         config.method = 'POST';
         config.body = JSON.stringify(review);
 
         Intercom.logEvent('reviewed_listing', { listingId: review.listing_id });
+        // TODO: Track in Answers. Need the listing name.
+
         return fetch(
           `http://sproutli-staging.elasticbeanstalk.com/api/v1/review`,
           config

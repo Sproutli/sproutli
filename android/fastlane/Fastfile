@@ -22,7 +22,7 @@ default_platform :android
 
 platform :android do
   before_all do
-    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
   end
 
   desc "Runs all the tests"
@@ -33,7 +33,7 @@ platform :android do
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :beta do
     gradle(task: "assembleRelease")
-    crashlytics
+    crashlytics(api_token: "57cb97ac2092a89c88b4d38d158356fcbf2d5dbf", build_secret: "fdd652a4dbe29a72ff0747c41e222fcbf0e427a130aedeb6c375293af073e327")
 
     # sh "your_script.sh"
     # You can also use other beta testing services here

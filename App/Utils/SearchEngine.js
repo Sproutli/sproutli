@@ -21,7 +21,6 @@ function getBoundingBox(latlng, distance) {
       maxLon,
       deltaLon;
 
-      console.log('Custom implementation:', radDist, minLat, maxLat);
   if (minLat > MIN_LAT && maxLat < MAX_LAT) {
     deltaLon = Math.asin(Math.sin(radDist) / Math.cos(lat));
     minLon = lon - deltaLon;
@@ -77,7 +76,6 @@ var prepareReturnFields = (location) => {
 };
 
 var parse = (listings, location) => { 
-  console.log(listings);
   var response = listings.hits.hit
     .map((l) => {
       return({...l.fields, distance: l.exprs ? l.exprs.distance : null});
@@ -110,7 +108,6 @@ var runSearch = (searchParams) => {
     url = `http://search-sproutli-bhzq3vdfhs5jhshdoqqt67ru5a.ap-southeast-2.cloudsearch.amazonaws.com/2013-01-01/search?q=${query}&size=${size}&q.parser=${parser}`;
   }
 
-  console.log('Search URL:', url);
   return fetch(url);
 };
 
@@ -118,7 +115,6 @@ var runSearch = (searchParams) => {
 
 var SearchEngine = {
   search(query, location) {
-    console.log('[SearchEngine] - Searching', query, location);
     const SEARCH_PARAMS = {
       query: query ? `'${query.replace("'", "\\'")}'` : 'matchall',
       parser: 'structured',

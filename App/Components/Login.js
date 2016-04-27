@@ -59,7 +59,6 @@ class Login extends React.Component {
   }
 
   _signupPressed() {
-    console.log('Signup pressed');
     if (!this.props.signingUp) {
       this.props.navigator.push({
         name: 'login',

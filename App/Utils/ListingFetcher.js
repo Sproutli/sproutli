@@ -15,7 +15,6 @@ function checkStatus(response) {
 
 var ListingFetcher = {
   fetch(listingID) {
-    console.log('Fetching listing ID: ', listingID);
     return AsyncStorage.getItem('token')
     .then((token) => {
       return fetch(`http://sproutli-staging.elasticbeanstalk.com/api/v1/listing/${listingID}`, {

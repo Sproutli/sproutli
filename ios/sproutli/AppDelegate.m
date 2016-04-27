@@ -24,11 +24,14 @@
   NSURL *jsCodeLocation;
 
   // Define JS Code Location
+#ifdef DEBUG
   //jsCodeLocation = [NSURL URLWithString:@"http://172.20.10.3:8081/index.ios.bundle?platform=ios&dev=true"];
-  //jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.112:8081/index.ios.bundle?platform=ios&dev=true"];
-  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+  jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.112:8081/index.ios.bundle?platform=ios&dev=true"];
+  //jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
   //jsCodeLocation = [NSURL URLWithString:@"http://sproutli-admin.s3-website-ap-southeast-2.amazonaws.com/beta.jsbundle"];
-  //jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+#else
+  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+#endif
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"sproutli"
@@ -59,7 +62,7 @@
   
   
   // Initialise Crashlytics
-  [Fabric with:@[[Crashlytics class]]];
+  [Fabric with:@[[Crashlytics class], [Answers class]]];
   
   return YES;
 }

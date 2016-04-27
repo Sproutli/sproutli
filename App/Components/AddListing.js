@@ -2,7 +2,7 @@
 'use strict';
 
 var React = require('react-native');
-var {
+const {
   Image,
   View,
   StyleSheet,
@@ -12,6 +12,10 @@ var {
   ActionSheetIOS,
   Alert,
   Platform,
+  NativeModules: {
+    ImagePickerManager,
+    CrashlyticsReporter
+  },
 } = React;
 
 // Dimensions
@@ -19,8 +23,6 @@ var Dimensions = require('Dimensions');
 var { width } = Dimensions.get('window');
 var imageSize = width / 3 - 16;
 
-// Image Picker
-var UIImagePickerManager = require('NativeModules').UIImagePickerManager;
 
 // Form
 var t = require('tcomb-form-native');
@@ -50,14 +52,10 @@ import AddressParser from '../Utils/AddressParser';
 
 // Constants
 var CATEGORIES = [
-  'Beer & Wine',
   'Cafes & Restaurants',
-  'Causes',
   'Clothing, Shoes & Accessories',
   'Food Stores',
-  'Health, Wellness & Lifestyle',
-  'Home & Living',
-  'Pets',
+  'Hair & Beauty',
   'Professional Services & Trades',
 ];
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
@@ -132,7 +130,7 @@ var tagsTransformer = {
 
   parse: (value) => {
     if (typeof value === 'string') { 
-      return value.replace(/#/g, '').split(' ');
+      return value.trim().replace(/#/g, '').split(' ');
     } else {
       return value;
     }
@@ -223,18 +221,9 @@ class AddListing extends React.Component {
       listing
     });
 
-    const IS_ANDROID = Platform.OS === 'android'
     const ALERT_TITLE = 'Listing Added';
-    const ALERT_MESSAGE = (IS_ANDROID ? 
-      `Thanks for adding ${this.state.formValue.name}!` :
-      `${this.state.formValue.name} has been added! Would you like to share it on Facebook?`); 
-    const ALERT_OPTIONS = (IS_ANDROID ?
-      [{ text: 'OK', onPress: this.navigateToNewListing.bind(this, listing) }] :
-      [
-        { text: 'Share', onPress: this.shareOnFacebook.bind(this, listing) },
-        { text: 'Not Now', onPress: this.navigateToNewListing.bind(this, listing) }
-      ]);
-
+    const ALERT_MESSAGE = `Thanks for adding ${this.state.formValue.name}!`;
+    const ALERT_OPTIONS = [{ text: 'OK', onPress: this.navigateToNewListing.bind(this, listing) }];
 
     Alert.alert(ALERT_TITLE, ALERT_MESSAGE, ALERT_OPTIONS);
   }
@@ -252,15 +241,16 @@ class AddListing extends React.Component {
     .catch((error) => {
       Alert.alert('Error sharing listing', 'Sorry, there was an error talking to Facebook!');
       console.warn('[AddListing] - Error sharing - ', error);
-      this.postErrorToSlack(error);
+      this.reportError(error);
     });
   }
 
-  postErrorToSlack(error) {
+  reportError(error) {
     Users.fetchUser()
    .then((user) => {
-      var message = `@kane.rogers - ${user.name} (${user.email}) encountered an error sharing with Facebook. Error code: \`${error.code}\` Error message: \`${error.message}\``;
-      console.log('Posting message', message);
+      console.log('Reporting error to crashlytics:', error);
+      var message = `@kane.rogers - ${user.name} (${user.email}) encountered an error creating a listing. Error code: \`${error.code}\` Error message: \`${error.message}\``;
+      CrashlyticsReporter.reportError(error.message);
       Slack.postMessage(message);
     })
   }
@@ -289,6 +279,7 @@ class AddListing extends React.Component {
       .then(this._onListingCreated.bind(this))
       .catch((error) => {
         console.warn('[CreateListing] - Error creating listing', error); 
+        this.reportError(error);
         this._onListingError('Sorry! There was an error creating your listing.',  'Please let us know what happened.')
       });
   }
@@ -330,19 +321,21 @@ class AddListing extends React.Component {
       takePhotoButtonTitle: 'Take Photo',
       chooseFromLibraryButtonTitle: 'Choose from Library',
       quality: 0.5,
-      allowsEditing: true,
-      noData: false,
+      hasData: false,
       storageOptions: {
         skipBackup: true,
-        path: 'images'
       }
     };
 
-    UIImagePickerManager.showImagePicker(options, (response) => {
+    console.log('ImagePicker:', ImagePickerManager);
+
+    ImagePickerManager.showImagePicker(options, (response) => {
       if (response.didCancel) { return ; }
       var source;
+
+      console.log('***RESPONSE FROM IMAGEPICKER', response);
       if (Platform.OS === 'ios') {
-        source = {uri: response.uri.replace('file://', ''), isStatic: true};
+        source = {uri: response.uri.replace('file://', ''), isStatic: false};
       } else {
         source = {uri: `file://${response.path}`, isStatic: true};
       };
@@ -386,7 +379,6 @@ class AddListing extends React.Component {
     var latlng = details.geometry.location;
 
     const location = AddressParser.parse(address, latlng);
-    console.log('Got location:', location);
 
     this.setState({ location });
   }

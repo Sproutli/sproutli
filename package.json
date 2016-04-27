@@ -23,7 +23,7 @@
     "react-native-geocoder": "^0.2.0",
     "react-native-google-analytics": "0.0.3",
     "react-native-google-places-autocomplete": "git+https://github.com/kanerogers/react-native-google-places-autocomplete.git",
-    "react-native-image-picker": "^0.14.1",
+    "react-native-image-picker": "^0.18.2",
     "react-native-intercom": "0.0.4",
     "react-native-linear-gradient": "^1.1.0-alpha",
     "react-native-looped-carousel": "0.0.8",

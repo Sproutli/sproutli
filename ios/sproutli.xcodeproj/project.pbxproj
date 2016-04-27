@@ -23,6 +23,9 @@
 		28676361B016DC4EB4383BD6 /* libPods-sproutli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C1FF3F60BE1503FE8C33A9 /* libPods-sproutli.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		C30968131C8E76B00053122A /* ImageUploaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C30968121C8E76B00053122A /* ImageUploaderTest.m */; };
+		C331A73A1C8EE17600C68AA9 /* SproutliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C331A7391C8EE17600C68AA9 /* SproutliUITests.swift */; };
+		C331A7671C8FBB9E00C68AA9 /* CrashlyticsReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = C331A7661C8FBB9E00C68AA9 /* CrashlyticsReporter.m */; };
+		C331A7C41C8FF68200C68AA9 /* AnswersReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = C331A7C31C8FF68200C68AA9 /* AnswersReporter.m */; };
 		C33F3AB11BDA0D2700FF4218 /* IntercomWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F3AB01BDA0D2700FF4218 /* IntercomWrapper.m */; };
 		C34DABDB1BD7341900EB08C8 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C34DABDA1BD7341000EB08C8 /* libBVLinearGradient.a */; };
 		C34DABE21BD751B100EB08C8 /* libRNSearchBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C34DABE11BD751AC00EB08C8 /* libRNSearchBar.a */; };
@@ -37,13 +40,12 @@
 		C371A30B1BCF2D4700589DFD /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A3031BCF2D4700589DFD /* MaterialIcons.ttf */; };
 		C371A30C1BCF2D4700589DFD /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A3041BCF2D4700589DFD /* Octicons.ttf */; };
 		C371A30D1BCF2D4700589DFD /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C371A3051BCF2D4700589DFD /* Zocial.ttf */; };
+		C395293D1C91AB3400EE1AD6 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C395293C1C91A9F000EE1AD6 /* libRNImagePicker.a */; };
 		C3986C321C056E8E002B5B3E /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C311C056C08002B5B3E /* libRNBlur.a */; };
 		C3986C331C056E8E002B5B3E /* libRNOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C291C056B1C002B5B3E /* libRNOverlay.a */; };
 		C3986C4C1C05C42C002B5B3E /* libRCTFBSDKShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986C4B1C05C219002B5B3E /* libRCTFBSDKShare.a */; };
 		C3986CC01C068A87002B5B3E /* libRCTFBSDKLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986CBF1C068A7A002B5B3E /* libRCTFBSDKLogin.a */; };
 		C3986CC71C06B8E8002B5B3E /* libRCTFBSDKCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3986CC61C06B8DB002B5B3E /* libRCTFBSDKCore.a */; };
-		C39D2B841C4F43D6008EB34C /* UIImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C39D2B821C4F43D6008EB34C /* UIImagePickerManager.m */; };
-		C39D2B851C4F43D6008EB34C /* UIImagePickerManager.h in Sources */ = {isa = PBXBuildFile; fileRef = C39D2B831C4F43D6008EB34C /* UIImagePickerManager.h */; };
 		C3F26AF01C05182400D31B66 /* ImageUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F26AEF1C05182400D31B66 /* ImageUploader.m */; };
 		C3F5019D1C4F42E30064699A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F5019A1C4F42E30064699A /* FBSDKCoreKit.framework */; };
 		C3F5019E1C4F42E30064699A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F5019B1C4F42E30064699A /* FBSDKLoginKit.framework */; };
@@ -128,6 +130,13 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = sproutli;
 		};
+		C331A73C1C8EE17600C68AA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = sproutli;
+		};
 		C34DABD91BD7341000EB08C8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C34DABD51BD7341000EB08C8 /* BVLinearGradient.xcodeproj */;
@@ -155,6 +164,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
+		};
+		C395293B1C91A9F000EE1AD6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C39529371C91A9F000EE1AD6 /* RNImagePicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
+			remoteInfo = RNImagePicker;
 		};
 		C3986C281C056B1C002B5B3E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -217,6 +233,13 @@
 		C30968081C8E76960053122A /* SproutliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SproutliTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C309680C1C8E76960053122A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C30968121C8E76B00053122A /* ImageUploaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageUploaderTest.m; path = ../ImageUploaderTest.m; sourceTree = "<group>"; };
+		C331A7371C8EE17600C68AA9 /* SproutliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SproutliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C331A7391C8EE17600C68AA9 /* SproutliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SproutliUITests.swift; sourceTree = "<group>"; };
+		C331A73B1C8EE17600C68AA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C331A7651C8FBB7700C68AA9 /* CrashlyticsReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashlyticsReporter.h; sourceTree = "<group>"; };
+		C331A7661C8FBB9E00C68AA9 /* CrashlyticsReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashlyticsReporter.m; sourceTree = "<group>"; };
+		C331A7B01C8FF66900C68AA9 /* AnswersReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswersReporter.h; sourceTree = "<group>"; };
+		C331A7C31C8FF68200C68AA9 /* AnswersReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswersReporter.m; sourceTree = "<group>"; };
 		C33F3AAF1BDA0D2700FF4218 /* IntercomWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntercomWrapper.h; path = "../node_modules/react-native-intercom/iOS/IntercomWrapper.h"; sourceTree = "<group>"; };
 		C33F3AB01BDA0D2700FF4218 /* IntercomWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntercomWrapper.m; path = "../node_modules/react-native-intercom/iOS/IntercomWrapper.m"; sourceTree = "<group>"; };
 		C34DABD51BD7341000EB08C8 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
@@ -234,13 +257,12 @@
 		C371A3031BCF2D4700589DFD /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		C371A3041BCF2D4700589DFD /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		C371A3051BCF2D4700589DFD /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		C39529371C91A9F000EE1AD6 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		C3986C191C056B1C002B5B3E /* RNOverlay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNOverlay.xcodeproj; path = "../node_modules/react-native-overlay/RNOverlay.xcodeproj"; sourceTree = "<group>"; };
 		C3986C2C1C056C08002B5B3E /* RNBlur.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBlur.xcodeproj; path = "../node_modules/react-native-blur/ios/RNBlur.xcodeproj"; sourceTree = "<group>"; };
 		C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKShare.xcodeproj; path = "../node_modules/react-native-fbsdkshare/RCTFBSDKShare.xcodeproj"; sourceTree = "<group>"; };
 		C3986CBA1C068A7A002B5B3E /* RCTFBSDKLogin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKLogin.xcodeproj; path = "../node_modules/react-native-fbsdklogin/RCTFBSDKLogin.xcodeproj"; sourceTree = "<group>"; };
 		C3986CC11C06B8DA002B5B3E /* RCTFBSDKCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDKCore.xcodeproj; path = "../node_modules/react-native-fbsdkcore/RCTFBSDKCore.xcodeproj"; sourceTree = "<group>"; };
-		C39D2B821C4F43D6008EB34C /* UIImagePickerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UIImagePickerManager.m; path = "../node_modules/react-native-image-picker/ios/UIImagePickerManager.m"; sourceTree = "<group>"; };
-		C39D2B831C4F43D6008EB34C /* UIImagePickerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UIImagePickerManager.h; path = "../node_modules/react-native-image-picker/ios/UIImagePickerManager.h"; sourceTree = "<group>"; };
 		C3F26AEF1C05182400D31B66 /* ImageUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageUploader.m; path = sproutli/ImageUploader.m; sourceTree = "<group>"; };
 		C3F26AFE1C05185300D31B66 /* ImageUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUploader.h; sourceTree = "<group>"; };
 		C3F5019A1C4F42E30064699A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -253,6 +275,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C395293D1C91AB3400EE1AD6 /* libRNImagePicker.a in Frameworks */,
 				C3F5019D1C4F42E30064699A /* FBSDKCoreKit.framework in Frameworks */,
 				C3F5019F1C4F42E30064699A /* FBSDKShareKit.framework in Frameworks */,
 				C3F5019E1C4F42E30064699A /* FBSDKLoginKit.framework in Frameworks */,
@@ -279,6 +302,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C30968051C8E76960053122A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C331A7341C8EE17600C68AA9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -356,6 +386,10 @@
 			children = (
 				C3F26AFE1C05185300D31B66 /* ImageUploader.h */,
 				C3F26AEF1C05182400D31B66 /* ImageUploader.m */,
+				C331A7651C8FBB7700C68AA9 /* CrashlyticsReporter.h */,
+				C331A7661C8FBB9E00C68AA9 /* CrashlyticsReporter.m */,
+				C331A7B01C8FF66900C68AA9 /* AnswersReporter.h */,
+				C331A7C31C8FF68200C68AA9 /* AnswersReporter.m */,
 				C3642CA91BF95B45007FC821 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -386,8 +420,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				C39D2B821C4F43D6008EB34C /* UIImagePickerManager.m */,
-				C39D2B831C4F43D6008EB34C /* UIImagePickerManager.h */,
+				C39529371C91A9F000EE1AD6 /* RNImagePicker.xcodeproj */,
 				C3986CC11C06B8DA002B5B3E /* RCTFBSDKCore.xcodeproj */,
 				C3986CBA1C068A7A002B5B3E /* RCTFBSDKLogin.xcodeproj */,
 				C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */,
@@ -424,10 +457,11 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				C30968091C8E76960053122A /* SproutliTests */,
 				C371A2FD1BCF2D4700589DFD /* Fonts */,
 				13B07FAE1A68108700A75B9A /* sproutli */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				C30968091C8E76960053122A /* SproutliTests */,
+				C331A7381C8EE17600C68AA9 /* SproutliUITests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				E7A46FC703A4F412ADA2E1F3 /* Pods */,
 				B1E558C659135EF5326A410B /* Frameworks */,
@@ -442,6 +476,7 @@
 				13B07F961A680F5B00A75B9A /* Sproutli.app */,
 				C35B3EA91BCC904E005AB832 /* Sproutli.xctest */,
 				C30968081C8E76960053122A /* SproutliTests.xctest */,
+				C331A7371C8EE17600C68AA9 /* SproutliUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -464,6 +499,15 @@
 				C309680C1C8E76960053122A /* Info.plist */,
 			);
 			path = SproutliTests;
+			sourceTree = "<group>";
+		};
+		C331A7381C8EE17600C68AA9 /* SproutliUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C331A7391C8EE17600C68AA9 /* SproutliUITests.swift */,
+				C331A73B1C8EE17600C68AA9 /* Info.plist */,
+			);
+			path = SproutliUITests;
 			sourceTree = "<group>";
 		};
 		C34DABD61BD7341000EB08C8 /* Products */ = {
@@ -514,6 +558,14 @@
 			);
 			name = Fonts;
 			path = "../node_modules/react-native-vector-icons/Fonts";
+			sourceTree = "<group>";
+		};
+		C39529381C91A9F000EE1AD6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C395293C1C91A9F000EE1AD6 /* libRNImagePicker.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		C3986C1A1C056B1C002B5B3E /* Products */ = {
@@ -578,7 +630,6 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				002310C001DC78298EBED17D /* Embed Pods Frameworks */,
 				92AA8476126EDC17CEC624E4 /* Copy Pods Resources */,
-				C3FF43C31C7BCE5C0071F3DD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -606,6 +657,24 @@
 			productName = SproutliTests;
 			productReference = C30968081C8E76960053122A /* SproutliTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C331A7361C8EE17600C68AA9 /* SproutliUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C331A73E1C8EE17600C68AA9 /* Build configuration list for PBXNativeTarget "SproutliUITests" */;
+			buildPhases = (
+				C331A7331C8EE17600C68AA9 /* Sources */,
+				C331A7341C8EE17600C68AA9 /* Frameworks */,
+				C331A7351C8EE17600C68AA9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C331A73D1C8EE17600C68AA9 /* PBXTargetDependency */,
+			);
+			name = SproutliUITests;
+			productName = SproutliUITests;
+			productReference = C331A7371C8EE17600C68AA9 /* SproutliUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		C35B3EA81BCC904E005AB832 /* sproutliUITests */ = {
 			isa = PBXNativeTarget;
@@ -644,6 +713,10 @@
 						};
 					};
 					C30968071C8E76960053122A = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					C331A7361C8EE17600C68AA9 = {
 						CreatedOnToolsVersion = 7.2.1;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
@@ -726,6 +799,10 @@
 					ProjectRef = C3986C2C1C056C08002B5B3E /* RNBlur.xcodeproj */;
 				},
 				{
+					ProductGroup = C39529381C91A9F000EE1AD6 /* Products */;
+					ProjectRef = C39529371C91A9F000EE1AD6 /* RNImagePicker.xcodeproj */;
+				},
+				{
 					ProductGroup = C3986C1A1C056B1C002B5B3E /* Products */;
 					ProjectRef = C3986C191C056B1C002B5B3E /* RNOverlay.xcodeproj */;
 				},
@@ -743,6 +820,7 @@
 				13B07F861A680F5B00A75B9A /* sproutli */,
 				C35B3EA81BCC904E005AB832 /* sproutliUITests */,
 				C30968071C8E76960053122A /* SproutliTests */,
+				C331A7361C8EE17600C68AA9 /* SproutliUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -839,6 +917,13 @@
 			remoteRef = C371A2FA1BCF0D4000589DFD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		C395293C1C91A9F000EE1AD6 /* libRNImagePicker.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNImagePicker.a;
+			remoteRef = C395293B1C91A9F000EE1AD6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		C3986C291C056B1C002B5B3E /* libRNOverlay.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -902,6 +987,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C331A7351C8EE17600C68AA9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C35B3EA71BCC904E005AB832 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -957,19 +1049,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sproutli/Pods-sproutli-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C3FF43C31C7BCE5C0071F3DD /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 57cb97ac2092a89c88b4d38d158356fcbf2d5dbf fdd652a4dbe29a72ff0747c41e222fcbf0e427a130aedeb6c375293af073e327";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -977,10 +1056,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C39D2B841C4F43D6008EB34C /* UIImagePickerManager.m in Sources */,
-				C39D2B851C4F43D6008EB34C /* UIImagePickerManager.h in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				C331A7C41C8FF68200C68AA9 /* AnswersReporter.m in Sources */,
 				C34DABEA1BD7824500EB08C8 /* RNGeocoder.m in Sources */,
+				C331A7671C8FBB9E00C68AA9 /* CrashlyticsReporter.m in Sources */,
 				C3F26AF01C05182400D31B66 /* ImageUploader.m in Sources */,
 				C33F3AB11BDA0D2700FF4218 /* IntercomWrapper.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
@@ -992,6 +1071,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C30968131C8E76B00053122A /* ImageUploaderTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C331A7331C8EE17600C68AA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C331A73A1C8EE17600C68AA9 /* SproutliUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1009,6 +1096,11 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* sproutli */;
 			targetProxy = C309680D1C8E76960053122A /* PBXContainerItemProxy */;
+		};
+		C331A73D1C8EE17600C68AA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A /* sproutli */;
+			targetProxy = C331A73C1C8EE17600C68AA9 /* PBXContainerItemProxy */;
 		};
 		C35B3EAF1BCC904E005AB832 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1036,8 +1128,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 10;
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1060,7 +1154,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.app;
 				PRODUCT_NAME = Sproutli;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				k = "";
 			};
 			name = Debug;
 		};
@@ -1070,8 +1167,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 10;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"~/Development/FacebookSDK\"",
@@ -1094,6 +1193,8 @@
 				PRODUCT_NAME = Sproutli;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				k = "";
 			};
 			name = Release;
 		};
@@ -1215,6 +1316,38 @@
 			};
 			name = Release;
 		};
+		C331A73F1C8EE17600C68AA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = SproutliUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.SproutliUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_TARGET_NAME = sproutli;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		C331A7401C8EE17600C68AA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = SproutliUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.SproutliUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = sproutli;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 		C35B3EB01BCC904E005AB832 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1280,6 +1413,16 @@
 				C30968111C8E76960053122A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C331A73E1C8EE17600C68AA9 /* Build configuration list for PBXNativeTarget "SproutliUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C331A73F1C8EE17600C68AA9 /* Debug */,
+				C331A7401C8EE17600C68AA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C35B3EBC1BCC904E005AB832 /* Build configuration list for PBXNativeTarget "sproutliUITests" */ = {
 			isa = XCConfigurationList;

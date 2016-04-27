@@ -9,6 +9,7 @@ var {
   ListView,
   ProgressBarAndroid,
   ScrollView,
+  NativeModules,
   ViewPagerAndroid,
   IntentAndroid,
   PixelRatio
@@ -21,12 +22,10 @@ var pixelRatio = PixelRatio.get();
 var Intercom = require('../Utils/Intercom');
 var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 var Reviews = require('../Utils/Reviews');
-var KindnessCards = require('../Utils/KindnessCards');
+var AnswersReporter = NativeModules.AnswersReporter;
 
 var Review = require('./Review');
 var ReviewModal = require('./ReviewModal');
-var BuyKindnessCardModal = require('./BuyKindnessCardModal');
-var OfferModal = require('./OfferModal');
 var Button = require('./Button');
 
 var COLOURS = require('../Constants/Colours');
@@ -110,10 +109,12 @@ class ListingDetail extends React.Component {
   constructor(props) {
     super(props);
 
-    Intercom.logEvent('viewed_listing', { listingID: props.listing.id, listingName: props.listing.name });
-    GoogleAnalytics.viewedScreen('View Listing Detail');
-    GoogleAnalytics.trackEvent('Listing', 'View', props.listing.id);
+    let { name, id, categories } = props.listing;
 
+    Intercom.logEvent('viewed_listing', { listingID: id, listingName: name });
+    GoogleAnalytics.viewedScreen('View Listing Detail');
+    GoogleAnalytics.trackEvent('Listing', 'View', id);
+    AnswersReporter.reportViewListing(id, name, categories[0]);
   }
 
   componentDidMount() {
@@ -168,8 +169,6 @@ class ListingDetail extends React.Component {
   renderedDetails() {
     return (
       <View style={styles.container}>
-        { this.renderedOffer() }
-
         <Text style={styles.description}>{this.props.listing.description}</Text>
 
         <Text style={styles.bold}>Categories</Text>
@@ -191,16 +190,6 @@ class ListingDetail extends React.Component {
         <Text style={[styles.text, {paddingBottom: 0}]}>{this.props.listing.locality}</Text>
         <Text style={[styles.text, {paddingBottom: 0}]}>{this.props.listing.administrative_area_level_1}</Text>
         <Text style={[styles.text, {paddingBottom: 0}]}>{this.props.listing.postcode}</Text>
-      </View>
-    );
-  }
-
-  renderedOffer() {
-    if (!this.props.listing.offer_details) { return <View />; }
-
-    return(
-      <View style={styles.buttonContainer}>
-        <Button onPress={this._onViewOffer.bind(this)}>View Kindness Card offer</Button>
       </View>
     );
   }
@@ -227,33 +216,6 @@ class ListingDetail extends React.Component {
     IntentAndroid.openURL(url);
   }
 
-  _onViewOffer() {
-    var askToBuy = () => {
-      this.props.navigator.push({
-        title: 'Get a Kindness Card',
-        component: BuyKindnessCardModal,
-        passProps: { listingName: this.props.listing }
-      });
-    };
-    KindnessCards.fetchCard()
-      .then((card) => {
-        if (card.length < 1) { 
-          askToBuy();
-          return;
-        }
-
-        this.props.navigator.push({
-          title: 'View Offer',
-          component: OfferModal,
-          passProps: { 
-            offerDetails: this.props.listing.offer_details, 
-            offerConditions: this.props.listing.offer_conditions, 
-            offerInstructions: this.props.listing.offer_instructions 
-          }
-        });
-      })
-      .catch(askToBuy);
-  }
 
   render() {
     return(
