@@ -27,4 +27,11 @@ public class CrashlyticsReporterModule extends ReactContextBaseJavaModule {
     Crashlytics.logException(new Exception(errorMessage));
     promise.resolve(null);
   }
+
+  @ReactMethod
+  public void identifyUser(String userName, String userId, String email) {
+    Crashlytics.setUserIdentifier(userId);
+    Crashlytics.setUserName(userName);
+    Crashlytics.setUserEmail(email);
+  }
 }

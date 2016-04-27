@@ -1,2 +1,2 @@
-json_key_file "/Users/kanerogers/Downloads/google_play.json" # Path to the json secret file - Follow https://github.com/fastlane/supply#setup to get one
+json_key_file "/Users/kanerogers/Development/Sproutli/sproutli/android/google_play.json" # Path to the json secret file - Follow https://github.com/fastlane/supply#setup to get one
 package_name "com.sproutli.app" # e.g. com.krausefx.app
