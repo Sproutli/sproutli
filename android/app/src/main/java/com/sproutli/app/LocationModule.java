@@ -273,6 +273,7 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
 
   @Override
   public boolean canOverrideExistingModule() {
+    Log.e(TAG, "********FUUUCCCKK****");
     return true;
   }
 }

@@ -1,15 +1,17 @@
 'use strict';
 
-var React = require('react-native');
+import React, {
+  AppRegistry,
+  Component,
+  Navigator,
+  StyleSheet,
+  AsyncStorage,
+  Text,
+  View
+} from 'react-native';
 var App = require('./App/Components/App');
 var Login = require('./App/Components/Login');
 var GoogleAnalytics = require('./App/Utils/GoogleAnalytics');
-var {
-  View,
-  AppRegistry,
-  Navigator,
-  AsyncStorage
-} = React;
 
 class Sproutli extends React.Component {
   constructor() {
@@ -49,4 +51,7 @@ class Sproutli extends React.Component {
     );
   }
 }
+
+console.log('AppRegistry is a face.');
+
 AppRegistry.registerComponent('sproutli', () => Sproutli);
