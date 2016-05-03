@@ -45,7 +45,10 @@ var LoadingScreen = require('./LoadingScreen');
 
 // Utils
 var CreateListing = require('../Utils/CreateListing');
-var Facebook = require('../Utils/Facebook');
+var Facebook;
+if (Platform.os === 'ios') {
+  Facebook = require('../Utils/Facebook');
+}
 var Slack = require('../Utils/Slack');
 var Users = require('../Utils/Users');
 import AddressParser from '../Utils/AddressParser';

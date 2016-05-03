@@ -43,7 +43,6 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
   private static final CopyOnWriteArrayList<RCTLocationRequest> pendingRequests = new CopyOnWriteArrayList<>();
   protected static final int REQUEST_CHECK_SETTINGS = 0x1;
 
-  Activity parentActivity;
   GoogleApiClient mGoogleApiClient;
   Location mLastLocation;
   LocationRequest mLocationRequest;
@@ -51,27 +50,26 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
   boolean observingLocation;
   boolean userDeclined;
 
-  public LocationModule(ReactApplicationContext reactContext, Activity activity) {
+  public LocationModule(ReactApplicationContext reactContext) {
     super(reactContext);
-    parentActivity = activity;
 
     // Register for ActivityEvent updates.
-    getReactApplicationContext().addActivityEventListener(this);
+    reactContext.addActivityEventListener(this);
   }
 
   @Override
   public String getName() {
-    return "LocationObserver";
+    return "SproutliLocation";
   }
 
   @ReactMethod
-  public void getCurrentPosition(ReadableMap options, Callback successCallback, Callback failureCallback) {
-    if (currentLocationValid(options)) {
+  public void getCurrentPosition(Callback successCallback, Callback failureCallback) {
+    if (currentLocationValid()) {
       successCallback.invoke(buildResponse(mLastLocation));
     } else if (userDeclined) {
       failureCallback.invoke("User declined to enable location");
     } else {
-      RCTLocationRequest request = new RCTLocationRequest(options, successCallback, failureCallback);
+      RCTLocationRequest request = new RCTLocationRequest(successCallback, failureCallback);
       pendingRequests.add(request);
     }
   }
@@ -137,6 +135,8 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
   // LocationSettingsRequest Lifecycle Methods
   @Override
   public void onResult(Result result) {
+    Activity currentActivity = getCurrentActivity();
+
     final Status status = result.getStatus();
     Log.d(TAG, "LocationSettingsStates - " + status);
     switch (status.getStatusCode()) {
@@ -149,7 +149,7 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
         Log.d(TAG, "ResolutionRequired. Prompting user.");
         try {
           status.startResolutionForResult(
-            parentActivity,
+            currentActivity,
             REQUEST_CHECK_SETTINGS);
         } catch (SendIntentException e) {
         }
@@ -258,8 +258,7 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
     }
   }
 
-  private boolean currentLocationValid(ReadableMap options) {
-    // TODO: Fetch maximumAge from options.
+  private boolean currentLocationValid() {
     return (mLastLocation != null && 
            ((mLastUpdateTime - System.currentTimeMillis()) < 2000));
   }
@@ -278,12 +277,10 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
 }
 
 class RCTLocationRequest {
-  public ReadableMap options;
   public Callback successCallback;
   public Callback failureCallback;
 
-  RCTLocationRequest(ReadableMap aOptions, Callback aSuccessCallback, Callback aFailureCallback) {
-    options = aOptions;
+  RCTLocationRequest(Callback aSuccessCallback, Callback aFailureCallback) {
     successCallback = aSuccessCallback;
     failureCallback = aFailureCallback;
   }
