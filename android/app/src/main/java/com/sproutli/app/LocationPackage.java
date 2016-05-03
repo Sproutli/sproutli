@@ -13,16 +13,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LocationPackage implements ReactPackage {
-  Activity parentActivity;
-
-  public LocationPackage(Activity activity) {
-    parentActivity = activity;
-  }
-
   @Override
   public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
     return Arrays.<NativeModule>asList(
-        new LocationModule(reactContext, parentActivity)
+        new LocationModule(reactContext)
     );
   }
 

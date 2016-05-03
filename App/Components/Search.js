@@ -19,6 +19,7 @@ var Icon = require('react-native-vector-icons/Ionicons');
 import ActionButton from 'react-native-action-button';
 var Moment = require('moment');
 var Debounce = require('debounce');
+var RCTDeviceEventEmitter = require('RCTDeviceEventEmitter');
 
 var SearchBox = require('./SearchBox');
 var Listing = require('./Listing');
@@ -57,6 +58,13 @@ class Search extends React.Component {
     if (Platform.OS === 'android') {
       props.searchListeners.push(() => { this.setState({ showSearch: !this.state.showSearch })});
       navigator.geolocation = SproutliLocation;
+      navigator.geolocation.watchPosition = function(callback) {
+        SproutliLocation.startObserving({});
+        RCTDeviceEventEmitter.addListener('geolocationDidChange', callback);
+      }
+      navigator.geolocation.clearWatch = function() {
+        SproutliLocation.stopObserving();
+      }
     }
 
     this.state.searchConfig.vegan_level = VeganLevelManager.veganLevel;
@@ -73,20 +81,20 @@ class Search extends React.Component {
   getLocation() {
     navigator.geolocation.getCurrentPosition(
       (position) => { 
-      var location = position.coords;
-      this.setState({ location });
-      this.search(location);
-      RNGeocoder.reverseGeocodeLocation(location)
-        .then((geocodedLocation) => {
-          this.setState({ locationName: geocodedLocation[0].locality })
-        })
-        .catch((error) => console.warn('[Search] - Error getting reverse geocode', error.message));
-    },
+        var location = position.coords;
+        this.setState({ location });
+        this.search(location);
+        RNGeocoder.reverseGeocodeLocation(location)
+          .then((geocodedLocation) => {
+            this.setState({ locationName: geocodedLocation[0].locality })
+          })
+          .catch((error) => console.warn('[Search] - Error getting reverse geocode', error.message));
+      },
       (error) => {
-      console.warn('[Search] - Error getting location', error);
-      this.setState({ location: null });
-      this.search(null);
-    }
+        console.warn('[Search] - Error getting location', error);
+        this.setState({ location: null });
+        this.search(null);
+      }
     );
 
     this.watchID = navigator.geolocation.watchPosition((lastPosition) => {

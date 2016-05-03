@@ -72,7 +72,7 @@ public class MainActivity extends ReactActivity {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-        new LocationModule(),
+        new LocationPackage(),
         new MainReactPackage(),
         new AnswersReporterPackage(),
         new CrashlyticsReporterPackage(),
