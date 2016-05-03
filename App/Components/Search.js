@@ -32,6 +32,7 @@ var Intercom = require('../Utils/Intercom');
 var GoogleAnalytics = require('../Utils/GoogleAnalytics');
 var VeganLevelManager = require('../Utils/VeganLevelManager');
 var AnswersReporter = NativeModules.AnswersReporter;
+var SproutliLocation = NativeModules.SproutliLocation;
 
 var COLOURS = require('../Constants/Colours');
 
@@ -55,6 +56,7 @@ class Search extends React.Component {
 
     if (Platform.OS === 'android') {
       props.searchListeners.push(() => { this.setState({ showSearch: !this.state.showSearch })});
+      navigator.geolocation = SproutliLocation;
     }
 
     this.state.searchConfig.vegan_level = VeganLevelManager.veganLevel;

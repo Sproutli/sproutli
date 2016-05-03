@@ -39,21 +39,13 @@ public class MainActivity extends ReactActivity {
     private final String SENDER_ID = "1034144542573";
     private String regId; 
 
-    // @Override
-    // protected void onCreate(Bundle savedInstanceState) {
-    //     super.onCreate(savedInstanceState);
-    //     Fabric.with(this, new Crashlytics(), new Answers());
-    //     Intercom.initialize(getApplication(), "android_sdk-aba6524a84e6953392e1a8583c15970a6dbe851c", "r18lw9fx");
-    //     mReactRootView = new ReactRootView(this);
-    //     setUpGCM();
-
-
-    //     mReactRootView.startReactApplication(mReactInstanceManager, "sproutli", null);
-
-
-    //     setContentView(mReactRootView);
-    //     Intercom.client().openGCMMessage(getIntent().getData());
-    // }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics(), new Answers());
+        Intercom.initialize(getApplication(), "android_sdk-aba6524a84e6953392e1a8583c15970a6dbe851c", "r18lw9fx");
+        Intercom.client().openGCMMessage(getIntent().getData());
+    }
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -80,14 +72,15 @@ public class MainActivity extends ReactActivity {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-        new MainReactPackage());
-        // new AnswersReporterPackage(),
-        // new CrashlyticsReporterPackage(),
-        // new RNGeocoderPackage(),
-        // new IntercomPackage(),
-        // new ImageUploaderPackage(),
-        // new ImagePickerPackage(),
-        // new VectorIconsPackage(),
-        // new ReactMaterialKitPackage());
+        new LocationModule(),
+        new MainReactPackage(),
+        new AnswersReporterPackage(),
+        new CrashlyticsReporterPackage(),
+        new RNGeocoderPackage(),
+        new IntercomPackage(),
+        new ImageUploaderPackage(),
+        new ImagePickerPackage(),
+        new VectorIconsPackage(),
+        new ReactMaterialKitPackage());
     }
 }

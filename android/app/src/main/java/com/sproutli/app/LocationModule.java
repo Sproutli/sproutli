@@ -61,7 +61,7 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
 
   @Override
   public String getName() {
-    return "LocationObserver";
+    return "SproutliLocation";
   }
 
   @ReactMethod
@@ -273,7 +273,6 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
 
   @Override
   public boolean canOverrideExistingModule() {
-    Log.e(TAG, "********FUUUCCCKK****");
     return true;
   }
 }
