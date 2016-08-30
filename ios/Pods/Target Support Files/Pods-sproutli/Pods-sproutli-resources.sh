@@ -58,10 +58,10 @@ install_resource()
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "Intercom/Intercom.bundle"
+  install_resource "Intercom/Intercom/Intercom.framework/Versions/A/Resources/Intercom.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "Intercom/Intercom.bundle"
+  install_resource "Intercom/Intercom/Intercom.framework/Versions/A/Resources/Intercom.bundle"
 fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
