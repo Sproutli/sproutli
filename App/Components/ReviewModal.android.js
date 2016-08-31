@@ -2,40 +2,46 @@
 
 var React = require('react-native');
 var {
+  ScrollView,
   Text,
   StyleSheet,
   TextInput,
   View,
   Image,
+  PixelRatio,
   ToastAndroid,
   TouchableOpacity
 } = React;
 
+var Icon = require('react-native-vector-icons/Ionicons');
+
 var Button = require('./Button');
 var Reviews = require('../Utils/Reviews');
 var COLOURS = require('../Constants/Colours');
+var pixelRatio = PixelRatio.get();
 
 class Stars extends React.Component {
   getStarIcon(num) {
-    return num <= this.props.stars ? require('../Images/ic_star_black.png') : require('../Images/ic_star_border_black.png');
+    return num <= this.props.stars ? 'ios-star' : 'ios-star-outline';
   }
   render() {
+    const starSize = pixelRatio == 3 ? 50 : 25;
     return (
       <View style={styles.stars}>
         <TouchableOpacity onPress={this.props.handler.bind(this, 1)}>
-          <Image style={styles.star} source={this.getStarIcon(1)} />
+          <Icon name={this.getStarIcon(1)} size={starSize} color={COLOURS.GREEN} />
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.handler.bind(this, 2)}>
-          <Image style={styles.star} source={this.getStarIcon(2)} />
+          <Icon name={this.getStarIcon(2)} size={starSize} color={COLOURS.GREEN} />
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.handler.bind(this, 3)}>
-          <Image style={styles.star} source={this.getStarIcon(3)} />
+          <Icon name={this.getStarIcon(3)} size={starSize} color={COLOURS.GREEN} />
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.handler.bind(this, 4)}>
-          <Image style={styles.star} source={this.getStarIcon(4)} />
+          <Icon name={this.getStarIcon(4)} size={starSize} color={COLOURS.GREEN} />
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.handler.bind(this, 5)}>
-          <Image style={styles.star} source={this.getStarIcon(5)} />
+          <Icon name={this.getStarIcon(5)}size={starSize} color={COLOURS.GREEN} />
         </TouchableOpacity>
       </View>
     );
@@ -93,14 +99,15 @@ class ReviewModal extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.headerText}>What did you think of {this.props.name}?</Text>
+      <ScrollView style={styles.container}>
         <Stars stars={this.state.stars} handler={this._onPressStars.bind(this)} />
         <Text style={styles.starsText}>{this.state.stars} Stars</Text>
         <TextInput
-          placeholder='Your review'
+          autoCapitalize='sentences'
+          placeholder='What did you think of Vegie Bowl Restaurant?'
           onSubmitEditing={this._onLeaveReview.bind(this)}
           textAlignVertical='top'
+          underlineColorAndroid={COLOURS.GREEN}
           style={styles.reviewForm}
           onChangeText={this._onChangeText.bind(this)}
           value={this.state.reviewText}
@@ -108,44 +115,47 @@ class ReviewModal extends React.Component {
         <View style={{alignItems: 'center'}}>
           <Button color={this.getButtonColour()} onPress={this._onLeaveReview.bind(this)}>Leave your review </Button>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
+
 var styles = StyleSheet.create({
   container: {
+    marginTop: 0,
     flex: 1,
     padding: 10
   },
   reviewForm: {
-    height: 50,
-    fontSize: 16,
-    backgroundColor: '#f8f8f8',
+    height: 100,
+    fontSize: pixelRatio === 3 ? 20 : 16,
     marginTop: 10,
     marginBottom: 10,
-    padding: 2
+    padding: 7,
+    borderRadius: 4,
+    borderColor: '#cccccc',
+    borderWidth: 1,
+    textAlignVertical: "top"
   },
   headerText: {
     color: COLOURS.GREY,
     textAlign: 'center',
-    fontSize: 20
-  },
-  star: {
-    width: 24,
-    height: 24
+    fontSize: pixelRatio === 3 ? 20 : 16,
   },
   stars: {
-    padding: 10,
+    paddingTop: 10,
     justifyContent: 'center',
     flexDirection: 'row'
   },
   starsText: {
-    fontSize: 17,
+    fontSize: pixelRatio === 3 ? 20 : 16,
     textAlign: 'center',
-    fontWeight: 'bold',
     color: COLOURS.GREY
+  },
+  buttonContainer: {
+    justifyContent: 'center',
+    flexDirection: 'row'
   }
-
 });
 
 ReviewModal.propTypes = {
