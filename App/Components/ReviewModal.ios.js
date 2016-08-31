@@ -106,11 +106,10 @@ class ReviewModal extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container} keyboardDismissMode='on-drag'>
-        <Text style={styles.headerText}>What did you think of {this.props.name}?</Text>
         <Stars stars={this.state.stars} handler={this._onPressStars.bind(this)} />
         <Text style={styles.starsText}>{this.state.stars} Stars</Text>
         <TextInput
-          placeholder="Enter your review."
+          placeholder={`What did you think of ${this.props.name}?`}
           style={styles.reviewForm}
           onChangeText={this._onChangeText.bind(this)}
           value={this.state.reviewText}

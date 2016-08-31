@@ -104,7 +104,7 @@ class ReviewModal extends React.Component {
         <Text style={styles.starsText}>{this.state.stars} Stars</Text>
         <TextInput
           autoCapitalize='sentences'
-          placeholder='What did you think of Vegie Bowl Restaurant?'
+          placeholder={`What did you think of ${this.props.name}?`}
           onSubmitEditing={this._onLeaveReview.bind(this)}
           textAlignVertical='top'
           underlineColorAndroid={COLOURS.GREEN}
