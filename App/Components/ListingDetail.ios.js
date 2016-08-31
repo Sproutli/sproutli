@@ -30,6 +30,7 @@ var AnswersReporter = NativeModules.AnswersReporter;
 var Review = require('./Review');
 var ReviewModal = require('./ReviewModal');
 var Button = require('./Button');
+var LoadingScreen = require('./LoadingScreen');
 
 var COLOURS = require('../Constants/Colours');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
@@ -134,9 +135,7 @@ class ListingDetail extends React.Component {
     GoogleAnalytics.viewedScreen('Reviews');
     if (this.state.loadingReviews) {
       return (
-        <View style={styles.loadingIndicator}>
-          <ActivityIndicatorIOS size='large' />
-        </View>
+        <LoadingScreen>Fetching reviews..</LoadingScreen>
       );
     }
     return (

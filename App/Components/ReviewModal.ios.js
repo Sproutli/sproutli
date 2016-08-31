@@ -157,7 +157,6 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row'
   }
-
 });
 
 ReviewModal.propTypes = {
