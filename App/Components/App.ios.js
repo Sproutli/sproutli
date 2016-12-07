@@ -100,7 +100,7 @@ class App extends React.Component {
         <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'food'})}
           selected={this.state.currentTab === 'food'}
-          iconName='eat'
+          iconName='cutlery'
           title='Food'>
           { this.makeNavigator('Food') }
         </Icon.TabBarItem>
@@ -116,7 +116,7 @@ class App extends React.Component {
         <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'services'})}
           selected={this.state.currentTab === 'services'}
-          iconName='people'
+          iconName='users'
           title='Services'>
           { this.makeNavigator('Services') }
         </Icon.TabBarItem>

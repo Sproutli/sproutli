@@ -5,7 +5,7 @@ import {
   View,
   Text,
   StyleSheet,
-  SliderIOS
+  Slider
 } from 'react-native';
 
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
@@ -23,6 +23,14 @@ class VeganLevelSlider extends React.Component{
     var veganLevel = VEGAN_LEVELS[Math.round(this.props.veganLevel)];
     return (
       <View>
+        <Slider
+          onSlidingComplete={this.props.onSlidingComplete} 
+          onValueChange={(veganLevel) => this.setState({ veganLevel })}
+          minimumTrackTintColor={COLOURS.GREEN}
+          value={this.props.veganLevel} 
+          minimumValue={1} 
+          maximumValue={5} 
+        />
         <Text style={[styles.veganLevelText, {fontWeight: 'bold'}]}>{veganLevel.short}</Text>
         <Text style={styles.veganLevelText}>{veganLevel.long}</Text>
       </View>
@@ -32,14 +40,6 @@ class VeganLevelSlider extends React.Component{
   render() {
     return (
       <View style={styles.container}>
-        <SliderIOS 
-          onSlidingComplete={this.props.onSlidingComplete} 
-          onValueChange={(veganLevel) => this.setState({ veganLevel })}
-          minimumTrackTintColor={COLOURS.GREEN}
-          value={this.props.veganLevel} 
-          minimumValue={1} 
-          maximumValue={5} 
-        />
         { this.veganLevelText() }
       </View>
     );
@@ -65,3 +65,4 @@ VeganLevelSlider.propTypes = {
 };
 
 module.exports = VeganLevelSlider;
+
