@@ -23,7 +23,6 @@
 		28676361B016DC4EB4383BD6 /* libPods-sproutli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C1FF3F60BE1503FE8C33A9 /* libPods-sproutli.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		C30968131C8E76B00053122A /* ImageUploaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C30968121C8E76B00053122A /* ImageUploaderTest.m */; };
-		C331A73A1C8EE17600C68AA9 /* SproutliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C331A7391C8EE17600C68AA9 /* SproutliUITests.swift */; };
 		C331A7671C8FBB9E00C68AA9 /* CrashlyticsReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = C331A7661C8FBB9E00C68AA9 /* CrashlyticsReporter.m */; };
 		C331A7C41C8FF68200C68AA9 /* AnswersReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = C331A7C31C8FF68200C68AA9 /* AnswersReporter.m */; };
 		C33F3AB11BDA0D2700FF4218 /* IntercomWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F3AB01BDA0D2700FF4218 /* IntercomWrapper.m */; };
@@ -130,13 +129,6 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = sproutli;
 		};
-		C331A73C1C8EE17600C68AA9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = sproutli;
-		};
 		C34DABD91BD7341000EB08C8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C34DABD51BD7341000EB08C8 /* BVLinearGradient.xcodeproj */;
@@ -150,13 +142,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNSearchBar;
-		};
-		C35B3EAE1BCC904E005AB832 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = sproutli;
 		};
 		C371A2FA1BCF0D4000589DFD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -233,9 +218,6 @@
 		C30968081C8E76960053122A /* SproutliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SproutliTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C309680C1C8E76960053122A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C30968121C8E76B00053122A /* ImageUploaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageUploaderTest.m; path = ../ImageUploaderTest.m; sourceTree = "<group>"; };
-		C331A7371C8EE17600C68AA9 /* SproutliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SproutliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C331A7391C8EE17600C68AA9 /* SproutliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SproutliUITests.swift; sourceTree = "<group>"; };
-		C331A73B1C8EE17600C68AA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C331A7651C8FBB7700C68AA9 /* CrashlyticsReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashlyticsReporter.h; sourceTree = "<group>"; };
 		C331A7661C8FBB9E00C68AA9 /* CrashlyticsReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashlyticsReporter.m; sourceTree = "<group>"; };
 		C331A7B01C8FF66900C68AA9 /* AnswersReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswersReporter.h; sourceTree = "<group>"; };
@@ -246,7 +228,6 @@
 		C34DABDC1BD751AB00EB08C8 /* RNSearchBar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSearchBar.xcodeproj; path = "../node_modules/react-native-search-bar/RNSearchBar.xcodeproj"; sourceTree = "<group>"; };
 		C34DABE81BD7824500EB08C8 /* RNGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGeocoder.h; sourceTree = "<group>"; };
 		C34DABE91BD7824500EB08C8 /* RNGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGeocoder.m; sourceTree = "<group>"; };
-		C35B3EA91BCC904E005AB832 /* Sproutli.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sproutli.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3642CA91BF95B45007FC821 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = ../main.jsbundle; sourceTree = "<group>"; };
 		C371A2F61BCF0D4000589DFD /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		C371A2FE1BCF2D4700589DFD /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
@@ -302,20 +283,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C30968051C8E76960053122A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C331A7341C8EE17600C68AA9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C35B3EA61BCC904E005AB832 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -461,7 +428,6 @@
 				C371A2FD1BCF2D4700589DFD /* Fonts */,
 				13B07FAE1A68108700A75B9A /* sproutli */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				C331A7381C8EE17600C68AA9 /* SproutliUITests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				E7A46FC703A4F412ADA2E1F3 /* Pods */,
 				B1E558C659135EF5326A410B /* Frameworks */,
@@ -474,9 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* Sproutli.app */,
-				C35B3EA91BCC904E005AB832 /* Sproutli.xctest */,
 				C30968081C8E76960053122A /* SproutliTests.xctest */,
-				C331A7371C8EE17600C68AA9 /* SproutliUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -499,15 +463,6 @@
 				C309680C1C8E76960053122A /* Info.plist */,
 			);
 			path = SproutliTests;
-			sourceTree = "<group>";
-		};
-		C331A7381C8EE17600C68AA9 /* SproutliUITests */ = {
-			isa = PBXGroup;
-			children = (
-				C331A7391C8EE17600C68AA9 /* SproutliUITests.swift */,
-				C331A73B1C8EE17600C68AA9 /* Info.plist */,
-			);
-			path = SproutliUITests;
 			sourceTree = "<group>";
 		};
 		C34DABD61BD7341000EB08C8 /* Products */ = {
@@ -658,42 +613,6 @@
 			productReference = C30968081C8E76960053122A /* SproutliTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		C331A7361C8EE17600C68AA9 /* SproutliUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C331A73E1C8EE17600C68AA9 /* Build configuration list for PBXNativeTarget "SproutliUITests" */;
-			buildPhases = (
-				C331A7331C8EE17600C68AA9 /* Sources */,
-				C331A7341C8EE17600C68AA9 /* Frameworks */,
-				C331A7351C8EE17600C68AA9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C331A73D1C8EE17600C68AA9 /* PBXTargetDependency */,
-			);
-			name = SproutliUITests;
-			productName = SproutliUITests;
-			productReference = C331A7371C8EE17600C68AA9 /* SproutliUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
-		C35B3EA81BCC904E005AB832 /* sproutliUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C35B3EBC1BCC904E005AB832 /* Build configuration list for PBXNativeTarget "sproutliUITests" */;
-			buildPhases = (
-				C35B3EA51BCC904E005AB832 /* Sources */,
-				C35B3EA61BCC904E005AB832 /* Frameworks */,
-				C35B3EA71BCC904E005AB832 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C35B3EAF1BCC904E005AB832 /* PBXTargetDependency */,
-			);
-			name = sproutliUITests;
-			productName = sproutliUITests;
-			productReference = C35B3EA91BCC904E005AB832 /* Sproutli.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -714,14 +633,6 @@
 					};
 					C30968071C8E76960053122A = {
 						CreatedOnToolsVersion = 7.2.1;
-						TestTargetID = 13B07F861A680F5B00A75B9A;
-					};
-					C331A7361C8EE17600C68AA9 = {
-						CreatedOnToolsVersion = 7.2.1;
-						TestTargetID = 13B07F861A680F5B00A75B9A;
-					};
-					C35B3EA81BCC904E005AB832 = {
-						CreatedOnToolsVersion = 7.0.1;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 				};
@@ -818,9 +729,7 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* sproutli */,
-				C35B3EA81BCC904E005AB832 /* sproutliUITests */,
 				C30968071C8E76960053122A /* SproutliTests */,
-				C331A7361C8EE17600C68AA9 /* SproutliUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -987,20 +896,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C331A7351C8EE17600C68AA9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C35B3EA71BCC904E005AB832 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1074,21 +969,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C331A7331C8EE17600C68AA9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C331A73A1C8EE17600C68AA9 /* SproutliUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C35B3EA51BCC904E005AB832 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1096,16 +976,6 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* sproutli */;
 			targetProxy = C309680D1C8E76960053122A /* PBXContainerItemProxy */;
-		};
-		C331A73D1C8EE17600C68AA9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* sproutli */;
-			targetProxy = C331A73C1C8EE17600C68AA9 /* PBXContainerItemProxy */;
-		};
-		C35B3EAF1BCC904E005AB832 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* sproutli */;
-			targetProxy = C35B3EAE1BCC904E005AB832 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1325,75 +1195,6 @@
 			};
 			name = Release;
 		};
-		C331A73F1C8EE17600C68AA9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = SproutliUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.SproutliUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TEST_TARGET_NAME = sproutli;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		C331A7401C8EE17600C68AA9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = SproutliUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sproutli.SproutliUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = sproutli;
-				USES_XCTRUNNER = YES;
-			};
-			name = Release;
-		};
-		C35B3EB01BCC904E005AB832 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_TESTABILITY = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = sproutliUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kanerogers.sproutliUITests;
-				PRODUCT_NAME = Sproutli;
-				SWIFT_OBJC_BRIDGING_HEADER = "sproutliUITests-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TEST_TARGET_NAME = sproutli;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		C35B3EB11BCC904E005AB832 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = sproutliUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kanerogers.sproutliUITests;
-				PRODUCT_NAME = Sproutli;
-				SWIFT_OBJC_BRIDGING_HEADER = "sproutliUITests-Bridging-Header.h";
-				TEST_TARGET_NAME = sproutli;
-				USES_XCTRUNNER = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1420,24 +1221,6 @@
 			buildConfigurations = (
 				C30968101C8E76960053122A /* Debug */,
 				C30968111C8E76960053122A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C331A73E1C8EE17600C68AA9 /* Build configuration list for PBXNativeTarget "SproutliUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C331A73F1C8EE17600C68AA9 /* Debug */,
-				C331A7401C8EE17600C68AA9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C35B3EBC1BCC904E005AB832 /* Build configuration list for PBXNativeTarget "sproutliUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C35B3EB01BCC904E005AB832 /* Debug */,
-				C35B3EB11BCC904E005AB832 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
