@@ -46,7 +46,6 @@ public class MainApplication extends Application implements ReactApplication {
         new AnswersReporterPackage(),
         new CrashlyticsReporterPackage(),
         new RNGeocoderPackage(),
-        new IntercomPackage(),
         new ImageUploaderPackage(),
         new ImagePickerPackage(),
         new VectorIconsPackage(),
