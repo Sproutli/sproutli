@@ -169,9 +169,8 @@ dependencies {
   compile 'com.amazonaws:aws-android-sdk-cognito:2.+'
   compile 'com.amazonaws:aws-android-sdk-s3:2.+'
 
-  compile ('io.intercom.android:intercom-sdk:3.+') {
-    transitive = true
-  }
+  compile 'io.intercom.android:intercom-sdk:3.+'
+
   compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
     transitive = true;
   }
