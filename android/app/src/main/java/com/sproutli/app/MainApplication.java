@@ -4,6 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.robinpowered.react.Intercom.IntercomPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -39,6 +41,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
         new LocationPackage(),
         new MainReactPackage(),
+            new FBSDKPackage(),
+            new IntercomPackage(),
         new AnswersReporterPackage(),
         new CrashlyticsReporterPackage(),
         new RNGeocoderPackage(),

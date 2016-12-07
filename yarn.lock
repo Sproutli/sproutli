@@ -3674,6 +3674,10 @@ react-native-communications@0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-0.0.6.tgz#2e6821de4e19c525f04a74e14c97052d0344004e"
 
+react-native-fbsdk@latest:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-fbsdk/-/react-native-fbsdk-0.4.0.tgz#1c1db311202795db651b5c42a65dd90d487943c1"
+
 react-native-fbsdkcore@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/react-native-fbsdkcore/-/react-native-fbsdkcore-0.0.8.tgz#807858753680466a52a30f1d70cae81806a166b8"
@@ -3689,10 +3693,6 @@ react-native-fbsdkshare@0.0.8:
 react-native-geocoder@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/react-native-geocoder/-/react-native-geocoder-0.2.0.tgz#644cbb0f3a9fdae7dff92adcd1193e96c7f8dee4"
-
-react-native-google-analytics@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-google-analytics/-/react-native-google-analytics-0.0.3.tgz#8c1c78cf0bb39e30ab1eb563dde8be2c170c471b"
 
 react-native-google-places-autocomplete@^1.2.6:
   version "1.2.6"

@@ -156,6 +156,8 @@ repositories {
 }
 
 dependencies {
+    compile project(':react-native-fbsdk')
+    compile project(':react-native-intercom')
   compile 'com.android.support:multidex:1.0.0'
   compile fileTree(dir: 'libs', include: ['*.jar'])
   compile 'com.android.support:appcompat-v7:24.1.1'
