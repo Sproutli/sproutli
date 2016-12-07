@@ -23,9 +23,9 @@
 		28676361B016DC4EB4383BD6 /* libPods-sproutli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C1FF3F60BE1503FE8C33A9 /* libPods-sproutli.a */; };
 		7EB6990025C542E1BDE90959 /* libRNIntercom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 972D1324F2DA41ACA1A3C71B /* libRNIntercom.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		B26591ED5AED4C70AD545CC7 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3546966543E14F7E8768D42B /* libRCTFBSDK.a */; };
 		C30968131C8E76B00053122A /* ImageUploaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C30968121C8E76B00053122A /* ImageUploaderTest.m */; };
 		C327BD2E1DF8022C00CE00C6 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C327BD161DF8021000CE00C6 /* libRCTAnimation.a */; };
+		C327BD991DF80BF600CE00C6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C327BD981DF80BF600CE00C6 /* Bolts.framework */; };
 		C331A7671C8FBB9E00C68AA9 /* CrashlyticsReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = C331A7661C8FBB9E00C68AA9 /* CrashlyticsReporter.m */; };
 		C331A7C41C8FF68200C68AA9 /* AnswersReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = C331A7C31C8FF68200C68AA9 /* AnswersReporter.m */; };
 		C33F3AB11BDA0D2700FF4218 /* IntercomWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F3AB01BDA0D2700FF4218 /* IntercomWrapper.m */; };
@@ -201,13 +201,6 @@
 			remoteGlobalIDString = 112EE36D1CC0AB8A00BF6BB8;
 			remoteInfo = RNIntercom;
 		};
-		C327BD7D1DF80A8100CE00C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FEE2706A059444E6A37E5C14 /* RCTFBSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
-			remoteInfo = RCTFBSDK;
-		};
 		C34DABE01BD751AC00EB08C8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C34DABDC1BD751AB00EB08C8 /* RNSearchBar.xcodeproj */;
@@ -284,7 +277,6 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		1E90897CD3553ACFC8692D42 /* Pods-sproutli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sproutli.release.xcconfig"; path = "Pods/Target Support Files/Pods-sproutli/Pods-sproutli.release.xcconfig"; sourceTree = "<group>"; };
 		29C1FF3F60BE1503FE8C33A9 /* libPods-sproutli.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sproutli.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3546966543E14F7E8768D42B /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
 		5D6227535814471EADF59280 /* Pods-sproutli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sproutli.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sproutli/Pods-sproutli.debug.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7FC9E955ACE448059AD0844D /* RNIntercom.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNIntercom.xcodeproj; path = "../node_modules/react-native-intercom/iOS/RNIntercom.xcodeproj"; sourceTree = "<group>"; };
@@ -294,6 +286,7 @@
 		C309680C1C8E76960053122A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C30968121C8E76B00053122A /* ImageUploaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageUploaderTest.m; path = ../ImageUploaderTest.m; sourceTree = "<group>"; };
 		C327BD101DF8021000CE00C6 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "/Users/kanerogers/Development/Sproutli/sproutli/node_modules/react-native-fbsdkshare/../react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<absolute>"; };
+		C327BD981DF80BF600CE00C6 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
 		C331A7651C8FBB7700C68AA9 /* CrashlyticsReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashlyticsReporter.h; sourceTree = "<group>"; };
 		C331A7661C8FBB9E00C68AA9 /* CrashlyticsReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashlyticsReporter.m; sourceTree = "<group>"; };
 		C331A7B01C8FF66900C68AA9 /* AnswersReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswersReporter.h; sourceTree = "<group>"; };
@@ -324,7 +317,6 @@
 		C3F5019A1C4F42E30064699A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		C3F5019B1C4F42E30064699A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		C3F5019C1C4F42E30064699A /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
-		FEE2706A059444E6A37E5C14 /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,11 +324,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C327BD991DF80BF600CE00C6 /* Bolts.framework in Frameworks */,
+				C3F5019D1C4F42E30064699A /* FBSDKCoreKit.framework in Frameworks */,
+				C3F5019E1C4F42E30064699A /* FBSDKLoginKit.framework in Frameworks */,
+				C3F5019F1C4F42E30064699A /* FBSDKShareKit.framework in Frameworks */,
 				C327BD2E1DF8022C00CE00C6 /* libRCTAnimation.a in Frameworks */,
 				C395293D1C91AB3400EE1AD6 /* libRNImagePicker.a in Frameworks */,
-				C3F5019D1C4F42E30064699A /* FBSDKCoreKit.framework in Frameworks */,
-				C3F5019F1C4F42E30064699A /* FBSDKShareKit.framework in Frameworks */,
-				C3F5019E1C4F42E30064699A /* FBSDKLoginKit.framework in Frameworks */,
 				C3986CC71C06B8E8002B5B3E /* libRCTFBSDKCore.a in Frameworks */,
 				C3986CC01C068A87002B5B3E /* libRCTFBSDKLogin.a in Frameworks */,
 				C3986C4C1C05C42C002B5B3E /* libRCTFBSDKShare.a in Frameworks */,
@@ -356,7 +349,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				28676361B016DC4EB4383BD6 /* libPods-sproutli.a in Frameworks */,
 				7EB6990025C542E1BDE90959 /* libRNIntercom.a in Frameworks */,
-				B26591ED5AED4C70AD545CC7 /* libRCTFBSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,7 +486,6 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				7FC9E955ACE448059AD0844D /* RNIntercom.xcodeproj */,
-				FEE2706A059444E6A37E5C14 /* RCTFBSDK.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -535,6 +526,7 @@
 		B1E558C659135EF5326A410B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C327BD981DF80BF600CE00C6 /* Bolts.framework */,
 				C3F5019A1C4F42E30064699A /* FBSDKCoreKit.framework */,
 				C3F5019B1C4F42E30064699A /* FBSDKLoginKit.framework */,
 				C3F5019C1C4F42E30064699A /* FBSDKShareKit.framework */,
@@ -565,14 +557,6 @@
 			isa = PBXGroup;
 			children = (
 				C327BD5F1DF80A2300CE00C6 /* libRNIntercom.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		C327BD771DF80A8100CE00C6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C327BD7E1DF80A8100CE00C6 /* libRCTFBSDK.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -760,10 +744,6 @@
 				{
 					ProductGroup = C327BD111DF8021000CE00C6 /* Products */;
 					ProjectRef = C327BD101DF8021000CE00C6 /* RCTAnimation.xcodeproj */;
-				},
-				{
-					ProductGroup = C327BD771DF80A8100CE00C6 /* Products */;
-					ProjectRef = FEE2706A059444E6A37E5C14 /* RCTFBSDK.xcodeproj */;
 				},
 				{
 					ProductGroup = C3986CC21C06B8DA002B5B3E /* Products */;
@@ -987,13 +967,6 @@
 			remoteRef = C327BD5E1DF80A2300CE00C6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C327BD7E1DF80A8100CE00C6 /* libRCTFBSDK.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTFBSDK.a;
-			remoteRef = C327BD7D1DF80A8100CE00C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		C34DABE11BD751AC00EB08C8 /* libRNSearchBar.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1200,12 +1173,13 @@
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 				INFOPLIST_FILE = sproutli/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Sproutli\"",
 					"\"$(SRCROOT)/Sproutli\"",
+					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1246,12 +1220,13 @@
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 				INFOPLIST_FILE = sproutli/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Sproutli\"",
 					"\"$(SRCROOT)/Sproutli\"",
+					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1311,7 +1286,7 @@
 					"$(SRCROOT)/../node_modules/react-native-intercom/iOS",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1356,7 +1331,7 @@
 					"$(SRCROOT)/../node_modules/react-native-intercom/iOS",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
