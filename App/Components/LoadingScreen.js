@@ -1,7 +1,8 @@
 'use strict';
 /* @flow */
 
-import React, { Text, View, ProgressBarAndroid, StyleSheet, ActivityIndicatorIOS, Platform } from 'react-native';
+import { Text, View, ProgressBarAndroid, StyleSheet, ActivityIndicatorIOS, Platform } from 'react-native';
+import React from 'react';
 
 let spinner = () => { 
   if (Platform.OS === 'android') {

@@ -1,14 +1,15 @@
 'use strict';
 
-var React = require('react-native');
-var Icon = require('react-native-vector-icons/Ionicons');
-var {
+import React from 'react';
+import {
   StyleSheet,
   Text,
   TouchableHighlight,
   PixelRatio,
   View
-} = React;
+} from 'react-native';
+
+var Icon = require('react-native-vector-icons/Ionicons');
 var Dimensions = require('Dimensions');
 var windowSize = Dimensions.get('window');
 var boxWidth = windowSize.width / 2;

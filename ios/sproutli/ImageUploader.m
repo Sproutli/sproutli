@@ -46,7 +46,7 @@ RCT_EXPORT_METHOD(uploadImage:(nonnull NSString *)path
     }
     
     if (task.result) {
-      RCTLogInfo(@"[ImageUploader] Succesfully uploaded image %@!", imageName)
+      RCTLogInfo(@"[ImageUploader] Succesfully uploaded image %@!", imageName);
       resolve(imageName);
     }
     

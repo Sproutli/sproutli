@@ -2,7 +2,7 @@
 
 var Dimensions = require('Dimensions');
 var { width, height } = Dimensions.get('window');
-import React, {
+import {
   StyleSheet,
   Text,
   View,
@@ -14,6 +14,7 @@ import React, {
   TextInput,
   Platform,
 } from 'react-native';
+import React from 'react';
 
 var Authentication = require('../Utils/Authentication');
 var Button = require('./Button');

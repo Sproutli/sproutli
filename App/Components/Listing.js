@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react';
+import {
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,7 +9,7 @@ var {
   PixelRatio,
   Image,
   View
-} = React;
+} from 'react-native';
 
 var Icon = require('react-native-vector-icons/Ionicons');
 var COLOURS = require('../Constants/Colours');

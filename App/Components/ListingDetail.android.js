@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react';
+import {
   StyleSheet,
   Text,
   Image,
@@ -13,7 +13,7 @@ var {
   ViewPagerAndroid,
   IntentAndroid,
   PixelRatio
-} = React;
+} from 'react-native';
 
 var Dimensions = require('Dimensions');
 var {width} = Dimensions.get('window');

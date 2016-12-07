@@ -1,9 +1,10 @@
 'use strict';
 
-import React, { View, StyleSheet, TextInput, Animated } from 'react-native';
+import { View, StyleSheet, TextInput, Animated } from 'react-native';
 import AdvancedSearchOptions from './AdvancedSearchOptions';
 import SearchBar from 'react-native-search-bar';
 import COLOURS from '../Constants/Colours';
+import React from 'react';
 
 class SearchBox extends React.Component {
   constructor() {

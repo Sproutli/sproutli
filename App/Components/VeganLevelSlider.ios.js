@@ -1,12 +1,12 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react';
+import {
   View,
   Text,
   StyleSheet,
   SliderIOS
-} = React;
+} from 'react-native';
 
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 var COLOURS = require('../Constants/Colours');

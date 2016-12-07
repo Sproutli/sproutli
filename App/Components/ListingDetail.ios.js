@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {
+import {
   StyleSheet,
   Text,
   Image,
@@ -14,6 +14,7 @@ import React, {
   NativeModules,
   MapView,
 } from 'react-native';
+import React from 'react';
 
 var Carousel = require('react-native-looped-carousel');
 var Communications = require('react-native-communications');

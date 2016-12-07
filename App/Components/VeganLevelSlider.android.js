@@ -1,11 +1,11 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react';
+import {
   View,
   Text,
   StyleSheet
-} = React;
+} from 'react-native';
 
 var Slider = require('react-native-material-kit').mdl.Slider;
 

@@ -1,13 +1,13 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react';
+import {
   StyleSheet,
   NavigatorIOS,
   Linking,
   View,
   TabBarIOS,
-} = React;
+} from 'react-native';
 
 var Icon = require('react-native-vector-icons/Ionicons');
 
@@ -15,7 +15,6 @@ var AddListing = require('./AddListing');
 var Search = require('./Search');
 var Intercom = require('../Utils/Intercom');
 var ListingFetcher = require('../Utils/ListingFetcher');
-var KindnessCard = require('./KindnessCard');
 var ListingDetail = require('./ListingDetail');
 var SUGGESTIONS = require('../Constants/Suggestions');
 var COLOURS = require('../Constants/Colours');

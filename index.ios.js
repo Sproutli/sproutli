@@ -1,14 +1,15 @@
 'use strict';
 
-var React = require('react-native');
-var App = require('./App/Components/App');
-var Login = require('./App/Components/Login');
-var {
+import React from 'react';
+import {
   View,
   AppRegistry,
   Navigator,
   AsyncStorage
-} = React;
+} from 'react-native';
+
+const App = require('./App/Components/App');
+const Login = require('./App/Components/Login');
 
 class Sproutli extends React.Component {
   constructor() {

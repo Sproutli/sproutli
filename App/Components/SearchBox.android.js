@@ -1,6 +1,7 @@
 'use strict';
 
-import React, { StyleSheet, TextInput, Animated } from 'react-native';
+import { StyleSheet, TextInput, Animated } from 'react-native';
+import React from 'react';
 import AdvancedSearchOptions from './AdvancedSearchOptions';
 
 var COLOURS = require('../Constants/Colours');

@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react';
+import {
   ScrollView,
   Text,
   StyleSheet,
@@ -11,7 +11,7 @@ var {
   PixelRatio,
   ToastAndroid,
   TouchableOpacity
-} = React;
+} from 'react-native';
 
 var Icon = require('react-native-vector-icons/Ionicons');
 

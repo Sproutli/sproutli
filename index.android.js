@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {
+import {
   AppRegistry,
   Component,
   Navigator,
@@ -9,6 +9,7 @@ import React, {
   Text,
   View
 } from 'react-native';
+import React from 'react';
 var App = require('./App/Components/App');
 var Login = require('./App/Components/Login');
 var GoogleAnalytics = require('./App/Utils/GoogleAnalytics');

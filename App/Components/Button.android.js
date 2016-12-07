@@ -1,13 +1,13 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react';
+import {
   Text,
   View,
   TouchableHighlight,
   PixelRatio,
   StyleSheet
-} = React;
+} from 'react-native';
 
 var pixelRatio = PixelRatio.get();
 
