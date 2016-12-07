@@ -28,7 +28,6 @@
 		C327BD991DF80BF600CE00C6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C327BD981DF80BF600CE00C6 /* Bolts.framework */; };
 		C331A7671C8FBB9E00C68AA9 /* CrashlyticsReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = C331A7661C8FBB9E00C68AA9 /* CrashlyticsReporter.m */; };
 		C331A7C41C8FF68200C68AA9 /* AnswersReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = C331A7C31C8FF68200C68AA9 /* AnswersReporter.m */; };
-		C33F3AB11BDA0D2700FF4218 /* IntercomWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F3AB01BDA0D2700FF4218 /* IntercomWrapper.m */; };
 		C34DABE21BD751B100EB08C8 /* libRNSearchBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C34DABE11BD751AC00EB08C8 /* libRNSearchBar.a */; };
 		C34DABEA1BD7824500EB08C8 /* RNGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = C34DABE91BD7824500EB08C8 /* RNGeocoder.m */; };
 		C3642CAA1BF95B45007FC821 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = C3642CA91BF95B45007FC821 /* main.jsbundle */; };
@@ -194,13 +193,6 @@
 			remoteGlobalIDString = 2D2A28131D9B038B00D4039D;
 			remoteInfo = "React-tvOS";
 		};
-		C327BD5E1DF80A2300CE00C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7FC9E955ACE448059AD0844D /* RNIntercom.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 112EE36D1CC0AB8A00BF6BB8;
-			remoteInfo = RNIntercom;
-		};
 		C34DABE01BD751AC00EB08C8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C34DABDC1BD751AB00EB08C8 /* RNSearchBar.xcodeproj */;
@@ -257,6 +249,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RCTFBSDKCore;
 		};
+		C3D3F75B1DF80F3900A1B200 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CBBF6757D0E4C0B8E1A4D91 /* RNIntercom.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 112EE36D1CC0AB8A00BF6BB8;
+			remoteInfo = RNIntercom;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -277,9 +276,9 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		1E90897CD3553ACFC8692D42 /* Pods-sproutli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sproutli.release.xcconfig"; path = "Pods/Target Support Files/Pods-sproutli/Pods-sproutli.release.xcconfig"; sourceTree = "<group>"; };
 		29C1FF3F60BE1503FE8C33A9 /* libPods-sproutli.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sproutli.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CBBF6757D0E4C0B8E1A4D91 /* RNIntercom.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNIntercom.xcodeproj; path = "../node_modules/react-native-intercom/iOS/RNIntercom.xcodeproj"; sourceTree = "<group>"; };
 		5D6227535814471EADF59280 /* Pods-sproutli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sproutli.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sproutli/Pods-sproutli.debug.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
-		7FC9E955ACE448059AD0844D /* RNIntercom.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNIntercom.xcodeproj; path = "../node_modules/react-native-intercom/iOS/RNIntercom.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		972D1324F2DA41ACA1A3C71B /* libRNIntercom.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNIntercom.a; sourceTree = "<group>"; };
 		C30968081C8E76960053122A /* SproutliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SproutliTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,8 +290,6 @@
 		C331A7661C8FBB9E00C68AA9 /* CrashlyticsReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashlyticsReporter.m; sourceTree = "<group>"; };
 		C331A7B01C8FF66900C68AA9 /* AnswersReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswersReporter.h; sourceTree = "<group>"; };
 		C331A7C31C8FF68200C68AA9 /* AnswersReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswersReporter.m; sourceTree = "<group>"; };
-		C33F3AAF1BDA0D2700FF4218 /* IntercomWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntercomWrapper.h; path = "../node_modules/react-native-intercom/iOS/IntercomWrapper.h"; sourceTree = "<group>"; };
-		C33F3AB01BDA0D2700FF4218 /* IntercomWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntercomWrapper.m; path = "../node_modules/react-native-intercom/iOS/IntercomWrapper.m"; sourceTree = "<group>"; };
 		C34DABDC1BD751AB00EB08C8 /* RNSearchBar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSearchBar.xcodeproj; path = "../node_modules/react-native-search-bar/RNSearchBar.xcodeproj"; sourceTree = "<group>"; };
 		C34DABE81BD7824500EB08C8 /* RNGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGeocoder.h; sourceTree = "<group>"; };
 		C34DABE91BD7824500EB08C8 /* RNGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGeocoder.m; sourceTree = "<group>"; };
@@ -470,8 +467,6 @@
 				C3986C461C05C219002B5B3E /* RCTFBSDKShare.xcodeproj */,
 				C3986C2C1C056C08002B5B3E /* RNBlur.xcodeproj */,
 				C3986C191C056B1C002B5B3E /* RNOverlay.xcodeproj */,
-				C33F3AAF1BDA0D2700FF4218 /* IntercomWrapper.h */,
-				C33F3AB01BDA0D2700FF4218 /* IntercomWrapper.m */,
 				C34DABE71BD7824500EB08C8 /* RNGeocoder */,
 				C34DABDC1BD751AB00EB08C8 /* RNSearchBar.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -485,7 +480,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				7FC9E955ACE448059AD0844D /* RNIntercom.xcodeproj */,
+				2CBBF6757D0E4C0B8E1A4D91 /* RNIntercom.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -549,14 +544,6 @@
 			children = (
 				C327BD161DF8021000CE00C6 /* libRCTAnimation.a */,
 				C327BD181DF8021000CE00C6 /* libRCTAnimation-tvOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		C327BD431DF80A2300CE00C6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C327BD5F1DF80A2300CE00C6 /* libRNIntercom.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -651,6 +638,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		C3D3F7401DF80F3900A1B200 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C3D3F75C1DF80F3900A1B200 /* libRNIntercom.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E7A46FC703A4F412ADA2E1F3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -725,7 +720,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Sproutli" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sproutli" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -802,8 +797,8 @@
 					ProjectRef = C39529371C91A9F000EE1AD6 /* RNImagePicker.xcodeproj */;
 				},
 				{
-					ProductGroup = C327BD431DF80A2300CE00C6 /* Products */;
-					ProjectRef = 7FC9E955ACE448059AD0844D /* RNIntercom.xcodeproj */;
+					ProductGroup = C3D3F7401DF80F3900A1B200 /* Products */;
+					ProjectRef = 2CBBF6757D0E4C0B8E1A4D91 /* RNIntercom.xcodeproj */;
 				},
 				{
 					ProductGroup = C3986C1A1C056B1C002B5B3E /* Products */;
@@ -960,13 +955,6 @@
 			remoteRef = C327BD2C1DF8021000CE00C6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C327BD5F1DF80A2300CE00C6 /* libRNIntercom.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNIntercom.a;
-			remoteRef = C327BD5E1DF80A2300CE00C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		C34DABE11BD751AC00EB08C8 /* libRNSearchBar.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1021,6 +1009,13 @@
 			fileType = archive.ar;
 			path = libRCTFBSDKCore.a;
 			remoteRef = C3986CC51C06B8DB002B5B3E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C3D3F75C1DF80F3900A1B200 /* libRNIntercom.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNIntercom.a;
+			remoteRef = C3D3F75B1DF80F3900A1B200 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1111,7 +1106,6 @@
 				C34DABEA1BD7824500EB08C8 /* RNGeocoder.m in Sources */,
 				C331A7671C8FBB9E00C68AA9 /* CrashlyticsReporter.m in Sources */,
 				C3F26AF01C05182400D31B66 /* ImageUploader.m in Sources */,
-				C33F3AB11BDA0D2700FF4218 /* IntercomWrapper.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1171,6 +1165,7 @@
 					"\"~/Development/FacebookSDK\"/**",
 					"$(SRCROOT)/../node_modules/react-native-intercom/iOS",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-intercom/iOS",
 				);
 				INFOPLIST_FILE = sproutli/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -1218,6 +1213,7 @@
 					"\"~/Development/FacebookSDK\"/**",
 					"$(SRCROOT)/../node_modules/react-native-intercom/iOS",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-intercom/iOS",
 				);
 				INFOPLIST_FILE = sproutli/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -1285,6 +1281,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-intercom/iOS",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-intercom/iOS",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1330,6 +1327,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-intercom/iOS",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-intercom/iOS",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -1382,7 +1380,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Sproutli" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sproutli" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
