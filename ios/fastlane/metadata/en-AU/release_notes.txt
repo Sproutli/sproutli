@@ -1,0 +1,3 @@
+We've fixed a bunch of a little bugs to help make Sproutli as easy to use as possible.
+
+As always, please give us feedback by hitting the "help" button!

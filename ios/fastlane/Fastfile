@@ -45,6 +45,11 @@ platform :ios do
     gym(scheme: "sproutli") # Build your app - more options available
     pilot
 
+    slack ({
+      message: "Sproutli beta v#{complete_version_number} was released successfully!",
+      channel: "#development"
+    })
+
     # sh "your_script.sh"
     # You can also use other beta testing services here (run `fastlane actions`)
   end
@@ -56,6 +61,10 @@ platform :ios do
     gym(scheme: "sproutli") # Build your app - more options available
     deliver(force: true)
     # frameit
+    slack ({
+      message: "Sproutli v#{complete_version_number} was released successfully!",
+      channel: "#sales"
+    })
   end
 
   # You can define as many lanes as you want
@@ -69,10 +78,11 @@ platform :ios do
   end
 
   error do |lane, exception|
-    # slack(
-    #   message: exception.message,
-    #   success: false
-    # )
+    slack(
+      channel: "#development",
+      message: exception.message,
+      success: false
+    )
   end
 end
 

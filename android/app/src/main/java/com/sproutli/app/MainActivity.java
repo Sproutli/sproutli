@@ -36,15 +36,12 @@ import io.fabric.sdk.android.Fabric;
 import io.intercom.android.sdk.Intercom;
 
 public class MainActivity extends ReactActivity {
-    private final String SENDER_ID = "1034144542573";
-    private String regId; 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics(), new Answers());
         Intercom.initialize(getApplication(), "android_sdk-aba6524a84e6953392e1a8583c15970a6dbe851c", "r18lw9fx");
-        Intercom.client().openGCMMessage(getIntent().getData());
+        Intercom.client().openGcmMessage();
     }
 
     /**
@@ -54,33 +51,5 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "sproutli";
-    }
-
-    /**
-     * Returns whether dev mode should be enabled.
-     * This enables e.g. the dev menu.
-     */
-    @Override
-    protected boolean getUseDeveloperSupport() {
-        return BuildConfig.DEBUG;
-    }
-
-   /**
-   * A list of packages used by the app. If the app uses additional views
-   * or modules besides the default ones, add more packages here.
-   */
-    @Override
-    protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-        new LocationPackage(),
-        new MainReactPackage(),
-        new AnswersReporterPackage(),
-        new CrashlyticsReporterPackage(),
-        new RNGeocoderPackage(),
-        new IntercomPackage(),
-        new ImageUploaderPackage(),
-        new ImagePickerPackage(),
-        new VectorIconsPackage(),
-        new ReactMaterialKitPackage());
     }
 }

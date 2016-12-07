@@ -1,0 +1,82 @@
+Arguments: 
+  /Users/kanerogers/.nvm/versions/node/v6.5.0/bin/node /usr/local/bin/yarn add react-native-intercom@latest
+
+PATH: 
+  /Users/kanerogers/.nvm/versions/node/v6.5.0/bin/:/Users/kanerogers/.cargo/bin:/Users/kanerogers/.nvm/versions/node/v6.5.0/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin
+
+Yarn version: 
+  0.16.1
+
+Node version: 
+  6.5.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "sproutli",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+      "start": "node_modules/react-native/packager/packager.sh",
+      "test": "jest"
+    },
+    "jest": {
+      "preset": "react-native"
+    },
+    "dependencies": {
+      "debounce": "^1.0.0",
+      "extend": "^3.0.0",
+      "jwt-decode": "^1.4.0",
+      "moment": "^2.12.0",
+      "query-string": "^3.0.0",
+      "react": "^15.4.1",
+      "react-native": "^0.39.0",
+      "react-native-action-button": "^2.0.15",
+      "react-native-blur": "^0.7.9",
+      "react-native-communications": "0.0.6",
+      "react-native-fbsdkcore": "0.0.8",
+      "react-native-fbsdklogin": "0.0.8",
+      "react-native-fbsdkshare": "0.0.8",
+      "react-native-geocoder": "^0.2.0",
+      "react-native-google-analytics": "0.0.3",
+      "react-native-google-places-autocomplete": "^1.2.6",
+      "react-native-image-picker": "^0.24.1",
+      "react-native-intercom": "/Users/kanerogers/Development/react-native-intercom",
+      "react-native-linear-gradient": "^1.1.0-alpha",
+      "react-native-looped-carousel": "^0.1.4",
+      "react-native-material-kit": "^0.2.5",
+      "react-native-overlay": "^0.4.1",
+      "react-native-search-bar": "^2.16.0",
+      "react-native-vector-icons": "^3.0.0",
+      "tcomb-form-native": "^0.6.1"
+    },
+    "devDependencies": {
+      "babel-preset-react": "^6.3.13",
+      "eslint": "^1.7.0",
+      "eslint-plugin-react": "^3.5.1",
+      "expect": "^1.13.4",
+      "mocha": "^2.3.4"
+    },
+    "main": "index.js",
+    "repository": {
+      "url": "https://github.com/Sproutli/sproutli.git",
+      "type": "git"
+    },
+    "author": "Kane Rogers <kane.m.rogers@gmail.com>",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+bower manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: ENOENT: no such file or directory, open '/Users/kanerogers/Development/Sproutli/sproutli/node_modules/react-native-linear-gradient/Examples/AnimatedGradient/ios/AnimatedGradient/AppDelegate.h'
+      at Error (native)

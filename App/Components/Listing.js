@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react';
+import {
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,9 +9,9 @@ var {
   PixelRatio,
   Image,
   View
-} = React;
+} from 'react-native';
 
-var Icon = require('react-native-vector-icons/Ionicons');
+import Icon from 'react-native-vector-icons/Ionicons';
 var COLOURS = require('../Constants/Colours');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 
@@ -21,7 +21,7 @@ class Listing extends React.Component {
 
   renderedVeganLevel() {
     if (!this.props.listing.vegan_level) { return <View />; }
-    return <Text style={styles.subTitle}><Icon name='heart' /> {VEGAN_LEVELS[this.props.listing.vegan_level].short}</Text>;
+    return <Text style={styles.subTitle}><Icon name='ios-heart' /> {VEGAN_LEVELS[this.props.listing.vegan_level].short}</Text>;
   }
 
   renderedLocation() {
@@ -30,7 +30,7 @@ class Listing extends React.Component {
 
     distance = parseFloat(distance).toFixed(1);
 
-    return <Text style={styles.subTitle}><Icon name='ios-location' /> {this.props.listing.locality} ({distance} km)</Text>;
+    return <Text style={styles.subTitle}><Icon name='ios-compass' /> {this.props.listing.locality} ({distance} km)</Text>;
   }
 
   renderedRating() {

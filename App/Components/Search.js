@@ -1,7 +1,7 @@
 /*global navigator */
 'use strict';
 
-import React, {
+import {
   StyleSheet,
   ListView,
   ProgressBarAndroid,
@@ -13,6 +13,7 @@ import React, {
   PixelRatio,
   View
 } from 'react-native';
+import React from 'react';
 
 var RNGeocoder = require('react-native-geocoder');
 var Icon = require('react-native-vector-icons/Ionicons');

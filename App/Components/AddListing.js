@@ -1,8 +1,8 @@
 /* @flow */
 'use strict';
 
-var React = require('react-native');
-const {
+import React from 'react';
+import {
   Image,
   View,
   StyleSheet,
@@ -12,11 +12,13 @@ const {
   ActionSheetIOS,
   Alert,
   Platform,
-  NativeModules: {
-    ImagePickerManager,
-    CrashlyticsReporter
-  },
-} = React;
+  NativeModules
+} from 'react-native';
+
+const {
+  ImagePickerManager,
+  CrashlyticsReporter
+} = NativeModules;
 
 // Dimensions
 var Dimensions = require('Dimensions');

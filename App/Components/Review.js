@@ -1,11 +1,11 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react';
+import {
   View,
   StyleSheet,
   Text
-} = React;
+} from 'react-native';
 
 var Moment = require('moment');
 

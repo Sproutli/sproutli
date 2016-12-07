@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react';
+import {
   StyleSheet,
   Text,
   Image,
@@ -13,7 +13,7 @@ var {
   ViewPagerAndroid,
   IntentAndroid,
   PixelRatio
-} = React;
+} from 'react-native';
 
 var Dimensions = require('Dimensions');
 var {width} = Dimensions.get('window');
@@ -27,6 +27,7 @@ var AnswersReporter = NativeModules.AnswersReporter;
 var Review = require('./Review');
 var ReviewModal = require('./ReviewModal');
 var Button = require('./Button');
+var LoadingScreen = require('./LoadingScreen');
 
 var COLOURS = require('../Constants/Colours');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
@@ -73,16 +74,14 @@ class ReviewsComponent extends React.Component {
   render() {
     if (this.state.loadingReviews) {
       return (
-        <View style={styles.loadingIndicator}>
-          <ProgressBarAndroid styleAttr='Large' />
-        </View>
+        <LoadingScreen>Fetching reviews..</LoadingScreen>
       );
     }
 
     if (this.state.reviews.length < 1) {
       return (
         <View style={styles.emptyContainer}>
-          <Text style={styles.description}>No reviews for {this.props.listingName} yet.</Text>
+          <Text style={styles.description}>No reviews for {this.props.listingName} yet!</Text>
           <View style={styles.buttonContainer}>
             <Button onPress={this._onLeaveReview.bind(this)}>Leave the first review</Button>
           </View>

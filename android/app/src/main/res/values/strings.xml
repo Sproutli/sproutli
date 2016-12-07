@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Sproutli</string>
+    <string name="intercom_gcm_sender_id">1034144542573</string>
 </resources>

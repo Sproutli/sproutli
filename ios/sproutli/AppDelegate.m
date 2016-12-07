@@ -9,6 +9,7 @@
 
 #import "AppDelegate.h"
 
+#import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
 #import "RCTLinkingManager.h"
 #import "Intercom/intercom.h"
@@ -17,26 +18,20 @@
 #import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
-
-  // Define JS Code Location
-#ifdef DEBUG
-  jsCodeLocation = [NSURL URLWithString:@"http://172.20.10.3:8081/index.ios.bundle?platform=ios&dev=true"];
-  //jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.112:8081/index.ios.bundle?platform=ios&dev=true"];
-  //jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
-  //jsCodeLocation = [NSURL URLWithString:@"http://sproutli-admin.s3-website-ap-southeast-2.amazonaws.com/beta.jsbundle"];
-#else
-  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-#endif
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"sproutli"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
+  
+  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
   
   // Launch React
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

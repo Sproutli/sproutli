@@ -2,6 +2,7 @@
     package="com.sproutli.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -9,20 +10,26 @@
     <uses-permission android:name="com.google.android.c2dm.permission.REGISTER" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="22" />
+
     <uses-feature android:name="android.hardware.camera"
       android:required="true"/>
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <permission android:name="com.sproutli.app.permission.C2D_MESSAGE"
-              android:protectionLevel="signature" />
-                <uses-permission android:name="com.sproutli.app.permission.C2D_MESSAGE" />
-
+      android:protectionLevel="signature" />
+    <uses-permission android:name="com.sproutli.app.permission.C2D_MESSAGE" />
 
     <application
+      android:name=".MainApplication"
       android:allowBackup="true"
       android:label="@string/app_name"
       android:icon="@drawable/icon"
-      android:name="android.support.multidex.MultiDexApplication"
       android:theme="@style/AppTheme">
       <service
           android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
@@ -31,6 +38,7 @@
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name">
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />

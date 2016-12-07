@@ -1,20 +1,19 @@
 'use strict';
 /* @flow */
 
-import React, { Text, View, ProgressBarAndroid, StyleSheet, ActivityIndicatorIOS, Platform } from 'react-native';
-
-let spinner = () => { 
-  if (Platform.OS === 'android') {
-    return <ProgressBarAndroid styleAttr='Large' />;
-  } else {
-    return <ActivityIndicatorIOS size='large' />;
-  }
-}
+import {
+  Text,
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  Platform
+} from 'react-native';
+import React from 'react';
 
 let LoadingScreen = (props) => {
   return (
     <View style={styles.background}>
-      { spinner() }
+      <ActivityIndicator size='large' />
       <Text style={{marginTop: 16}}>{props.children}</Text>  
     </View>
   );

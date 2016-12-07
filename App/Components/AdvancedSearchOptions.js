@@ -1,9 +1,9 @@
 'use strict';
-var React = require('react-native');
-var {
+import React from 'react';
+import {
   Platform,
   View
-} = React;
+} from 'react-native';
 
 var VeganLevelSlider = require('./VeganLevelSlider');
 var COLOURS = require('../Constants/Colours');

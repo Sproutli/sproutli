@@ -1,23 +1,23 @@
 'use strict';
 
-import React, {
+import {
   StyleSheet,
   Text,
   Image,
   View,
   ListView,
-  TouchableHighlight,
+  TouchableOpacity,
   LinkingIOS,
   ActivityIndicatorIOS,
   ScrollView,
   PixelRatio,
   NativeModules,
-  MapView,
 } from 'react-native';
+import React from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-var Carousel = require('react-native-looped-carousel');
+import Carousel from 'react-native-looped-carousel';
 var Communications = require('react-native-communications');
-var Icon = require('react-native-vector-icons/Ionicons');
 var Dimensions = require('Dimensions');
 var {width} = Dimensions.get('window');
 var pixelRatio = PixelRatio.get();
@@ -30,6 +30,7 @@ var AnswersReporter = NativeModules.AnswersReporter;
 var Review = require('./Review');
 var ReviewModal = require('./ReviewModal');
 var Button = require('./Button');
+var LoadingScreen = require('./LoadingScreen');
 
 var COLOURS = require('../Constants/Colours');
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
@@ -74,18 +75,19 @@ class ListingDetail extends React.Component {
   }
 
   renderedImages() {
-    if (this.state.showMap) {
-      var location = this.props.listing.location.split(',').map((n) => Number(n)),
-        region = {latitude: location[0], longitude: location[1], latitudeDelta: 0.05, longitudeDelta: 0.05},
-        annotations = [{latitude: location[0], longitude: location[1], title: this.props.listing.name, animateDrop: true}];
+    // TODO: Switch to react-native-maps: https://github.com/airbnb/react-native-maps
+    // if (this.state.showMap) {
+    //   var location = this.props.listing.location.split(',').map((n) => Number(n)),
+    //     region = {latitude: location[0], longitude: location[1], latitudeDelta: 0.05, longitudeDelta: 0.05},
+    //     annotations = [{latitude: location[0], longitude: location[1], title: this.props.listing.name, animateDrop: true}];
       
-      return (
-        <MapView 
-          region={region}
-          annotations={annotations}
-          style={styles.imageStyle} />
-      );
-    }
+    //   return (
+    //     <MapView 
+    //       region={region}
+    //       annotations={annotations}
+    //       style={styles.imageStyle} />
+    //   );
+    // }
     let images = this.props.listing.images;
     if (!images || images.length == 0) {
       return <Text>Sorry! No images for {this.props.listing.name}</Text>; 
@@ -134,9 +136,7 @@ class ListingDetail extends React.Component {
     GoogleAnalytics.viewedScreen('Reviews');
     if (this.state.loadingReviews) {
       return (
-        <View style={styles.loadingIndicator}>
-          <ActivityIndicatorIOS size='large' />
-        </View>
+        <LoadingScreen>Fetching reviews..</LoadingScreen>
       );
     }
     return (
@@ -157,12 +157,12 @@ class ListingDetail extends React.Component {
     if (!this.props.listing.location) return <View />;
 
     return (
-      <TouchableHighlight style={styles.actionBarButton} onPress={this._onShowMap.bind(this)} underlayColor={COLOURS.LIGHTER_GREY}>
+      <TouchableOpacity style={styles.actionBarButton} onPress={this._onShowMap.bind(this)}>
         <View style={styles.actionBarButton}>
-          <Icon name='map' size={13 * pixelRatio} color='white' />
+          <Icon name='ios-map' size={13 * pixelRatio} color='white' />
           <Text style={styles.actionBarText}>Map</Text>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   }
 
@@ -170,12 +170,12 @@ class ListingDetail extends React.Component {
     if (!this.props.listing.website) return <View />;
 
     return (
-      <TouchableHighlight style={styles.actionBarButton} onPress={this._onGoToWebsite.bind(this)} underlayColor={COLOURS.LIGHTER_GREY}>
+      <TouchableOpacity style={styles.actionBarButton} onPress={this._onGoToWebsite.bind(this)}>
         <View style={styles.actionBarButton}>
-          <Icon name='earth' size={13 * pixelRatio} color='white' />
+          <Icon name='ios-globe' size={13 * pixelRatio} color='white' />
           <Text style={styles.actionBarText}>Website</Text>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   }
 
@@ -183,24 +183,24 @@ class ListingDetail extends React.Component {
     if (!this.props.listing.phone_number) return <View />;
 
     return (
-      <TouchableHighlight style={styles.actionBarButton} onPress={this._onCallListing.bind(this)} underlayColor={COLOURS.LIGHTER_GREY}>
+      <TouchableOpacity style={styles.actionBarButton} onPress={this._onCallListing.bind(this)}>
         <View style={styles.actionBarButton}>
-          <Icon name='ios-telephone' size={13 * pixelRatio} color='white' />
+          <Icon name='ios-call' size={13 * pixelRatio} color='white' />
           <Text style={styles.actionBarText}>Call</Text>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   }
 
   renderedActionBar() {
     return (
       <View style={styles.actionBar}> 
-        <TouchableHighlight underlayColor={COLOURS.LIGHTER_GREY} style={styles.actionBarButton} onPress={this._onShowImages.bind(this)}>
+        <TouchableOpacity style={styles.actionBarButton} onPress={this._onShowImages.bind(this)}>
           <View style={styles.actionBarButton}>
-            <Icon name='images' size={13 * pixelRatio} color='white' />
+            <Icon name='ios-images' size={13 * pixelRatio} color='white' />
             <Text style={styles.actionBarText}>Images</Text>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
         { this.renderedMapButton() }
         { this.renderedCallButton() }
         { this.renderedWebsiteButton() }
@@ -245,12 +245,12 @@ class ListingDetail extends React.Component {
 
         <View style={styles.container}>
           <View style={styles.buttonsContainer}>
-            <TouchableHighlight underlayColor={COLOURS.LIGHT_GREY} style={[styles.leftButton, {backgroundColor: this.state.currentTab === 0 ? COLOURS.GREY : '#fff'}]} onPress={() => this.setState({currentTab: 0})} >
+            <TouchableOpacity style={[styles.leftButton, {backgroundColor: this.state.currentTab === 0 ? COLOURS.GREY : '#fff'}]} onPress={() => this.setState({currentTab: 0})} >
               <Text style={[styles.buttonText, {color: this.state.currentTab === 0 ? '#fff' : '#222'}]}>Details</Text>
-            </TouchableHighlight>
-            <TouchableHighlight underlayColor={COLOURS.LIGHT_GREY} style={[styles.rightButton, {backgroundColor: this.state.currentTab === 1 ? COLOURS.GREY : '#fff'}]} onPress={() => this.setState({currentTab: 1})} >
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.rightButton, {backgroundColor: this.state.currentTab === 1 ? COLOURS.GREY : '#fff'}]} onPress={() => this.setState({currentTab: 1})} >
               <Text style={[styles.buttonText, {color: this.state.currentTab === 1 ? '#fff' : '#222'}]}>Reviews</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
 
           { this.state.currentTab === 0 ? this.renderedDetails() : this.renderedReviews() }
