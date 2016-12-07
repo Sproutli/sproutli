@@ -9,7 +9,7 @@ import {
   TabBarIOS,
 } from 'react-native';
 
-var Icon = require('react-native-vector-icons/Ionicons');
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 var AddListing = require('./AddListing');
 var Search = require('./Search');
@@ -100,7 +100,7 @@ class App extends React.Component {
         <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'food'})}
           selected={this.state.currentTab === 'food'}
-          iconName='fork'
+          iconName='eat'
           title='Food'>
           { this.makeNavigator('Food') }
         </Icon.TabBarItem>
@@ -108,7 +108,7 @@ class App extends React.Component {
         <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'shops'})}
           selected={this.state.currentTab === 'shops'}
-          iconName='bag'
+          iconName='shopping-bag'
           title='Shops'>
           { this.makeNavigator('Shops') }
         </Icon.TabBarItem>
@@ -116,7 +116,7 @@ class App extends React.Component {
         <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'services'})}
           selected={this.state.currentTab === 'services'}
-          iconName='ios-people'
+          iconName='people'
           title='Services'>
           { this.makeNavigator('Services') }
         </Icon.TabBarItem>
@@ -124,7 +124,7 @@ class App extends React.Component {
         <Icon.TabBarItem
           onPress={() => this.setState({currentTab: 'online'})}
           selected={this.state.currentTab === 'online'}
-          iconName='earth'
+          iconName='globe'
           title='Online'>
           { this.makeNavigator('Online') }
         </Icon.TabBarItem>
@@ -132,7 +132,7 @@ class App extends React.Component {
         <Icon.TabBarItem
           onPress={this.showIntercomMessenger}
           selected={this.state.currentTab === 'help'}
-          iconName='help-circled'
+          iconName='question-circle'
           title='Help'>
             <View />
         </Icon.TabBarItem>

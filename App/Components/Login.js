@@ -16,14 +16,15 @@ import {
 } from 'react-native';
 import React from 'react';
 
+import Button from './Button';
 var Authentication = require('../Utils/Authentication');
-var Button = require('./Button');
 var COLOURS = require('../Constants/Colours');
 var pixelRatio = PixelRatio.get();
 
 class Login extends React.Component {
   constructor(props) {
     super();
+
     this.state = {
       email: props.email,
       password: props.password,
@@ -137,15 +138,6 @@ class Login extends React.Component {
      );
   }
 
-  loginButton() {
-    if (this.props.signingUp) return <View />;
-    return (
-      <View style={{paddingVertical: 20}}>
-        <Button onPress={this._loginPressed.bind(this)}>Login</Button>
-      </View>
-    );
-  }
-
   renderLoading() {
     if (!this.state.loading) { return <View /> }
 
@@ -155,6 +147,7 @@ class Login extends React.Component {
       return <ProgressBarAndroid style={{paddingTop: 10}} />
     }
   }
+  
 
   render() {
     return (
@@ -167,9 +160,9 @@ class Login extends React.Component {
           {this.emailField() }
           {this.passwordField()}
           {this.nameField()}
+
           <View style={styles.loginButtonsContainer}>
-            {this.loginButton()}
-            <Button onPress={this._signupPressed.bind(this)}>Sign Up</Button>
+            <Button onPress={() => this._signupPressed()}>Sign Up</Button>
             {this.renderLoading()}
           </View>
         </View>

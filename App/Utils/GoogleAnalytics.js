@@ -12,7 +12,10 @@ class GoogleAnalytics {
     this.ga = {
       send() {} // No-op to begin with.
     };
-    Users.getUserID().then((userID) => this.ga = new Analytics('UA-66202608-2', userID));
+    Users
+      .getUserID()
+      .then(userID => this.ga = new Analytics('UA-66202608-2', userID))
+      .catch(() => {});
   }
 
   viewedScreen(screenName) {

@@ -4,30 +4,24 @@ import React from 'react';
 import {
   Text,
   View,
-  TouchableHighlight,
+  TouchableOpacity,
   PixelRatio,
   StyleSheet
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-var Icon = require('react-native-vector-icons/Ionicons');
 var pixelRatio = PixelRatio.get();
 
 var COLOURS = require('../Constants/Colours');
 
-class Button extends React.Component {
-  render() {
-    var color = this.props.color || COLOURS.GREEN;
-
-    return (
-      <TouchableHighlight onPress={this.props.onPress} underlayColor={COLOURS.LIGHT_GREY}>
-        <View style={styles.container}>
-          <Text style={[styles.buttonText, { color }]}>{this.props.children}</Text>
-          <Icon name='chevron-right' size={25} color={color} />
-        </View>
-      </TouchableHighlight>
-    );
-  }
-}
+const Button = ({ color, onPress, children }) => (
+  <TouchableOpacity onPress={onPress} underlayColor={COLOURS.LIGHT_GREY}>
+    <View style={styles.container}>
+      <Text style={[styles.buttonText, { color }]}>{children}</Text>
+      <Icon name='ios-arrow-forward' size={25} color={color} />
+    </View>
+  </TouchableOpacity>
+);
 
 var styles = StyleSheet.create({
   container: {
@@ -49,4 +43,4 @@ Button.propTypes = {
   color: React.PropTypes.string
 };
 
-module.exports = Button;
+export default Button;

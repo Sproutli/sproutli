@@ -27,7 +27,12 @@ class Sproutli extends React.Component {
     case 'app':
       return <App token={this.state.token} />;
     case 'login':
-      return <Login navigator={navigator} signingUp={route.signingUp} email={route.email} password={route.password} />;
+      return (
+        <Login
+          navigator={navigator}
+          signingUp={this.state.token === null}
+        />
+      );
     }
   }
 

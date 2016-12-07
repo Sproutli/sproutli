@@ -7,7 +7,6 @@ import {
   Platform,
 } from 'react-native';
 let { AnswersReporter, ImageUploader } = NativeModules;
-let JWTDecode = require('jwt-decode');
 let listingWithImages = {};
 let Slack = require('../Utils/Slack');
 let Users = require('../Utils/Users');
