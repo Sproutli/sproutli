@@ -160,7 +160,7 @@ dependencies {
     compile project(':react-native-intercom')
   compile 'com.android.support:multidex:1.0.0'
   compile fileTree(dir: 'libs', include: ['*.jar'])
-  compile 'com.android.support:appcompat-v7:24.1.1'
+  compile 'com.android.support:appcompat-v7:23.0.1'
   compile 'com.facebook.react:react-native:+'
 
   compile 'com.google.android.gms:play-services-gcm:9.4.0'
@@ -171,7 +171,7 @@ dependencies {
   compile 'com.amazonaws:aws-android-sdk-cognito:2.+'
   compile 'com.amazonaws:aws-android-sdk-s3:2.+'
 
-  compile 'io.intercom.android:intercom-sdk:3.+'
+  compile 'io.intercom.android:intercom-sdk:3.0.21'
 
   compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
     transitive = true;

@@ -162,7 +162,12 @@ public class LocationModule extends ReactContextBaseJavaModule implements Connec
   }
 
   @Override
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+  public void onNewIntent(Intent intent) {
+    // DO NOTHING!!
+  }
+
+  @Override
+  public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
     // Defensive programming.
     if (data == null) {
       return;
