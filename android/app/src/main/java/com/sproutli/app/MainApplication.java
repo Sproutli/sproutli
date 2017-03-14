@@ -41,7 +41,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
         new LocationPackage(),
         new MainReactPackage(),
-            new FBSDKPackage(),
             new IntercomPackage(),
         new AnswersReporterPackage(),
         new CrashlyticsReporterPackage(),
