@@ -88,10 +88,10 @@ apply from: "../../node_modules/react-native/react.gradle"
 def enableProguardInReleaseBuilds = false
 
 android {
-    dexOptions { 
-      incremental true 
-      javaMaxHeapSize "4g" 
-    } 
+    dexOptions {
+      incremental true
+      javaMaxHeapSize "4g"
+    }
 
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -171,7 +171,7 @@ dependencies {
   compile 'com.amazonaws:aws-android-sdk-cognito:2.+'
   compile 'com.amazonaws:aws-android-sdk-s3:2.+'
 
-  compile 'io.intercom.android:intercom-sdk:3.+'
+  compile 'io.intercom.android:intercom-sdk:3.0.+'
 
   compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
     transitive = true;
