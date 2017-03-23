@@ -14,12 +14,14 @@ class AdvancedSearchOptions extends React.Component {
     var API_KEY = 'AIzaSyAgb2XoUPeXZP3jKAqhaWX-D5rfkyIIi7E';
     var GooglePlacesAutocomplete = require('react-native-google-places-autocomplete').create({
       placeholder: 'Location',
+      placeholderTextColor: COLOURS.GREY,
       fetchDetails: true,
+      enablePoweredByContainer: false,
       styles: styles[Platform.OS],
       getDefaultValue: () => this.props.locationName,
       onPress(place, placeDetails) {
-        if (place === null) { 
-          that.props.onLocationSelected(null); 
+        if (place === null) {
+          that.props.onLocationSelected(null);
           return;
         }
 
@@ -44,20 +46,26 @@ class AdvancedSearchOptions extends React.Component {
     });
 
     return (
-      <View>
-        
-        { this.props.showLocationBar ? <GooglePlacesAutocomplete /> : <View /> }
-
-        <VeganLevelSlider 
-          veganLevel={this.props.veganLevel} 
-          onSlidingComplete={this.props.onVeganLevelChanged.bind(this)} 
+      <View style={styles.container}>
+        <View style={{height: 44}} >
+          { this.props.showLocationBar ? <GooglePlacesAutocomplete /> : <View /> }
+        </View>
+        <VeganLevelSlider
+          veganLevel={this.props.veganLevel}
+          onSlidingComplete={this.props.onVeganLevelChanged.bind(this)}
         />
       </View>
     );
   }
 }
 
+
+
 var styles = {
+  container: {
+    flex: 0,
+  },
+
   'ios' : {
     textInput: {
       paddingTop: 4.5,
@@ -69,12 +77,29 @@ var styles = {
       backgroundColor: COLOURS.LIGHT_GREY,
       height: 34
     }
-  }, 
+  },
+
   'android' : {
     textInput: {
       height: 44,
-      marginHorizontal: 4
-    }
+      //paddingTop: 4.5,
+      //paddingBottom: 4.5,
+      paddingHorizontal: 8,
+      margin: 0,
+      fontSize: 14,
+      marginHorizontal: 8,
+      //borderColor: 'black',
+      //borderWidth: 2,
+      borderRadius: 0,
+      marginTop: 0,
+    },
+
+    textInputContainer: {
+      height: 44,
+      borderTopWidth: 0,
+      borderBottomWidth:0,
+      backgroundColor: 'white',
+    },
   }
 };
 

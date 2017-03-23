@@ -42,3 +42,4 @@ android/fastlane/report.xml
 # \.buckd/
 # android/app/libs
 # android/keystores/debug.keystore
+/nbproject/private/

@@ -24,12 +24,12 @@ class VeganLevelSlider extends React.Component{
     return (
       <View>
         <Slider
-          onSlidingComplete={this.props.onSlidingComplete} 
+          onSlidingComplete={this.props.onSlidingComplete}
           onValueChange={(veganLevel) => this.setState({ veganLevel })}
           minimumTrackTintColor={COLOURS.GREEN}
-          value={this.props.veganLevel} 
-          minimumValue={1} 
-          maximumValue={5} 
+          value={this.props.veganLevel}
+          minimumValue={1}
+          maximumValue={5}
         />
         <Text style={[styles.veganLevelText, {fontWeight: 'bold'}]}>{veganLevel.short}</Text>
         <Text style={styles.veganLevelText}>{veganLevel.long}</Text>
@@ -65,4 +65,3 @@ VeganLevelSlider.propTypes = {
 };
 
 module.exports = VeganLevelSlider;
-

@@ -4,15 +4,14 @@ import React from 'react';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Slider
 } from 'react-native';
 
-var Slider = require('react-native-material-kit').mdl.Slider;
+//var Slider = require('react-native-material-kit').mdl.Slider;
 
 var VEGAN_LEVELS = require('../Constants/VeganLevels');
 var COLOURS = require('../Constants/Colours');
-
-
 
 class VeganLevelSlider extends React.Component{
   constructor(props) {
@@ -26,13 +25,30 @@ class VeganLevelSlider extends React.Component{
     var veganLevel = VEGAN_LEVELS[Math.round(this.props.veganLevel)];
     return (
       <View>
+        <Slider
+          onSlidingComplete={this.props.onSlidingComplete}
+          onValueChange={(veganLevel) => this.setState({ veganLevel })}
+          minimumTrackTintColor={COLOURS.GREEN}
+          value={this.props.veganLevel}
+          minimumValue={1}
+          maximumValue={5}
+        />
         <Text style={[styles.veganLevelText, {fontWeight: 'bold'}]}>{veganLevel.short}</Text>
         <Text style={styles.veganLevelText}>{veganLevel.long}</Text>
       </View>
     );
   }
 
-  componentDidMount() {
+  render() {
+    return (
+      <View style={styles.container}>
+        { this.veganLevelText() }
+      </View>
+    );
+  }
+}
+
+/*  componentDidMount() {
     this.slider.value = this.props.veganLevel;
   }
 
@@ -53,18 +69,21 @@ class VeganLevelSlider extends React.Component{
       </View>
     );
   }
-}
+}   */
 
 var styles = StyleSheet.create({
   container: {
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
+    paddingTop: 10,
+    //borderColor: 'red',
+    //borderWidth: 2,
   },
 
   veganLevelText: {
     textAlign: 'center',
     color: COLOURS.GREY,
-    paddingBottom: 5
+    paddingBottom: 5,
   }
 });
 

@@ -81,7 +81,7 @@ class Search extends React.Component {
 
   getLocation() {
     navigator.geolocation.getCurrentPosition(
-      (position) => { 
+      (position) => {
         var location = position.coords;
         this.setState({ location });
         this.search(location);
@@ -114,7 +114,7 @@ class Search extends React.Component {
     GoogleAnalytics.trackEvent('Search', 'vegan_level', this.state.searchConfig.vegan_level);
     GoogleAnalytics.trackEvent('Search', 'pre_canned', this.props.searchLabel);
 
-    AnswersReporter.reportSearch(query || '', { 
+    AnswersReporter.reportSearch(query || '', {
       'Has Location': location ? 'Yes' : 'No',
       'Vegan Level': this.state.searchConfig.vegan_level,
       'Category': this.props.searchLabel,
@@ -146,7 +146,7 @@ class Search extends React.Component {
         var message = '[Search] - Error searching';
         console.warn(message, error);
         GoogleAnalytics.trackError(message + ' ' + error, false);
-        this.setState({ 
+        this.setState({
           loading: false,
           hasError: true
         });
@@ -178,7 +178,7 @@ class Search extends React.Component {
     searchConfig.vegan_level = veganLevel;
     var filteredListings = this.state.listings.filter((l) => ListingsFilter.filter(l, searchConfig));
 
-    this.setState({ 
+    this.setState({
       filteredListings,
       veganLevel,
       searchConfig,
@@ -240,31 +240,31 @@ class Search extends React.Component {
     return (
       <SearchBox
         query={this.state.query}
-        onChangeText={this._onChangeText.bind(this)} 
-        onSubmitEditing={this._onSearch.bind(this)} 
+        onChangeText={this._onChangeText.bind(this)}
+        onSubmitEditing={this._onSearch.bind(this)}
         location={this.state.locationName}
         searchLabel={this.props.searchLabel}
         numberOfListings={this.state.numberOfListings}
         veganLevel={this.state.veganLevel}
-        onLocationSelected={this._onLocationSelected.bind(this)} 
+        onLocationSelected={this._onLocationSelected.bind(this)}
         onVeganLevelChanged={this._onVeganSliderChanged.bind(this)}
         locationName={this.state.locationName}
         showLocationBar={this.state.searchConfig.online_store !== 'Y'}
-      /> 
+      />
     );
   }
 
   renderListings() {
-    if (this.state.hasError) { 
+    if (this.state.hasError) {
       return (
-        <ScrollView contentContainerStyle={styles.loadingContainer} keyboardShouldPersistTaps={false} keyboardDismissMode='on-drag'>
+        <ScrollView contentContainerStyle={styles.loadingContainer} keyboardShouldPersistTaps={"never"} keyboardDismissMode='on-drag'>
           <Icon name='sad-outline' size={100} color={COLOURS.GREY} />
           <Text style={styles.loadingText}>There was an error searching - please try again!</Text>
         </ScrollView>
       );
     }
 
-    if (this.state.loading) { 
+    if (this.state.loading) {
       return (
         <LoadingScreen>Just a moment..</LoadingScreen>
       );
@@ -272,10 +272,10 @@ class Search extends React.Component {
 
     if (this.state.numberOfListings < 1) {
       return (
-        <ScrollView 
-          contentContainerStyle={styles.loadingContainer} 
+        <ScrollView
+          contentContainerStyle={styles.loadingContainer}
           showsVerticalScrollIndicator
-          keyboardShouldPersistTaps={true}
+          keyboardShouldPersistTaps={"always"}
           automaticallyAdjustContentInsets={false}
           keyboardDismissMode='on-drag'>
           <Icon name='sad-outline' size={100} color={COLOURS.GREY} />
@@ -284,10 +284,10 @@ class Search extends React.Component {
       );
     }
 
-    return ( 
+    return (
       <ListView
         dataSource={this.state.dataSource}
-        keyboardShouldPersistTaps={false}
+        keyboardShouldPersistTaps={"never"}
         keyboardDismissMode='on-drag'
         onScroll={this._onScroll.bind(this)}
         renderRow={(listing, index) => <Listing key={index} listing={listing} handler={this._onListingPressed.bind(this, listing)} />}
@@ -315,7 +315,7 @@ class Search extends React.Component {
         <ActionButton.Item title='Ask a Question' buttonColor={COLOURS.GREY} onPress={() => Intercom.displayMessageComposer()}>
           <Icon name="help" style={styles.actionButtonIcon} />
         </ActionButton.Item>
-      </ActionButton> 
+      </ActionButton>
     );
   }
 

@@ -35,8 +35,8 @@ class Listing extends React.Component {
 
   renderedRating() {
     var rating = this.props.listing.rating;
-    if (!rating) { 
-      rating = 'No rating yet'; 
+    if (!rating) {
+      rating = 'No rating yet';
     } else {
       rating = `${rating}/5.0`;
     }
@@ -68,7 +68,7 @@ class Listing extends React.Component {
 
     if (this.props.listing.premium && this.props.listing.cover_image) {
       return (
-        <TouchableOpacity onPress={this.props.handler} activeOpacity={0.8}> 
+        <TouchableOpacity onPress={this.props.handler} activeOpacity={0.8}>
           <Image style={styles.card} source={{uri: this.props.listing.cover_image}}>
             { listing }
           </Image>
@@ -77,7 +77,7 @@ class Listing extends React.Component {
     }
 
     return (
-      <TouchableOpacity style={[styles.card, {backgroundColor: COLOURS.GREEN }]} onPress={this.props.handler} activeOpacity={0.8}> 
+      <TouchableOpacity style={[styles.card, {backgroundColor: COLOURS.GREEN }]} onPress={this.props.handler} activeOpacity={0.8}>
         { listing }
       </TouchableOpacity>
     );

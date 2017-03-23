@@ -55,10 +55,10 @@ class App extends React.Component {
 
   createTab(name, index) {
     return (
-      <TouchableHighlight 
-        key={index} 
-        style={[styles.tab, index === this.state.page ? styles.selectedTab : {}]} 
-        onPress={this._onTabSelected.bind(this, index)} 
+      <TouchableHighlight
+        key={index}
+        style={[styles.tab, index === this.state.page ? styles.selectedTab : {}]}
+        onPress={this._onTabSelected.bind(this, index)}
         underlayColor='rgba(0,0,0,0.6)'
       >
         <Text style={styles.tabText}>{name.toUpperCase()}</Text>
@@ -76,13 +76,13 @@ class App extends React.Component {
 
   _onTabSelected(page) {
     this.setState({ page }, () => {
-      var currentRoutes = this.navigators[page].getCurrentRoutes(), 
+      var currentRoutes = this.navigators[page].getCurrentRoutes(),
         currentRoute = currentRoutes[currentRoutes.length - 1],
         title = currentRoute.title;
 
-      this.setState({ 
+      this.setState({
         actions: this.actionsCache[page] || [],
-        title 
+        title
       });
     });
   }
@@ -137,13 +137,13 @@ class App extends React.Component {
 
     return (
       <View style={{flex: 1}} key={index}>
-        <Navigator 
+        <Navigator
           configureScene={() => Navigator.SceneConfigs.FadeAndroid}
           renderScene={this.RouteMapper(index).bind(this)}
           initialRoute={{
             title: 'Search',
             component: Search,
-            passProps: { 
+            passProps: {
               searchListeners: this.state.searchListeners,
               showSearch: this.state.showSearch,
               searchLabel: name,
@@ -161,7 +161,7 @@ class App extends React.Component {
     if (this.state.title !== 'Search') return image;
   }
 
-  
+
   render() {
     const searchActions = [{
       title: 'Search',

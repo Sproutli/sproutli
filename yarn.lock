@@ -2907,6 +2907,10 @@ query-string@^3.0.0:
   dependencies:
     strict-uri-encode "^1.0.0"
 
+ramda@~0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.21.0.tgz#a001abedb3ff61077d4ff1d577d44de77e8d0a35"
+
 random-bytes@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/random-bytes/-/random-bytes-1.0.0.tgz#4f68a1dc0ae58bd3fb95848c30324db75d64360b"
@@ -2981,9 +2985,11 @@ react-native-looped-carousel@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/react-native-looped-carousel/-/react-native-looped-carousel-0.1.4.tgz#e67a4e0381309849a717e0605d0666b1c53f5805"
 
-react-native-material-kit@^0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/react-native-material-kit/-/react-native-material-kit-0.2.5.tgz#0120c7214d5e8523865515e377b3eeda90656bc6"
+react-native-material-kit@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-material-kit/-/react-native-material-kit-0.4.1.tgz#bdfc4727e4146980e129ee5bbeb7565db6a918cc"
+  dependencies:
+    ramda "~0.21.0"
 
 react-native-overlay@^0.4.1:
   version "0.4.2"

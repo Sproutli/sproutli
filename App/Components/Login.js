@@ -97,11 +97,11 @@ class Login extends React.Component {
   emailField() {
     if (height === 480 && this.props.signingUp) { return <View />; }
     return (
-      <TextInput 
-        keyboardType='email-address' 
+      <TextInput
+        keyboardType='email-address'
         underlineColorAndroid={COLOURS.GREEN}
-        style={styles.loginInput} 
-        placeholder='Email' 
+        style={styles.loginInput}
+        placeholder='Email'
         autoCorrect={false}
         value={this.state.email}
         onChangeText={this._onEmailChanged.bind(this)}
@@ -113,11 +113,11 @@ class Login extends React.Component {
   passwordField() {
     if (height === 480 && this.props.signingUp) { return <View />; }
     return (
-      <TextInput 
+      <TextInput
         secureTextEntry
-        style={styles.loginInput} 
+        style={styles.loginInput}
         underlineColorAndroid={COLOURS.GREEN}
-        placeholder='Password' 
+        placeholder='Password'
         value={this.state.password}
         onChangeText={this._onPasswordChanged.bind(this)}
       />
@@ -126,14 +126,14 @@ class Login extends React.Component {
 
   nameField() {
     if (!this.props.signingUp) return <View />;
-    return ( 
-      <TextInput 
-        style={styles.loginInput} 
+    return (
+      <TextInput
+        style={styles.loginInput}
         underlineColorAndroid={COLOURS.GREEN}
         returnKeyType='done'
         onSubmitEditing={this._signupPressed.bind(this)}
-        onChangeText={this._onNameChanged.bind(this)} 
-        placeholder='Your name' 
+        onChangeText={this._onNameChanged.bind(this)}
+        placeholder='Your name'
       />
      );
   }
@@ -147,11 +147,11 @@ class Login extends React.Component {
       return <ProgressBarAndroid style={{paddingTop: 10}} />
     }
   }
-  
+
 
   render() {
     return (
-      <ScrollView containerStyle={styles.container} keyboardShouldPersistTaps={true} keyboardDismissMode='on-drag'>
+      <ScrollView containerStyle={styles.container} keyboardShouldPersistTaps="always" keyboardDismissMode='on-drag'>
         <View style={styles.loginContainer}>
           <View style={styles.header}>
             <Text style={styles.headerText}>Welcome to Sproutli!</Text>
@@ -199,9 +199,9 @@ var styles = StyleSheet.create({
     width
   },
   loginButtonsContainer: {
-    flex: 1, 
+    flex: 1,
     alignItems: 'center',
-    justifyContent: height === 480 ? 'center' : 'flex-start', 
+    justifyContent: height === 480 ? 'center' : 'flex-start',
     flexDirection: height === 480 ? 'row' : 'column',
     width
   },
@@ -213,7 +213,7 @@ var styles = StyleSheet.create({
     textAlign: 'center'
   },
   loginInput: {
-    height: 40, 
+    height: 40,
     width,
     margin: 5,
     borderRadius: 5,
