@@ -164,12 +164,12 @@ dependencies {
   compile 'com.facebook.react:react-native:+'
 
   compile 'com.google.android.gms:play-services-gcm:9.4.0'
-  compile 'com.google.android.gms:play-services-location:9.+'
+  compile 'com.google.android.gms:play-services-location:9.4.+'
 
   // AWS
-  compile 'com.amazonaws:aws-android-sdk-core:2.+'
-  compile 'com.amazonaws:aws-android-sdk-cognito:2.+'
-  compile 'com.amazonaws:aws-android-sdk-s3:2.+'
+  compile 'com.amazonaws:aws-android-sdk-core:2.3.+'
+  compile 'com.amazonaws:aws-android-sdk-cognito:2.3.+'
+  compile 'com.amazonaws:aws-android-sdk-s3:2.3.+'
 
   compile 'io.intercom.android:intercom-sdk:3.0.+'
 
